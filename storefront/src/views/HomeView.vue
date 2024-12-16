@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
-const { t } = useI18n();
-
+import HeaderContainer from "@/components/layout/header/HeaderContainer.vue";
 </script>
 
 <template>
-  {{t('hello')}}
+  <HeaderContainer />
 </template>
