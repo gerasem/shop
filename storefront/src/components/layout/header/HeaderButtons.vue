@@ -4,9 +4,11 @@ const { t } = useI18n();
 </script>
 
 <template>
-  <RouterLink to="/" data-test-id="contact">{{t('contact')}}</RouterLink>
+  <RouterLink to="/" class="contact" data-test-id="contact">{{t('contact')}}</RouterLink>
 </template>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.contact {
+  background-color: $color-primary;
+}
 </style>
