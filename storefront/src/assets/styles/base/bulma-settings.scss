@@ -1,0 +1,17 @@
+@use "../sass-utils/variables" as *;
+@use "bulma/sass/utilities" with (
+  $primary: $color-primary,
+);
+@forward "bulma/sass/base";
+@forward "bulma/sass/components/card";
+@forward "bulma/sass/components/modal";
+@forward "bulma/sass/components/navbar";
+@forward "bulma/sass/elements/button";
+@forward "bulma/sass/elements/icon";
+@forward "bulma/sass/elements/content";
+@forward "bulma/sass/elements/notification";
+@forward "bulma/sass/elements/progress";
+@forward "bulma/sass/elements/tag";
+@forward "bulma/sass/layout/footer";
+// Import the themes so that all CSS variables have a value
+@forward "bulma/sass/themes";

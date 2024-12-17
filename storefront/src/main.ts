@@ -1,4 +1,4 @@
-import './assets/main.css'
+import './assets/styles/main.scss'
 import i18n from "./i18n";
 
 import { createApp } from 'vue'
