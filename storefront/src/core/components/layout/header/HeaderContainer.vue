@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import HeaderButtons from "@/components/layout/header/HeaderButtons.vue";
+import HeaderButtons from "@/core/components/layout/header/HeaderButtons.vue";
 </script>
 
 <template>

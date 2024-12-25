@@ -1,7 +1,7 @@
 import {describe, it, expect} from "vitest";
 import {mount} from "@vue/test-utils";
 import {createI18n} from "vue-i18n";
-import HeaderButtons from "@/components/layout/header/HeaderButtons.vue";
+import HeaderButtons from "@/core/components/layout/header/HeaderButtons.vue";
 import router from "@/router";
 
 const messages = {
@@ -18,8 +18,7 @@ describe("HeaderButtons.vue", () => {
   });
 
   const createWrapper = async (path: string) => {
-    const language = path.startsWith("/en") ? "en" : "de";
-    i18n.global.locale.value = language;
+    i18n.global.locale.value = path.startsWith("/en") ? "en" : "de";
 
     await router.push(path);
     await router.isReady();
