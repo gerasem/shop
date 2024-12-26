@@ -8,7 +8,5 @@ const { t } = useI18n();
 </template>
 
 <style lang="scss" scoped>
-.contact {
-  background-color: $color-primary;
-}
+
 </style>
