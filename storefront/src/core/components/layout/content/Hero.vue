@@ -1,12 +1,15 @@
 <script setup lang="ts">
-
+defineProps<{
+  title: string;
+  subtitle?: string;
+}>()
 </script>
 
 <template>
   <section class="hero is-link">
     <div class="hero-body">
-      <p class="title">Link hero</p>
-      <p class="subtitle">Link subtitle</p>
+      <p class="title">{{title}}</p>
+      <p v-if="subtitle" class="subtitle">{{subtitle}}</p>
     </div>
   </section>
 </template>

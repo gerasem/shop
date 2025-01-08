@@ -1,16 +1,20 @@
 <script setup lang="ts">
-import HeaderContainer from "@/core/components/layout/header/Header.vue";
 import FooterContainer from '@/core/components/layout/footer/Footer.vue'
+import HeaderContainer from '@/core/components/layout/header/Header.vue'
 import HeroContainer from '@/core/components/layout/content/Hero.vue'
 </script>
 
 <template>
   <HeaderContainer />
-  <HeroContainer title="Hello" subtitle="A vue mini shop"/>
+  <HeroContainer title="Catalog" />
   <section class="section">
     <div class="container is-fluid">
-      Home
+      Catalog
     </div>
   </section>
   <FooterContainer />
 </template>
+
+<style scoped lang="scss">
+
+</style>

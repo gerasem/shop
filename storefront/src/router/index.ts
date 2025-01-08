@@ -16,9 +16,19 @@ const router: Router = createRouter({
           component: HomeView,
         },
         {
+          path: 'catalog',
+          name: 'catalog',
+          component: () => import("@/modules/product/view/CatalogView.vue"),
+        },
+        {
+          path: 'cart',
+          name: 'cart',
+          component: () => import("@/modules/cart/view/CartView.vue"),
+        },
+        {
           path: ':pathMatch(.*)*',
           name: 'NotFound',
-          component: HomeView,
+          component: () => import("@/core/views/404View.vue"),
         },
       ],
     },

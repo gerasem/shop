@@ -6,10 +6,10 @@ import HeroContainer from '@/core/components/layout/content/Hero.vue'
 
 <template>
   <HeaderContainer />
-  <HeroContainer title="Hello" subtitle="A vue mini shop"/>
+  <HeroContainer title="404" subtitle="Page not found"/>
   <section class="section">
     <div class="container is-fluid">
-      Home
+      404
     </div>
   </section>
   <FooterContainer />
