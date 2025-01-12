@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 
 const supportedLocales: String[] = [
   'de',
@@ -12,7 +12,7 @@ const supportedLocales: String[] = [
 <template>
   <div
     class="header__languages"
-    :aria-label="$t('Select Language')"
+    :aria-label="t('Select Language')"
   >
     <template v-for="(lang, index) of supportedLocales" :key="lang">
       <a

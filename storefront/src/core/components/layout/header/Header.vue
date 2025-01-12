@@ -16,7 +16,6 @@ import HeaderLanguage from '@/core/components/layout/header/HeaderLanguage.vue'
       <div class="navbar-start">
         <HeaderMenu />
       </div>
-
       <div class="navbar-end">
         <div class="navbar-item">
           <HeaderLanguage />
