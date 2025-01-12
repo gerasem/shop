@@ -3,6 +3,7 @@ import HeaderButtons from '@/core/components/layout/header/HeaderButtons.vue'
 import HeaderLogo from '@/core/components/layout/header/HeaderLogo.vue'
 import HeaderIcons from '@/core/components/layout/header/HeaderIcons.vue'
 import HeaderMenu from '@/core/components/layout/header/HeaderMenu.vue'
+import HeaderLanguage from '@/core/components/layout/header/HeaderLanguage.vue'
 </script>
 
 <template>
@@ -17,6 +18,10 @@ import HeaderMenu from '@/core/components/layout/header/HeaderMenu.vue'
       </div>
 
       <div class="navbar-end">
+        <div class="navbar-item">
+          <HeaderLanguage />
+        </div>
+
         <div class="navbar-item">
           <HeaderButtons />
         </div>
