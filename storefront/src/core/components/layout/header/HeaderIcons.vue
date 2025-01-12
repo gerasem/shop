@@ -11,7 +11,7 @@ const icons = [
   <RouterLink v-for="icon in icons"
               :key="icon.link"
               :to="localePath(icon.link)">
-    <BaseIcon :icon="icon.icon" />
+    <BaseIcon :icon="icon.icon" :width="24" :height="24" />
   </RouterLink>
 </template>
 

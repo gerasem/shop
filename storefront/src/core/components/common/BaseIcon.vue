@@ -16,7 +16,7 @@ const props = withDefaults(
 )
 
 const loadIcon = defineAsyncComponent({
-  loader: () => import(`@/assets/icons/${props.icon}.svg?`),
+  loader: () => import(`@/assets/icons/${props.icon}.svg?skipsvgo`),
   errorComponent: defineAsyncComponent(() => import(`@/assets/icons/_default.svg`))
 });
 </script>
@@ -27,7 +27,7 @@ const loadIcon = defineAsyncComponent({
     class="icon"
     :class="`icon-${icon}`"
     :width="width"
-    :height="height"
+    :height="width"
     :fill="fill"
   />
 </template>
@@ -38,30 +38,10 @@ const loadIcon = defineAsyncComponent({
   cursor: pointer;
 }
 
-.big {
-  .icon {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-.primary {
-  color: $color-primary;
-}
-
 .disabled {
   .icon {
     opacity: 0.5;
     cursor: not-allowed;
   }
-
-  &:hover,
-  &:focus {
-    //color: $color-icons;
-  }
-}
-
-.pointer {
-  cursor: pointer;
 }
 </style>

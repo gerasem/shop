@@ -7,7 +7,7 @@ import HeaderLanguage from '@/core/components/layout/header/HeaderLanguage.vue'
 </script>
 
 <template>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <nav class="navbar container is-fluid" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <HeaderLogo />
     </div>
