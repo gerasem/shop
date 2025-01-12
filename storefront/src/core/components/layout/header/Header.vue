@@ -1,34 +1,28 @@
 <script setup lang="ts">
 import HeaderButtons from '@/core/components/layout/header/HeaderButtons.vue'
-import BaseImage from '@/core/components/common/BaseImage.vue'
-import { localePath } from '@/core/composables/localePath.ts'
+import HeaderLogo from '@/core/components/layout/header/HeaderLogo.vue'
+import HeaderIcons from '@/core/components/layout/header/HeaderIcons.vue'
+import HeaderMenu from '@/core/components/layout/header/HeaderMenu.vue'
 </script>
 
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <RouterLink class="navbar-item" :to="localePath('')">
-        <BaseImage src="logo.svg" />
-      </RouterLink>
-
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
+      <HeaderLogo />
     </div>
 
     <div class="navbar-menu">
       <div class="navbar-start">
-        <RouterLink class="navbar-item" :to="localePath('')"> Home</RouterLink>
-        <RouterLink class="navbar-item" :to="localePath('catalog')"> Catalog</RouterLink>
-        <RouterLink class="navbar-item" :to="localePath('cart')"> Cart</RouterLink>
+        <HeaderMenu />
       </div>
 
       <div class="navbar-end">
         <div class="navbar-item">
           <HeaderButtons />
+        </div>
+
+        <div class="navbar-item">
+          <HeaderIcons />
         </div>
       </div>
     </div>

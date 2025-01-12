@@ -1,14 +1,12 @@
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
-import BaseIcon from '@/core/components/common/BaseIcon.vue'
+import { useI18n } from 'vue-i18n'
 import { localePath } from '@/core/composables/localePath.ts'
-const { t } = useI18n();
+
+const { t } = useI18n()
 </script>
 
 <template>
-  <RouterLink :to="localePath('')" class="contact" data-test-id="contact">{{t('contact')}}</RouterLink>
-
-  <BaseIcon icon="bag" />
+  <RouterLink :to="localePath('')" class="contact" data-test-id="contact">{{ t('contact') }}</RouterLink>
 </template>
 
 <style lang="scss" scoped>
