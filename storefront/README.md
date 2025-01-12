@@ -1,61 +1,93 @@
-# storefront
+# Demo Online Store 🚀🔥
 
-This template should help get you started developing with Vue 3 in Vite.
+Welcome to the **Demo Online Store**! This project is a fast, sleek, and modern example of an e-commerce application built with the latest technologies, showcasing the power of **Vue.js**. 🛍️✨
 
-## Recommended IDE Setup
+## Key Features
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- **Lightning-fast Performance** ⚡: Optimized for speed and responsiveness.
+- **Modern Design** 🎨: A clean, minimalist user interface that focuses on usability.
+- **Component-based Architecture** 🧩: Built with reusable, scalable Vue.js components.
+- **Dynamic Language Support** 🌍: Includes localization using **vue-i18n** for seamless multi-language experiences.
+- **Lazy Loading** 🕐: Implements lazy loading for assets to ensure quick load times.
+- **State Management** 🗂️: Managed using **Pinia** for efficient data handling.
+- **Routing** 🛤️: Dynamic and intuitive navigation powered by **Vue Router**.
+- **SVG and Image Handling** 🖼️: Custom components for flexible integration of icons and images.
 
-## Type Support for `.vue` Imports in TS
+## Tech Stack 🔧
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- **Frontend Framework**: Vue.js 3
+- **State Management**: Pinia
+- **Routing**: Vue Router
+- **Localization**: vue-i18n
+- **Build Tool**: Vite
+- **TypeScript**: Strongly typed codebase for reliability and scalability.
+- **SCSS**: Modular and maintainable styling.
+- **Bulma SCSS Framework**: Old, but good
 
-## Customize configuration
+## Installation 💻
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+To get started, follow these steps:
 
-## Project Setup
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/gerasem/shop.git
+   cd shop
+   cd storefront
+   ```
 
-```sh
-npm install
+2. **Install dependencies:**
+   ```bash
+   npm i
+   ```
+
+3. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+
+4. **Build for production:**
+   ```bash
+   npm run build
+   ```
+
+## Project Structure 📂
+
+```
+src/
+├── assets/               # Static files (images, icons, etc.)
+├── components/           # Reusable Vue components
+│   ├── base/             # Base components (BaseIcon, BaseImage, etc.)
+├── core/                 # Core application files
+│   ├── layouts/          # Application layouts
+│   ├── views/            # Page components (HomeView, AboutView, etc.)
+├── locales/              # Localization files (en-US.json, de-DE.json)
+├── router/               # Vue Router setup
+├── store/                # Pinia store modules
+├── styles/               # Global SCSS styles
+├── App.vue               # Root Vue component
+├── main.ts               # Application entry point
 ```
 
-### Compile and Hot-Reload for Development
+## Usage 🛠️
 
-```sh
-npm run dev
-```
+### Localization
+- By default, the application supports English (`en`) and German (`de`).
+- The language can be switched dynamically based on the URL or user preference.
 
-### Type-Check, Compile and Minify for Production
+### Custom Icons and Images
+- Icons are stored in `src/assets/icons/` and handled by the `BaseIcon` component.
+- Images are stored in `src/assets/images/` and handled by the `BaseImage` component.
 
-```sh
-npm run build
-```
+## Contributing 🤝
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+Contributions are welcome! Feel free to fork this repository and submit a pull request.
 
-```sh
-npm run test:unit
-```
+## License 📜
 
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
+This project is licensed under the MIT License. See the `LICENSE` file for more information.
 
-```sh
-npm run test:e2e:dev
-```
+---
 
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
+### Demo Online Store 🌟
+This is not a functional e-commerce platform but a demonstration project designed for learning and experimentation with modern web development technologies. Enjoy exploring and customizing it to fit your needs! 🚀🔥
 
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-npm run build
-npm run test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
