@@ -3,10 +3,14 @@ import HeaderButtons from '@/core/components/layout/header/HeaderButtons.vue'
 import HeaderLogo from '@/core/components/layout/header/HeaderLogo.vue'
 import HeaderIcons from '@/core/components/layout/header/HeaderIcons.vue'
 import HeaderMenu from '@/core/components/layout/header/HeaderMenu.vue'
-import HeaderLanguage from '@/core/components/layout/header/HeaderLanguage.vue'
+import HeaderLanguage from '@/core/components/layout/header/LanguageSwitcher.vue'
+import TrustBar from '@/core/components/layout/header/InformationBanner.vue'
 </script>
 
 <template>
+  <header>
+    <TrustBar />
+  </header>
   <nav class="navbar container is-fluid" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <HeaderLogo />

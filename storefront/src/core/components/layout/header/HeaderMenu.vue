@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { localePath } from '@/core/composables/localePath.ts'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const links = [
   { path: '', text: 'Home' },
@@ -13,7 +16,7 @@ const links = [
               :key="link.path"
               class="navbar-item"
               :to="localePath(link.path)">
-    {{ link.text }}
+    {{ t(link.text) }}
   </RouterLink>
 </template>
 
