@@ -7,7 +7,7 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <RouterLink class="navbar-item header__logo" :to="localePath('')">
+  <RouterLink class="navbar-item is-flex is-flex-grow-1 header__logo" :to="localePath('')">
     <BaseImage src="logo.svg" />
   </RouterLink>
 
@@ -18,6 +18,11 @@ const { t } = useI18n()
 .header {
   &__logo {
     margin-top: -5px;
+
+    @media (max-width: $screen-md-max) {
+      flex: 1;
+      justify-content: center;
+    }
   }
 
   &__slogan {

@@ -5,6 +5,8 @@ import HeaderIcons from '@/core/components/layout/header/HeaderIcons.vue'
 import HeaderMenu from '@/core/components/layout/header/HeaderMenu.vue'
 import HeaderLanguage from '@/core/components/layout/header/LanguageSwitcher.vue'
 import InformationBanner from '@/core/components/layout/header/InformationBanner.vue'
+import BaseIcon from '@/core/components/common/BaseIcon.vue'
+import HeaderBurger from '@/core/components/layout/header/HeaderBurger.vue'
 </script>
 
 <template>
@@ -13,7 +15,9 @@ import InformationBanner from '@/core/components/layout/header/InformationBanner
   </header>
 
   <nav class="navbar is-flex container is-fluid" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
+    <div class="navbar-brand header__navbar-brand" >
+      <HeaderBurger />
+
       <HeaderLogo />
     </div>
 
@@ -45,5 +49,11 @@ import InformationBanner from '@/core/components/layout/header/InformationBanner
 </style>
 
 <style lang="scss" scoped>
-
+.header{
+  &__navbar-brand{
+    @media (max-width: $screen-md-max) {
+      flex: 1;
+    }
+  }
+}
 </style>
