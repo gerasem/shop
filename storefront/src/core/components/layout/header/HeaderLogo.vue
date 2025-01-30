@@ -11,7 +11,7 @@ const { t } = useI18n()
     <BaseImage src="logo.svg" />
   </RouterLink>
 
-  <div class="navbar-item header__slogan">{{t("Demo project of an online store")}}</div>
+  <div class="navbar-item is-hidden-touch header__slogan">{{t("Demo project of an online store")}}</div>
 </template>
 
 <style scoped lang="scss">
@@ -22,6 +22,7 @@ const { t } = useI18n()
 
   &__slogan {
     color: $text-muted;
+
   }
 }
 </style>

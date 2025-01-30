@@ -6,7 +6,6 @@ import HeroContainer from '@/core/components/layout/content/Hero.vue'
 
 <template>
   <HeaderContainer />
-  <HeroContainer title="Hello" subtitle="A vue mini shop"/>
   <section class="section">
     <div class="container is-fluid">
       Home

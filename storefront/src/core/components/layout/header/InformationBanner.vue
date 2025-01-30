@@ -34,9 +34,9 @@ const items = [
     align-content: center;
     color: $color-light-gray;
     font-size: 15px;
-    position: relative;
+    //position: relative;
 
-    &:after {
+    /*&:after {
       content: "";
       background: linear-gradient(90deg, transparent 0, #FFF2EB 80%);
       width: 30px;
@@ -44,7 +44,7 @@ const items = [
       position: absolute;
       right: 0;
       top: 0;
-    }
+    }*/
   }
 
   &__list-container {
@@ -56,7 +56,7 @@ const items = [
     scrollbar-width: none;
     -ms-overflow-style: none;
     padding: 0 12px;
-
+    height: 100%;
     &::-webkit-scrollbar {
       display: none;
     }
@@ -70,6 +70,5 @@ const items = [
     display: flex;
     gap: 7px;
   }
-
 }
 </style>

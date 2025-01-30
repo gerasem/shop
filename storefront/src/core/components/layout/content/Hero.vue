@@ -7,7 +7,7 @@ defineProps<{
 
 <template>
   <section class="hero is-link">
-    <div class="hero-body">
+    <div class="container is-fluid hero-body">
       <p class="title">{{title}}</p>
       <p v-if="subtitle" class="subtitle">{{subtitle}}</p>
     </div>

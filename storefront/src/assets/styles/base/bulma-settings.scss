@@ -14,6 +14,14 @@
 @forward "bulma/sass/elements/progress";
 @forward "bulma/sass/elements/tag";
 @forward "bulma/sass/layout/container";
-@forward "bulma/sass/layout/section";
+@use "bulma/sass/layout/section" with (
+  $section-padding-desktop: 2.5rem 0.75rem 0,
+  $section-padding: 2.5rem 0.75rem 0
+);
+@forward "bulma/sass/layout/media";
+@forward "bulma/sass/helpers";
+@forward "bulma/sass/grid";
+@forward "bulma/sass/base/skeleton";
+@forward "bulma/sass/helpers/typography";
 // Import the themes so that all CSS variables have a value
 @forward "bulma/sass/themes";
