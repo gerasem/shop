@@ -21,6 +21,7 @@ const icons = [
   &__icon-link {
     width: 24px;
     text-align: center;
+    color: $color-icons;
   }
 }
 </style>

@@ -5,8 +5,14 @@ import HeaderIcons from '@/core/components/layout/header/HeaderIcons.vue'
 import HeaderMenu from '@/core/components/layout/header/HeaderMenu.vue'
 import HeaderLanguage from '@/core/components/layout/header/LanguageSwitcher.vue'
 import InformationBanner from '@/core/components/layout/header/InformationBanner.vue'
-import BaseIcon from '@/core/components/common/BaseIcon.vue'
 import HeaderBurger from '@/core/components/layout/header/HeaderBurger.vue'
+import { ref } from 'vue'
+
+const mobileMenu = ref<boolean>(false)
+
+const toggleMenu = () => {
+  mobileMenu.value = !mobileMenu.value
+}
 </script>
 
 <template>
@@ -15,8 +21,9 @@ import HeaderBurger from '@/core/components/layout/header/HeaderBurger.vue'
   </header>
 
   <nav class="navbar is-flex container is-fluid" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand header__navbar-brand" >
-      <HeaderBurger />
+    <div class="navbar-brand header__navbar-brand">
+
+      <HeaderBurger :mobileMenu="mobileMenu" @toggleMenu="toggleMenu()"/>
 
       <HeaderLogo />
     </div>
@@ -49,8 +56,8 @@ import HeaderBurger from '@/core/components/layout/header/HeaderBurger.vue'
 </style>
 
 <style lang="scss" scoped>
-.header{
-  &__navbar-brand{
+.header {
+  &__navbar-brand {
     @media (max-width: $screen-md-max) {
       flex: 1;
     }
