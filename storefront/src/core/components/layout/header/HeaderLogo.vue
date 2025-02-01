@@ -11,17 +11,19 @@ const { t } = useI18n()
     <BaseImage src="logo.svg" />
   </RouterLink>
 
-  <div class="navbar-item is-hidden-touch header__slogan">{{t("Demo project of an online store")}}</div>
+  <div class="navbar-item is-hidden-touch header__slogan">{{ t('Demo project of an online store') }}</div>
 </template>
 
 <style scoped lang="scss">
 .header {
   &__logo {
-    margin-top: -5px;
-
     @media (max-width: $screen-md-max) {
       flex: 1;
       justify-content: center;
+    }
+
+    svg {
+      margin-top: -5px;
     }
   }
 
