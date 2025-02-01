@@ -14,9 +14,7 @@
   padding: 0 .75rem 1rem;
 
   &__image{
-    width: 210px;
-    height: 120px;
-    object-fit: cover;
+    width: 100%;
   }
 }
 </style>

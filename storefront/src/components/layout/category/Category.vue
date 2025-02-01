@@ -1,12 +1,10 @@
 <script setup lang="ts">
 
-import CategoryItem from '@/components/layout/category/CategoryItem.vue'
+import CategoryCard from '@/components/layout/category/CategoryCard.vue'
 </script>
 
 <template>
-  <div class="container is-fluid ">
-    <CategoryItem v-for="category in 5" :key="category" />
-  </div>
+  <CategoryCard v-for="category in 5" :key="category" />
 </template>
 
 <style scoped lang="scss">
