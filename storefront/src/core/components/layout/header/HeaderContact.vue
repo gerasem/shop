@@ -6,7 +6,8 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <RouterLink :to="localePath('')" class="contact" data-test-id="contact">{{ t('contact') }}</RouterLink>
+  <RouterLink :to="localePath('')" class="contact button is-white" data-test-id="contact">{{ t('contact') }}
+  </RouterLink>
 </template>
 
 <style lang="scss" scoped>

@@ -1,7 +1,7 @@
 import {describe, it, expect} from "vitest";
 import {mount} from "@vue/test-utils";
 import {createI18n} from "vue-i18n";
-import HeaderButtons from "@/core/components/layout/header/HeaderButtons.vue";
+import HeaderContact from "@/core/components/layout/header/HeaderContact.vue";
 import router from "@/router";
 
 const messages = {
@@ -9,7 +9,7 @@ const messages = {
   de: {contact: "Kontakt"},
 };
 
-describe("HeaderButtons.vue", () => {
+describe("HeaderContact.vue", () => {
   const i18n = createI18n({
     locale: "de",
     fallbackLocale: "de",
@@ -23,7 +23,7 @@ describe("HeaderButtons.vue", () => {
     await router.push(path);
     await router.isReady();
 
-    return mount(HeaderButtons, {
+    return mount(HeaderContact, {
       global: {
         plugins: [router, i18n],
       },

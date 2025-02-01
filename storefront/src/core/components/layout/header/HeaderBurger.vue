@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -14,27 +14,31 @@ const emit = defineEmits<{
 }>()
 
 const toggleMenu = () => {
-  //console.log("toggle Menu function")
   emit("toggleMenu")
   if(!props.mobileMenu) {
     router.push({ query: { menu: 'open' } })
     document.body.style.overflow = 'hidden'
   } else {
     router.push({ query: {} })
-    //todo replace with body:has(dialog[open]
     document.body.style.overflow = 'visible'
   }
 }
 
 onMounted(() => {
-  //console.log("route.query?.menu", route.query?.menu)
   if(route.query?.menu === "open" ) {
-    //console.log("remove get param open")
     router.push({ query: {} })
   }
+  window.addEventListener("resize", handlerResize)
 })
 
+const handlerResize = () => {
+  if(props.mobileMenu && window.innerWidth >= 768) {
+    emit("toggleMenu")
+    router.replace({ query: {} })
+  }
+};
 
+onUnmounted(() => window.removeEventListener("resize", handlerResize));
 </script>
 
 <template>

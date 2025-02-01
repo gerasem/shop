@@ -14,7 +14,7 @@ const links = [
 <template>
   <RouterLink v-for="link in links"
               :key="link.path"
-              class="navbar-item"
+              class="navbar-item button is-white"
               :to="localePath(link.path)">
     {{ t(link.text) }}
   </RouterLink>

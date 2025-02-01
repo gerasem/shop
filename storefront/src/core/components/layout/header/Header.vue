@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import HeaderButtons from '@/core/components/layout/header/HeaderButtons.vue'
+import HeaderContact from '@/core/components/layout/header/HeaderContact.vue'
 import HeaderLogo from '@/core/components/layout/header/HeaderLogo.vue'
 import HeaderMenu from '@/core/components/layout/header/HeaderMenu.vue'
 import HeaderLanguage from '@/core/components/layout/header/LanguageSwitcher.vue'
@@ -20,33 +20,41 @@ const toggleMenu = () => {
     <InformationBanner class="is-hidden-mobile" />
   </header>
 
-  <nav class="navbar is-flex container is-fluid" :class="{'is-flex-direction-column': mobileMenu}" role="navigation"
+  <nav class="navbar is-flex is-flex-wrap-wrap container is-fluid" role="navigation"
        aria-label="main navigation">
     <div class="navbar-brand header__navbar-brand">
       <HeaderBurger :mobileMenu="mobileMenu" @toggleMenu="toggleMenu()" />
 
       <HeaderLogo />
-
-      <div class="navbar-item is-hidden-tablet">
-        <HeaderCart /> 2
-      </div>
     </div>
 
-    <div class="navbar-start is-flex-grow-1 is-align-items-center" :class="{'is-hidden is-flex-tablet': !mobileMenu}">
+    <div class="navbar-start is-flex-grow-1 is-align-items-center is-hidden is-flex-tablet">
       <HeaderMenu />
     </div>
 
     <div class="navbar-end is-flex is-align-items-center">
-      <div class="navbar-item" :class="{'is-hidden is-flex-tablet': !mobileMenu}">
+      <div class="navbar-item is-hidden is-flex-tablet">
         <HeaderLanguage />
       </div>
 
-      <div class="navbar-item" :class="{'is-hidden is-flex-tablet': !mobileMenu}">
-        <HeaderButtons />
+      <div class="navbar-item is-hidden is-flex-tablet">
+        <HeaderContact />
       </div>
 
-      <div class="navbar-item is-hidden is-flex-tablet">
-        <HeaderCart /> 1
+      <div class="navbar-item">
+        <HeaderCart />
+      </div>
+    </div>
+
+    <div v-if="mobileMenu" class="header__mobile-menu">
+      <HeaderMenu />
+
+      <div class="navbar-item">
+        <HeaderLanguage />
+      </div>
+
+      <div class="navbar-item">
+        <HeaderContact />
       </div>
     </div>
   </nav>
@@ -65,6 +73,13 @@ const toggleMenu = () => {
     @media (max-width: $screen-md-max) {
       flex: 1;
     }
+  }
+
+  &__mobile-menu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 </style>
