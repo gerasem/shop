@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Header from "@/core/components/layout/header/Header.vue";
-import Footer from '@/core/components/layout/footer/Footer.vue'
-import Category from '@/core/components/layout/category/Category.vue'
+import Header from "@/components/layout/header/Header.vue";
+import Footer from '@/components/layout/footer/Footer.vue'
+import Category from '@/components/layout/category/Category.vue'
 </script>
 
 <template>

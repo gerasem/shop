@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import FooterContainer from '@/core/components/layout/footer/Footer.vue'
-import HeaderContainer from '@/core/components/layout/header/Header.vue'
-import HeroContainer from '@/core/components/layout/content/Hero.vue'
+import FooterContainer from '@/components/layout/footer/Footer.vue'
+import HeaderContainer from '@/components/layout/header/Header.vue'
+import HeroContainer from '@/components/layout/content/Hero.vue'
 </script>
 
 <template>

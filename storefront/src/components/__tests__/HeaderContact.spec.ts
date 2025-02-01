@@ -1,7 +1,7 @@
 import {describe, it, expect} from "vitest";
 import {mount} from "@vue/test-utils";
 import {createI18n} from "vue-i18n";
-import HeaderContact from "@/core/components/layout/header/HeaderContact.vue";
+import HeaderContact from "@/components/layout/header/HeaderContact.vue";
 import router from "@/router";
 
 const messages = {

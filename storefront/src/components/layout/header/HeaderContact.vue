@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { localePath } from '@/core/composables/localePath.ts'
+import { localePath } from '@/composables/localePath.ts'
 
 const { t } = useI18n()
 </script>

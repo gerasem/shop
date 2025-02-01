@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import CategoryItem from '@/core/components/layout/category/CategoryItem.vue'
+import CategoryItem from '@/components/layout/category/CategoryItem.vue'
 </script>
 
 <template>
