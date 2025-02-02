@@ -4,7 +4,7 @@ import NavbarLogo from '@/components/layout/navbar/NavbarLogo.vue'
 import NavbarMenu from '@/components/layout/navbar/NavbarMenu.vue'
 import LanguageSwitcher from '@/components/layout/navbar/LanguageSwitcher.vue'
 import NavbarBurger from '@/components/layout/navbar/NavbarBurger.vue'
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref } from 'vue'
 import NavbarCart from '@/components/layout/navbar/NavbarCart.vue'
 
 const mobileMenu = ref<boolean>(false)
@@ -12,30 +12,10 @@ const mobileMenu = ref<boolean>(false)
 const toggleMenu = () => {
   mobileMenu.value = !mobileMenu.value
 }
-
-const isScrolled = ref(false);
-const trigger = ref(null);
-
-const observer = new IntersectionObserver(
-  ([entry]) => {
-    isScrolled.value = !entry.isIntersecting;
-  },
-  { rootMargin: "0px 0px 0px 0px", threshold: 0 }
-);
-
-onMounted(() => {
-  if (trigger.value) observer.observe(trigger.value);
-});
-
-onUnmounted(() => {
-  if (trigger.value) observer.unobserve(trigger.value);
-});
 </script>
 
 <template>
-  <div ref="trigger" class="navbar__trigger-block" :class="{ 'navbar__trigger-block--hidden': isScrolled }"></div>
-
-  <nav class="navbar is-flex is-flex-wrap-wrap" :class="{ 'navbar--scrolled': isScrolled }" role="navigation"
+  <nav class="navbar is-flex is-flex-wrap-wrap is-transparent" role="navigation"
        aria-label="main navigation">
     <div class="container is-fluid">
 
@@ -81,7 +61,8 @@ onUnmounted(() => {
 <style lang="scss">
 @use "bulma/sass/components/navbar" with (
   $navbar-item-img-max-height: 2rem,
-  $navbar-height: 6.25rem
+  $navbar-height: 3.5rem,
+  $navbar-background-color: rgba(255,255,255, .8)
 );
 
 </style>
@@ -89,12 +70,9 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 .navbar {
   position: sticky;
-  top: 0;
-  transition: height 0.3s ease;
-
-  &--scrolled {
-    --bulma-navbar-height: 4rem;
-  }
+  top: -24px;
+  padding-top: 24px;
+  margin-bottom: 24px;
 
   &__navbar-brand {
     @media (max-width: $screen-md-max) {
@@ -109,10 +87,5 @@ onUnmounted(() => {
     align-items: center;
   }
 
-  &__trigger-block{
-    &--hidden{
-      margin-top: -40px;
-    }
-  }
 }
 </style>
