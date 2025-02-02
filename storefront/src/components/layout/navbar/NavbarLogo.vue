@@ -7,15 +7,15 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <RouterLink class="navbar-item is-flex is-flex-grow-1 header__logo" :to="localePath('')">
+  <RouterLink class="navbar-item is-flex is-flex-grow-1 navbar__logo" :to="localePath('')">
     <BaseImage src="logo.svg" />
   </RouterLink>
 
-  <div class="navbar-item is-hidden-touch header__slogan">{{ t('Demo project of an online store') }}</div>
+  <div class="navbar-item is-hidden-touch navbar__slogan">{{ t('Demo project of an online store') }}</div>
 </template>
 
 <style scoped lang="scss">
-.header {
+.navbar {
   &__logo {
     @media (max-width: $screen-md-max) {
       flex: 1;

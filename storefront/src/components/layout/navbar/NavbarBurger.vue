@@ -42,7 +42,7 @@ onUnmounted(() => window.removeEventListener("resize", handlerResize));
 </script>
 
 <template>
-  <a @click="toggleMenu()" class="navbar-burger is-hidden-tablet header__navbar-burger" :class="{'is-active': mobileMenu}" role="button" aria-label="menu" aria-expanded="false">
+  <a @click="toggleMenu()" class="navbar-burger is-hidden-tablet navbar__navbar-burger" :class="{'is-active': mobileMenu}" role="button" aria-label="menu" aria-expanded="false">
     <span aria-hidden="true"></span>
     <span aria-hidden="true"></span>
     <span aria-hidden="true"></span>
@@ -51,7 +51,7 @@ onUnmounted(() => window.removeEventListener("resize", handlerResize));
 </template>
 
 <style lang="scss" scoped>
-.header {
+.navbar {
   &__navbar-burger {
     color: $color-icons;
   }

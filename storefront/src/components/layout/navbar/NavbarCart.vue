@@ -4,14 +4,14 @@ import { localePath } from '@/composables/localePath.ts'
 </script>
 
 <template>
-  <RouterLink class="header__icon-link"
+  <RouterLink class="navbar__icon-link"
               :to="localePath('cart')">
     <BaseIcon icon="bag" :width="24" :height="24" />
   </RouterLink>
 </template>
 
 <style lang="scss" scoped>
-.header{
+.navbar{
   &__icon-link {
     width: 24px;
     text-align: center;

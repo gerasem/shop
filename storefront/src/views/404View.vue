@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import Header from "@/components/layout/header/Header.vue";
+import Navbar from "@/components/layout/navbar/Navbar.vue";
 import Footer from '@/components/layout/footer/Footer.vue'
 import Hero from '@/components/layout/content/Hero.vue'
+import InformationBanner from '@/components/information-banner/InformationBanner.vue'
 </script>
 
 <template>
-  <Header />
+  <InformationBanner />
+
+  <Navbar />
 
   <Hero title="404" subtitle="Page not found"/>
 

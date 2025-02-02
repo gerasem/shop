@@ -11,20 +11,20 @@ const supportedLocales: String[] = [
 
 <template>
   <div
-    class="header__languages"
+    class="navbar__languages"
     :aria-label="t('Select Language')"
   >
     <template v-for="(lang, index) of supportedLocales" :key="lang">
       <a
-        :class="{ 'header__language--current': locale === lang }"
-        class="header__language is-clickable"
+        :class="{ 'navbar__language--current': locale === lang }"
+        class="navbar__language is-clickable"
         :href="locale !== lang ? `/${lang}` : '#'"
       >{{ lang }}</a
       >
 
       <span
         v-if="index !== supportedLocales.length - 1"
-        class="header__language-separator"
+        class="navbar__language-separator"
       >/</span
       >
     </template>
@@ -32,7 +32,7 @@ const supportedLocales: String[] = [
 </template>
 
 <style scoped lang="scss">
-.header {
+.navbar {
   &__languages {
     user-select: none;
   }

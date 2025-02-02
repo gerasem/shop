@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import Header from '@/components/layout/header/Header.vue'
+import Navbar from '@/components/layout/navbar/Navbar.vue'
 import Footer from '@/components/layout/footer/Footer.vue'
 import Categories from '@/components/layout/category/Categories.vue'
-import CategoryPreview from '@/components/layout/category/CategoryPreview.vue'
+import InformationBanner from '@/components/information-banner/InformationBanner.vue'
 </script>
 
 <template>
-  <Header />
+  <InformationBanner />
+
+  <Navbar />
 
   <Categories />
 

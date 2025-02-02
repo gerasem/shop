@@ -1,18 +1,24 @@
 <script setup lang="ts">
-import FooterContainer from '@/components/layout/footer/Footer.vue'
-import HeaderContainer from '@/components/layout/header/Header.vue'
-import HeroContainer from '@/components/layout/content/Hero.vue'
+import Footer from '@/components/layout/footer/Footer.vue'
+import Hero from '@/components/layout/content/Hero.vue'
+import InformationBanner from '@/components/information-banner/InformationBanner.vue'
+import Navbar from '@/components/layout/navbar/Navbar.vue'
 </script>
 
 <template>
-  <HeaderContainer />
-  <HeroContainer title="Shopping Cart" />
+  <InformationBanner />
+
+  <Navbar />
+
+  <Hero title="Catalog" />
+
   <section class="section">
     <div class="container is-fluid">
       Shopping Cart
     </div>
   </section>
-  <FooterContainer />
+
+  <Footer />
 </template>
 
 <style scoped lang="scss">

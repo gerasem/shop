@@ -12,7 +12,7 @@ const items = [
 </script>
 
 <template>
-  <header class="information-banner__container">
+  <header class="is-hidden-mobile information-banner__container">
     <div class="container is-fluid">
       <ul class="information-banner__list-container">
         <li v-for="item in items"

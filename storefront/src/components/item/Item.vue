@@ -4,7 +4,7 @@
 
 <template>
 <RouterLink to="#" class="item">
-  <img class="item__image" src="https://placehold.co/400x400" alt="item">
+  <img class="image is-square item__image" src="https://placehold.co/400x400" alt="item">
 
   <div class="item__bottom">
     <h3 class="item__title">lorem ipsum</h3>
@@ -17,7 +17,7 @@
 <style scoped lang="scss">
 .item {
   &__image{
-
+    width: 100%;
   }
 
   &__bottom {
