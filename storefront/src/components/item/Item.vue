@@ -18,6 +18,7 @@
 .item {
   &__image{
     width: 100%;
+    object-fit: cover;
   }
 
   &__bottom {
