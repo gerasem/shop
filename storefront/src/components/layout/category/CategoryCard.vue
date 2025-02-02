@@ -11,7 +11,7 @@
 
 <style scoped lang="scss">
 .category {
-  padding: 0 .75rem 1rem;
+  margin-bottom: 1rem;
 
   &__image{
     width: 100%;
