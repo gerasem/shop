@@ -25,5 +25,13 @@
     display: flex;
     justify-content: space-between;
   }
+
+  &__title{
+    color: $color-text;
+  }
+
+  &__price {
+    color: $color-text;
+  }
 }
 </style>
