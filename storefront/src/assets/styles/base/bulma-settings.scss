@@ -16,8 +16,8 @@
 @forward "bulma/sass/elements/tag";
 @forward "bulma/sass/layout/container";
 @use "bulma/sass/layout/section" with (
-  $section-padding-desktop: 2.5rem 0.75rem 0,
-  $section-padding: 2.5rem 0.75rem 0
+  $section-padding-desktop: 2.5rem 0 0,
+  $section-padding: 2.5rem 0 0
 );
 @forward "bulma/sass/layout/media";
 @forward "bulma/sass/helpers";

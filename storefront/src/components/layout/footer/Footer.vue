@@ -8,7 +8,7 @@ const year = computed(() => {
 
 <template>
   <footer class="footer">
-    <div class="container is-fluid">
+    <div class="container is-fullhd">
       <div class="grid is-col-min-8">
         <ul class="cell footer__items">
           <li class="footer__item"><a href="#">Lorem ipsum</a></li>
