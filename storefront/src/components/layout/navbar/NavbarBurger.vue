@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -14,35 +14,37 @@ const emit = defineEmits<{
 }>()
 
 const toggleMenu = () => {
-  emit("toggleMenu")
-  if(!props.mobileMenu) {
+  if (!props.mobileMenu) {
     router.push({ query: { menu: 'open' } })
-    document.body.style.overflow = 'hidden'
   } else {
-    router.push({ query: {} })
-    document.body.style.overflow = 'visible'
+    router.replace({ query: {} })
   }
 }
 
 onMounted(() => {
-  if(route.query?.menu === "open" ) {
-    router.push({ query: {} })
+  if (route.query?.menu === 'open') {
+    router.replace({ query: {} })
   }
-  window.addEventListener("resize", handlerResize)
+  window.addEventListener('resize', handlerResize)
 })
 
 const handlerResize = () => {
-  if(props.mobileMenu && window.innerWidth >= 768) {
-    emit("toggleMenu")
+  if (props.mobileMenu && window.innerWidth >= 768) {
+    emit('toggleMenu')
     router.replace({ query: {} })
   }
-};
+}
 
-onUnmounted(() => window.removeEventListener("resize", handlerResize));
+watch(() => route.query.menu, () => {
+  emit('toggleMenu')
+})
+
+onUnmounted(() => window.removeEventListener('resize', handlerResize))
 </script>
 
 <template>
-  <a @click="toggleMenu()" class="navbar-burger is-hidden-tablet navbar__navbar-burger" :class="{'is-active': mobileMenu}" role="button" aria-label="menu" aria-expanded="false">
+  <a @click="toggleMenu()" class="navbar-burger is-hidden-tablet navbar__navbar-burger"
+     :class="{'is-active': mobileMenu}" role="button" aria-label="menu" aria-expanded="false">
     <span aria-hidden="true"></span>
     <span aria-hidden="true"></span>
     <span aria-hidden="true"></span>

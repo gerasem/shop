@@ -10,7 +10,7 @@ import NavbarCart from '@/components/layout/navbar/NavbarCart.vue'
 const mobileMenu = ref<boolean>(false)
 
 const toggleMenu = () => {
-  mobileMenu.value = !mobileMenu.value
+  mobileMenu.value = new URLSearchParams(window.location.search).has('menu')
 }
 </script>
 
@@ -74,6 +74,11 @@ const toggleMenu = () => {
   padding-top: 24px;
   margin-bottom: 24px;
 
+  @media (max-width: $screen-md-max) {
+    position: static;
+    top: unset;
+  }
+
   &__navbar-brand {
     @media (max-width: $screen-md-max) {
       flex: 1;
@@ -87,5 +92,9 @@ const toggleMenu = () => {
     align-items: center;
   }
 
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 </style>

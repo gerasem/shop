@@ -5,16 +5,15 @@ defineProps<{
 </script>
 
 <template>
-  <div class="container">
-    <section class="section">
+  <section class="section">
+    <div class="container is-fullhd">
       <h2 class="title is-2">{{ header }}</h2>
 
       <p class="content text__paragraph text__paragraph--2-columns">
         <slot></slot>
       </p>
-    </section>
-  </div>
-
+    </div>
+  </section>
 </template>
 
 <style scoped lang="scss">
