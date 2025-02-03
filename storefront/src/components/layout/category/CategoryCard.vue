@@ -20,10 +20,11 @@
 
   &__title {
     position: sticky;
-    margin-bottom: 1rem;
     z-index: 1;
     display: block;
     color: $color-text;
+    background: #fff;
+    padding-bottom: 10px;
 
     @for $i from 1 through 20 {
       &:nth-child(#{$i}) {

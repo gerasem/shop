@@ -4,10 +4,16 @@ import BaseImage from '@/components/common/BaseImage.vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
+
+const handleLogoClick = () => {
+  setTimeout(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, 300)
+}
 </script>
 
 <template>
-  <RouterLink class="navbar-item is-flex is-flex-grow-1 navbar__logo" :to="localePath('')">
+  <RouterLink @click="handleLogoClick()" class="navbar-item is-flex is-flex-grow-1 navbar__logo" :to="localePath('')">
     <BaseImage src="logo.svg" />
   </RouterLink>
 

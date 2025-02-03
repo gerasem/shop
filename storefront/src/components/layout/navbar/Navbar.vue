@@ -62,7 +62,7 @@ const toggleMenu = () => {
 @use "bulma/sass/components/navbar" with (
   $navbar-item-img-max-height: 2rem,
   $navbar-height: 3.5rem,
-  $navbar-background-color: rgba(255,255,255, .8)
+  $navbar-background-color: rgba(255,255,255, 1)
 );
 
 </style>
