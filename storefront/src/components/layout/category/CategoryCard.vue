@@ -3,11 +3,11 @@
 </script>
 
 <template>
-  <RouterLink to="#">
+  <RouterLink to="#" class="is-hidden-mobile">
     <img class="image is-16by9 category__image" src="https://placehold.co/400x200" alt="category">
   </RouterLink>
   <RouterLink to="#" class="category__title">
-    <h3>test</h3>
+    <h3>test Test 123</h3>
   </RouterLink>
 </template>
 
@@ -30,6 +30,13 @@
       &:nth-child(#{$i}) {
         top: calc(40px + (#{$i} - 1) * 15px);
       }
+    }
+
+    @media (max-width: $screen-md-max) {
+      position: static;
+      background: none;
+      padding-bottom: 0;
+      gap: 15px;
     }
   }
 }
