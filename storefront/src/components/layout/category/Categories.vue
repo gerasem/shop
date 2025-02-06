@@ -27,17 +27,18 @@ import CategoryPreview from '@/components/layout/category/CategoryPreview.vue'
       flex-wrap: wrap;
       width: 100%;
       background: $color-categories-background;
+      gap: 15px;
     }
   }
 
   &__sticky-header {
-    background: #ffffff;
+    /*background: #ffffff;
     z-index: 5;
     width: 100%;
     height: 20px;
     top: 56px;
     position: sticky;
-    margin-top: -20px;
+    margin-top: -20px;*/
   }
 }
 </style>

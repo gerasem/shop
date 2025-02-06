@@ -15,8 +15,10 @@ const emit = defineEmits<{
 
 const toggleMenu = () => {
   if (!props.mobileMenu) {
+    document.body.classList.add("overflow-hidden")
     router.push({ query: { menu: 'open' } })
   } else {
+    document.body.classList.remove("overflow-hidden")
     router.replace({ query: {} })
   }
 }

@@ -43,17 +43,19 @@ const toggleMenu = () => {
         </div>
       </div>
 
-      <div v-if="mobileMenu" class="navbar__mobile-menu">
-        <NavbarMenu />
+      <Transition name="mobile-menu">
+        <div v-if="mobileMenu" class="navbar__mobile-menu">
+          <NavbarMenu />
 
-        <div class="navbar-item">
-          <LanguageSwitcher />
-        </div>
+          <div class="navbar-item">
+            <LanguageSwitcher />
+          </div>
 
-        <div class="navbar-item">
-          <NavbarContact />
+          <div class="navbar-item">
+            <NavbarContact />
+          </div>
         </div>
-      </div>
+      </Transition>
     </div>
   </nav>
 </template>
@@ -90,11 +92,23 @@ const toggleMenu = () => {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: calc(100vh - 100px);
+    justify-content: space-around;
+    user-select: none;
   }
 
   .container {
     display: flex;
     flex-wrap: wrap;
   }
+}
+
+.mobile-menu-enter-active {
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-enter-from {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>
