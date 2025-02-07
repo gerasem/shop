@@ -16,8 +16,10 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@vueuse/core": "^12.5.0",
     "bulma": "^1.0.2",
     "pinia": "^2.2.6",
+    "swiper": "^11.2.2",
     "vite-svg-loader": "^5.1.0",
     "vue": "^3.5.13",
     "vue-i18n": "^10.0.5",

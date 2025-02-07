@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import NavbarContact from '@/components/layout/navbar/NavbarContact.vue'
-import NavbarLogo from '@/components/layout/navbar/NavbarLogo.vue'
-import NavbarMenu from '@/components/layout/navbar/NavbarMenu.vue'
-import LanguageSwitcher from '@/components/layout/navbar/LanguageSwitcher.vue'
-import NavbarBurger from '@/components/layout/navbar/NavbarBurger.vue'
+import NavbarContact from '@/components/navbar/NavbarContact.vue'
+import NavbarLogo from '@/components/navbar/NavbarLogo.vue'
+import NavbarMenu from '@/components/navbar/NavbarMenu.vue'
+import LanguageSwitcher from '@/components/navbar/LanguageSwitcher.vue'
+import NavbarBurger from '@/components/navbar/NavbarBurger.vue'
 import { ref } from 'vue'
-import NavbarCart from '@/components/layout/navbar/NavbarCart.vue'
+import NavbarCart from '@/components/navbar/NavbarCart.vue'
 
 const mobileMenu = ref<boolean>(false)
 

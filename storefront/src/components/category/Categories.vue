@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import CategoryCard from '@/components/layout/category/CategoryCard.vue'
-import CategoryPreview from '@/components/layout/category/CategoryPreview.vue'
+import CategoryCard from '@/components/category/CategoryCard.vue'
+import CategoryPreview from '@/components/category/CategoryPreview.vue'
 </script>
 
 <template>

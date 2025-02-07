@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import Navbar from '@/components/layout/navbar/Navbar.vue'
-import Footer from '@/components/layout/footer/Footer.vue'
-import Categories from '@/components/layout/category/Categories.vue'
+import Navbar from '@/components/navbar/Navbar.vue'
+import Footer from '@/components/footer/Footer.vue'
+import Categories from '@/components/category/Categories.vue'
 import InformationBanner from '@/components/information-banner/InformationBanner.vue'
-import Text2Columns from '@/components/layout/content/Text2Columns.vue'
+import Text2Columns from '@/components/content/Text2Columns.vue'
 </script>
 
 <template>

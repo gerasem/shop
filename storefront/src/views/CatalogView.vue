@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Footer from '@/components/layout/footer/Footer.vue'
-import Navbar from '@/components/layout/navbar/Navbar.vue'
-import Hero from '@/components/layout/content/Hero.vue'
+import Footer from '@/components/footer/Footer.vue'
+import Navbar from '@/components/navbar/Navbar.vue'
+import Hero from '@/components/content/Hero.vue'
 import InformationBanner from '@/components/information-banner/InformationBanner.vue'
 </script>
 
