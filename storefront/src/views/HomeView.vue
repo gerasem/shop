@@ -4,6 +4,18 @@ import Footer from '@/components/footer/Footer.vue'
 import Categories from '@/components/category/Categories.vue'
 import InformationBanner from '@/components/information-banner/InformationBanner.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
+import { useHead } from 'unhead'
+
+useHead({
+  title: 'Home',
+  meta: [
+    {
+      name: 'description',
+      //content: () => myPage.value.description,
+      content: 'description'
+    },
+  ],
+})
 </script>
 
 <template>

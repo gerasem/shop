@@ -3,6 +3,18 @@ import Navbar from "@/components/navbar/Navbar.vue";
 import Footer from '@/components/footer/Footer.vue'
 import Hero from '@/components/content/Hero.vue'
 import InformationBanner from '@/components/information-banner/InformationBanner.vue'
+import { useHead } from 'unhead'
+
+useHead({
+  title: '404',
+  meta: [
+    {
+      name: 'description',
+      //content: () => myPage.value.description,
+      content: 'description'
+    },
+  ],
+})
 </script>
 
 <template>
