@@ -24,5 +24,8 @@
 @forward "bulma/sass/grid";
 @forward "bulma/sass/base/skeleton";
 @forward "bulma/sass/helpers/typography";
+@use "bulma/sass/form" with (
+  $input-shadow: none
+);
 // Import the themes so that all CSS variables have a value
 @forward "bulma/sass/themes";

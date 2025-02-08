@@ -1,12 +1,14 @@
 <script setup lang="ts">
+import { localePath } from '@/composables/localePath.ts'
 
 </script>
 
 <template>
-  <RouterLink to="#" class="is-hidden-mobile">
+  <RouterLink :to="localePath('catalog')" class="is-hidden-mobile">
     <img class="image is-16by9 category__image" src="https://placehold.co/400x200" alt="category">
   </RouterLink>
-  <RouterLink to="#" class="category__title">
+
+  <RouterLink :to="localePath('catalog')" class="category__title">
     <h3>test Test 123</h3>
   </RouterLink>
 </template>
