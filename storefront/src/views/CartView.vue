@@ -3,17 +3,9 @@ import Footer from '@/components/footer/Footer.vue'
 import Hero from '@/components/content/Hero.vue'
 import InformationBanner from '@/components/information-banner/InformationBanner.vue'
 import Navbar from '@/components/navbar/Navbar.vue'
-import { useHead } from 'unhead'
+import { useMeta } from '@/composables/useMeta.ts'
 
-useHead({
-  title: 'Cart',
-  meta: [
-    {
-      name: 'description',
-      content: 'description'
-    },
-  ],
-})
+useMeta("Cart", "cart description")
 </script>
 
 <template>

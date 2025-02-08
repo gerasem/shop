@@ -4,18 +4,9 @@ import Footer from '@/components/footer/Footer.vue'
 import Categories from '@/components/category/Categories.vue'
 import InformationBanner from '@/components/information-banner/InformationBanner.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
-import { useHead } from 'unhead'
+import { useMeta } from '@/composables/useMeta.ts'
 
-useHead({
-  title: 'Home',
-  meta: [
-    {
-      name: 'description',
-      //content: () => myPage.value.description,
-      content: 'description'
-    },
-  ],
-})
+useMeta("Home", "Description Home")
 </script>
 
 <template>
