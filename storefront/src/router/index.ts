@@ -16,19 +16,24 @@ const router: Router = createRouter({
           component: HomeView,
         },
         {
-          path: 'catalog',
+          path: 'catalog/:slug?',
           name: 'catalog',
           component: () => import("@/views/CatalogView.vue"),
+        },
+        {
+          path: 'item/:slug?',
+          name: 'item',
+          component: () => import("@/views/ItemView.vue"),
+        },
+        {
+          path: "contact",
+          name: "contact",
+          component: () => import("@/views/ContactView.vue"),
         },
         {
           path: 'cart',
           name: 'cart',
           component: () => import("@/views/CartView.vue"),
-        },
-        {
-          path: ':pathMatch(.*)*',
-          name: 'NotFound',
-          component: () => import("@/views/404View.vue"),
         },
       ],
     },

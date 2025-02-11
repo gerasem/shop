@@ -5,7 +5,7 @@ import CategoryPreview from '@/components/category/CategoryPreview.vue'
 
 <template>
   <div class="container is-fluid">
-    <div class="columns is-5-tablet is-8-desktop">
+    <div class="columns is-5-tablet is-6-desktop is-8-fullhd">
       <div class="column is-full is-one-third-tablet is-one-fifth-desktop category__container">
         <div class="is-hidden-mobile category__sticky-header"></div>
         <CategoryCard v-for="category in 5" :key="category" />
