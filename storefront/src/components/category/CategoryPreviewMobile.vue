@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import Item from '@/components/item/Item.vue'
 import { useI18n } from 'vue-i18n'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import 'swiper/css'
 
 const { t } = useI18n()
 </script>
@@ -13,11 +15,14 @@ const { t } = useI18n()
       <RouterLink to="#" class="title__link">{{ t('Show all Tests') }}</RouterLink>
     </div>
 
-    <div class="columns is-mobile is-multiline is-3">
-      <div class="column is-half-tablet is-one-third-desktop is-one-quarter-fullhd" v-for="item in 4" :key="item">
-        <Item />
-      </div>
-    </div>
+      <swiper
+        :slidesPerView="1.2"
+        :space-between="30"
+      >
+        <swiper-slide v-for="item in 4" :key="item">
+          <Item />
+        </swiper-slide>
+      </swiper>
   </div>
 </template>
 

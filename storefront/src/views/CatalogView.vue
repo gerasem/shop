@@ -5,7 +5,7 @@ import InformationBanner from '@/components/information-banner/InformationBanner
 import { useMeta } from '@/composables/useMeta.ts'
 import Item from '@/components/item/Item.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
-import CategoriesNarrow from '@/components/category/CategoriesNarrow.vue'
+import CategoriesNarrow from '@/components/category/CategoryTitleMobile.vue'
 
 useMeta('catalog')
 </script>
