@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import CategoryTitle from '@/components/category/CategoryTitle.vue'
+import { useCategoryStore } from '@/stores/category'
+
+const categoryStore = useCategoryStore()
 </script>
 
 <template>
   <div class="is-full category__container">
-    <CategoryTitle v-for="category in 5" :key="category" />
+    <CategoryTitle v-for="category in categoryStore.categories" :key="category.id" :category="category" />
   </div>
 </template>
 
@@ -21,7 +24,7 @@ import CategoryTitle from '@/components/category/CategoryTitle.vue'
     margin-bottom: 2rem;
   }
 
-  &__title{
+  &__title {
     padding-bottom: 0;
   }
 }

@@ -3,16 +3,20 @@ import Item from '@/components/item/Item.vue'
 import { useI18n } from 'vue-i18n'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
+import type { ICategory } from '@/interfaces/ICategory.ts'
 
+defineProps<{
+  category: ICategory
+}>()
 const { t } = useI18n()
 </script>
 
 <template>
   <div class="category__preview-container">
     <div class="title__container">
-      <h2 class="title is-2">Test</h2>
+      <h2 class="title is-2">{{category.title}}</h2>
 
-      <RouterLink to="#" class="title__link">{{ t('Show all Tests') }}</RouterLink>
+      <RouterLink :to="`catalog/${category.slug}`" class="title__link">{{ t('Show all Tests') }}</RouterLink>
     </div>
 
       <swiper

@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import CategoryImage from '@/components/category/CategoryImage.vue'
 import CategoryTitle from '@/components/category/CategoryTitle.vue'
+import type { ICategory } from '@/interfaces/ICategory.ts'
+
+defineProps<{
+  category: ICategory
+}>()
 </script>
 
 <template>
-  <CategoryImage />
+  <CategoryImage :category="category" />
 
-  <CategoryTitle />
+  <CategoryTitle :category="category" />
 </template>
 
 <style scoped lang="scss">

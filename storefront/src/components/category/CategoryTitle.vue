@@ -1,11 +1,15 @@
 <script setup lang="ts">
-
 import { localePath } from '@/composables/localePath.ts'
+import type { ICategory } from '@/interfaces/ICategory.ts'
+
+defineProps<{
+  category: ICategory
+}>()
 </script>
 
 <template>
-  <RouterLink :to="localePath('catalog')" class="category__title">
-    <h3>test Test 123</h3>
+  <RouterLink :to="localePath(`catalog/${category.slug}`)" class="category__title">
+    <h3>{{ category.title }}</h3>
   </RouterLink>
 </template>
 
