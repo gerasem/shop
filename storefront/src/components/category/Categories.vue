@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import CategoryCard from '@/components/category/CategoryCard.vue'
 import CategoryPreview from '@/components/category/CategoryPreview.vue'
-import CategoryTitleMobile from '@/components/category/CategoryTitleMobile.vue'
+import CategoryTitleNarrow from '@/components/category/CategoryTitleNarrow.vue'
 import { useDevice } from '@/composables/useDevice.ts'
 import CategoryPreviewMobile from '@/components/category/CategoryPreviewMobile.vue'
 import { useCategoryStore } from '@/stores/category'
 import { onMounted } from 'vue'
-import CategoryTitle from '@/components/category/CategoryTitle.vue'
 
 const { isMobile } = useDevice()
 
@@ -19,7 +18,7 @@ onMounted(() => {
 
 <template>
   <template v-if="isMobile">
-    <CategoryTitleMobile />
+    <CategoryTitleNarrow />
 
     <div class="container is-fluid">
       <CategoryPreviewMobile v-for="category in categoryStore.categories" :key="category.id" :category="category" />

@@ -1,12 +1,14 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { ref } from 'vue'
 import type { ICategory } from '@/interfaces/ICategory.ts'
 
 
 export const useCategoryStore = defineStore('category', () => {
   const categories = ref<ICategory[]>([]);
+  const currentCategory = ref<ICategory | null>(null);
 
   const fetchCategories = async () => {
+    console.log("fetchCategories()")
     if (categories.value.length) return;
 
     categories.value = [
@@ -17,5 +19,11 @@ export const useCategoryStore = defineStore('category', () => {
     ];
   };
 
-  return { categories, fetchCategories };
+  const setCurrentCategory = (slug: string) => {
+    console.log("setCurrentCategory()")
+    if (!categories.value.length) return;
+    currentCategory.value = categories.value.find(cat => cat.slug === slug) || null;
+  };
+
+  return { categories, fetchCategories, currentCategory, setCurrentCategory };
 });

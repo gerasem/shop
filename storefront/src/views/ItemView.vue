@@ -5,7 +5,7 @@ import InformationBanner from '@/components/information-banner/InformationBanner
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue'
 import Gallery from '@/components/gallery/Gallery.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
-import CategoriesNarrow from '@/components/category/CategoryTitleMobile.vue'
+import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
 </script>
 
 <template>

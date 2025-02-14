@@ -35,6 +35,10 @@ defineProps<{
       padding-bottom: 0;
       gap: 15px;
     }
+
+    &.router-link-active{
+      color: $color-primary;
+    }
   }
 }
 </style>

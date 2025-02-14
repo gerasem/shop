@@ -5,9 +5,26 @@ import InformationBanner from '@/components/information-banner/InformationBanner
 import { useMeta } from '@/composables/useMeta.ts'
 import Item from '@/components/item/Item.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
-import CategoriesNarrow from '@/components/category/CategoryTitleMobile.vue'
+import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
+import { useCategoryStore } from '@/stores/category';
+import { useRoute } from 'vue-router'
+import { onMounted, watch } from 'vue'
 
-useMeta('catalog')
+const route = useRoute();
+const categoryStore = useCategoryStore();
+
+onMounted(() => {
+  categoryStore.fetchCategories().then(() => {
+    categoryStore.setCurrentCategory(route.params.slug as string);
+    if(categoryStore.currentCategory) {
+      useMeta(categoryStore.currentCategory?.title)
+    }
+  });
+});
+
+watch(() => route.params.slug, (newSlug) => {
+  categoryStore.setCurrentCategory(newSlug as string);
+});
 </script>
 
 <template>
@@ -19,7 +36,7 @@ useMeta('catalog')
 
   <div class="container is-fluid">
     <div class="title__container">
-      <h1 class="title is-2">Categories</h1>
+      <h1 class="title is-2">{{ categoryStore.currentCategory?.title }}</h1>
 
       <div class="select">
         <select>
