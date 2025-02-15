@@ -8,61 +8,47 @@ let lightbox = ref<null | PhotoSwipeLightbox>(null)
 
 const imagesData = [
   {
-    largeURL:
-      'https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg',
-    thumbnailURL:
-      'https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg',
+    largeURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg',
+    thumbnailURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg',
     width: 1875,
-    height: 2500
+    height: 2500,
   },
   {
-    largeURL:
-      'https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg',
-    thumbnailURL:
-      'https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg',
+    largeURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg',
+    thumbnailURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg',
     width: 1669,
-    height: 2500
+    height: 2500,
   },
   {
-    largeURL:
-      'https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg',
-    thumbnailURL:
-      'https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg',
+    largeURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg',
+    thumbnailURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg',
     width: 2500,
-    height: 1666
+    height: 1666,
   },
   {
-    largeURL:
-      'https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg',
-    thumbnailURL:
-      'https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg',
+    largeURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg',
+    thumbnailURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg',
     width: 1669,
-    height: 2500
+    height: 2500,
   },
   {
-    largeURL:
-      'https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg',
-    thumbnailURL:
-      'https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg',
+    largeURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg',
+    thumbnailURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg',
     width: 2500,
-    height: 1666
+    height: 1666,
   },
   {
-    largeURL:
-      'https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg',
-    thumbnailURL:
-      'https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg',
+    largeURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg',
+    thumbnailURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg',
     width: 1669,
-    height: 2500
+    height: 2500,
   },
   {
-    largeURL:
-      'https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg',
-    thumbnailURL:
-      'https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg',
+    largeURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg',
+    thumbnailURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg',
     width: 2500,
-    height: 1666
-  }
+    height: 1666,
+  },
 ]
 
 onMounted(() => {
@@ -70,7 +56,7 @@ onMounted(() => {
     lightbox.value = new PhotoSwipeLightbox({
       gallery: '#gallery',
       children: 'a',
-      pswpModule: () => import('photoswipe')
+      pswpModule: () => import('photoswipe'),
     })
     lightbox.value.init()
   }
@@ -78,8 +64,8 @@ onMounted(() => {
 
 onUnmounted(() => {
   if (lightbox.value) {
-    lightbox.value.destroy();
-    lightbox.value = null;
+    lightbox.value.destroy()
+    lightbox.value = null
   }
 })
 </script>

@@ -15,10 +15,12 @@ const toggleMenu = () => {
 </script>
 
 <template>
-  <nav class="navbar is-flex is-flex-wrap-wrap is-transparent" role="navigation"
-       aria-label="main navigation">
+  <nav
+    class="navbar is-flex is-flex-wrap-wrap is-transparent"
+    role="navigation"
+    aria-label="main navigation"
+  >
     <div class="container is-fluid">
-
       <div class="navbar-brand navbar__navbar-brand">
         <NavbarBurger :mobileMenu="mobileMenu" @toggleMenu="toggleMenu()" />
 
@@ -61,12 +63,11 @@ const toggleMenu = () => {
 </template>
 
 <style lang="scss">
-@use "bulma/sass/components/navbar" with (
+@use 'bulma/sass/components/navbar' with (
   $navbar-item-img-max-height: 2rem,
   $navbar-height: 3.5rem,
-  $navbar-background-color: rgba(255,255,255, 1)
+  $navbar-background-color: rgba(255, 255, 255, 1)
 );
-
 </style>
 
 <style lang="scss" scoped>

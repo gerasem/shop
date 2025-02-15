@@ -1,5 +1,5 @@
-import {createRouter, createWebHistory, type Router, RouterView} from 'vue-router'
-import {handleLocaleRouting} from './beforeEnter'
+import { createRouter, createWebHistory, type Router, RouterView } from 'vue-router'
+import { handleLocaleRouting } from './beforeEnter'
 import HomeView from '@/views/HomeView.vue'
 
 const router: Router = createRouter({
@@ -18,22 +18,22 @@ const router: Router = createRouter({
         {
           path: 'catalog/:slug?',
           name: 'catalog',
-          component: () => import("@/views/CatalogView.vue"),
+          component: () => import('@/views/CatalogView.vue'),
         },
         {
           path: 'item/:slug?',
           name: 'item',
-          component: () => import("@/views/ItemView.vue"),
+          component: () => import('@/views/ItemView.vue'),
         },
         {
-          path: "contact",
-          name: "contact",
-          component: () => import("@/views/ContactView.vue"),
+          path: 'contact',
+          name: 'contact',
+          component: () => import('@/views/ContactView.vue'),
         },
         {
           path: 'cart',
           name: 'cart',
-          component: () => import("@/views/CartView.vue"),
+          component: () => import('@/views/CartView.vue'),
         },
       ],
     },

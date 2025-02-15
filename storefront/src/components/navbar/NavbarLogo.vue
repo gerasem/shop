@@ -13,11 +13,17 @@ const handleLogoClick = () => {
 </script>
 
 <template>
-  <RouterLink @click="handleLogoClick()" class="navbar-item is-flex is-flex-grow-1 navbar__logo" :to="localePath('')">
+  <RouterLink
+    @click="handleLogoClick()"
+    class="navbar-item is-flex is-flex-grow-1 navbar__logo"
+    :to="localePath('')"
+  >
     <BaseImage src="logo.svg" />
   </RouterLink>
 
-  <div class="navbar-item is-hidden-touch navbar__slogan">{{ t('Demo project of an online store') }}</div>
+  <div class="navbar-item is-hidden-touch navbar__slogan">
+    {{ t('Demo project of an online store') }}
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -35,7 +41,6 @@ const handleLogoClick = () => {
 
   &__slogan {
     color: $text-muted;
-
   }
 }
 </style>

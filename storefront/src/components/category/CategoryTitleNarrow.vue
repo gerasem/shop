@@ -7,7 +7,11 @@ const categoryStore = useCategoryStore()
 
 <template>
   <div class="is-full category__container">
-    <CategoryTitle v-for="category in categoryStore.categories" :key="category.id" :category="category" />
+    <CategoryTitle
+      v-for="category in categoryStore.categories"
+      :key="category.id"
+      :category="category"
+    />
   </div>
 </template>
 
@@ -20,7 +24,7 @@ const categoryStore = useCategoryStore()
     width: 100%;
     background: $color-categories-background;
     gap: 15px;
-    padding: .75rem;
+    padding: 0.75rem;
     margin-bottom: 2rem;
   }
 

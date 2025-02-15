@@ -3,30 +3,20 @@ import { useI18n } from 'vue-i18n'
 
 const { locale, t } = useI18n()
 
-const supportedLocales: String[] = [
-  'de',
-  'en'
-]
+const supportedLocales: String[] = ['de', 'en']
 </script>
 
 <template>
-  <div
-    class="navbar__languages"
-    :aria-label="t('Select Language')"
-  >
+  <div class="navbar__languages" :aria-label="t('Select Language')">
     <template v-for="(lang, index) of supportedLocales" :key="lang">
       <a
         :class="{ 'navbar__language--current': locale === lang }"
         class="navbar__language is-clickable"
         :href="locale !== lang ? `/${lang}` : '#'"
-      >{{ lang }}</a
+        >{{ lang }}</a
       >
 
-      <span
-        v-if="index !== supportedLocales.length - 1"
-        class="navbar__language-separator"
-      >/</span
-      >
+      <span v-if="index !== supportedLocales.length - 1" class="navbar__language-separator">/</span>
     </template>
   </div>
 </template>

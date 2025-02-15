@@ -1,6 +1,4 @@
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <nav class="breadcrumb" aria-label="breadcrumbs">
@@ -14,6 +12,5 @@
 </template>
 
 <style scoped lang="scss">
-@forward "bulma/sass/components/breadcrumb";
+@forward 'bulma/sass/components/breadcrumb';
 </style>
-

@@ -21,7 +21,11 @@ onMounted(() => {
     <CategoryTitleNarrow />
 
     <div class="container is-fluid">
-      <CategoryPreviewMobile v-for="category in categoryStore.categories" :key="category.id" :category="category" />
+      <CategoryPreviewMobile
+        v-for="category in categoryStore.categories"
+        :key="category.id"
+        :category="category"
+      />
     </div>
   </template>
 
@@ -29,17 +33,23 @@ onMounted(() => {
     <div class="container is-fluid">
       <div class="columns is-5-tablet is-6-desktop is-8-fullhd">
         <div class="column is-one-third-tablet is-one-fifth-desktop">
-          <CategoryCard v-for="category in categoryStore.categories" :key="category.id" :category="category" />
+          <CategoryCard
+            v-for="category in categoryStore.categories"
+            :key="category.id"
+            :category="category"
+          />
         </div>
 
         <div class="column">
-          <CategoryPreview v-for="category in categoryStore.categories" :key="category.id" :category="category" />
+          <CategoryPreview
+            v-for="category in categoryStore.categories"
+            :key="category.id"
+            :category="category"
+          />
         </div>
       </div>
     </div>
   </template>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

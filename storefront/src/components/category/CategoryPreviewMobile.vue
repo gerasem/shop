@@ -14,19 +14,18 @@ const { t } = useI18n()
 <template>
   <div class="category__preview-container">
     <div class="title__container">
-      <h2 class="title is-2">{{category.title}}</h2>
+      <h2 class="title is-2">{{ category.title }}</h2>
 
-      <RouterLink :to="`catalog/${category.slug}`" class="title__link">{{ t('Show all Tests') }}</RouterLink>
+      <RouterLink :to="`catalog/${category.slug}`" class="title__link">{{
+        t('Show all Tests')
+      }}</RouterLink>
     </div>
 
-      <swiper
-        :slidesPerView="1.2"
-        :space-between="30"
-      >
-        <swiper-slide v-for="item in 4" :key="item">
-          <Item />
-        </swiper-slide>
-      </swiper>
+    <swiper :slidesPerView="1.2" :space-between="30">
+      <swiper-slide v-for="item in 4" :key="item">
+        <Item />
+      </swiper-slide>
+    </swiper>
   </div>
 </template>
 

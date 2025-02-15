@@ -12,13 +12,19 @@ const { t } = useI18n()
 <template>
   <div class="category__preview-container">
     <div class="title__container">
-      <h2 class="title is-2">{{category.title}}</h2>
+      <h2 class="title is-2">{{ category.title }}</h2>
 
-      <RouterLink :to="`catalog/${category.slug}`" class="title__link">{{ t('Show all Tests') }}</RouterLink>
+      <RouterLink :to="`catalog/${category.slug}`" class="title__link">{{
+        t('Show all Tests')
+      }}</RouterLink>
     </div>
 
     <div class="columns is-mobile is-multiline is-3">
-      <div class="column is-half-tablet is-one-third-desktop is-one-quarter-fullhd" v-for="item in 4" :key="item">
+      <div
+        class="column is-half-tablet is-one-third-desktop is-one-quarter-fullhd"
+        v-for="item in 4"
+        :key="item"
+      >
         <Item />
       </div>
     </div>

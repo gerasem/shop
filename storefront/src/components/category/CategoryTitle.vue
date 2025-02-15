@@ -36,7 +36,7 @@ defineProps<{
       gap: 15px;
     }
 
-    &.router-link-active{
+    &.router-link-active {
       color: $color-primary;
     }
   }

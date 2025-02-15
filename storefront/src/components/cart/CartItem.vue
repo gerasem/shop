@@ -3,16 +3,12 @@ import { localePath } from '@/composables/localePath'
 import BaseIcon from '@/components/common/BaseIcon.vue'
 
 defineProps<{
-  item: Object;
+  item: Object
 }>()
 
-const deleteItemWithConfirm = (event: Event, itemId: string) => {
+const deleteItemWithConfirm = (event: Event, itemId: string) => {}
 
-}
-
-const changeItemCount = (count: number, item) => {
-
-}
+const changeItemCount = (count: number, item) => {}
 </script>
 
 <template>
@@ -46,7 +42,7 @@ const changeItemCount = (count: number, item) => {
       <h4 class="cart__title">Item 123</h4>
     </div>
 
-    <input class="input" style="width: 100px;" type="text" placeholder="Text input" />
+    <input class="input" style="width: 100px" type="text" placeholder="Text input" />
 
     <BaseIcon :width="25" :height="25" icon="x-lg" @click="deleteItemWithConfirm($event, 1)" />
   </div>
@@ -62,7 +58,7 @@ const changeItemCount = (count: number, item) => {
 
     &:not(:last-of-type):after {
       position: absolute;
-      content: "";
+      content: '';
       width: calc(100% - 2rem);
       left: 1rem;
       bottom: 0;

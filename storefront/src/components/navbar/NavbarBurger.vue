@@ -10,15 +10,15 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'toggleMenu'): void;
+  (e: 'toggleMenu'): void
 }>()
 
 const toggleMenu = () => {
   if (!props.mobileMenu) {
-    document.body.classList.add("overflow-hidden")
+    document.body.classList.add('overflow-hidden')
     router.push({ query: { menu: 'open' } })
   } else {
-    document.body.classList.remove("overflow-hidden")
+    document.body.classList.remove('overflow-hidden')
     router.replace({ query: {} })
   }
 }
@@ -37,16 +37,25 @@ const handlerResize = () => {
   }
 }
 
-watch(() => route.query.menu, () => {
-  emit('toggleMenu')
-})
+watch(
+  () => route.query.menu,
+  () => {
+    emit('toggleMenu')
+  },
+)
 
 onUnmounted(() => window.removeEventListener('resize', handlerResize))
 </script>
 
 <template>
-  <a @click="toggleMenu()" class="navbar-burger is-hidden-tablet navbar__navbar-burger"
-     :class="{'is-active': mobileMenu}" role="button" aria-label="menu" aria-expanded="false">
+  <a
+    @click="toggleMenu()"
+    class="navbar-burger is-hidden-tablet navbar__navbar-burger"
+    :class="{ 'is-active': mobileMenu }"
+    role="button"
+    aria-label="menu"
+    aria-expanded="false"
+  >
     <span aria-hidden="true"></span>
     <span aria-hidden="true"></span>
     <span aria-hidden="true"></span>

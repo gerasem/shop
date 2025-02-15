@@ -12,13 +12,9 @@ useMeta('Cart', 'cart description')
 
 const { t } = useI18n()
 
-onMounted(async () => {
+onMounted(async () => {})
 
-})
-
-const deleteItemsFromCart = () => {
-
-}
+const deleteItemsFromCart = () => {}
 </script>
 
 <template>
@@ -33,7 +29,7 @@ const deleteItemsFromCart = () => {
           <h2 class="title is-2">Shopping Cart</h2>
 
           <template v-for="item in 5" :key="item">
-            <CartItem  item=""/>
+            <CartItem item="" />
           </template>
         </div>
 
@@ -50,23 +46,19 @@ const deleteItemsFromCart = () => {
                 <div class="columns">
                   <div class="column">{{ t('Sub-Total') }}:</div>
                   <div class="column">
-                    <span class="cart__form-price">{{ totalPrice }}</span>
+                    <span class="cart__form-price">{{ 0 }}</span>
                   </div>
                 </div>
 
                 <div class="columns">
                   <div class="column">{{ t('Shipping') }}:</div>
                   <div class="column">
-                    <span class="cart__form-price">
-                      5€
-                    </span>
+                    <span class="cart__form-price"> 5€ </span>
                   </div>
                 </div>
 
                 <div class="columns" v-if="true">
-                  <div class="column cart__form-price--discount">
-                    Discount ():
-                  </div>
+                  <div class="column cart__form-price--discount">Discount ():</div>
                   <div class="column">
                     <span class="cart__form-price cart__form-price--discount">
                       {{ 0 }}
@@ -75,26 +67,20 @@ const deleteItemsFromCart = () => {
                 </div>
 
                 <div class="columns">
-                  <div class="column">
-                    {{ t('Total price') }}:
-                  </div>
+                  <div class="column">{{ t('Total price') }}:</div>
                   <div class="column">
                     <span class="cart__form-price cart__form-price--total">
-                      {{ totalPrice }}
+                      {{ 0 }}
                     </span>
                   </div>
                 </div>
 
                 <div class="columns">
-                  <div class="column">
-
-                  </div>
+                  <div class="column"></div>
                 </div>
 
                 <div class="columns">
-                  <div class="column">
-
-                  </div>
+                  <div class="column"></div>
                 </div>
               </div>
             </div>
@@ -156,4 +142,3 @@ const deleteItemsFromCart = () => {
   }
 }
 </style>
-

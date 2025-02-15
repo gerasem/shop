@@ -1,5 +1,5 @@
 import './assets/styles/main.scss'
-import i18n from "./i18n";
+import i18n from './i18n'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -13,8 +13,8 @@ const head = createHead()
 
 app.use(createPinia())
 app.use(router)
-app.use(i18n);
+app.use(i18n)
 //@ts-ignore
-app.use(head);
+app.use(head)
 
 app.mount('#app')
