@@ -6,9 +6,12 @@ import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue'
 import Gallery from '@/components/gallery/Gallery.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
 import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
+import Loader from '@/components/common/Loader.vue'
 </script>
 
 <template>
+  <Loader />
+
   <InformationBanner />
 
   <Navbar />

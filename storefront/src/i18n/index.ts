@@ -5,4 +5,6 @@ export default createI18n({
   fallbackLocale: 'en',
   legacy: false,
   messages: {},
+  fallbackWarn: false,
+  missingWarn: false
 })

@@ -9,6 +9,7 @@ import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
 import { useCategoryStore } from '@/stores/category'
 import { useRoute } from 'vue-router'
 import { onMounted, watch } from 'vue'
+import Loader from '@/components/common/Loader.vue'
 
 const route = useRoute()
 const categoryStore = useCategoryStore()
@@ -31,6 +32,8 @@ watch(
 </script>
 
 <template>
+  <Loader />
+
   <InformationBanner />
 
   <Navbar />

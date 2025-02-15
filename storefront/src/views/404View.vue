@@ -4,11 +4,14 @@ import Footer from '@/components/footer/Footer.vue'
 import Hero from '@/components/content/Hero.vue'
 import InformationBanner from '@/components/information-banner/InformationBanner.vue'
 import { useMeta } from '@/composables/useMeta.ts'
+import Loader from '@/components/common/Loader.vue'
 
 useMeta('404')
 </script>
 
 <template>
+  <Loader />
+  
   <InformationBanner />
 
   <Navbar />

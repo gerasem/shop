@@ -9,12 +9,10 @@ import App from './App.vue'
 import router from './router'
 
 const app = createApp(App)
-const head = createHead()
 
 app.use(createPinia())
 app.use(router)
 app.use(i18n)
-//@ts-ignore
-app.use(head)
+app.use(createHead)
 
 app.mount('#app')

@@ -3,10 +3,10 @@ import Footer from '@/components/footer/Footer.vue'
 import InformationBanner from '@/components/information-banner/InformationBanner.vue'
 import Navbar from '@/components/navbar/Navbar.vue'
 import CartItem from '@/components/cart/CartItem.vue'
-
 import { useMeta } from '@/composables/useMeta.ts'
 import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import Loader from '@/components/common/Loader.vue'
 
 useMeta('Cart', 'cart description')
 
@@ -18,6 +18,8 @@ const deleteItemsFromCart = () => {}
 </script>
 
 <template>
+  <Loader />
+
   <InformationBanner />
 
   <Navbar />
