@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { ICategory } from '@/interfaces/ICategory.ts'
 import { useLoader } from "@/composables/useLoader";
+import { apiService } from '@/services/api/api';
 
 const { startLoading, stopLoading } = useLoader('category');
 
@@ -11,26 +12,29 @@ export const useCategoryStore = defineStore('category', () => {
   const currentCategory = ref<ICategory | null>(null)
 
   const fetchCategories = async () => {
-    startLoading();
-    console.log('fetchCategories()')
     if (categories.value.length) {
-      setTimeout(() => {
-        stopLoading()
-      }, 500)
       return
     }
     
-    categories.value = [
-      { id: 1, image: 'https://placehold.co/400x200', title: 'Laptops', slug: 'laptops' },
-      { id: 2, image: 'https://placehold.co/400x200', title: 'Smartphones', slug: 'smartphones' },
-      { id: 3, image: 'https://placehold.co/400x200', title: 'Accessories', slug: 'accessories' },
-      { id: 4, image: 'https://placehold.co/400x200', title: 'Gaming', slug: 'gaming' },
-    ]
+    startLoading();
+    console.log('fetchCategories()')
 
-  setTimeout(() => {
-    stopLoading()
-  }, 1000)
-    
+    try {
+      const data = await apiService.get<string[]>('/products/categories');
+      categories.value = data.map((title, index) => ({
+        id: index + 1,
+        image: `https://placehold.co/200?text=${title}`,
+        title,
+        slug: title.toString().toLowerCase().replace(/\s+/g, '-'),
+      }));
+
+    } catch (err: any) {
+      
+    } finally {
+      setTimeout(() => {
+        stopLoading()
+      }, 1000)
+    }   
   }
 
   const setCurrentCategory = (slug: string) => {
