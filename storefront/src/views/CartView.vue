@@ -1,29 +1,19 @@
 <script setup lang="ts">
-import Footer from '@/components/footer/Footer.vue'
-import InformationBanner from '@/components/information-banner/InformationBanner.vue'
-import Navbar from '@/components/navbar/Navbar.vue'
 import CartItem from '@/components/cart/CartItem.vue'
 import { useMeta } from '@/composables/useMeta.ts'
 import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import Loader from '@/components/common/Loader.vue'
-
-useMeta('Cart', 'cart description')
-
-const { t } = useI18n()
 
 onMounted(async () => {})
 
+const { t } = useI18n()
+
 const deleteItemsFromCart = () => {}
+
+useMeta('Cart', 'cart description')
 </script>
 
 <template>
-  <Loader />
-
-  <InformationBanner />
-
-  <Navbar />
-
   <div class="container is-fluid">
     <template v-if="true">
       <div class="columns">
@@ -97,8 +87,6 @@ const deleteItemsFromCart = () => {}
       <p>{{ t('Shopping cart is empty') }}</p>
     </template>
   </div>
-
-  <Footer />
 </template>
 
 <style lang="scss" scoped>

@@ -1,21 +1,11 @@
 <script setup lang="ts">
-import Footer from '@/components/footer/Footer.vue'
-import Navbar from '@/components/navbar/Navbar.vue'
-import InformationBanner from '@/components/information-banner/InformationBanner.vue'
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue'
 import Gallery from '@/components/gallery/Gallery.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
 import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
-import Loader from '@/components/common/Loader.vue'
 </script>
 
 <template>
-  <Loader />
-
-  <InformationBanner />
-
-  <Navbar />
-
   <CategoriesNarrow />
 
   <div class="container is-fluid">
@@ -45,8 +35,6 @@ import Loader from '@/components/common/Loader.vue'
     officiis quasi quidem repellendus repudiandae sapiente, ullam vero voluptatibus. Dolore neque
     quia ratione!
   </Text2Columns>
-
-  <Footer />
 </template>
 
 <style scoped lang="scss"></style>

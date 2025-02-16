@@ -1,21 +1,12 @@
 <script setup lang="ts">
-import Navbar from '@/components/navbar/Navbar.vue'
-import Footer from '@/components/footer/Footer.vue'
 import Categories from '@/components/category/Categories.vue'
-import InformationBanner from '@/components/information-banner/InformationBanner.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
 import { useMeta } from '@/composables/useMeta.ts'
-import Loader from '@/components/common/Loader.vue'
+
 useMeta('Home', 'Description Home')
 </script>
 
 <template>
-  <Loader />
-  
-  <InformationBanner />
-
-  <Navbar />
-
   <Categories />
 
   <Text2Columns header="About us"
@@ -29,6 +20,4 @@ useMeta('Home', 'Description Home')
     officiis quasi quidem repellendus repudiandae sapiente, ullam vero voluptatibus. Dolore neque
     quia ratione!
   </Text2Columns>
-
-  <Footer />
 </template>

@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import Footer from '@/components/footer/Footer.vue'
-import Navbar from '@/components/navbar/Navbar.vue'
-import InformationBanner from '@/components/information-banner/InformationBanner.vue'
 import { useMeta } from '@/composables/useMeta.ts'
 import Item from '@/components/item/Item.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
@@ -9,35 +6,32 @@ import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
 import { useCategoryStore } from '@/stores/category'
 import { useRoute } from 'vue-router'
 import { onMounted, watch } from 'vue'
-import Loader from '@/components/common/Loader.vue'
+
+onMounted(() => {
+  categoryStore.fetchCategories().then(() => {
+    setCurrentCategory(route.params.slug as string)
+  })
+})
 
 const route = useRoute()
 const categoryStore = useCategoryStore()
 
-onMounted(() => {
-  categoryStore.fetchCategories().then(() => {
-    categoryStore.setCurrentCategory(route.params.slug as string)
+const setCurrentCategory = (slug: string) => {
+  categoryStore.setCurrentCategory(slug as string)
     if (categoryStore.currentCategory) {
       useMeta(categoryStore.currentCategory?.title)
     }
-  })
-})
+}
 
 watch(
   () => route.params.slug,
   (newSlug) => {
-    categoryStore.setCurrentCategory(newSlug as string)
+    setCurrentCategory(newSlug as string)
   },
 )
 </script>
 
 <template>
-  <Loader />
-
-  <InformationBanner />
-
-  <Navbar />
-
   <CategoriesNarrow />
 
   <div class="container is-fluid">
@@ -74,8 +68,6 @@ watch(
     officiis quasi quidem repellendus repudiandae sapiente, ullam vero voluptatibus. Dolore neque
     quia ratione!
   </Text2Columns>
-
-  <Footer />
 </template>
 
 <style scoped lang="scss"></style>
