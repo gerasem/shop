@@ -6,27 +6,32 @@ import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
 import { useCategoryStore } from '@/stores/category'
 import { useRoute } from 'vue-router'
 import { onMounted, watch } from 'vue'
+import { useItemStore } from '@/stores/item';
+import { useLoader } from '@/composables/useLoader'
 
-onMounted(() => {
-  categoryStore.fetchCategories().then(() => {
-    setCurrentCategory(route.params.slug as string)
+onMounted((): void => {
+  categoryStore.fetchCategories().then((): void => {
+    init(route.params.slug as string)
   })
 })
 
 const route = useRoute()
 const categoryStore = useCategoryStore()
+const itemStore = useItemStore();
+const { loading } = useLoader()
 
-const setCurrentCategory = (slug: string) => {
-  categoryStore.setCurrentCategory(slug as string)
-    if (categoryStore.currentCategory) {
-      useMeta(categoryStore.currentCategory?.title)
-    }
+const init = (slug: string): void => {
+  categoryStore.setCurrentCategory(slug)
+  itemStore.getItemsByCategory(slug)
+  if (categoryStore.currentCategory) {
+    useMeta(categoryStore.currentCategory?.title)
+  }
 }
 
 watch(
-  () => route.params.slug,
-  (newSlug) => {
-    setCurrentCategory(newSlug as string)
+  (): string | string[] => route.params.slug,
+  (newSlug: string | string[]): void => {
+    init(newSlug as string)
   },
 )
 </script>
@@ -46,19 +51,20 @@ watch(
       </div>
     </div>
 
-    <div class="columns is-mobile is-multiline is-3">
-      <div
-        class="column is-half-mobile is-one-third-tablet is-one-quarter-desktop"
-        v-for="item in 40"
-        :key="item"
-      >
-        <Item />
+    <div v-if="!loading && categoryStore.currentCategory" class="columns is-mobile is-multiline is-3">
+      <div class="column is-half-mobile is-one-third-tablet is-one-quarter-desktop"
+        v-for="item in itemStore.itemsByCategory(categoryStore.currentCategory?.slug)" :key="item.id">
+        <Item :item="item" />
       </div>
+
+      <p v-if="itemStore.itemsByCategory(categoryStore.currentCategory?.slug).length === 0" class="column">Nothing found</p>
     </div>
+
+    
   </div>
 
-  <Text2Columns header="About us"
-    >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores expedita, maiores! Ab cum
+  <Text2Columns header="About us">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores expedita, maiores!
+    Ab cum
     porro voluptates voluptatibus voluptatum. Adipisci architecto at, atque cumque deleniti eveniet
     exercitationem expedita, id illum iure, iusto maiores molestias nisi nobis non rerum suscipit
     tempora unde velit veniam veritatis voluptas voluptate. Adipisci delectus distinctio dolores

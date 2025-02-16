@@ -1,13 +1,19 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { IItem } from '@/interfaces/IItem';
+
+defineProps<{
+  item: IItem
+}>()
+</script>
 
 <template>
-  <RouterLink to="#" class="item">
-    <img class="image is-square item__image" src="https://placehold.co/400x400" alt="item" />
+  <RouterLink :to="`item/${item.slug}`" class="item">
+    <img class="image is-square item__image" :src="item.image" :alt="item.title" />
 
     <div class="item__bottom">
-      <h3 class="item__title">lorem ipsum</h3>
+      <h3 class="item__title">{{ item.title }}</h3>
 
-      <div class="item__price">2,50€</div>
+      <div class="item__price">{{ item.price }}€</div>
     </div>
   </RouterLink>
 </template>

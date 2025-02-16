@@ -1,10 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { ICategory } from '@/interfaces/ICategory.ts'
-import { useLoader } from "@/composables/useLoader";
 import { apiService } from '@/services/api/api';
-
-const { startLoading, stopLoading } = useLoader('category');
 
 export const useCategoryStore = defineStore('category', () => {
   const categories = ref<ICategory[]>([])
@@ -15,7 +12,6 @@ export const useCategoryStore = defineStore('category', () => {
       return
     }
 
-    startLoading();
     console.log('fetchCategories()')
 
     const data = await apiService.get<string[]>('/products/categories');
@@ -25,16 +21,13 @@ export const useCategoryStore = defineStore('category', () => {
       title,
       slug: title.toString().toLowerCase().replace(/\s+/g, '-'),
     }));
-
-    setTimeout(() => {
-      stopLoading()
-    }, 1000)
   }
 
   const setCurrentCategory = (slug: string) => {
     console.log('setCurrentCategory()')
+    //todo redirect 404 if category not found 
     if (!categories.value.length) return
-    currentCategory.value = categories.value.find((cat) => cat.slug === slug) || null
+    currentCategory.value = categories.value.find((cat: ICategory) => cat.slug === slug) || null
   }
 
   return { categories, fetchCategories, currentCategory, setCurrentCategory }
