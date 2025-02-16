@@ -1,5 +1,8 @@
+import { useLoader } from "@/composables/useLoader";
+
 export class ApiService {
   private baseUrl: string;
+  private loader = useLoader();
 
   constructor(baseUrl: string) {
     this.baseUrl = baseUrl;
@@ -7,6 +10,7 @@ export class ApiService {
 
   private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
     try {
+      this.loader.startLoading(endpoint);
       const response = await fetch(`${this.baseUrl}${endpoint}`, {
         headers: { 'Content-Type': 'application/json' },
         ...options,
@@ -22,6 +26,8 @@ export class ApiService {
       console.error('API Error:', error.message);
       // notifications
       throw error; 
+    } finally {
+      this.loader.stopLoading(endpoint);
     }
   }
 

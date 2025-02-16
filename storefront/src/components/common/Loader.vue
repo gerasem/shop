@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useLoader } from "@/composables/useLoader";
-import { useId } from "vue";
-const { loading } = useLoader(useId());
+const { loading } = useLoader();
 </script>
 
 <template>
