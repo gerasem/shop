@@ -5,15 +5,10 @@ import CategoryTitleNarrow from '@/components/category/CategoryTitleNarrow.vue'
 import { useDevice } from '@/composables/useDevice.ts'
 import CategoryPreviewMobile from '@/components/category/CategoryPreviewMobile.vue'
 import { useCategoryStore } from '@/stores/category'
-import { onMounted } from 'vue'
 
 const { isMobile } = useDevice()
 
 const categoryStore = useCategoryStore()
-
-onMounted(() => {
-  categoryStore.fetchCategories()
-})
 </script>
 
 <template>

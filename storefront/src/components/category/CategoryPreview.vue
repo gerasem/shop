@@ -1,12 +1,23 @@
 <script setup lang="ts">
 import Item from '@/components/item/Item.vue'
-import { useI18n } from 'vue-i18n'
 import type { ICategory } from '@/interfaces/ICategory.ts'
+import { useItemStore } from '@/stores/item';
+import { useLoader } from '@/composables/useLoader'
+import { onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-defineProps<{
+const props = defineProps<{
   category: ICategory
 }>()
+
+onMounted(() => {
+  itemStore.getItemsByCategory(props.category.slug, 4)
+})
+
+const itemStore = useItemStore();
+const { loading } = useLoader()
 const { t } = useI18n()
+
 </script>
 
 <template>
@@ -14,19 +25,19 @@ const { t } = useI18n()
     <div class="title__container">
       <h2 class="title is-2">{{ category.title }}</h2>
 
-      <RouterLink :to="`catalog/${category.slug}`" class="title__link">{{
-        t('Show all Tests')
-      }}</RouterLink>
+      <RouterLink :to="`catalog/${category.slug}`" class="title__link">
+        {{ t('Show all') }}
+        {{ category.title }}
+      </RouterLink>
     </div>
 
     <div class="columns is-mobile is-multiline is-3">
-      <div
-        class="column is-half-tablet is-one-third-desktop is-one-quarter-fullhd"
-        v-for="item in 4"
-        :key="item"
-      >
-        <Item />
+      <div class="column is-half-tablet is-one-third-desktop is-one-quarter-fullhd"
+        v-for="item in itemStore.itemsByCategory(category.slug)" :key="item.id">
+        <Item :item="item" />
       </div>
+
+      <p v-if="itemStore.itemsByCategory(category.slug).length === 0" class="column">Nothing found</p>
     </div>
   </div>
 </template>

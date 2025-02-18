@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import Hero from '@/components/content/Hero.vue'
 import { useMeta } from '@/composables/useMeta.ts'
+import { onMounted } from 'vue'
+import { useCategoryStore } from '@/stores/category'
+
+const categoryStore = useCategoryStore()
+
+onMounted(() => {
+  categoryStore.fetchCategories()
+})
 
 useMeta('404')
 </script>

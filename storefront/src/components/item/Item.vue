@@ -8,7 +8,7 @@ defineProps<{
 
 <template>
   <RouterLink :to="`item/${item.slug}`" class="item">
-    <img class="image is-square item__image" :src="item.image" :alt="item.title" />
+      <img class="image is-square item__image" :src="item.image" :alt="item.title" />
 
     <div class="item__bottom">
       <h3 class="item__title">{{ item.title }}</h3>

@@ -51,13 +51,13 @@ watch(
       </div>
     </div>
 
-    <div v-if="!loading && categoryStore.currentCategory" class="columns is-mobile is-multiline is-3">
+    <div v-if="categoryStore.currentCategory" class="columns is-mobile is-multiline is-3">
       <div class="column is-half-mobile is-one-third-tablet is-one-quarter-desktop"
-        v-for="item in itemStore.itemsByCategory(categoryStore.currentCategory?.slug)" :key="item.id">
+        v-for="item in itemStore.itemsByCategory(categoryStore.currentCategory.slug)" :key="item.id">
         <Item :item="item" />
       </div>
 
-      <p v-if="itemStore.itemsByCategory(categoryStore.currentCategory?.slug).length === 0" class="column">Nothing found</p>
+      <p v-if="itemStore.itemsByCategory(categoryStore.currentCategory.slug).length === 0" class="column">Nothing found</p>
     </div>
 
     

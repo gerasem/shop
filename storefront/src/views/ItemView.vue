@@ -3,6 +3,17 @@ import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue'
 import Gallery from '@/components/gallery/Gallery.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
 import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
+import { onMounted } from 'vue'
+import { useCategoryStore } from '@/stores/category'
+import { useMeta } from '@/composables/useMeta.ts'
+
+const categoryStore = useCategoryStore()
+
+onMounted(() => {
+  categoryStore.fetchCategories()
+})
+
+useMeta('Item', 'Description Item')
 </script>
 
 <template>
