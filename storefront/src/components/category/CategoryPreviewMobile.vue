@@ -4,10 +4,20 @@ import { useI18n } from 'vue-i18n'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import type { ICategory } from '@/interfaces/ICategory.ts'
+import { useItemStore } from '@/stores/item';
+import { useLoader } from '@/composables/useLoader'
+import { onMounted } from 'vue'
 
-defineProps<{
+const props = defineProps<{
   category: ICategory
 }>()
+
+onMounted(() => {
+  itemStore.getItemsByCategory(props.category.slug, 4)
+})
+
+const itemStore = useItemStore();
+const { loading } = useLoader()
 const { t } = useI18n()
 </script>
 
@@ -22,10 +32,12 @@ const { t } = useI18n()
     </div>
 
     <swiper :slidesPerView="1.2" :space-between="30">
-      <swiper-slide v-for="item in 4" :key="item">
-        <Item />
+      <swiper-slide v-for="item in itemStore.itemsByCategory(category.slug)" :key="item.id">
+        <Item :item="item" />
       </swiper-slide>
     </swiper>
+    <p v-if="itemStore.itemsByCategory(category.slug).length === 0" class="">Nothing found</p>
+
   </div>
 </template>
 
