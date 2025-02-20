@@ -4,7 +4,7 @@ import CategoryPreview from '@/components/category/CategoryPreview.vue'
 import CategoryTitleNarrow from '@/components/category/CategoryTitleNarrow.vue'
 import { useDevice } from '@/composables/useDevice.ts'
 import CategoryPreviewMobile from '@/components/category/CategoryPreviewMobile.vue'
-import { useCategoryStore } from '@/stores/category'
+import { useCategoryStore } from '@/stores/CatalogStore'
 
 const { isMobile } = useDevice()
 

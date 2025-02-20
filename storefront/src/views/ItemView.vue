@@ -4,7 +4,7 @@ import Gallery from '@/components/gallery/Gallery.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
 import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
 import { onMounted } from 'vue'
-import { useCategoryStore } from '@/stores/category'
+import { useCategoryStore } from '@/stores/CatalogStore'
 import { useMeta } from '@/composables/useMeta.ts'
 
 const categoryStore = useCategoryStore()

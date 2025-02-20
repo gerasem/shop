@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import type { ICategory } from '@/interfaces/ICategory.ts'
-import { useItemStore } from '@/stores/item';
+import { useItemStore } from '@/stores/ItemStore';
 import { useLoader } from '@/composables/useLoader'
 import { onMounted } from 'vue'
 

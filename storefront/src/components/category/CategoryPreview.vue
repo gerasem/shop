@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Item from '@/components/item/Item.vue'
 import type { ICategory } from '@/interfaces/ICategory.ts'
-import { useItemStore } from '@/stores/item';
+import { useItemStore } from '@/stores/ItemStore';
 import { useLoader } from '@/composables/useLoader'
 import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'

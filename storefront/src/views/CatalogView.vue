@@ -3,10 +3,10 @@ import { useMeta } from '@/composables/useMeta.ts'
 import Item from '@/components/item/Item.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
 import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
-import { useCategoryStore } from '@/stores/category'
+import { useCategoryStore } from '@/stores/CatalogStore'
 import { useRoute } from 'vue-router'
 import { onMounted, watch } from 'vue'
-import { useItemStore } from '@/stores/item';
+import { useItemStore } from '@/stores/ItemStore';
 import { useLoader } from '@/composables/useLoader'
 
 onMounted((): void => {

@@ -4,7 +4,7 @@ import { useMeta } from '@/composables/useMeta.ts'
 import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import { useCategoryStore } from '@/stores/category'
+import { useCategoryStore } from '@/stores/CatalogStore'
 
 const categoryStore = useCategoryStore()
 
