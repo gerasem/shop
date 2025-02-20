@@ -1,16 +1,7 @@
 <script setup lang="ts">
 import CartItem from '@/components/cart/CartItem.vue'
 import { useMeta } from '@/composables/useMeta.ts'
-import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-
-import { useCategoryStore } from '@/stores/CatalogStore'
-
-const categoryStore = useCategoryStore()
-
-onMounted(() => {
-  categoryStore.fetchCategories()
-})
 
 const { t } = useI18n()
 

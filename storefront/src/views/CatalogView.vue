@@ -1,39 +1,39 @@
 <script setup lang="ts">
-import { useMeta } from '@/composables/useMeta.ts'
-import Item from '@/components/item/Item.vue'
-import Text2Columns from '@/components/content/Text2Columns.vue'
-import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
-import { useCategoryStore } from '@/stores/CatalogStore'
-import { useRoute } from 'vue-router'
-import { onMounted, watch } from 'vue'
-import { useItemStore } from '@/stores/ItemStore';
-import { useLoader } from '@/composables/useLoader'
+  import { useMeta } from '@/composables/useMeta.ts'
+  import Item from '@/components/item/Item.vue'
+  import Text2Columns from '@/components/content/Text2Columns.vue'
+  import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
+  import { useCategoryStore } from '@/stores/CategoryStore'
+  import { useRoute } from 'vue-router'
+  import { onMounted, watch } from 'vue'
+  import { useItemStore } from '@/stores/ItemStore';
+  import { useLoader } from '@/composables/useLoader'
 
-onMounted((): void => {
-  categoryStore.fetchCategories().then((): void => {
+  onMounted((): void => {
     init(route.params.slug as string)
   })
-})
 
-const route = useRoute()
-const categoryStore = useCategoryStore()
-const itemStore = useItemStore();
-const { loading } = useLoader()
+  const route = useRoute()
+  const categoryStore = useCategoryStore()
+  const itemStore = useItemStore();
+  const { loading } = useLoader()
 
-const init = (slug: string): void => {
-  categoryStore.setCurrentCategory(slug)
-  itemStore.getItemsByCategory(slug)
-  if (categoryStore.currentCategory) {
-    useMeta(categoryStore.currentCategory?.title)
+  const init = (slug: string): void => {
+    categoryStore.setCurrentCategory(slug)
+    itemStore.getItemsByCategory(slug)
+    if (categoryStore.currentCategory) {
+      useMeta(categoryStore.currentCategory?.title)
+    }
   }
-}
 
-watch(
-  (): string | string[] => route.params.slug,
-  (newSlug: string | string[]): void => {
-    init(newSlug as string)
-  },
-)
+  watch(
+    [() => route.params.slug, () => categoryStore.isLoaded],
+    ([newSlug, isLoaded]) => {
+      if (isLoaded) {
+        init(newSlug as string);
+      }
+    }
+  )
 </script>
 
 <template>
@@ -57,10 +57,11 @@ watch(
         <Item :item="item" />
       </div>
 
-      <p v-if="itemStore.itemsByCategory(categoryStore.currentCategory.slug).length === 0" class="column">Nothing found</p>
+      <p v-if="itemStore.itemsByCategory(categoryStore.currentCategory.slug).length === 0" class="column">Nothing found
+      </p>
     </div>
 
-    
+
   </div>
 
   <Text2Columns header="About us">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores expedita, maiores!

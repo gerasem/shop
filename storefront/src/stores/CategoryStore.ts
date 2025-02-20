@@ -6,6 +6,7 @@ import { apiService } from '@/services/api/api';
 export const useCategoryStore = defineStore('category', () => {
   const categories = ref<ICategory[]>([])
   const currentCategory = ref<ICategory | null>(null)
+  const isLoaded = ref<boolean>(false);
 
   const fetchCategories = async () => {
     if (categories.value.length) {
@@ -21,6 +22,8 @@ export const useCategoryStore = defineStore('category', () => {
       title,
       slug: title.toString().toLowerCase().replace(/\s+/g, '-'),
     }));
+
+    isLoaded.value = true;
   }
 
   const setCurrentCategory = (slug: string) => {
@@ -30,5 +33,5 @@ export const useCategoryStore = defineStore('category', () => {
     currentCategory.value = categories.value.find((cat: ICategory) => cat.slug === slug) || null
   }
 
-  return { categories, fetchCategories, currentCategory, setCurrentCategory }
+  return { isLoaded, categories, fetchCategories, currentCategory, setCurrentCategory }
 })

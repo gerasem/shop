@@ -4,6 +4,14 @@ import Loader from '@/components/common/Loader.vue'
 import InformationBanner from '@/components/information-banner/InformationBanner.vue'
 import Navbar from '@/components/navbar/Navbar.vue'
 import Footer from '@/components/footer/Footer.vue'
+import { onMounted } from 'vue'
+import { useCategoryStore } from '@/stores/CategoryStore'
+
+const categoryStore = useCategoryStore()
+
+onMounted(() => {
+  categoryStore.fetchCategories()
+})
 </script>
 
 <template>

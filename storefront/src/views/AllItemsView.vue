@@ -3,17 +3,14 @@
   import Item from '@/components/item/Item.vue'
   import Text2Columns from '@/components/content/Text2Columns.vue'
   import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
-  import { useCategoryStore } from '@/stores/CatalogStore'
   import { onMounted } from 'vue'
   import { useItemStore } from '@/stores/ItemStore';
   import { useLoader } from '@/composables/useLoader'
 
   onMounted((): void => {
-    categoryStore.fetchCategories()
     itemStore.getAllItems()
   })
 
-  const categoryStore = useCategoryStore()
   const itemStore = useItemStore();
   const { loading } = useLoader()
 

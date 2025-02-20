@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import CategoryTitle from '@/components/category/CategoryTitle.vue'
-import { useCategoryStore } from '@/stores/CatalogStore'
+import { useCategoryStore } from '@/stores/CategoryStore'
 
 const categoryStore = useCategoryStore()
 </script>

@@ -2,14 +2,6 @@
 import Categories from '@/components/category/Categories.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
 import { useMeta } from '@/composables/useMeta.ts'
-import { onMounted } from 'vue'
-import { useCategoryStore } from '@/stores/CatalogStore'
-
-const categoryStore = useCategoryStore()
-
-onMounted(() => {
-  categoryStore.fetchCategories()
-})
 
 useMeta('Home', 'Description Home')
 </script>
