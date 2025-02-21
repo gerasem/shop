@@ -5,6 +5,7 @@
   import { useLoader } from '@/composables/useLoader'
   import { computed, onMounted } from 'vue'
   import { useI18n } from 'vue-i18n'
+  import ItemSkeleton from '../item/ItemSkeleton.vue';
 
   const props = defineProps<{
     category: ICategory
@@ -34,28 +35,24 @@
       </RouterLink>
     </div>
 
-    <div v-if="loading" class="columns is-mobile is-multiline is-3">
-      <div v-for="skeleton in 4" :key="skeleton"
-        class="column is-half-tablet is-one-third-desktop is-one-quarter-fullhd">
-        <figure class="image is-square is-skeleton">
-        </figure>
-        <div class="category__skeleton-lines skeleton-lines">
-          <div></div>
+    <div class="columns is-mobile is-multiline is-3">
+      <template v-if="loading">
+        <div v-for="skeleton in 4" :key="skeleton"
+          class="column is-half-tablet is-one-third-desktop is-one-quarter-fullhd">
+          <ItemSkeleton />
         </div>
-      </div>
-    </div>
+      </template>
 
-    <div v-else class="columns is-mobile is-multiline is-3">
-      <div class="column is-half-tablet is-one-third-desktop is-one-quarter-fullhd"
-        v-for="item in items" :key="item.id">
-        <Item :item="item" />
-      </div>
+      <template v-else>
+        <div v-for="item in items" :key="item.id"
+          class="column is-half-tablet is-one-third-desktop is-one-quarter-fullhd">
+          <Item :item="item" />
+        </div>
+      </template>
 
-      <p v-if="items.length === 0" class="column">Nothing found</p>
+      <p v-if="!loading && items.length === 0" class="column">Nothing found</p>
     </div>
   </div>
 </template>
 
-<style scoped lang="scss">
-  
-</style>
+<style scoped lang="scss"></style>

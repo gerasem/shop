@@ -7,6 +7,7 @@
   import { useItemStore } from '@/stores/ItemStore';
   import { useLoader } from '@/composables/useLoader'
   import { onMounted, computed } from 'vue'
+  import ItemSkeleton from '../item/ItemSkeleton.vue'
 
   const props = defineProps<{
     category: ICategory
@@ -35,23 +36,21 @@
       </RouterLink>
     </div>
 
-    <swiper v-if="loading" :slidesPerView="1.2" :space-between="30">
-      <swiper-slide v-for="skeleton in 2" :key="skeleton">
-        <figure class="image is-square is-skeleton">
-        </figure>
-        <div class="category__skeleton-lines skeleton-lines">
-          <div></div>
-        </div>
-      </swiper-slide>
+    <swiper :slidesPerView="1.2" :space-between="30">
+      <template v-if="loading">
+        <swiper-slide v-for="skeleton in 2" :key="skeleton">
+          <ItemSkeleton />
+        </swiper-slide>
+      </template>
+
+      <template v-else>
+        <swiper-slide v-for="item in items" :key="item.id">
+          <Item :item="item" />
+        </swiper-slide>
+      </template>
     </swiper>
 
-    <swiper v-else :slidesPerView="1.2" :space-between="30">
-      <swiper-slide v-for="item in items" :key="item.id">
-        <Item :item="item" />
-      </swiper-slide>
-    </swiper>
-    <p v-if="items.length === 0" class="">Nothing found</p>
-
+    <p v-if="!loading && items.length === 0" class="">Nothing found</p>
   </div>
 </template>
 

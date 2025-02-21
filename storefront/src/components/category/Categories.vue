@@ -35,14 +35,10 @@
   </template>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
   .category {
     &__preview-container {
       margin-bottom: 2rem;
-    }
-
-    &__skeleton-lines {
-      margin-top: 10px;
     }
   }
 </style>
