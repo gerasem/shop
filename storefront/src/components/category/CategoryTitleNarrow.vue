@@ -5,7 +5,6 @@
 
   const categoryStore = useCategoryStore()
   const { loading } = useLoader()
-
 </script>
 
 <template>
