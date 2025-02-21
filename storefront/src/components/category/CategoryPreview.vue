@@ -11,7 +11,7 @@ const props = defineProps<{
 }>()
 
 onMounted(() => {
-  itemStore.getItemsByCategory(props.category.slug, 4)
+  itemStore.getItemsForMainPage(props.category.slug, 4)
 })
 
 const itemStore = useItemStore();
@@ -33,11 +33,11 @@ const { t } = useI18n()
 
     <div class="columns is-mobile is-multiline is-3">
       <div class="column is-half-tablet is-one-third-desktop is-one-quarter-fullhd"
-        v-for="item in itemStore.itemsByCategory(category.slug)" :key="item.id">
+        v-for="item in itemStore.itemsByCategoryForMainPage(category.slug)" :key="item.id">
         <Item :item="item" />
       </div>
 
-      <p v-if="itemStore.itemsByCategory(category.slug).length === 0" class="column">Nothing found</p>
+      <p v-if="itemStore.itemsByCategoryForMainPage(category.slug).length === 0" class="column">Nothing found</p>
     </div>
   </div>
 </template>

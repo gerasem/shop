@@ -13,7 +13,7 @@ const props = defineProps<{
 }>()
 
 onMounted(() => {
-  itemStore.getItemsByCategory(props.category.slug, 4)
+  itemStore.getItemsForMainPage(props.category.slug, 4)
 })
 
 const itemStore = useItemStore();
@@ -32,11 +32,11 @@ const { t } = useI18n()
     </div>
 
     <swiper :slidesPerView="1.2" :space-between="30">
-      <swiper-slide v-for="item in itemStore.itemsByCategory(category.slug)" :key="item.id">
+      <swiper-slide v-for="item in itemStore.itemsByCategoryForMainPage(category.slug)" :key="item.id">
         <Item :item="item" />
       </swiper-slide>
     </swiper>
-    <p v-if="itemStore.itemsByCategory(category.slug).length === 0" class="">Nothing found</p>
+    <p v-if="itemStore.itemsByCategoryForMainPage(category.slug).length === 0" class="">Nothing found</p>
 
   </div>
 </template>
