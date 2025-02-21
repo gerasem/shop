@@ -28,6 +28,8 @@ defineProps<{
   &__bottom {
     display: flex;
     justify-content: space-between;
+    gap: 15px;
+    margin-top: .75rem;
   }
 
   &__title {
@@ -36,6 +38,7 @@ defineProps<{
 
   &__price {
     color: $color-text;
+    font-weight: 700;
   }
 }
 </style>

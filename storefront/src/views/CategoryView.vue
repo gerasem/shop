@@ -49,7 +49,7 @@
 
   <div class="container is-fluid">
     <div class="title__container">
-      <h1 class="title is-2">{{ categoryStore.currentCategory?.title }}</h1>
+      <h1 class="title is-2" :class="{'has-skeleton': categoryStore.currentCategory === null}">{{ categoryStore.currentCategory?.title }}</h1>
 
       <div class="select">
         <select>
