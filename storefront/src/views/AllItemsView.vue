@@ -6,6 +6,7 @@
   import { onMounted } from 'vue'
   import { useItemStore } from '@/stores/ItemStore';
   import { useLoader } from '@/composables/useLoader'
+  import ItemSkeleton from '@/components/item/ItemSkeleton.vue';
 
   onMounted((): void => {
     itemStore.getAllItems()
@@ -32,18 +33,26 @@
       </div>
     </div>
 
-    <template v-for="category in itemStore.allItems()" :key="category.category">
-      <h2 class="title is-3">{{ category.category }}</h2>
-      <div class="columns is-mobile is-multiline is-3">
-        <div v-for="item in category.products" :key="item.id"
-          class="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
-          <Item :item="item" />
-        </div>
-
-        <p v-if="itemStore.allItems().length === 0" class="column">Nothing found</p>
+    <div v-if="loading" class="columns is-mobile is-multiline is-3">
+      <div v-for="skeleton in 8" :key="skeleton"
+        class="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
+        <ItemSkeleton />
       </div>
-    </template>
+    </div>
 
+    <template v-else>
+      <template v-for="category in itemStore.allItems()" :key="category.category">
+        <h2 class="title is-3">{{ category.category }}</h2>
+        <div class="columns is-mobile is-multiline is-3">
+          <div v-for="item in category.products" :key="item.id"
+            class="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
+            <Item :item="item" />
+          </div>
+
+          <p v-if="itemStore.allItems().length === 0" class="column">Nothing found</p>
+        </div>
+      </template>
+    </template>
   </div>
 
   <Text2Columns header="About us">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores expedita, maiores!
