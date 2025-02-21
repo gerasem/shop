@@ -45,7 +45,7 @@
       </div>
     </div>
 
-    <div class="columns is-mobile is-multiline is-3">
+    <div v-else class="columns is-mobile is-multiline is-3">
       <div class="column is-half-tablet is-one-third-desktop is-one-quarter-fullhd"
         v-for="item in items" :key="item.id">
         <Item :item="item" />
@@ -57,13 +57,5 @@
 </template>
 
 <style scoped lang="scss">
-  .category {
-    &__preview-container {
-      margin-bottom: 2rem;
-    }
-
-    &__skeleton-lines {
-      margin-top: 10px;
-    }
-  }
+  
 </style>
