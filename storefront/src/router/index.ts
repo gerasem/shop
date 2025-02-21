@@ -16,14 +16,14 @@ const router: Router = createRouter({
           component: HomeView,
         },
         {
-          path: 'catalog',
+          path: 'category',
           name: 'all-items',
           component: () => import('@/views/AllItemsView.vue'),
         },
         {
-          path: 'catalog/:slug',
+          path: 'category/:slug',
           name: 'catalog',
-          component: () => import('@/views/CatalogView.vue'),
+          component: () => import('@/views/CategoryView.vue'),
         },
         {
           path: 'item/:slug?',

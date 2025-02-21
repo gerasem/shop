@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-  <RouterLink :to="localePath(`catalog/${category.slug}`)" class="is-hidden-mobile">
+  <RouterLink :to="localePath(`category/${category.slug}`)" class="is-hidden-mobile">
     <img class="image is-16by9 category__image" :src="category.image" :alt="category.title" />
   </RouterLink>
 </template>

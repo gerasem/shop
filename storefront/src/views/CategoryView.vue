@@ -5,9 +5,10 @@
   import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
   import { useCategoryStore } from '@/stores/CategoryStore'
   import { useRoute } from 'vue-router'
-  import { onMounted, watch } from 'vue'
+  import { onMounted, watch, computed } from 'vue'
   import { useItemStore } from '@/stores/ItemStore';
   import { useLoader } from '@/composables/useLoader'
+  import ItemSkeleton from '@/components/item/ItemSkeleton.vue';
 
   onMounted((): void => {
     init(route.params.slug as string)
@@ -25,6 +26,13 @@
       useMeta(categoryStore.currentCategory?.title)
     }
   }
+
+  const items = computed(() => {
+    if (categoryStore.currentCategory) {
+      return itemStore.itemsByCategory(categoryStore.currentCategory.slug)
+    }
+    return []
+  })
 
   watch(
     [() => route.params.slug, () => categoryStore.isLoaded],
@@ -51,14 +59,22 @@
       </div>
     </div>
 
-    <div v-if="categoryStore.currentCategory" class="columns is-mobile is-multiline is-3">
-      <div class="column is-half-mobile is-one-third-tablet is-one-quarter-desktop"
-        v-for="item in itemStore.itemsByCategory(categoryStore.currentCategory.slug)" :key="item.id">
-        <Item :item="item" />
-      </div>
+    <div class="columns is-mobile is-multiline is-3">
+      <template v-if="loading">
+        <div v-for="skeleton in 8" :key="skeleton"
+          class="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
+          <ItemSkeleton />
+        </div>
+      </template>
 
-      <p v-if="itemStore.itemsByCategory(categoryStore.currentCategory.slug).length === 0" class="column">Nothing found
-      </p>
+      <template v-else>
+        <div v-for="item in items" :key="item.id"
+          class="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
+          <Item :item="item" />
+        </div>
+      </template>
+
+      <p v-if="!loading && items.length === 0" class="column">Nothing found</p>
     </div>
 
 

@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-  <RouterLink :to="localePath(`catalog/${category.slug}`)" class="category__title">
+  <RouterLink :to="localePath(`category/${category.slug}`)" class="category__title">
     <h3>{{ category.title }}</h3>
   </RouterLink>
 </template>

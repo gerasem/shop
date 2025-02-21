@@ -9,7 +9,7 @@
 
 <template>
   <div class="is-full category__container">
-    <template v-if="loading">
+    <template v-if="categoryStore.categories.length === 0">
       <div  v-for="skeleton in 5" :key="skeleton" class="skeleton-lines">
         <div></div>
       </div>

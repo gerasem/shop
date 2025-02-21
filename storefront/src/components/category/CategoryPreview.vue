@@ -5,7 +5,7 @@
   import { useLoader } from '@/composables/useLoader'
   import { computed, onMounted } from 'vue'
   import { useI18n } from 'vue-i18n'
-  import ItemSkeleton from '../item/ItemSkeleton.vue';
+  import ItemSkeleton from '@/components/item/ItemSkeleton.vue';
 
   const props = defineProps<{
     category: ICategory
@@ -29,14 +29,14 @@
     <div class="title__container">
       <h2 class="title is-2">{{ category.title }}</h2>
 
-      <RouterLink :to="`catalog/${category.slug}`" class="title__link">
+      <RouterLink :to="`category/${category.slug}`" class="title__link">
         {{ t('Show all') }}
         {{ category.title }}
       </RouterLink>
     </div>
 
     <div class="columns is-mobile is-multiline is-3">
-      <template v-if="loading">
+      <template v-if="loading && items.length === 0">
         <div v-for="skeleton in 4" :key="skeleton"
           class="column is-half-tablet is-one-third-desktop is-one-quarter-fullhd">
           <ItemSkeleton />

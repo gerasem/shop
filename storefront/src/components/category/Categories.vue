@@ -26,7 +26,7 @@
     <div class="container is-fluid">
       <div class="columns is-5-tablet is-6-desktop is-8-fullhd">
         <div class="column is-one-third-tablet is-one-fifth-desktop">
-          <template v-if="loading">
+          <template v-if="categoryStore.categories.length === 0">
             <CategoryCardSkeleton v-for="skeleton in 5" :key="skeleton" />
           </template>
 

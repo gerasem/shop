@@ -6,7 +6,7 @@ const { t } = useI18n()
 
 const links = [
   { path: '', text: 'Home' },
-  { path: 'catalog', text: 'Catalog' },
+  { path: 'category', text: 'Category' },
   { path: 'cart', text: 'Cart' },
 ]
 </script>
