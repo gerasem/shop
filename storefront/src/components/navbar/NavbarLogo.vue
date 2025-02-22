@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { localePath } from "@/composables/localePath.ts";
-import BaseImage from "@/components/common/BaseImage.vue";
+import BaseImage from "@/components/media/BaseImage.vue";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { localePath } from "@/composables/localePath";
-import BaseIcon from "@/components/common/BaseIcon.vue";
+import BaseIcon from "@/components/media/BaseIcon.vue";
 
 defineProps<{
   item: Object;
