@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import BaseIcon from '@/components/common/BaseIcon.vue'
-import { localePath } from '@/composables/localePath.ts'
+import BaseIcon from "@/components/common/BaseIcon.vue";
+import { localePath } from "@/composables/localePath.ts";
 </script>
 
 <template>

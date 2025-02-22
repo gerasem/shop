@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { localePath } from '@/composables/localePath.ts'
-import type { ICategory } from '@/interfaces/ICategory.ts'
+import { localePath } from "@/composables/localePath.ts";
+import type { ICategory } from "@/interfaces/ICategory.ts";
 
 defineProps<{
-  category: ICategory
-}>()
+  category: ICategory;
+}>();
 </script>
 
 <template>

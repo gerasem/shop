@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent } from "vue";
 
 const props = withDefaults(
   defineProps<{
-    icon: string
-    width?: number | string
-    height?: number | string
-    fill?: string
+    icon: string;
+    width?: number | string;
+    height?: number | string;
+    fill?: string;
   }>(),
   {
     width: 16,
     height: 16,
-    fill: 'currentColor',
+    fill: "currentColor",
   },
-)
+);
 
 const loadIcon = defineAsyncComponent({
   loader: () => import(`@/assets/icons/${props.icon}.svg?skipsvgo`),
   errorComponent: defineAsyncComponent(() => import(`@/assets/icons/_default.svg`)),
-})
+});
 </script>
 
 <template>

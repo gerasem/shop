@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
+import { useI18n } from "vue-i18n";
 
-const { locale, t } = useI18n()
+const { locale, t } = useI18n();
 
-const supportedLocales: String[] = ['de', 'en']
+const supportedLocales: String[] = ["de", "en"];
 </script>
 
 <template>

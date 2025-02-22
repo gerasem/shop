@@ -12,5 +12,5 @@
 </template>
 
 <style scoped lang="scss">
-@forward 'bulma/sass/components/breadcrumb';
+@forward "bulma/sass/components/breadcrumb";
 </style>

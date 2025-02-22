@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import Categories from '@/components/category/Categories.vue'
-import Text2Columns from '@/components/content/Text2Columns.vue'
-import { useMeta } from '@/composables/useMeta.ts'
+import Categories from "@/components/category/Categories.vue";
+import Text2Columns from "@/components/content/Text2Columns.vue";
+import { useMeta } from "@/composables/useMeta.ts";
 
-useMeta('Home', 'Description Home')
+useMeta("Home", "Description Home");
 </script>
 
 <template>

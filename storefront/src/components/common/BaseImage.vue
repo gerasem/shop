@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import { computed, defineAsyncComponent, ref } from 'vue'
+import { computed, defineAsyncComponent, ref } from "vue";
 
 const props = defineProps<{
-  src: string
-}>()
+  src: string;
+}>();
 
 const imageName = computed(() => {
-  const parts = props.src.split('.')
-  return parts.length > 1 ? parts.slice(0, -1).join('.') : props.src
-})
+  const parts = props.src.split(".");
+  return parts.length > 1 ? parts.slice(0, -1).join(".") : props.src;
+});
 
 const imageExtension = computed(() => {
-  const parts = props.src.split('.')
-  return parts.length > 1 ? parts.pop() : ''
-})
+  const parts = props.src.split(".");
+  return parts.length > 1 ? parts.pop() : "";
+});
 
 const loadImage = defineAsyncComponent({
   loader: () => import(`@/assets/images/${imageName.value}.${imageExtension.value}`),
   errorComponent: defineAsyncComponent(() => import(`@/assets/icons/_default.svg`)),
-})
+});
 </script>
 
 <template>
@@ -26,5 +26,5 @@ const loadImage = defineAsyncComponent({
 </template>
 
 <style scoped lang="scss">
-@forward 'bulma/sass/elements/image';
+@forward "bulma/sass/elements/image";
 </style>

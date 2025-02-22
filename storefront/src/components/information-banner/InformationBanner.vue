@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-import BaseIcon from '@/components/common/BaseIcon.vue'
+import { useI18n } from "vue-i18n";
+import BaseIcon from "@/components/common/BaseIcon.vue";
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const items = [
-  { icon: 'bag', text: 'Free Shipping' },
-  { icon: '', text: 'More than 50 items' },
-  { icon: '', text: 'Fast delivery' },
-]
+  { icon: "bag", text: "Free Shipping" },
+  { icon: "", text: "More than 50 items" },
+  { icon: "", text: "Fast delivery" },
+];
 </script>
 
 <template>

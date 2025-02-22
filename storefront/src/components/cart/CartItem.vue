@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { localePath } from '@/composables/localePath'
-import BaseIcon from '@/components/common/BaseIcon.vue'
+import { localePath } from "@/composables/localePath";
+import BaseIcon from "@/components/common/BaseIcon.vue";
 
 defineProps<{
-  item: Object
-}>()
+  item: Object;
+}>();
 
-const deleteItemWithConfirm = (event: Event, itemId: string) => {}
+const deleteItemWithConfirm = (event: Event, itemId: string) => {};
 
-const changeItemCount = (count: number, item) => {}
+const changeItemCount = (count: number, item) => {};
 </script>
 
 <template>
@@ -58,7 +58,7 @@ const changeItemCount = (count: number, item) => {}
 
     &:not(:last-of-type):after {
       position: absolute;
-      content: '';
+      content: "";
       width: calc(100% - 2rem);
       left: 1rem;
       bottom: 0;

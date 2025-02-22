@@ -1,21 +1,21 @@
 <script setup lang="ts">
-  import { useMeta } from '@/composables/useMeta.ts'
-  import Item from '@/components/item/Item.vue'
-  import Text2Columns from '@/components/content/Text2Columns.vue'
-  import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
-  import { onMounted } from 'vue'
-  import { useItemStore } from '@/stores/ItemStore';
-  import { useLoader } from '@/composables/useLoader'
-  import ItemSkeleton from '@/components/item/ItemSkeleton.vue';
+import { useMeta } from "@/composables/useMeta.ts";
+import Item from "@/components/item/Item.vue";
+import Text2Columns from "@/components/content/Text2Columns.vue";
+import CategoriesNarrow from "@/components/category/CategoryTitleNarrow.vue";
+import { onMounted } from "vue";
+import { useItemStore } from "@/stores/ItemStore";
+import { useLoader } from "@/composables/useLoader";
+import ItemSkeleton from "@/components/item/ItemSkeleton.vue";
 
-  onMounted((): void => {
-    itemStore.getAllItems()
-  })
+onMounted((): void => {
+  itemStore.getAllItems();
+});
 
-  const itemStore = useItemStore();
-  const { loading } = useLoader()
+const itemStore = useItemStore();
+const { loading } = useLoader();
 
-  useMeta("All items")
+useMeta("All items");
 </script>
 
 <template>
@@ -34,8 +34,11 @@
     </div>
 
     <div v-if="loading" class="columns is-mobile is-multiline is-3">
-      <div v-for="skeleton in 8" :key="skeleton"
-        class="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
+      <div
+        v-for="skeleton in 8"
+        :key="skeleton"
+        class="column is-half-mobile is-one-third-tablet is-one-quarter-desktop"
+      >
         <ItemSkeleton />
       </div>
     </div>
@@ -44,8 +47,11 @@
       <template v-for="category in itemStore.allItems()" :key="category.category">
         <h2 class="title is-3">{{ category.category }}</h2>
         <div class="columns is-mobile is-multiline is-3">
-          <div v-for="item in category.products" :key="item.id"
-            class="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
+          <div
+            v-for="item in category.products"
+            :key="item.id"
+            class="column is-half-mobile is-one-third-tablet is-one-quarter-desktop"
+          >
             <Item :item="item" />
           </div>
 
@@ -55,8 +61,8 @@
     </template>
   </div>
 
-  <Text2Columns header="About us">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores expedita, maiores!
-    Ab cum
+  <Text2Columns header="About us"
+    >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores expedita, maiores! Ab cum
     porro voluptates voluptatibus voluptatum. Adipisci architecto at, atque cumque deleniti eveniet
     exercitationem expedita, id illum iure, iusto maiores molestias nisi nobis non rerum suscipit
     tempora unde velit veniam veritatis voluptas voluptate. Adipisci delectus distinctio dolores

@@ -12,7 +12,7 @@ export class ApiService {
     try {
       this.loader.startLoading(endpoint);
       const response = await fetch(`${this.baseUrl}${endpoint}`, {
-        headers: { 'Content-Type': 'application/json' },
+        headers: { "Content-Type": "application/json" },
         ...options,
       });
 
@@ -23,9 +23,9 @@ export class ApiService {
 
       return response.json();
     } catch (error: any) {
-      console.error('API Error:', error.message);
+      console.error("API Error:", error.message);
       // notifications
-      throw error; 
+      throw error;
     } finally {
       this.loader.stopLoading(endpoint);
     }
@@ -37,23 +37,23 @@ export class ApiService {
 
   public post<T>(endpoint: string, data: any): Promise<T> {
     return this.request<T>(endpoint, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(data),
     });
   }
 
   public put<T>(endpoint: string, data: any): Promise<T> {
     return this.request<T>(endpoint, {
-      method: 'PUT',
+      method: "PUT",
       body: JSON.stringify(data),
     });
   }
 
   public delete<T>(endpoint: string): Promise<T> {
     return this.request<T>(endpoint, {
-      method: 'DELETE',
+      method: "DELETE",
     });
   }
 }
 
-export const apiService = new ApiService('https://fakestoreapi.com');
+export const apiService = new ApiService("https://fakestoreapi.com");

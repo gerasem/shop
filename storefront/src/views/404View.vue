@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import Hero from '@/components/content/Hero.vue'
-import { useMeta } from '@/composables/useMeta.ts'
+import Hero from "@/components/content/Hero.vue";
+import { useMeta } from "@/composables/useMeta.ts";
 
-useMeta('404')
+useMeta("404");
 </script>
 
 <template>

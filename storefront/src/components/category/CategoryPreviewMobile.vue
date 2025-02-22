@@ -1,29 +1,29 @@
 <script setup lang="ts">
-  import Item from '@/components/item/Item.vue'
-  import { useI18n } from 'vue-i18n'
-  import { Swiper, SwiperSlide } from 'swiper/vue'
-  import 'swiper/css'
-  import type { ICategory } from '@/interfaces/ICategory.ts'
-  import { useItemStore } from '@/stores/ItemStore';
-  import { useLoader } from '@/composables/useLoader'
-  import { onMounted, computed } from 'vue'
-  import ItemSkeleton from '@/components/item/ItemSkeleton.vue'
+import Item from "@/components/item/Item.vue";
+import { useI18n } from "vue-i18n";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import "swiper/css";
+import type { ICategory } from "@/interfaces/ICategory.ts";
+import { useItemStore } from "@/stores/ItemStore";
+import { useLoader } from "@/composables/useLoader";
+import { onMounted, computed } from "vue";
+import ItemSkeleton from "@/components/item/ItemSkeleton.vue";
 
-  const props = defineProps<{
-    category: ICategory
-  }>()
+const props = defineProps<{
+  category: ICategory;
+}>();
 
-  onMounted(() => {
-    itemStore.getItemsForMainPage(props.category.slug, 4)
-  })
+onMounted(() => {
+  itemStore.getItemsForMainPage(props.category.slug, 4);
+});
 
-  const itemStore = useItemStore();
-  const { loading } = useLoader()
-  const { t } = useI18n()
+const itemStore = useItemStore();
+const { loading } = useLoader();
+const { t } = useI18n();
 
-  const items = computed(() => {
-    return itemStore.itemsByCategoryForMainPage(props.category.slug)
-  })
+const items = computed(() => {
+  return itemStore.itemsByCategoryForMainPage(props.category.slug);
+});
 </script>
 
 <template>
@@ -32,7 +32,7 @@
       <h2 class="title is-2">{{ category.title }}</h2>
 
       <RouterLink :to="`category/${category.slug}`" class="title__link">
-        {{ t('Show all Tests') }}
+        {{ t("Show all Tests") }}
       </RouterLink>
     </div>
 

@@ -1,16 +1,14 @@
 <script setup lang="ts">
-  import CategoryCard from '@/components/category/CategoryCard.vue'
-  import CategoryPreview from '@/components/category/CategoryPreview.vue'
-  import CategoryTitleNarrow from '@/components/category/CategoryTitleNarrow.vue'
-  import { useDevice } from '@/composables/useDevice.ts'
-  import CategoryPreviewMobile from '@/components/category/CategoryPreviewMobile.vue'
-  import { useCategoryStore } from '@/stores/CategoryStore'
-  import { useLoader } from '@/composables/useLoader'
-  import CategoryCardSkeleton from '@/components/category/CategoryCardSkeleton.vue'
+import CategoryCard from "@/components/category/CategoryCard.vue";
+import CategoryPreview from "@/components/category/CategoryPreview.vue";
+import CategoryTitleNarrow from "@/components/category/CategoryTitleNarrow.vue";
+import { useDevice } from "@/composables/useDevice.ts";
+import CategoryPreviewMobile from "@/components/category/CategoryPreviewMobile.vue";
+import { useCategoryStore } from "@/stores/CategoryStore";
+import CategoryCardSkeleton from "@/components/category/CategoryCardSkeleton.vue";
 
-  const { isMobile } = useDevice()
-  const { loading } = useLoader()
-  const categoryStore = useCategoryStore()
+const { isMobile } = useDevice();
+const categoryStore = useCategoryStore();
 </script>
 
 <template>
@@ -18,7 +16,11 @@
     <CategoryTitleNarrow />
 
     <div class="container is-fluid">
-      <CategoryPreviewMobile v-for="category in categoryStore.categories" :key="category.id" :category="category" />
+      <CategoryPreviewMobile
+        v-for="category in categoryStore.categories"
+        :key="category.id"
+        :category="category"
+      />
     </div>
   </template>
 
@@ -31,12 +33,20 @@
           </template>
 
           <template v-else>
-            <CategoryCard v-for="category in categoryStore.categories" :key="category.id" :category="category" />
+            <CategoryCard
+              v-for="category in categoryStore.categories"
+              :key="category.id"
+              :category="category"
+            />
           </template>
         </div>
 
         <div class="column">
-          <CategoryPreview v-for="category in categoryStore.categories" :key="category.id" :category="category" />
+          <CategoryPreview
+            v-for="category in categoryStore.categories"
+            :key="category.id"
+            :category="category"
+          />
         </div>
       </div>
     </div>
@@ -44,9 +54,9 @@
 </template>
 
 <style scoped lang="scss">
-  .category {
-    &__preview-container {
-      margin-bottom: 2rem;
-    }
+.category {
+  &__preview-container {
+    margin-bottom: 2rem;
   }
+}
 </style>

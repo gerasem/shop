@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { localePath } from '@/composables/localePath.ts'
-import type { ICategory } from '@/interfaces/ICategory.ts'
+import { localePath } from "@/composables/localePath.ts";
+import type { ICategory } from "@/interfaces/ICategory.ts";
 
 defineProps<{
-  category: ICategory
-}>()
+  category: ICategory;
+}>();
 </script>
 
 <template>
@@ -25,7 +25,7 @@ defineProps<{
 
     @for $i from 1 through 20 {
       &:nth-child(#{$i}) {
-        top: calc(40px + (#{$i} - 1) * 15px);
+        top: calc(60px + (#{$i} - 1) * 20px);
       }
     }
 

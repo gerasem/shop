@@ -1,8 +1,8 @@
 <script setup lang="ts">
 defineProps<{
-  title: string
-  subtitle?: string
-}>()
+  title: string;
+  subtitle?: string;
+}>();
 </script>
 
 <template>
@@ -15,5 +15,5 @@ defineProps<{
 </template>
 
 <style scoped lang="scss">
-@forward 'bulma/sass/layout/hero';
+@forward "bulma/sass/layout/hero";
 </style>
