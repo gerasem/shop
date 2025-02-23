@@ -1,18 +1,44 @@
 <script setup lang="ts">
-import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue'
+import BreadcrumbItem from '@/components/breadcrumb/BreadcrumbItem.vue'
 import Gallery from '@/components/gallery/Gallery.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
 import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
 import { useMeta } from '@/composables/useMeta.ts'
+import { onMounted, watch } from 'vue'
+import { useLoader } from '@/composables/useLoader'
+import { useItemStore } from '@/stores/ItemStore'
+import { useCategoryStore } from '@/stores/CategoryStore'
+import { useRoute } from 'vue-router'
 
-useMeta('Item', 'Description Item')
+onMounted((): void => {
+  init(route.params.slug as string)
+})
+
+const route = useRoute()
+const categoryStore = useCategoryStore()
+const itemStore = useItemStore()
+const { loading } = useLoader()
+
+const init = (slug: string): void => {
+  itemStore.getItemBySlug(slug)
+  categoryStore.setCurrentCategory('electronics')
+  if (itemStore.currentItem) {
+    useMeta(itemStore.currentItem.title)
+  }
+}
+
+watch([() => route.params.slug, () => categoryStore.isLoaded], ([newSlug, isLoaded]) => {
+  if (isLoaded) {
+    init(newSlug as string)
+  }
+})
 </script>
 
 <template>
   <CategoriesNarrow />
 
   <div class="container is-fluid">
-    <Breadcrumb />
+    <BreadcrumbItem />
 
     <div class="columns is-mobile is-5-tablet is-6-desktop is-8-fullhd">
       <div class="column is-half">
@@ -21,7 +47,19 @@ useMeta('Item', 'Description Item')
 
       <div class="column is-half">
         <div class="title__container">
-          <h1 class="title is-2">Item</h1>
+          <h1
+            v-if="itemStore.currentItem"
+            class="title is-2"
+          >
+            {{ itemStore.currentItem?.title }}
+          </h1>
+
+          <h1
+            v-else
+            class="title is-2 is-skeleton"
+          >
+            Item
+          </h1>
         </div>
       </div>
     </div>

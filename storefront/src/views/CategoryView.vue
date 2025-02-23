@@ -47,10 +47,17 @@ watch([() => route.params.slug, () => categoryStore.isLoaded], ([newSlug, isLoad
   <div class="container is-fluid">
     <div class="title__container">
       <h1
+        v-if="categoryStore.currentCategory"
         class="title is-2"
-        :class="{ 'has-skeleton': categoryStore.currentCategory === null }"
       >
         {{ categoryStore.currentCategory?.title }}
+      </h1>
+
+      <h1
+        v-else
+        class="title is-2 is-skeleton"
+      >
+        Category
       </h1>
 
       <div class="select">

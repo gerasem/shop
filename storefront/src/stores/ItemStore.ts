@@ -6,6 +6,7 @@ import type { IItem } from '@/interfaces/IItem'
 export const useItemStore = defineStore('item', () => {
   const items = ref<{ category: string; products: IItem[] }[]>([])
   const itemsOnMainPage = ref<{ category: string; products: IItem[] }[]>([])
+  const currentItem = ref<IItem | null>(null)
 
   const getItemsByCategory = async (categorySlug: string) => {
     if (items.value.some((item) => item.category === categorySlug)) return
@@ -64,6 +65,13 @@ export const useItemStore = defineStore('item', () => {
     console.log('get all items', items.value)
   }
 
+  const getItemBySlug = async (slug: string) => {
+    const data = await apiService.get<IItem>('/products/1')
+
+    currentItem.value = data
+    console.log('getItemBySlug', currentItem.value)
+  }
+
   const itemsByCategory = (categorySlug: string) => {
     return items.value.find((item) => item.category === categorySlug)?.products || []
   }
@@ -80,11 +88,13 @@ export const useItemStore = defineStore('item', () => {
   return {
     items,
     itemsOnMainPage,
+    currentItem,
     itemsByCategoryForMainPage,
     getItemsByCategory,
     itemsByCategory,
     getAllItems,
     allItems,
     getItemsForMainPage,
+    getItemBySlug,
   }
 })
