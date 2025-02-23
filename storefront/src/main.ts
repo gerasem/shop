@@ -11,6 +11,8 @@ import router from "./router";
 const app = createApp(App);
 
 app.use(createPinia());
+/* bootstrap()
+ */
 app.use(router);
 app.use(i18n);
 app.use(createHead);

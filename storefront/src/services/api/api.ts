@@ -1,4 +1,5 @@
 import { useLoader } from "@/composables/useLoader";
+import { useToastStore } from "@/stores/ToastStore";
 
 export class ApiService {
   private baseUrl: string;
@@ -24,7 +25,8 @@ export class ApiService {
       return response.json();
     } catch (error: any) {
       console.error("API Error:", error.message);
-      // notifications
+      const toastStore = useToastStore();
+      toastStore.addError("API Error", error.message);
       throw error;
     } finally {
       this.loader.stopLoading(endpoint);
