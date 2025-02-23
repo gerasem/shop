@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { localePath } from "@/composables/localePath.ts";
-import { useI18n } from "vue-i18n";
+import { localePath } from '@/composables/localePath.ts'
+import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n();
+const { t } = useI18n()
 
 const links = [
-  { path: "", text: "Home" },
-  { path: "category", text: "Category" },
-  { path: "cart", text: "Cart" },
-];
+  { path: '', text: 'Home' },
+  { path: 'category', text: 'Category' },
+  { path: 'cart', text: 'Cart' },
+]
 </script>
 
 <template>

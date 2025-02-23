@@ -1,16 +1,20 @@
 <script setup lang="ts">
-import CategoryTitle from "@/components/category/CategoryTitle.vue";
-import { useCategoryStore } from "@/stores/CategoryStore";
-import { useLoader } from "@/composables/useLoader";
+import CategoryTitle from '@/components/category/CategoryTitle.vue'
+import { useCategoryStore } from '@/stores/CategoryStore'
+import { useLoader } from '@/composables/useLoader'
 
-const categoryStore = useCategoryStore();
-const { loading } = useLoader();
+const categoryStore = useCategoryStore()
+const { loading } = useLoader()
 </script>
 
 <template>
   <div class="is-full category__container">
     <template v-if="categoryStore.categories.length === 0">
-      <div v-for="skeleton in 5" :key="skeleton" class="skeleton-lines">
+      <div
+        v-for="skeleton in 5"
+        :key="skeleton"
+        class="skeleton-lines"
+      >
         <div></div>
       </div>
     </template>

@@ -1,4 +1,4 @@
-@use "../sass-utils/variables" as *;
+@use '../sass-utils/variables' as *;
 .container.is-fluid {
   max-width: 1800px !important;
   @media (max-width: $screen-xxl-max) {

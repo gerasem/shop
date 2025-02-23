@@ -1,10 +1,10 @@
-import { computed } from "vue";
-import { useWindowSize } from "@vueuse/core";
+import { computed } from 'vue'
+import { useWindowSize } from '@vueuse/core'
 
 export function useDevice() {
-  const { width } = useWindowSize();
+  const { width } = useWindowSize()
 
-  const isMobile = computed(() => width.value < 768);
+  const isMobile = computed(() => width.value < 768)
 
-  return { isMobile };
+  return { isMobile }
 }

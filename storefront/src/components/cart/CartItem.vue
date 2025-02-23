@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { localePath } from "@/composables/localePath";
-import BaseIcon from "@/components/media/BaseIcon.vue";
+import { localePath } from '@/composables/localePath'
+import BaseIcon from '@/components/media/BaseIcon.vue'
 
 defineProps<{
-  item: Object;
-}>();
+  item: Object
+}>()
 
-const deleteItemWithConfirm = (event: Event, itemId: string) => {};
+const deleteItemWithConfirm = (event: Event, itemId: string) => {}
 
-const changeItemCount = (count: number, item) => {};
+const changeItemCount = (count: number, item) => {}
 </script>
 
 <template>
@@ -26,25 +26,46 @@ const changeItemCount = (count: number, item) => {};
 
     <div class="cart__main">
       <div class="cart__prices is-flex">
-        <div class="cart__price" v-if="true">
+        <div
+          class="cart__price"
+          v-if="true"
+        >
           {{ 1100 }}
           <span>x {{ 1 }}</span>
           {{ 1100 }}
         </div>
 
-        <div class="cart__old-price" v-if="true">
+        <div
+          class="cart__old-price"
+          v-if="true"
+        >
           {{ 1200 }}
         </div>
 
-        <div class="cart__discount" v-if="false">%</div>
+        <div
+          class="cart__discount"
+          v-if="false"
+        >
+          %
+        </div>
       </div>
 
       <h4 class="cart__title">Item 123</h4>
     </div>
 
-    <input class="input" style="width: 100px" type="text" placeholder="Text input" />
+    <input
+      class="input"
+      style="width: 100px"
+      type="text"
+      placeholder="Text input"
+    />
 
-    <BaseIcon :width="25" :height="25" icon="x-lg" @click="deleteItemWithConfirm($event, 1)" />
+    <BaseIcon
+      :width="25"
+      :height="25"
+      icon="x-lg"
+      @click="deleteItemWithConfirm($event, 1)"
+    />
   </div>
 </template>
 
@@ -58,7 +79,7 @@ const changeItemCount = (count: number, item) => {};
 
     &:not(:last-of-type):after {
       position: absolute;
-      content: "";
+      content: '';
       width: calc(100% - 2rem);
       left: 1rem;
       bottom: 0;

@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import NavbarContact from "@/components/navbar/NavbarContact.vue";
-import NavbarLogo from "@/components/navbar/NavbarLogo.vue";
-import NavbarMenu from "@/components/navbar/NavbarMenu.vue";
-import LanguageSwitcher from "@/components/navbar/LanguageSwitcher.vue";
-import NavbarBurger from "@/components/navbar/NavbarBurger.vue";
-import { ref } from "vue";
-import NavbarCart from "@/components/navbar/NavbarCart.vue";
+import NavbarContact from '@/components/navbar/NavbarContact.vue'
+import NavbarLogo from '@/components/navbar/NavbarLogo.vue'
+import NavbarMenu from '@/components/navbar/NavbarMenu.vue'
+import LanguageSwitcher from '@/components/navbar/LanguageSwitcher.vue'
+import NavbarBurger from '@/components/navbar/NavbarBurger.vue'
+import { ref } from 'vue'
+import NavbarCart from '@/components/navbar/NavbarCart.vue'
 
-const mobileMenu = ref<boolean>(false);
+const mobileMenu = ref<boolean>(false)
 
 const toggleMenu = () => {
-  mobileMenu.value = new URLSearchParams(window.location.search).has("menu");
-};
+  mobileMenu.value = new URLSearchParams(window.location.search).has('menu')
+}
 </script>
 
 <template>
@@ -22,7 +22,10 @@ const toggleMenu = () => {
   >
     <div class="container is-fluid">
       <div class="navbar-brand navbar__navbar-brand">
-        <NavbarBurger :mobileMenu="mobileMenu" @toggleMenu="toggleMenu()" />
+        <NavbarBurger
+          :mobileMenu="mobileMenu"
+          @toggleMenu="toggleMenu()"
+        />
 
         <NavbarLogo />
       </div>
@@ -46,7 +49,10 @@ const toggleMenu = () => {
       </div>
 
       <Transition name="mobile-menu">
-        <div v-if="mobileMenu" class="navbar__mobile-menu">
+        <div
+          v-if="mobileMenu"
+          class="navbar__mobile-menu"
+        >
           <NavbarMenu />
 
           <div class="navbar-item">
@@ -63,7 +69,7 @@ const toggleMenu = () => {
 </template>
 
 <style lang="scss">
-@use "bulma/sass/components/navbar" with (
+@use 'bulma/sass/components/navbar' with (
   $navbar-item-img-max-height: 2rem,
   $navbar-height: 3.5rem,
   $navbar-background-color: rgba(255, 255, 255, 1)

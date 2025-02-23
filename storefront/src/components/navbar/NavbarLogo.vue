@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { localePath } from "@/composables/localePath.ts";
-import BaseImage from "@/components/media/BaseImage.vue";
-import { useI18n } from "vue-i18n";
+import { localePath } from '@/composables/localePath.ts'
+import BaseImage from '@/components/media/BaseImage.vue'
+import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n();
+const { t } = useI18n()
 
 const handleLogoClick = () => {
   setTimeout(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, 300);
-};
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, 300)
+}
 </script>
 
 <template>
@@ -22,7 +22,7 @@ const handleLogoClick = () => {
   </RouterLink>
 
   <div class="navbar-item is-hidden-touch navbar__slogan">
-    {{ t("Demo project of an online store") }}
+    {{ t('Demo project of an online store') }}
   </div>
 </template>
 

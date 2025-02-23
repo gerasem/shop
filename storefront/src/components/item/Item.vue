@@ -1,14 +1,21 @@
 <script setup lang="ts">
-import type { IItem } from "@/interfaces/IItem";
+import type { IItem } from '@/interfaces/IItem'
 
 defineProps<{
-  item: IItem;
-}>();
+  item: IItem
+}>()
 </script>
 
 <template>
-  <RouterLink :to="`item/${item.slug}`" class="item">
-    <img class="image is-square item__image" :src="item.image" :alt="item.title" />
+  <RouterLink
+    :to="`item/${item.slug}`"
+    class="item"
+  >
+    <img
+      class="image is-square item__image"
+      :src="item.image"
+      :alt="item.title"
+    />
 
     <div class="item__bottom">
       <h3 class="item__title">{{ item.title }}</h3>

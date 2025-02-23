@@ -1,22 +1,31 @@
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
-import BaseIcon from "@/components/media/BaseIcon.vue";
+import { useI18n } from 'vue-i18n'
+import BaseIcon from '@/components/media/BaseIcon.vue'
 
-const { t } = useI18n();
+const { t } = useI18n()
 
 const items = [
-  { icon: "bag", text: "Free Shipping" },
-  { icon: "", text: "More than 50 items" },
-  { icon: "", text: "Fast delivery" },
-];
+  { icon: 'bag', text: 'Free Shipping' },
+  { icon: '', text: 'More than 50 items' },
+  { icon: '', text: 'Fast delivery' },
+]
 </script>
 
 <template>
   <header class="is-hidden-mobile information-banner__container">
     <div class="container is-fluid">
       <ul class="information-banner__list-container">
-        <li v-for="item in items" :key="item.text" class="information-banner__list-item">
-          <BaseIcon v-if="item.icon" :icon="item.icon" :width="16" :height="16" />
+        <li
+          v-for="item in items"
+          :key="item.text"
+          class="information-banner__list-item"
+        >
+          <BaseIcon
+            v-if="item.icon"
+            :icon="item.icon"
+            :width="16"
+            :height="16"
+          />
           {{ t(item.text) }}
         </li>
       </ul>

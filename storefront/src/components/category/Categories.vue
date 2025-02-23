@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import CategoryCard from "@/components/category/CategoryCard.vue";
-import CategoryPreview from "@/components/category/CategoryPreview.vue";
-import CategoryTitleNarrow from "@/components/category/CategoryTitleNarrow.vue";
-import { useDevice } from "@/composables/useDevice.ts";
-import CategoryPreviewMobile from "@/components/category/CategoryPreviewMobile.vue";
-import { useCategoryStore } from "@/stores/CategoryStore";
-import CategoryCardSkeleton from "@/components/category/CategoryCardSkeleton.vue";
+import CategoryCard from '@/components/category/CategoryCard.vue'
+import CategoryPreview from '@/components/category/CategoryPreview.vue'
+import CategoryTitleNarrow from '@/components/category/CategoryTitleNarrow.vue'
+import { useDevice } from '@/composables/useDevice.ts'
+import CategoryPreviewMobile from '@/components/category/CategoryPreviewMobile.vue'
+import { useCategoryStore } from '@/stores/CategoryStore'
+import CategoryCardSkeleton from '@/components/category/CategoryCardSkeleton.vue'
 
-const { isMobile } = useDevice();
-const categoryStore = useCategoryStore();
+const { isMobile } = useDevice()
+const categoryStore = useCategoryStore()
 </script>
 
 <template>
@@ -29,7 +29,10 @@ const categoryStore = useCategoryStore();
       <div class="columns is-5-tablet is-6-desktop is-8-fullhd">
         <div class="column is-one-third-tablet is-one-fifth-desktop">
           <template v-if="categoryStore.categories.length === 0">
-            <CategoryCardSkeleton v-for="skeleton in 5" :key="skeleton" />
+            <CategoryCardSkeleton
+              v-for="skeleton in 5"
+              :key="skeleton"
+            />
           </template>
 
           <template v-else>

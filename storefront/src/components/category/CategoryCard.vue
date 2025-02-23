@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import CategoryImage from "@/components/category/CategoryImage.vue";
-import CategoryTitle from "@/components/category/CategoryTitle.vue";
-import type { ICategory } from "@/interfaces/ICategory.ts";
+import CategoryImage from '@/components/category/CategoryImage.vue'
+import CategoryTitle from '@/components/category/CategoryTitle.vue'
+import type { ICategory } from '@/interfaces/ICategory.ts'
 
 defineProps<{
-  category: ICategory;
-}>();
+  category: ICategory
+}>()
 </script>
 
 <template>

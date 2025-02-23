@@ -1,11 +1,19 @@
 <script setup lang="ts">
-import { useLoader } from "@/composables/useLoader";
-const { loading } = useLoader();
+import { useLoader } from '@/composables/useLoader'
+const { loading } = useLoader()
 </script>
 
 <template>
-  <div v-if="loading" class="loader">
-    <progress class="progress is-small is-primary" max="100">15%</progress>
+  <div
+    v-if="loading"
+    class="loader"
+  >
+    <progress
+      class="progress is-small is-primary"
+      max="100"
+    >
+      15%
+    </progress>
   </div>
 </template>
 

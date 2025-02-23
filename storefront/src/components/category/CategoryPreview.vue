@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import Item from "@/components/item/Item.vue";
-import type { ICategory } from "@/interfaces/ICategory.ts";
-import { useItemStore } from "@/stores/ItemStore";
-import { useLoader } from "@/composables/useLoader";
-import { computed, onMounted } from "vue";
-import { useI18n } from "vue-i18n";
-import ItemSkeleton from "@/components/item/ItemSkeleton.vue";
+import Item from '@/components/item/Item.vue'
+import type { ICategory } from '@/interfaces/ICategory.ts'
+import { useItemStore } from '@/stores/ItemStore'
+import { useLoader } from '@/composables/useLoader'
+import { computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import ItemSkeleton from '@/components/item/ItemSkeleton.vue'
 
 const props = defineProps<{
-  category: ICategory;
-}>();
+  category: ICategory
+}>()
 
 onMounted(() => {
-  itemStore.getItemsForMainPage(props.category.slug, 4);
-});
+  itemStore.getItemsForMainPage(props.category.slug, 4)
+})
 
-const itemStore = useItemStore();
-const { loading } = useLoader();
-const { t } = useI18n();
+const itemStore = useItemStore()
+const { loading } = useLoader()
+const { t } = useI18n()
 
 const items = computed(() => {
-  return itemStore.itemsByCategoryForMainPage(props.category.slug);
-});
+  return itemStore.itemsByCategoryForMainPage(props.category.slug)
+})
 </script>
 
 <template>
@@ -29,8 +29,11 @@ const items = computed(() => {
     <div class="title__container">
       <h2 class="title is-2">{{ category.title }}</h2>
 
-      <RouterLink :to="`category/${category.slug}`" class="title__link">
-        {{ t("Show all") }}
+      <RouterLink
+        :to="`category/${category.slug}`"
+        class="title__link"
+      >
+        {{ t('Show all') }}
         {{ category.title }}
       </RouterLink>
     </div>
@@ -56,7 +59,12 @@ const items = computed(() => {
         </div>
       </template>
 
-      <p v-if="!loading && items.length === 0" class="column">Nothing found</p>
+      <p
+        v-if="!loading && items.length === 0"
+        class="column"
+      >
+        Nothing found
+      </p>
     </div>
   </div>
 </template>

@@ -1,11 +1,18 @@
 <script setup lang="ts">
-import BaseIcon from "@/components/media/BaseIcon.vue";
-import { localePath } from "@/composables/localePath.ts";
+import BaseIcon from '@/components/media/BaseIcon.vue'
+import { localePath } from '@/composables/localePath.ts'
 </script>
 
 <template>
-  <RouterLink class="navbar__icon-link" :to="localePath('cart')">
-    <BaseIcon icon="bag" :width="24" :height="24" />
+  <RouterLink
+    class="navbar__icon-link"
+    :to="localePath('cart')"
+  >
+    <BaseIcon
+      icon="bag"
+      :width="24"
+      :height="24"
+    />
   </RouterLink>
 </template>
 

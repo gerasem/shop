@@ -1,50 +1,50 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, watch } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { onMounted, onUnmounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
-const router = useRouter();
-const route = useRoute();
+const router = useRouter()
+const route = useRoute()
 
 const props = defineProps<{
-  mobileMenu: boolean;
-}>();
+  mobileMenu: boolean
+}>()
 
 const emit = defineEmits<{
-  (e: "toggleMenu"): void;
-}>();
+  (e: 'toggleMenu'): void
+}>()
 
 const toggleMenu = () => {
   if (!props.mobileMenu) {
-    document.body.classList.add("overflow-hidden");
-    router.push({ query: { menu: "open" } });
+    document.body.classList.add('overflow-hidden')
+    router.push({ query: { menu: 'open' } })
   } else {
-    document.body.classList.remove("overflow-hidden");
-    router.replace({ query: {} });
+    document.body.classList.remove('overflow-hidden')
+    router.replace({ query: {} })
   }
-};
+}
 
 onMounted(() => {
-  if (route.query?.menu === "open") {
-    router.replace({ query: {} });
+  if (route.query?.menu === 'open') {
+    router.replace({ query: {} })
   }
-  window.addEventListener("resize", handlerResize);
-});
+  window.addEventListener('resize', handlerResize)
+})
 
 const handlerResize = () => {
   if (props.mobileMenu && window.innerWidth >= 768) {
-    emit("toggleMenu");
-    router.replace({ query: {} });
+    emit('toggleMenu')
+    router.replace({ query: {} })
   }
-};
+}
 
 watch(
   () => route.query.menu,
   () => {
-    emit("toggleMenu");
+    emit('toggleMenu')
   },
-);
+)
 
-onUnmounted(() => window.removeEventListener("resize", handlerResize));
+onUnmounted(() => window.removeEventListener('resize', handlerResize))
 </script>
 
 <template>

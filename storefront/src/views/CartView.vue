@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import CartItem from "@/components/cart/CartItem.vue";
-import { useMeta } from "@/composables/useMeta.ts";
-import { useI18n } from "vue-i18n";
+import CartItem from '@/components/cart/CartItem.vue'
+import { useMeta } from '@/composables/useMeta.ts'
+import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n();
+const { t } = useI18n()
 
-const deleteItemsFromCart = () => {};
+const deleteItemsFromCart = () => {}
 
-useMeta("Cart", "cart description");
+useMeta('Cart', 'cart description')
 </script>
 
 <template>
@@ -17,7 +17,10 @@ useMeta("Cart", "cart description");
         <div class="column is-two-thirds">
           <h2 class="title is-2">Shopping Cart</h2>
 
-          <template v-for="item in 5" :key="item">
+          <template
+            v-for="item in 5"
+            :key="item"
+          >
             <CartItem item="" />
           </template>
         </div>
@@ -25,7 +28,7 @@ useMeta("Cart", "cart description");
         <div class="column is-one-third">
           <div class="cart__form">
             <div class="cart__info">
-              {{ t("Free Shipping on all orders over 50€") }}
+              {{ t('Free Shipping on all orders over 50€') }}
             </div>
 
             <div class="cart__info cart__info--error">Coupon Error</div>
@@ -33,20 +36,23 @@ useMeta("Cart", "cart description");
             <div class="cart__form-container">
               <div class="has-text-centered">
                 <div class="columns">
-                  <div class="column">{{ t("Sub-Total") }}:</div>
+                  <div class="column">{{ t('Sub-Total') }}:</div>
                   <div class="column">
                     <span class="cart__form-price">{{ 0 }}</span>
                   </div>
                 </div>
 
                 <div class="columns">
-                  <div class="column">{{ t("Shipping") }}:</div>
+                  <div class="column">{{ t('Shipping') }}:</div>
                   <div class="column">
                     <span class="cart__form-price"> 5€ </span>
                   </div>
                 </div>
 
-                <div class="columns" v-if="true">
+                <div
+                  class="columns"
+                  v-if="true"
+                >
                   <div class="column cart__form-price--discount">Discount ():</div>
                   <div class="column">
                     <span class="cart__form-price cart__form-price--discount">
@@ -56,7 +62,7 @@ useMeta("Cart", "cart description");
                 </div>
 
                 <div class="columns">
-                  <div class="column">{{ t("Total price") }}:</div>
+                  <div class="column">{{ t('Total price') }}:</div>
                   <div class="column">
                     <span class="cart__form-price cart__form-price--total">
                       {{ 0 }}
@@ -81,7 +87,7 @@ useMeta("Cart", "cart description");
     <template v-else>
       <h2 class="title is-2">Shopping Cart</h2>
 
-      <p>{{ t("Shopping cart is empty") }}</p>
+      <p>{{ t('Shopping cart is empty') }}</p>
     </template>
   </div>
 </template>

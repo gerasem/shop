@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import { useMeta } from "@/composables/useMeta.ts";
-import Item from "@/components/item/Item.vue";
-import Text2Columns from "@/components/content/Text2Columns.vue";
-import CategoriesNarrow from "@/components/category/CategoryTitleNarrow.vue";
-import { onMounted } from "vue";
-import { useItemStore } from "@/stores/ItemStore";
-import { useLoader } from "@/composables/useLoader";
-import ItemSkeleton from "@/components/item/ItemSkeleton.vue";
+import { useMeta } from '@/composables/useMeta.ts'
+import Item from '@/components/item/Item.vue'
+import Text2Columns from '@/components/content/Text2Columns.vue'
+import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
+import { onMounted } from 'vue'
+import { useItemStore } from '@/stores/ItemStore'
+import { useLoader } from '@/composables/useLoader'
+import ItemSkeleton from '@/components/item/ItemSkeleton.vue'
 
 onMounted((): void => {
-  itemStore.getAllItems();
-});
+  itemStore.getAllItems()
+})
 
-const itemStore = useItemStore();
-const { loading } = useLoader();
+const itemStore = useItemStore()
+const { loading } = useLoader()
 
-useMeta("All items");
+useMeta('All items')
 </script>
 
 <template>
@@ -33,7 +33,10 @@ useMeta("All items");
       </div>
     </div>
 
-    <div v-if="loading" class="columns is-mobile is-multiline is-3">
+    <div
+      v-if="loading"
+      class="columns is-mobile is-multiline is-3"
+    >
       <div
         v-for="skeleton in 8"
         :key="skeleton"
@@ -44,7 +47,10 @@ useMeta("All items");
     </div>
 
     <template v-else>
-      <template v-for="category in itemStore.allItems()" :key="category.category">
+      <template
+        v-for="category in itemStore.allItems()"
+        :key="category.category"
+      >
         <h2 class="title is-3">{{ category.category }}</h2>
         <div class="columns is-mobile is-multiline is-3">
           <div
@@ -55,7 +61,12 @@ useMeta("All items");
             <Item :item="item" />
           </div>
 
-          <p v-if="itemStore.allItems().length === 0" class="column">Nothing found</p>
+          <p
+            v-if="itemStore.allItems().length === 0"
+            class="column"
+          >
+            Nothing found
+          </p>
         </div>
       </template>
     </template>

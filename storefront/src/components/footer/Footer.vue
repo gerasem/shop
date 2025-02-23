@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed } from 'vue'
 
 const year = computed(() => {
-  return new Date().getFullYear();
-});
+  return new Date().getFullYear()
+})
 </script>
 
 <template>
@@ -54,7 +54,7 @@ const year = computed(() => {
 </template>
 
 <style lang="scss">
-@use "bulma/sass/layout/footer" with (
+@use 'bulma/sass/layout/footer' with (
   $footer-background-color: $background-gray,
   $footer-padding: 3rem 0.75rem
 );
