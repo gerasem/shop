@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import BaseIcon from '@/components/media/BaseIcon.vue'
+import Icon from '@/components/media/Icon.vue'
 
 const { t } = useI18n()
 
@@ -20,7 +20,7 @@ const items = [
           :key="item.text"
           class="information-banner__list-item"
         >
-          <BaseIcon
+          <Icon
             v-if="item.icon"
             :icon="item.icon"
             :width="16"
@@ -64,6 +64,7 @@ const items = [
     -ms-overflow-style: none;
     padding: 0 12px;
     height: 100%;
+
     &::-webkit-scrollbar {
       display: none;
     }

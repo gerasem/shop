@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { localePath } from '@/composables/localePath'
-import BaseIcon from '@/components/media/BaseIcon.vue'
+import Icon from '@/components/media/Icon.vue'
 
 defineProps<{
   item: Object
@@ -60,7 +60,7 @@ const changeItemCount = (count: number, item) => {}
       placeholder="Text input"
     />
 
-    <BaseIcon
+    <Icon
       :width="25"
       :height="25"
       icon="x-lg"

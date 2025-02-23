@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BaseIcon from '@/components/media/BaseIcon.vue'
+import Icon from '@/components/media/Icon.vue'
 import { localePath } from '@/composables/localePath.ts'
 </script>
 
@@ -8,7 +8,7 @@ import { localePath } from '@/composables/localePath.ts'
     class="navbar__icon-link"
     :to="localePath('cart')"
   >
-    <BaseIcon
+    <Icon
       icon="bag"
       :width="24"
       :height="24"

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BaseIcon from '@/components/media/BaseIcon.vue'
+import Icon from '@/components/media/Icon.vue'
 import { Toast, Toaster, createToaster } from '@ark-ui/vue/toast'
 import { watch } from 'vue'
 import { useToastStore } from '@/stores/ToastStore'
@@ -49,7 +49,7 @@ watch(
       >
         <Toast.CloseTrigger class="notification__delete">
           <button>
-            <BaseIcon icon="x-lg" />
+            <Icon icon="x-lg" />
           </button>
         </Toast.CloseTrigger>
         <Toast.Title class="notification__title">{{ toast.title }}</Toast.Title>

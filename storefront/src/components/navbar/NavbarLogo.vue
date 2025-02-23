@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { localePath } from '@/composables/localePath.ts'
-import BaseImage from '@/components/media/BaseImage.vue'
+import Image from '@/components/media/Image.vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -18,7 +18,7 @@ const handleLogoClick = () => {
     class="navbar-item is-flex is-flex-grow-1 navbar__logo"
     :to="localePath('')"
   >
-    <BaseImage src="logo.svg" />
+    <Image src="logo.svg" />
   </RouterLink>
 
   <div class="navbar-item is-hidden-touch navbar__slogan">
