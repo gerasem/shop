@@ -46,6 +46,7 @@ const { loading } = useLoader()
 
   &__title {
     padding-bottom: 0;
+    padding-top: 0;
   }
 }
 </style>

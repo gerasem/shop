@@ -1,6 +1,6 @@
 @use '../sass-utils/variables' as *;
 .container.is-fluid {
-  max-width: 1800px !important;
+  max-width: 1600px !important;
   @media (max-width: $screen-xxl-max) {
     padding: 0 15px;
   }

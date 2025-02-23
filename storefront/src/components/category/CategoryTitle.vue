@@ -24,7 +24,8 @@ defineProps<{
     display: block;
     color: $color-text;
     /*background: #fff;*/
-    padding-bottom: 10px;
+    padding-bottom: 15px;
+    padding-top: 5px;
 
     @for $i from 1 through 20 {
       &:nth-child(#{$i}) {

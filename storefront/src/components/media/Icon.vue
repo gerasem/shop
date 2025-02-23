@@ -24,8 +24,7 @@ const loadIcon = defineAsyncComponent({
 <template>
   <component
     :is="loadIcon"
-    class="icon"
-    :class="`icon-${icon}`"
+    class="icon-component"
     :width="width"
     :height="width"
     :fill="fill"
@@ -33,13 +32,13 @@ const loadIcon = defineAsyncComponent({
 </template>
 
 <style scoped lang="scss">
-.icon {
+.icon-component {
   color: currentColor;
   cursor: pointer;
 }
 
 .disabled {
-  .icon {
+  .icon-component {
     opacity: 0.5;
     cursor: not-allowed;
   }

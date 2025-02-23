@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import BreadcrumbItem from '@/components/breadcrumb/BreadcrumbItem.vue'
 import Gallery from '@/components/gallery/Gallery.vue'
+import Button from '@/components/button/Button.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
 import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
 import { useMeta } from '@/composables/useMeta.ts'
@@ -61,6 +62,8 @@ watch([() => route.params.slug, () => categoryStore.isLoaded], ([newSlug, isLoad
             Item
           </h1>
         </div>
+
+        <Button icon="bag">Add to Cart</Button>
       </div>
     </div>
   </div>
