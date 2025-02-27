@@ -17,6 +17,8 @@
   },
   "dependencies": {
     "@ark-ui/vue": "^4.9.2",
+    "@medusajs/js-sdk": "^2.5.1",
+    "@medusajs/types": "^2.5.1",
     "@unhead/vue": "^1.11.18",
     "@vueuse/core": "^12.5.0",
     "bulma": "^1.0.2",
