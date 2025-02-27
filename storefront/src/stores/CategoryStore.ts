@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { sdk } from '@/services/medusa/config'
-import { HttpTypes } from "@medusajs/types"
+import type { ICategory } from '@/interfaces/ICategory'
 
 export const useCategoryStore = defineStore('category', () => {
-  const categories = ref<HttpTypes.StoreProductCategory[]>([])
-  const currentCategory = ref<HttpTypes.StoreProductCategory | null>(null)
+  const categories = ref<ICategory[]>([])
+  const currentCategory = ref<ICategory | null>(null)
   const isLoaded = ref<boolean>(false)
 
   const fetchCategories = async () => {
@@ -30,7 +30,7 @@ export const useCategoryStore = defineStore('category', () => {
     console.log('setCurrentCategory()')
     //todo redirect 404 if category not found
     if (!categories.value.length) return
-    currentCategory.value = categories.value.find((cat: HttpTypes.StoreProductCategory) => cat.handle === hanlde) || null
+    currentCategory.value = categories.value.find((cat: ICategory) => cat.handle === hanlde) || null
   }
 
   return { isLoaded, categories, fetchCategories, currentCategory, setCurrentCategory }

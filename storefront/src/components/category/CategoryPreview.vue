@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import Item from '@/components/item/Item.vue'
-import { HttpTypes } from "@medusajs/types"
 import { useItemStore } from '@/stores/ItemStore'
 import { useLoader } from '@/composables/useLoader'
 import { computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import ItemSkeleton from '@/components/item/ItemSkeleton.vue'
+import type { ICategory } from '@/interfaces/ICategory'
 
 const props = defineProps<{
-  category: HttpTypes.StoreProductCategory
+  category: ICategory
 }>()
 
 onMounted(() => {

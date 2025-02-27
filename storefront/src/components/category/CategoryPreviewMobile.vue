@@ -7,10 +7,10 @@ import { useItemStore } from '@/stores/ItemStore'
 import { useLoader } from '@/composables/useLoader'
 import { onMounted, computed } from 'vue'
 import ItemSkeleton from '@/components/item/ItemSkeleton.vue'
-import { HttpTypes } from "@medusajs/types"
+import type { ICategory } from '@/interfaces/ICategory'
 
 const props = defineProps<{
-  category: HttpTypes.StoreProductCategory
+  category: ICategory
 }>()
 
 onMounted(() => {

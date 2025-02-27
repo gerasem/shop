@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { localePath } from '@/composables/localePath.ts'
-import { HttpTypes } from "@medusajs/types"
+import type { ICategory } from '@/interfaces/ICategory'
 
 defineProps<{
-  category: HttpTypes.StoreProductCategory
+  category: ICategory
 }>()
 </script>
 

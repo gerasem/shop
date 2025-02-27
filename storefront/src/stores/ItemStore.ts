@@ -2,27 +2,31 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { apiService } from '@/services/api/api'
 import type { IItem } from '@/interfaces/IItem'
+import { sdk } from '@/services/medusa/config'
+import type { ICategory } from '@/interfaces/ICategory'
 
 export const useItemStore = defineStore('item', () => {
-  const items = ref<{ category: string; products: IItem[] }[]>([])
-  const itemsOnMainPage = ref<{ category: string; products: IItem[] }[]>([])
+  const items = ref<IItem[]>([])
+  const itemsOnMainPage = ref<IItem[]>([])
   const currentItem = ref<IItem | null>(null)
 
-  const getItemsByCategory = async (categoryHandle: string) => {
-    if (items.value.some((item) => item.category === categoryHandle)) return
+  const getItemsByCategory = async (selectedCategory: ICategory | null) => {
+    if (selectedCategory) {
+      if (items.value.some((item) => item.category === selectedCategory.handle)) return
 
-    const data = await apiService.get<IItem[]>(`/products/category/${categoryHandle}`)
-
-    items.value.push({
-      category: categoryHandle,
-      products: data.map((item: IItem) => ({
-        slug: item.title.toLowerCase().replace(/\s+/g, '-'),
-        ...item,
-      })),
-    })
-
-    console.log('get items by category', items.value)
+      sdk.store.product.list({
+        category_id: selectedCategory.id,
+      })
+        .then(({ products }) => {
+          console.log("products", products)
+          items.value.push({
+            category: selectedCategory.handle,
+            products: products
+          })
+        })
+    }
   }
+
 
   const getItemsForMainPage = async (categoryHandle: string, limit?: number) => {
     if (itemsOnMainPage.value.some((item) => item.category === categoryHandle)) return

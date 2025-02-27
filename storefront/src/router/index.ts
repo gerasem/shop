@@ -26,7 +26,7 @@ const router: Router = createRouter({
           component: () => import('@/views/CategoryView.vue'),
         },
         {
-          path: 'item/:slug?',
+          path: 'item/:handle?',
           name: 'item',
           component: () => import('@/views/ItemView.vue'),
         },

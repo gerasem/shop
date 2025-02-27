@@ -9,6 +9,7 @@ import { onMounted, watch, computed } from 'vue'
 import { useItemStore } from '@/stores/ItemStore'
 import { useLoader } from '@/composables/useLoader'
 import ItemSkeleton from '@/components/item/ItemSkeleton.vue'
+import { HttpTypes } from "@medusajs/types"
 
 onMounted((): void => {
   init(route.params.handle as string)
@@ -21,8 +22,8 @@ const { loading } = useLoader()
 
 const init = (handle: string): void => {
   categoryStore.setCurrentCategory(handle)
-  itemStore.getItemsByCategory(handle)
   if (categoryStore.currentCategory) {
+    itemStore.getItemsByCategory(categoryStore.currentCategory)
     useMeta(categoryStore.currentCategory?.name)
   }
 }
@@ -50,7 +51,7 @@ watch([() => route.params.handle, () => categoryStore.isLoaded], ([newHandle, is
         v-if="categoryStore.currentCategory"
         class="title is-2"
       >
-        {{ categoryStore.currentCategory?.title }}
+        {{ categoryStore.currentCategory?.name }}
       </h1>
 
       <h1

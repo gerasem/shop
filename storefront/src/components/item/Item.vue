@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import type { IItem } from '@/interfaces/IItem'
+import { HttpTypes } from "@medusajs/types"
 
 defineProps<{
-  item: IItem
+  item: HttpTypes.StoreProduct
 }>()
 </script>
 
 <template>
   <RouterLink
-    :to="`item/${item.slug}`"
+    :to="`item/${item.handle}`"
     class="item"
   >
     <img
       class="image is-square item__image"
-      :src="item.image"
+      :src="item.thumbnail as string"
       :alt="item.title"
     />
 
