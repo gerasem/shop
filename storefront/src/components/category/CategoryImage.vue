@@ -1,21 +1,21 @@
 <script setup lang="ts">
 import { localePath } from '@/composables/localePath.ts'
-import type { ICategory } from '@/interfaces/ICategory.ts'
+import { HttpTypes } from "@medusajs/types"
 
 defineProps<{
-  category: ICategory
+  category: HttpTypes.StoreProductCategory
 }>()
 </script>
 
 <template>
   <RouterLink
-    :to="localePath(`category/${category.slug}`)"
+    :to="localePath(`category/${category.handle}`)"
     class="is-hidden-mobile"
   >
     <img
       class="image is-16by9 category__image"
       :src="category.image"
-      :alt="category.title"
+      :alt="category.name"
     />
   </RouterLink>
 </template>

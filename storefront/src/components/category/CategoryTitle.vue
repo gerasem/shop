@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { localePath } from '@/composables/localePath.ts'
-import type { ICategory } from '@/interfaces/ICategory.ts'
+import { HttpTypes } from "@medusajs/types"
 
 defineProps<{
-  category: ICategory
+  category: HttpTypes.StoreProductCategory
 }>()
 </script>
 
 <template>
   <RouterLink
-    :to="localePath(`category/${category.slug}`)"
+    :to="localePath(`category/${category.handle}`)"
     class="category__title"
   >
-    <h3>{{ category.title }}</h3>
+    <h3>{{ category.name }}</h3>
   </RouterLink>
 </template>
 

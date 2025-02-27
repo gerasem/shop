@@ -8,13 +8,13 @@ export const useItemStore = defineStore('item', () => {
   const itemsOnMainPage = ref<{ category: string; products: IItem[] }[]>([])
   const currentItem = ref<IItem | null>(null)
 
-  const getItemsByCategory = async (categorySlug: string) => {
-    if (items.value.some((item) => item.category === categorySlug)) return
+  const getItemsByCategory = async (categoryHandle: string) => {
+    if (items.value.some((item) => item.category === categoryHandle)) return
 
-    const data = await apiService.get<IItem[]>(`/products/category/${categorySlug}`)
+    const data = await apiService.get<IItem[]>(`/products/category/${categoryHandle}`)
 
     items.value.push({
-      category: categorySlug,
+      category: categoryHandle,
       products: data.map((item: IItem) => ({
         slug: item.title.toLowerCase().replace(/\s+/g, '-'),
         ...item,
@@ -24,15 +24,15 @@ export const useItemStore = defineStore('item', () => {
     console.log('get items by category', items.value)
   }
 
-  const getItemsForMainPage = async (categorySlug: string, limit?: number) => {
-    if (itemsOnMainPage.value.some((item) => item.category === categorySlug)) return
+  const getItemsForMainPage = async (categoryHandle: string, limit?: number) => {
+    if (itemsOnMainPage.value.some((item) => item.category === categoryHandle)) return
 
-    const endpoint = `/products/category/${categorySlug}${limit ? `?limit=${limit}` : ''}`
+    const endpoint = `/products/category/${categoryHandle}${limit ? `?limit=${limit}` : ''}`
 
     const data = await apiService.get<IItem[]>(endpoint)
 
     itemsOnMainPage.value.push({
-      category: categorySlug,
+      category: categoryHandle,
       products: data.map((item: IItem) => ({
         slug: item.title.toLowerCase().replace(/\s+/g, '-'),
         ...item,
@@ -72,12 +72,12 @@ export const useItemStore = defineStore('item', () => {
     console.log('getItemBySlug', currentItem.value)
   }
 
-  const itemsByCategory = (categorySlug: string) => {
-    return items.value.find((item) => item.category === categorySlug)?.products || []
+  const itemsByCategory = (categoryHandle: string) => {
+    return items.value.find((item) => item.category === categoryHandle)?.products || []
   }
 
-  const itemsByCategoryForMainPage = (categorySlug: string) => {
-    return itemsOnMainPage.value.find((item) => item.category === categorySlug)?.products || []
+  const itemsByCategoryForMainPage = (categoryHandle: string) => {
+    return itemsOnMainPage.value.find((item) => item.category === categoryHandle)?.products || []
   }
 
   const allItems = () => {

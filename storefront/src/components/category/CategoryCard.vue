@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import CategoryImage from '@/components/category/CategoryImage.vue'
 import CategoryTitle from '@/components/category/CategoryTitle.vue'
-import type { ICategory } from '@/interfaces/ICategory.ts'
+import { HttpTypes } from "@medusajs/types"
 
 defineProps<{
-  category: ICategory
+  category: HttpTypes.StoreProductCategory
 }>()
 </script>
 

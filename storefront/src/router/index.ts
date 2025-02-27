@@ -21,7 +21,7 @@ const router: Router = createRouter({
           component: () => import('@/views/AllItemsView.vue'),
         },
         {
-          path: 'category/:slug',
+          path: 'category/:handle',
           name: 'catalog',
           component: () => import('@/views/CategoryView.vue'),
         },

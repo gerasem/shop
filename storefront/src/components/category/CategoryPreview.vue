@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Item from '@/components/item/Item.vue'
-import type { ICategory } from '@/interfaces/ICategory.ts'
+import { HttpTypes } from "@medusajs/types"
 import { useItemStore } from '@/stores/ItemStore'
 import { useLoader } from '@/composables/useLoader'
 import { computed, onMounted } from 'vue'
@@ -8,11 +8,11 @@ import { useI18n } from 'vue-i18n'
 import ItemSkeleton from '@/components/item/ItemSkeleton.vue'
 
 const props = defineProps<{
-  category: ICategory
+  category: HttpTypes.StoreProductCategory
 }>()
 
 onMounted(() => {
-  itemStore.getItemsForMainPage(props.category.slug, 4)
+  itemStore.getItemsForMainPage(props.category.handle, 4)
 })
 
 const itemStore = useItemStore()
@@ -20,21 +20,21 @@ const { loading } = useLoader()
 const { t } = useI18n()
 
 const items = computed(() => {
-  return itemStore.itemsByCategoryForMainPage(props.category.slug)
+  return itemStore.itemsByCategoryForMainPage(props.category.handle)
 })
 </script>
 
 <template>
   <div class="category__preview-container">
     <div class="title__container">
-      <h2 class="title is-2">{{ category.title }}</h2>
+      <h2 class="title is-2">{{ category.name }}</h2>
 
       <RouterLink
-        :to="`category/${category.slug}`"
+        :to="`category/${category.handle}`"
         class="title__link"
       >
         {{ t('Show all') }}
-        {{ category.title }}
+        {{ category.name }}
       </RouterLink>
     </div>
 

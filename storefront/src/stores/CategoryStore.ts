@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { ICategory } from '@/interfaces/ICategory.ts'
-import { apiService } from '@/services/api/api'
+import { sdk } from '@/services/medusa/config'
+import { HttpTypes } from "@medusajs/types"
 
 export const useCategoryStore = defineStore('category', () => {
-  const categories = ref<ICategory[]>([])
-  const currentCategory = ref<ICategory | null>(null)
+  const categories = ref<HttpTypes.StoreProductCategory[]>([])
+  const currentCategory = ref<HttpTypes.StoreProductCategory | null>(null)
   const isLoaded = ref<boolean>(false)
 
   const fetchCategories = async () => {
@@ -13,24 +13,24 @@ export const useCategoryStore = defineStore('category', () => {
       return
     }
 
+    sdk.store.category.list()
+      .then(({ product_categories }) => {
+        categories.value = product_categories.map((product) => ({
+          ...product,
+          image: `https://placehold.co/200?text=${product.name}`,
+        }))
+        console.log(product_categories)
+      })
+
     console.log('fetchCategories()')
-
-    const data = await apiService.get<string[]>('/products/categories')
-    categories.value = data.map((title, index) => ({
-      id: index + 1,
-      image: `https://placehold.co/200?text=${title}`,
-      title,
-      slug: title.toString().toLowerCase().replace(/\s+/g, '-'),
-    }))
-
     isLoaded.value = true
   }
 
-  const setCurrentCategory = (slug: string) => {
+  const setCurrentCategory = (hanlde: string) => {
     console.log('setCurrentCategory()')
     //todo redirect 404 if category not found
     if (!categories.value.length) return
-    currentCategory.value = categories.value.find((cat: ICategory) => cat.slug === slug) || null
+    currentCategory.value = categories.value.find((cat: HttpTypes.StoreProductCategory) => cat.handle === hanlde) || null
   }
 
   return { isLoaded, categories, fetchCategories, currentCategory, setCurrentCategory }

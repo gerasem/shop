@@ -11,7 +11,7 @@ import { useLoader } from '@/composables/useLoader'
 import ItemSkeleton from '@/components/item/ItemSkeleton.vue'
 
 onMounted((): void => {
-  init(route.params.slug as string)
+  init(route.params.handle as string)
 })
 
 const route = useRoute()
@@ -19,24 +19,24 @@ const categoryStore = useCategoryStore()
 const itemStore = useItemStore()
 const { loading } = useLoader()
 
-const init = (slug: string): void => {
-  categoryStore.setCurrentCategory(slug)
-  itemStore.getItemsByCategory(slug)
+const init = (handle: string): void => {
+  categoryStore.setCurrentCategory(handle)
+  itemStore.getItemsByCategory(handle)
   if (categoryStore.currentCategory) {
-    useMeta(categoryStore.currentCategory?.title)
+    useMeta(categoryStore.currentCategory?.name)
   }
 }
 
 const items = computed(() => {
   if (categoryStore.currentCategory) {
-    return itemStore.itemsByCategory(categoryStore.currentCategory.slug)
+    return itemStore.itemsByCategory(categoryStore.currentCategory.handle)
   }
   return []
 })
 
-watch([() => route.params.slug, () => categoryStore.isLoaded], ([newSlug, isLoaded]) => {
+watch([() => route.params.handle, () => categoryStore.isLoaded], ([newHandle, isLoaded]) => {
   if (isLoaded) {
-    init(newSlug as string)
+    init(newHandle as string)
   }
 })
 </script>
