@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { sdk } from '@/services/medusa/config'
+import ApiService from '@/services/api2/api'
 import type { ICategory } from '@/interfaces/ICategory'
 
 export const useCategoryStore = defineStore('category', () => {
@@ -12,15 +12,7 @@ export const useCategoryStore = defineStore('category', () => {
       return
     }
 
-    await sdk.store.category.list().then(({ product_categories }) => {
-      categories.value = product_categories.map((product) => ({
-        ...product,
-        image: `https://placehold.co/200?text=${product.name}`,
-      }))
-      console.log(product_categories)
-    })
-
-    console.log('fetchCategories()')
+    categories.value = await ApiService.getCategories() as ICategory[]
   }
 
   const setCurrentCategory = (hanlde: string) => {
