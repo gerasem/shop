@@ -34,7 +34,7 @@ watch(
   () => route.params.handle,
   (newHandle) => {
     init(newHandle as string)
-  }
+  },
 )
 </script>
 

@@ -12,8 +12,6 @@ onMounted(() => {
 useMeta('Contact')
 </script>
 
-<template>
-  Contact Page
-</template>
+<template>Contact Page</template>
 
 <style scoped lang="scss"></style>

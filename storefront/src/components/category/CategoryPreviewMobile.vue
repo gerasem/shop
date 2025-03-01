@@ -35,8 +35,8 @@ const items = computed(() => {
         :to="`category/${category.handle}`"
         class="title__link"
       >
-      {{ t('Show all') }}
-      {{ category.name }}
+        {{ t('Show all') }}
+        {{ category.name }}
       </RouterLink>
     </div>
 

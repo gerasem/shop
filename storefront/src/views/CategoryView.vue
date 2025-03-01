@@ -10,7 +10,7 @@ import { useItemStore } from '@/stores/ItemStore'
 import { useLoader } from '@/composables/useLoader'
 import ItemSkeleton from '@/components/item/ItemSkeleton.vue'
 
-onMounted(async() => {
+onMounted(async () => {
   categoryStore.fetchCategories().then(() => {
     init(route.params.handle as string)
   })
@@ -23,12 +23,11 @@ const { loading } = useLoader()
 
 const init = (handle: string): void => {
   categoryStore.setCurrentCategory(handle)
-  console.log("categoryStore.currentCategory", categoryStore.currentCategory, handle)
+  console.log('categoryStore.currentCategory', categoryStore.currentCategory, handle)
   if (categoryStore.currentCategory) {
     itemStore.getItemsByCategory(categoryStore.currentCategory)
     useMeta(categoryStore.currentCategory.name)
   }
-  
 }
 
 const items = computed(() => {
@@ -42,7 +41,7 @@ watch(
   () => route.params.handle,
   (newHandle) => {
     init(newHandle as string)
-  }
+  },
 )
 </script>
 

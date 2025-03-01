@@ -14,19 +14,19 @@ export const useItemStore = defineStore('item', () => {
     if (selectedCategory) {
       if (items.value.some((item) => item.category === selectedCategory.handle)) return
 
-      sdk.store.product.list({
-        category_id: selectedCategory.id,
-      })
+      sdk.store.product
+        .list({
+          category_id: selectedCategory.id,
+        })
         .then(({ products }) => {
-          console.log("products", products)
+          console.log('products', products)
           items.value.push({
             category: selectedCategory.handle,
-            products: products
+            products: products,
           })
         })
     }
   }
-
 
   const getItemsForMainPage = async (categoryHandle: string, limit?: number) => {
     if (itemsOnMainPage.value.some((item) => item.category === categoryHandle)) return

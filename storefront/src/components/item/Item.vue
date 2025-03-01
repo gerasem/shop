@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { HttpTypes } from "@medusajs/types"
+import { HttpTypes } from '@medusajs/types'
 
 defineProps<{
   item: HttpTypes.StoreProduct

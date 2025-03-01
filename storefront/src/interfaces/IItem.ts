@@ -1,6 +1,6 @@
-import { HttpTypes } from "@medusajs/types"
+import { HttpTypes } from '@medusajs/types'
 
 export interface IItem {
-  category: string,
+  category: string
   products: HttpTypes.StoreProduct[]
 }
