@@ -11,8 +11,10 @@ import { useItemStore } from '@/stores/ItemStore'
 import { useCategoryStore } from '@/stores/CategoryStore'
 import { useRoute } from 'vue-router'
 
-onMounted((): void => {
-  init(route.params.slug as string)
+onMounted(() => {
+  categoryStore.fetchCategories().then(() => {
+    init(route.params.handle as string)
+  })
 })
 
 const route = useRoute()
@@ -24,15 +26,16 @@ const init = (slug: string): void => {
   itemStore.getItemBySlug(slug)
   categoryStore.setCurrentCategory('electronics')
   if (itemStore.currentItem) {
-    useMeta(itemStore.currentItem.title)
+    useMeta(itemStore.currentItem.name)
   }
 }
 
-watch([() => route.params.slug, () => categoryStore.isLoaded], ([newSlug, isLoaded]) => {
-  if (isLoaded) {
-    init(newSlug as string)
+watch(
+  () => route.params.handle,
+  (newHandle) => {
+    init(newHandle as string)
   }
-})
+)
 </script>
 
 <template>

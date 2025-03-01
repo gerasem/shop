@@ -9,10 +9,11 @@ import { onMounted, watch, computed } from 'vue'
 import { useItemStore } from '@/stores/ItemStore'
 import { useLoader } from '@/composables/useLoader'
 import ItemSkeleton from '@/components/item/ItemSkeleton.vue'
-import { HttpTypes } from "@medusajs/types"
 
-onMounted((): void => {
-  init(route.params.handle as string)
+onMounted(async() => {
+  categoryStore.fetchCategories().then(() => {
+    init(route.params.handle as string)
+  })
 })
 
 const route = useRoute()
@@ -22,10 +23,12 @@ const { loading } = useLoader()
 
 const init = (handle: string): void => {
   categoryStore.setCurrentCategory(handle)
+  console.log("categoryStore.currentCategory", categoryStore.currentCategory, handle)
   if (categoryStore.currentCategory) {
     itemStore.getItemsByCategory(categoryStore.currentCategory)
-    useMeta(categoryStore.currentCategory?.name)
+    useMeta(categoryStore.currentCategory.name)
   }
+  
 }
 
 const items = computed(() => {
@@ -35,11 +38,12 @@ const items = computed(() => {
   return []
 })
 
-watch([() => route.params.handle, () => categoryStore.isLoaded], ([newHandle, isLoaded]) => {
-  if (isLoaded) {
+watch(
+  () => route.params.handle,
+  (newHandle) => {
     init(newHandle as string)
   }
-})
+)
 </script>
 
 <template>

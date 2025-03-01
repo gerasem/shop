@@ -7,8 +7,12 @@ import { onMounted } from 'vue'
 import { useItemStore } from '@/stores/ItemStore'
 import { useLoader } from '@/composables/useLoader'
 import ItemSkeleton from '@/components/item/ItemSkeleton.vue'
+import { useCategoryStore } from '@/stores/CategoryStore'
+
+const categoryStore = useCategoryStore()
 
 onMounted((): void => {
+  categoryStore.fetchCategories()
   itemStore.getAllItems()
 })
 
