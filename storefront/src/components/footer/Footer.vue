@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import FooterDebugBar from './FooterDebugBar.vue'
 
 const year = computed(() => {
   return new Date().getFullYear()
@@ -51,6 +52,8 @@ const year = computed(() => {
       </div>
     </div>
   </footer>
+
+  <FooterDebugBar />
 </template>
 
 <style lang="scss">

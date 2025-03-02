@@ -11,8 +11,8 @@ import { useCategoryStore } from '@/stores/CategoryStore'
 
 const categoryStore = useCategoryStore()
 
-onMounted((): void => {
-  categoryStore.fetchCategories()
+onMounted(async() => {
+  await categoryStore.fetchCategories()
   itemStore.getAllItems()
 })
 
@@ -52,7 +52,7 @@ useMeta('All items')
 
     <template v-else>
       <template
-        v-for="category in itemStore.allItems()"
+        v-for="category in itemStore.items"
         :key="category.category"
       >
         <h2 class="title is-3">{{ category.category }}</h2>
@@ -66,7 +66,7 @@ useMeta('All items')
           </div>
 
           <p
-            v-if="itemStore.allItems().length === 0"
+            v-if="itemStore.items.length === 0"
             class="column"
           >
             Nothing found

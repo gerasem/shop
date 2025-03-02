@@ -4,6 +4,7 @@ import { apiService } from '@/services/api/api'
 import type { IItem } from '@/interfaces/IItem'
 import ApiService from '@/services/api2/api'
 import type { ICategory } from '@/interfaces/ICategory'
+import { useCategoryStore } from '@/stores/CategoryStore'
 
 export const useItemStore = defineStore('item', () => {
   const items = ref<IItem[]>([])
@@ -20,7 +21,6 @@ export const useItemStore = defineStore('item', () => {
         category: selectedCategory.handle,
         products: products,
       })
-
     }
   }
 
@@ -43,25 +43,19 @@ export const useItemStore = defineStore('item', () => {
   }
 
   const getAllItems = async () => {
-    const data = await apiService.get<IItem[]>('/products')
+    const categoryStore = useCategoryStore()
+    const store = useItemStore()
 
-    const groupedItems = data.reduce<Record<string, IItem[]>>((acc, item) => {
-      const category = item.category
-      if (!acc[category]) {
-        acc[category] = []
+    for (const category of categoryStore.categories) {
+      const exists = items.value.some(item => item.category === category.handle)
+      
+      if (!exists) {
+         await store.getItemsByCategory(category)
+  
+        
       }
-      acc[category].push({
-        slug: item.title.toLowerCase().replace(/\s+/g, '-'),
-        ...item,
-      })
-      return acc
-    }, {})
-
-    items.value = Object.entries(groupedItems).map(([category, items]) => ({
-      category,
-      products: items,
-    }))
-
+    }
+    
     console.log('get all items', items.value)
   }
 
@@ -80,11 +74,6 @@ export const useItemStore = defineStore('item', () => {
     return itemsOnMainPage.value.find((item) => item.category === categoryHandle)?.products || []
   }
 
-  const allItems = () => {
-    console.log('ALL ITEMS', items.value || [])
-    return items.value || []
-  }
-
   return {
     items,
     itemsOnMainPage,
@@ -93,7 +82,6 @@ export const useItemStore = defineStore('item', () => {
     getItemsByCategory,
     itemsByCategory,
     getAllItems,
-    allItems,
     getItemsForMainPage,
     getItemBySlug,
   }
