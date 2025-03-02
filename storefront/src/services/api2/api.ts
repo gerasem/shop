@@ -1,13 +1,14 @@
 import { sdk } from '@/services/medusa/config'
 import { useLoader } from '@/composables/useLoader'
 import { useToastStore } from '@/stores/ToastStore'
+import { HttpTypes } from '@medusajs/types'
 
 const loader = useLoader()
 
 class ApiService {
-    static async handleRequest<T>(id: string, callback: () => Promise<T>): Promise<T | null> {
+    static async handleRequest<T>(id: string, callback: () => Promise<T>): Promise<T> {
         try {
-            loader.stopLoading(id)
+            loader.startLoading(id)
             return await callback();
         } catch (error: unknown) {
             const toastStore = useToastStore()
@@ -26,13 +27,25 @@ class ApiService {
         }
     }
 
-    static async getCategories() {
-        return this.handleRequest('get-categories', async () => {
+    static async getCategories(): Promise<HttpTypes.StoreProductCategory[] | []> {
+        return this.handleRequest('getCategories', async () => {
             const { product_categories } = await sdk.store.category.list();
+
             return product_categories.map((product) => ({
                 ...product,
                 image: `https://placehold.co/200?text=${product.name}`,
             }));
+        });
+    }
+
+    static async getItemsByCategory(categoryId: string): Promise<HttpTypes.StoreProduct[] | []> {
+        return this.handleRequest('getItemsByCategory', async () => {
+            const { products } = await sdk.store.product.list({
+                category_id: categoryId,
+            });
+            return products
+
+
         });
     }
 }

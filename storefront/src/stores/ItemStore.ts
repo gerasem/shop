@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { apiService } from '@/services/api/api'
 import type { IItem } from '@/interfaces/IItem'
-import { sdk } from '@/services/medusa/config'
+import ApiService from '@/services/api2/api'
 import type { ICategory } from '@/interfaces/ICategory'
 
 export const useItemStore = defineStore('item', () => {
@@ -14,17 +14,13 @@ export const useItemStore = defineStore('item', () => {
     if (selectedCategory) {
       if (items.value.some((item) => item.category === selectedCategory.handle)) return
 
-      sdk.store.product
-        .list({
-          category_id: selectedCategory.id,
-        })
-        .then(({ products }) => {
-          console.log('products', products)
-          items.value.push({
-            category: selectedCategory.handle,
-            products: products,
-          })
-        })
+      const products = await ApiService.getItemsByCategory(selectedCategory.id)
+
+      items.value.push({
+        category: selectedCategory.handle,
+        products: products,
+      })
+
     }
   }
 

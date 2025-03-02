@@ -12,7 +12,7 @@ export const useCategoryStore = defineStore('category', () => {
       return
     }
 
-    categories.value = await ApiService.getCategories() as ICategory[]
+    categories.value = await ApiService.getCategories()
   }
 
   const setCurrentCategory = (hanlde: string) => {
