@@ -1,4 +1,4 @@
-import { useHead } from 'unhead'
+import { useHead } from '@unhead/vue'
 
 export function useMeta(title: string, description: string = '') {
   useHead({
