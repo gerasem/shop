@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { apiService } from '@/services/api/api'
+import apiService from '@/services/api2/api'
 import type { IItem } from '@/interfaces/IItem'
 import ApiService from '@/services/api2/api'
 import type { ICategory } from '@/interfaces/ICategory'
@@ -47,15 +47,13 @@ export const useItemStore = defineStore('item', () => {
     const store = useItemStore()
 
     for (const category of categoryStore.categories) {
-      const exists = items.value.some(item => item.category === category.handle)
-      
+      const exists = items.value.some((item) => item.category === category.handle)
+
       if (!exists) {
-         await store.getItemsByCategory(category)
-  
-        
+        await store.getItemsByCategory(category)
       }
     }
-    
+
     console.log('get all items', items.value)
   }
 

@@ -44,7 +44,7 @@ class ApiService {
       const { products } = await sdk.store.product.list({
         category_id: categoryId,
         fields: FIELDS_ITEM_LIST,
-        region_id: 'reg_01JMZKZWA4ZNMFXGCK6TVYX36T',
+        region_id: 'reg_01JR3YZXEGWJ49X3CSPXY3HVS2',
       })
       return products
     })
