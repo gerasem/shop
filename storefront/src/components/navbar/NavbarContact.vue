@@ -7,7 +7,7 @@ const { t } = useI18n()
 
 <template>
   <RouterLink
-    :to="localePath('')"
+    :to="localePath('contact')"
     class="contact button is-white"
     data-test-id="contact"
     >{{ t('contact') }}

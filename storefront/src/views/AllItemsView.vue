@@ -5,9 +5,10 @@ import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
 import { onMounted } from 'vue'
 import { useItemStore } from '@/stores/ItemStore'
 import { useLoader } from '@/composables/useLoader'
-import ItemSkeleton from '@/components/item/ItemSkeleton.vue'
+import ItemSkeletonContainer from '@/components/item/ItemSkeletonContainer.vue'
 import { useCategoryStore } from '@/stores/CategoryStore'
 import { useSeoMeta } from '@unhead/vue'
+import Title from '@/components/content/Title.vue'
 
 const categoryStore = useCategoryStore()
 
@@ -28,29 +29,12 @@ useSeoMeta({
   <CategoriesNarrow />
 
   <div class="container is-fluid">
-    <div class="title__container">
-      <h1 class="title is-2">All Items</h1>
+    <Title>All Items</Title>
 
-      <div class="select">
-        <select>
-          <option>Select dropdown</option>
-          <option>With options</option>
-        </select>
-      </div>
-    </div>
-
-    <div
+    <ItemSkeletonContainer
       v-if="loading"
-      class="columns is-mobile is-multiline is-3"
-    >
-      <div
-        v-for="skeleton in 8"
-        :key="skeleton"
-        class="column is-half-mobile is-one-third-tablet is-one-quarter-desktop"
-      >
-        <ItemSkeleton />
-      </div>
-    </div>
+      :count="8"
+    />
 
     <template v-else>
       <template

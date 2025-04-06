@@ -6,6 +6,7 @@ import { computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import ItemSkeleton from '@/components/item/ItemSkeleton.vue'
 import type { ICategory } from '@/interfaces/ICategory'
+import ItemSkeletonContainer from '@/components/item/ItemSkeletonContainer.vue'
 
 const props = defineProps<{
   category: ICategory
@@ -38,26 +39,22 @@ const items = computed(() => {
       </RouterLink>
     </div>
 
-    <div class="columns is-mobile is-multiline is-3">
-      <template v-if="loading && items.length === 0">
-        <div
-          v-for="skeleton in 4"
-          :key="skeleton"
-          class="column is-half-tablet is-one-third-desktop is-one-quarter-fullhd"
-        >
-          <ItemSkeleton />
-        </div>
-      </template>
-
-      <template v-else>
-        <div
-          v-for="item in items"
-          :key="item.id"
-          class="column is-half-tablet is-one-third-desktop is-one-quarter-fullhd"
-        >
-          <Item :item="item" />
-        </div>
-      </template>
+    <ItemSkeletonContainer
+      v-if="loading && items.length === 0"
+      :count="4"
+    />
+    
+    <div
+      v-else
+      class="columns is-mobile is-multiline is-3"
+    >
+      <div
+        v-for="item in items"
+        :key="item.id"
+        class="column is-half-tablet is-one-third-desktop is-one-quarter-fullhd"
+      >
+        <Item :item="item" />
+      </div>
 
       <p
         v-if="!loading && items.length === 0"
