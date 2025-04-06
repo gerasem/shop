@@ -5,7 +5,7 @@ import { useLoader } from '@/composables/useLoader'
 import { computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import type { ICategory } from '@/interfaces/ICategory'
-import ItemSkeletonContainer from '@/components/item/ItemSkeletonContainer.vue'
+import ItemSkeletonContainer from '@/components/item/ItemSkeletonGroup.vue'
 
 const props = defineProps<{
   category: ICategory
@@ -45,7 +45,6 @@ const items = computed(() => {
 
     <ItemContainer
       v-else
-      :loading="loading"
       :items="items"
     />
   </div>

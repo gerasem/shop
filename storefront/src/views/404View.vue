@@ -20,7 +20,7 @@ useSeoMeta({
   <CategoriesNarrow />
 
   <div class="container is-fluid">
-    <Title>Nothing found</Title>
+    <Title>Error 404: Nothing found</Title>
 
     <p>Nothing found</p>
   </div>

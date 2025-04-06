@@ -6,7 +6,7 @@ import { useRoute } from 'vue-router'
 import { onMounted, watch, computed } from 'vue'
 import { useItemStore } from '@/stores/ItemStore'
 import { useLoader } from '@/composables/useLoader'
-import ItemSkeletonContainer from '@/components/item/ItemSkeletonContainer.vue'
+import ItemSkeletonContainer from '@/components/item/ItemSkeletonGroup.vue'
 import { useSeoMeta } from '@unhead/vue'
 import Title from '@/components/content/Title.vue'
 import ItemContainer from '@/components/item/ItemContainer.vue'
@@ -52,9 +52,9 @@ useSeoMeta({
   <CategoriesNarrow />
 
   <div class="container is-fluid">
-    <Title :loading="!categoryStore.currentCategory">{{
-      categoryStore.currentCategory?.name
-    }}</Title>
+    <Title :loading="!categoryStore.currentCategory">
+      {{ categoryStore.currentCategory?.name }}
+    </Title>
 
     <ItemSkeletonContainer
       v-if="loading"
@@ -63,7 +63,6 @@ useSeoMeta({
 
     <ItemContainer
       v-else
-      :loading="loading"
       :items="items"
     />
   </div>

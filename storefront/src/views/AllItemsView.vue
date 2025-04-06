@@ -4,7 +4,7 @@ import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
 import { onMounted } from 'vue'
 import { useItemStore } from '@/stores/ItemStore'
 import { useLoader } from '@/composables/useLoader'
-import ItemSkeletonContainer from '@/components/item/ItemSkeletonContainer.vue'
+import ItemSkeletonContainer from '@/components/item/ItemSkeletonGroup.vue'
 import { useCategoryStore } from '@/stores/CategoryStore'
 import { useSeoMeta } from '@unhead/vue'
 import Title from '@/components/content/Title.vue'
@@ -42,9 +42,8 @@ useSeoMeta({
         :key="category.category"
       >
         <h2 class="title is-3">{{ category.category }}</h2>
-       
+
         <ItemContainer
-          :loading="loading"
           :items="category.products"
         />
       </template>

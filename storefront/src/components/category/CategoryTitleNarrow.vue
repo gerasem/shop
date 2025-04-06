@@ -2,6 +2,7 @@
 import CategoryTitle from '@/components/category/CategoryTitle.vue'
 import { useCategoryStore } from '@/stores/CategoryStore'
 import { useLoader } from '@/composables/useLoader'
+import CategorySkeletonGroup from '@/components/category/CategorySkeletonGroup.vue'
 
 const categoryStore = useCategoryStore()
 const { loading } = useLoader()
@@ -9,15 +10,12 @@ const { loading } = useLoader()
 
 <template>
   <div class="is-full category__container">
-    <template v-if="categoryStore.categories.length === 0">
-      <div
-        v-for="skeleton in 5"
-        :key="skeleton"
-        class="skeleton-lines"
-      >
-        <div></div>
-      </div>
-    </template>
+    <template v-if="categoryStore.categories.length === 0"> </template>
+
+    <CategorySkeletonGroup
+      v-if="categoryStore.categories.length === 0"
+      :count="5"
+    />
 
     <template v-else>
       <CategoryTitle
