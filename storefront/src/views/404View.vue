@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import { onMounted } from 'vue'
 import { useCategoryStore } from '@/stores/CategoryStore'
 import { useSeoMeta } from '@unhead/vue'

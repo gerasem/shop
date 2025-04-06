@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Item from '@/components/item/Item.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
 import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
 import { onMounted } from 'vue'
@@ -9,6 +8,7 @@ import ItemSkeletonContainer from '@/components/item/ItemSkeletonContainer.vue'
 import { useCategoryStore } from '@/stores/CategoryStore'
 import { useSeoMeta } from '@unhead/vue'
 import Title from '@/components/content/Title.vue'
+import ItemContainer from '@/components/item/ItemContainer.vue'
 
 const categoryStore = useCategoryStore()
 
@@ -42,22 +42,11 @@ useSeoMeta({
         :key="category.category"
       >
         <h2 class="title is-3">{{ category.category }}</h2>
-        <div class="columns is-mobile is-multiline is-3">
-          <div
-            v-for="item in category.products"
-            :key="item.id"
-            class="column is-half-mobile is-one-third-tablet is-one-quarter-desktop"
-          >
-            <Item :item="item" />
-          </div>
-
-          <p
-            v-if="itemStore.items.length === 0"
-            class="column"
-          >
-            Nothing found
-          </p>
-        </div>
+       
+        <ItemContainer
+          :loading="loading"
+          :items="category.products"
+        />
       </template>
     </template>
   </div>

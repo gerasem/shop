@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import Item from '@/components/item/Item.vue'
+import ItemContainer from '@/components/item/ItemContainer.vue'
 import { useItemStore } from '@/stores/ItemStore'
 import { useLoader } from '@/composables/useLoader'
 import { computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import ItemSkeleton from '@/components/item/ItemSkeleton.vue'
 import type { ICategory } from '@/interfaces/ICategory'
 import ItemSkeletonContainer from '@/components/item/ItemSkeletonContainer.vue'
 
@@ -43,26 +42,12 @@ const items = computed(() => {
       v-if="loading && items.length === 0"
       :count="4"
     />
-    
-    <div
-      v-else
-      class="columns is-mobile is-multiline is-3"
-    >
-      <div
-        v-for="item in items"
-        :key="item.id"
-        class="column is-half-tablet is-one-third-desktop is-one-quarter-fullhd"
-      >
-        <Item :item="item" />
-      </div>
 
-      <p
-        v-if="!loading && items.length === 0"
-        class="column"
-      >
-        Nothing found
-      </p>
-    </div>
+    <ItemContainer
+      v-else
+      :loading="loading"
+      :items="items"
+    />
   </div>
 </template>
 

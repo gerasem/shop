@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import BreadcrumbItem from '@/components/breadcrumb/BreadcrumbItem.vue'
 import Gallery from '@/components/gallery/Gallery.vue'
+import Title from '@/components/content/Title.vue'
 import Button from '@/components/button/Button.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
 import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
@@ -10,6 +11,8 @@ import { useItemStore } from '@/stores/ItemStore'
 import { useCategoryStore } from '@/stores/CategoryStore'
 import { useRoute } from 'vue-router'
 import { useSeoMeta } from '@unhead/vue'
+
+//todo use new api 
 
 onMounted(() => {
   categoryStore.fetchCategories().then(() => {
@@ -24,7 +27,7 @@ const { loading } = useLoader()
 
 const init = (slug: string): void => {
   itemStore.getItemBySlug(slug)
-  categoryStore.setCurrentCategory('electronics')
+  categoryStore.setCurrentCategory('pants')
 }
 
 watch(
@@ -51,7 +54,11 @@ useSeoMeta({
       </div>
 
       <div class="column is-half">
-        <div class="title__container">
+        <Title :loading="loading">
+          {{ itemStore.currentItem?.title }}
+        </Title>
+
+        <!-- <div class="title__container">
           <h1
             v-if="itemStore.currentItem"
             class="title is-2"
@@ -65,7 +72,7 @@ useSeoMeta({
           >
             Item
           </h1>
-        </div>
+        </div> -->
 
         <Button icon="bag">Add to Cart</Button>
       </div>

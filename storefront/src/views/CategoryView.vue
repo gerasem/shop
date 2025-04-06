@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Item from '@/components/item/Item.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
 import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
 import { useCategoryStore } from '@/stores/CategoryStore'
@@ -10,6 +9,7 @@ import { useLoader } from '@/composables/useLoader'
 import ItemSkeletonContainer from '@/components/item/ItemSkeletonContainer.vue'
 import { useSeoMeta } from '@unhead/vue'
 import Title from '@/components/content/Title.vue'
+import ItemContainer from '@/components/item/ItemContainer.vue'
 
 onMounted(async () => {
   categoryStore.fetchCategories().then(() => {
@@ -24,7 +24,6 @@ const { loading } = useLoader()
 
 const init = (handle: string): void => {
   categoryStore.setCurrentCategory(handle)
-  console.log('categoryStore.currentCategory', categoryStore.currentCategory, handle)
   if (categoryStore.currentCategory) {
     itemStore.getItemsByCategory(categoryStore.currentCategory)
   }
@@ -62,25 +61,11 @@ useSeoMeta({
       :count="8"
     />
 
-    <div
+    <ItemContainer
       v-else
-      class="columns is-mobile is-multiline is-3"
-    >
-      <div
-        v-for="item in items"
-        :key="item.id"
-        class="column is-half-mobile is-one-third-tablet is-one-quarter-desktop"
-      >
-        <Item :item="item" />
-      </div>
-      
-      <p
-        v-if="!loading && items.length === 0"
-        class="column"
-      >
-        Nothing found
-      </p>
-    </div>
+      :loading="loading"
+      :items="items"
+    />
   </div>
 
   <Text2Columns header="About us"
