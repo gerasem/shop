@@ -7,12 +7,12 @@ export const useCategoryStore = defineStore('category', () => {
   const categories = ref<ICategory[]>([])
   const currentCategory = ref<ICategory | null>(null)
 
-  const fetchCategories = async () => {
+  const getCategories = async () => {
     if (categories.value.length) {
       return
     }
 
-    categories.value = await ApiService.getCategories()
+    categories.value = await ApiService.fetchCategories()
   }
 
   const setCurrentCategory = (hanlde: string) => {
@@ -22,5 +22,5 @@ export const useCategoryStore = defineStore('category', () => {
     currentCategory.value = categories.value.find((cat: ICategory) => cat.handle === hanlde) || null
   }
 
-  return { categories, fetchCategories, currentCategory, setCurrentCategory }
+  return { categories, getCategories, currentCategory, setCurrentCategory }
 })

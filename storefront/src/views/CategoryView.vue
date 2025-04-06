@@ -12,9 +12,8 @@ import Title from '@/components/content/Title.vue'
 import ItemContainer from '@/components/item/ItemContainer.vue'
 
 onMounted(async () => {
-  categoryStore.fetchCategories().then(() => {
-    init(route.params.handle as string)
-  })
+  await categoryStore.getCategories()
+  init(route.params.handle as string)
 })
 
 const route = useRoute()

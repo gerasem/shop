@@ -14,7 +14,7 @@ const props = defineProps<{
 }>()
 
 onMounted(() => {
-  itemStore.getItemsForMainPage(props.category.handle, 4)
+  itemStore.getItemsForMainPage(props.category, 4)
 })
 
 const itemStore = useItemStore()

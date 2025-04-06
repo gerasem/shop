@@ -12,12 +12,11 @@ import { useCategoryStore } from '@/stores/CategoryStore'
 import { useRoute } from 'vue-router'
 import { useSeoMeta } from '@unhead/vue'
 
-//todo use new api 
+//todo use new api
 
-onMounted(() => {
-  categoryStore.fetchCategories().then(() => {
-    init(route.params.handle as string)
-  })
+onMounted(async () => {
+  await categoryStore.getCategories()
+  init(route.params.handle as string)
 })
 
 const route = useRoute()

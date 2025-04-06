@@ -8,7 +8,7 @@ import { useSeoMeta } from '@unhead/vue'
 const categoryStore = useCategoryStore()
 
 onMounted(() => {
-  categoryStore.fetchCategories()
+  categoryStore.getCategories()
 })
 
 const { t } = useI18n()

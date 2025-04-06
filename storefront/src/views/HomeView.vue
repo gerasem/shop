@@ -14,7 +14,7 @@ const { isMobile } = useDevice()
 const categoryStore = useCategoryStore()
 
 onMounted(() => {
-  categoryStore.fetchCategories()
+  categoryStore.getCategories()
 })
 
 useSeoMeta({

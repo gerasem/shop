@@ -28,8 +28,8 @@ class ApiService {
     }
   }
 
-  static async getCategories(): Promise<HttpTypes.StoreProductCategory[] | []> {
-    return this.handleRequest('getCategories', async () => {
+  static async fetchCategories(): Promise<HttpTypes.StoreProductCategory[] | []> {
+    return this.handleRequest('fetchCategories', async () => {
       const { product_categories } = await sdk.store.category.list()
 
       return product_categories.map((product) => ({
@@ -39,12 +39,16 @@ class ApiService {
     })
   }
 
-  static async getItemsByCategory(categoryId: string): Promise<HttpTypes.StoreProduct[] | []> {
-    return this.handleRequest('getItemsByCategory', async () => {
+  static async fetchItemsByCategory(
+    categoryId: string,
+    limit: number = 50,
+  ): Promise<HttpTypes.StoreProduct[] | []> {
+    return this.handleRequest('fetchItemsByCategory', async () => {
       const { products } = await sdk.store.product.list({
         category_id: categoryId,
-        fields: FIELDS_ITEM_LIST,
         region_id: 'reg_01JR3YZXEGWJ49X3CSPXY3HVS2',
+        limit,
+        fields: FIELDS_ITEM_LIST,
       })
       return products
     })

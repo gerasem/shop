@@ -13,7 +13,7 @@ import ItemContainer from '@/components/item/ItemContainer.vue'
 const categoryStore = useCategoryStore()
 
 onMounted(async () => {
-  await categoryStore.fetchCategories()
+  await categoryStore.getCategories()
   itemStore.getAllItems()
 })
 

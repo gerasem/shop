@@ -14,7 +14,7 @@ export const useItemStore = defineStore('item', () => {
     if (selectedCategory) {
       if (items.value.some((item) => item.category === selectedCategory.handle)) return
 
-      const products = await ApiService.getItemsByCategory(selectedCategory.id)
+      const products = await ApiService.fetchItemsByCategory(selectedCategory.id)
 
       items.value.push({
         category: selectedCategory.handle,
@@ -23,19 +23,18 @@ export const useItemStore = defineStore('item', () => {
     }
   }
 
-  const getItemsForMainPage = async (categoryHandle: string, limit?: number) => {
-    if (itemsOnMainPage.value.some((item) => item.category === categoryHandle)) return
+  const getItemsForMainPage = async (category: ICategory, limit?: number) => {
+    if (itemsOnMainPage.value.some((item) => item.category === category.handle)) return
 
-    const endpoint = `/products/category/${categoryHandle}${limit ? `?limit=${limit}` : ''}`
+    const data = await ApiService.fetchItemsByCategory(category.id, limit)
 
-    const data = await ApiService.getItemsByCategory(endpoint)
-
+    console.log('data', data)
     itemsOnMainPage.value.push({
-      category: categoryHandle,
+      category: category.handle,
       products: data,
     })
 
-    console.log('get items by category', items.value)
+    console.log('get items by category', itemsOnMainPage.value)
   }
 
   const getAllItems = async () => {

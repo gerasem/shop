@@ -8,7 +8,7 @@ import Title from '@/components/content/Title.vue'
 const categoryStore = useCategoryStore()
 
 onMounted(() => {
-  categoryStore.fetchCategories()
+  categoryStore.getCategories()
 })
 
 useSeoMeta({
