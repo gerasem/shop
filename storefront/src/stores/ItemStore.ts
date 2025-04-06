@@ -1,40 +1,36 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { IItem } from '@/interfaces/IItem'
-import ApiService from '@/services/api2/api'
+import ApiService from '@/services/api/api'
 import type { ICategory } from '@/interfaces/ICategory'
 import { useCategoryStore } from '@/stores/CategoryStore'
+import { HttpTypes } from '@medusajs/types'
 
 export const useItemStore = defineStore('item', () => {
   const items = ref<IItem[]>([])
   const itemsOnMainPage = ref<IItem[]>([])
-  const currentItem = ref<IItem | null>(null)
+  const currentItem = ref<HttpTypes.StoreProduct | null>(null)
 
-  const getItemsByCategory = async (selectedCategory: ICategory | null) => {
-    if (selectedCategory) {
-      if (items.value.some((item) => item.category === selectedCategory.handle)) return
+  const getItemsByCategory = async (category: ICategory) => {
+    if (items.value.some((item) => item.category === category.handle)) return
 
-      const products = await ApiService.fetchItemsByCategory(selectedCategory.id)
+    const products = await ApiService.fetchItemsByCategory(category.id)
 
-      items.value.push({
-        category: selectedCategory.handle,
-        products: products,
-      })
-    }
+    items.value.push({
+      category: category.handle,
+      products,
+    })
   }
 
   const getItemsForMainPage = async (category: ICategory, limit?: number) => {
     if (itemsOnMainPage.value.some((item) => item.category === category.handle)) return
 
-    const data = await ApiService.fetchItemsByCategory(category.id, limit)
+    const products = await ApiService.fetchItemsByCategory(category.id, limit)
 
-    console.log('data', data)
     itemsOnMainPage.value.push({
       category: category.handle,
-      products: data,
+      products,
     })
-
-    console.log('get items by category', itemsOnMainPage.value)
   }
 
   const getAllItems = async () => {
@@ -48,22 +44,19 @@ export const useItemStore = defineStore('item', () => {
         await store.getItemsByCategory(category)
       }
     }
-
-    console.log('get all items', items.value)
   }
 
-  const getItemBySlug = async (slug: string) => {
-    /* const data = await apiService.get<IItem>('/products/1')
+  const getItemByHandle = async (handle: string) => {
+    const product = await ApiService.fetchItemByHandle(handle)
 
-    currentItem.value = data
-    console.log('getItemBySlug', currentItem.value) */
+    currentItem.value = product
   }
 
-  const itemsByCategory = (categoryHandle: string) => {
+  const itemsByCategory = (categoryHandle: string): HttpTypes.StoreProduct[] | [] => {
     return items.value.find((item) => item.category === categoryHandle)?.products || []
   }
 
-  const itemsByCategoryForMainPage = (categoryHandle: string) => {
+  const itemsByCategoryForMainPage = (categoryHandle: string): HttpTypes.StoreProduct[] | [] => {
     return itemsOnMainPage.value.find((item) => item.category === categoryHandle)?.products || []
   }
 
@@ -76,6 +69,6 @@ export const useItemStore = defineStore('item', () => {
     itemsByCategory,
     getAllItems,
     getItemsForMainPage,
-    getItemBySlug,
+    getItemByHandle,
   }
 })

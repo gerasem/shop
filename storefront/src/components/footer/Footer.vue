@@ -35,10 +35,10 @@ const year = computed(() => {
           </li>
         </ul>
 
-        <p class="cell footer__text">
-          © {{ year }} Logo
-          <span class="d-block">Lorem ipsum dolor sit amet.</span>
-        </p>
+        <div class="cell footer__text">
+          <p>© {{ year }} Minishop</p>
+          <p class="d-block">Lorem ipsum dolor sit amet.</p>
+        </div>
 
         <ul class="cell footer__items">
           <li class="footer__item footer__item--phone">
@@ -53,7 +53,7 @@ const year = computed(() => {
     </div>
   </footer>
 
-  <FooterDebugBar />
+  <FooterDebugBar v-if="false" />
 </template>
 
 <style lang="scss">

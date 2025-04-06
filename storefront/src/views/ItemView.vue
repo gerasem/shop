@@ -24,8 +24,8 @@ const categoryStore = useCategoryStore()
 const itemStore = useItemStore()
 const { loading } = useLoader()
 
-const init = (slug: string): void => {
-  itemStore.getItemBySlug(slug)
+const init = (handle: string): void => {
+  itemStore.getItemByHandle(handle)
   categoryStore.setCurrentCategory('pants')
 }
 

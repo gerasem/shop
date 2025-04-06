@@ -1,61 +1,69 @@
+import { sdk } from '@/services/medusa/config'
 import { useLoader } from '@/composables/useLoader'
 import { useToastStore } from '@/stores/ToastStore'
+import { HttpTypes } from '@medusajs/types'
 
-export class ApiService {
-  private baseUrl: string
-  private loader = useLoader()
+const loader = useLoader()
 
-  constructor(baseUrl: string) {
-    this.baseUrl = baseUrl
-  }
+const FIELDS_ITEM_LIST = 'id,title,handle,thumbnail,*categories,*variants'
 
-  private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+class ApiService {
+  static async handleRequest<T>(id: string, callback: () => Promise<T>): Promise<T> {
     try {
-      this.loader.startLoading(endpoint)
-      const response = await fetch(`${this.baseUrl}${endpoint}`, {
-        headers: { 'Content-Type': 'application/json' },
-        ...options,
-      })
+      loader.startLoading(id)
+      return await callback()
+    } catch (error: unknown) {
+      const toastStore = useToastStore()
 
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.message || `App Error ${response.status}`)
+      if (error instanceof Error) {
+        console.error('API Error:', error.message)
+        toastStore.addError('API Error', error.message)
+      } else {
+        console.error('API Error:', error)
       }
 
-      return response.json()
-    } catch (error: any) {
-      console.error('API Error:', error.message)
-      const toastStore = useToastStore()
-      toastStore.addError('API Error', error.message)
       throw error
     } finally {
-      this.loader.stopLoading(endpoint)
+      loader.stopLoading(id)
     }
   }
 
-  public get<T>(endpoint: string): Promise<T> {
-    return this.request<T>(endpoint)
-  }
+  static async fetchCategories(): Promise<HttpTypes.StoreProductCategory[] | []> {
+    return this.handleRequest('fetchCategories', async () => {
+      const { product_categories } = await sdk.store.category.list()
 
-  public post<T>(endpoint: string, data: any): Promise<T> {
-    return this.request<T>(endpoint, {
-      method: 'POST',
-      body: JSON.stringify(data),
+      return product_categories.map((product) => ({
+        ...product,
+        image: `https://placehold.co/200?text=${product.name}`,
+      }))
     })
   }
 
-  public put<T>(endpoint: string, data: any): Promise<T> {
-    return this.request<T>(endpoint, {
-      method: 'PUT',
-      body: JSON.stringify(data),
+  static async fetchItemsByCategory(
+    categoryId: string,
+    limit: number = 50,
+  ): Promise<HttpTypes.StoreProduct[] | []> {
+    return this.handleRequest('fetchItemsByCategory', async () => {
+      const { products } = await sdk.store.product.list({
+        category_id: categoryId,
+        region_id: 'reg_01JR3YZXEGWJ49X3CSPXY3HVS2',
+        limit,
+        fields: FIELDS_ITEM_LIST,
+      })
+      return products
     })
   }
 
-  public delete<T>(endpoint: string): Promise<T> {
-    return this.request<T>(endpoint, {
-      method: 'DELETE',
+  static async fetchItemByHandle(handle: string): Promise<HttpTypes.StoreProduct> {
+    return this.handleRequest('fetchItemByHandle', async () => {
+      const { products } = await sdk.store.product.list({
+        handle,
+        region_id: 'reg_01JR3YZXEGWJ49X3CSPXY3HVS2',
+        fields: FIELDS_ITEM_LIST,
+      })
+      return products[0]
     })
   }
 }
 
-export const apiService = new ApiService('https://fakestoreapi.com')
+export default ApiService

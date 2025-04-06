@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import ApiService from '@/services/api2/api'
+import ApiService from '@/services/api/api'
 import type { ICategory } from '@/interfaces/ICategory'
 
 export const useCategoryStore = defineStore('category', () => {

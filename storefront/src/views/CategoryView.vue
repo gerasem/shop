@@ -66,7 +66,7 @@ useSeoMeta({
     />
   </div>
 
-  <Text2Columns header="About us"
+  <Text2Columns header="About item">
     >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores expedita, maiores! Ab cum
     porro voluptates voluptatibus voluptatum. Adipisci architecto at, atque cumque deleniti eveniet
     exercitationem expedita, id illum iure, iusto maiores molestias nisi nobis non rerum suscipit
