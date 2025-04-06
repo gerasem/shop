@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import Categories from '@/components/category/Categories.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
-import { useMeta } from '@/composables/useMeta.ts'
 import { onMounted } from 'vue'
 import { useCategoryStore } from '@/stores/CategoryStore'
+import { useSeoMeta } from '@unhead/vue'
 
 const categoryStore = useCategoryStore()
 
@@ -11,7 +11,9 @@ onMounted(() => {
   categoryStore.fetchCategories()
 })
 
-useMeta('Home', 'Description Home')
+useSeoMeta({
+  title: 'Home',
+})
 </script>
 
 <template>

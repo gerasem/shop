@@ -4,12 +4,12 @@ import Gallery from '@/components/gallery/Gallery.vue'
 import Button from '@/components/button/Button.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
 import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
-import { useMeta } from '@/composables/useMeta.ts'
-import { onMounted, watch } from 'vue'
+import { onMounted, watch, computed } from 'vue'
 import { useLoader } from '@/composables/useLoader'
 import { useItemStore } from '@/stores/ItemStore'
 import { useCategoryStore } from '@/stores/CategoryStore'
 import { useRoute } from 'vue-router'
+import { useSeoMeta } from '@unhead/vue'
 
 onMounted(() => {
   categoryStore.fetchCategories().then(() => {
@@ -25,9 +25,6 @@ const { loading } = useLoader()
 const init = (slug: string): void => {
   itemStore.getItemBySlug(slug)
   categoryStore.setCurrentCategory('electronics')
-  if (itemStore.currentItem) {
-    useMeta(itemStore.currentItem.name)
-  }
 }
 
 watch(
@@ -36,6 +33,10 @@ watch(
     init(newHandle as string)
   },
 )
+
+useSeoMeta({
+  title: computed(() => (itemStore.currentItem ? itemStore.currentItem.name : '')),
+})
 </script>
 
 <template>

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useMeta } from '@/composables/useMeta.ts'
 import Item from '@/components/item/Item.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
 import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
@@ -9,6 +8,7 @@ import { onMounted, watch, computed } from 'vue'
 import { useItemStore } from '@/stores/ItemStore'
 import { useLoader } from '@/composables/useLoader'
 import ItemSkeleton from '@/components/item/ItemSkeleton.vue'
+import { useSeoMeta } from '@unhead/vue'
 
 onMounted(async () => {
   categoryStore.fetchCategories().then(() => {
@@ -26,7 +26,6 @@ const init = (handle: string): void => {
   console.log('categoryStore.currentCategory', categoryStore.currentCategory, handle)
   if (categoryStore.currentCategory) {
     itemStore.getItemsByCategory(categoryStore.currentCategory)
-    useMeta(categoryStore.currentCategory.name)
   }
 }
 
@@ -43,6 +42,12 @@ watch(
     init(newHandle as string)
   },
 )
+
+useSeoMeta({
+  title: computed(() =>
+    categoryStore.currentCategory ? categoryStore.currentCategory.name : '',
+  ),
+})
 </script>
 
 <template>

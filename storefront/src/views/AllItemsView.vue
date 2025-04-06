@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useMeta } from '@/composables/useMeta.ts'
 import Item from '@/components/item/Item.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
 import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
@@ -8,10 +7,11 @@ import { useItemStore } from '@/stores/ItemStore'
 import { useLoader } from '@/composables/useLoader'
 import ItemSkeleton from '@/components/item/ItemSkeleton.vue'
 import { useCategoryStore } from '@/stores/CategoryStore'
+import { useSeoMeta } from '@unhead/vue'
 
 const categoryStore = useCategoryStore()
 
-onMounted(async() => {
+onMounted(async () => {
   await categoryStore.fetchCategories()
   itemStore.getAllItems()
 })
@@ -19,7 +19,9 @@ onMounted(async() => {
 const itemStore = useItemStore()
 const { loading } = useLoader()
 
-useMeta('All items')
+useSeoMeta({
+  title: 'All Items',
+})
 </script>
 
 <template>

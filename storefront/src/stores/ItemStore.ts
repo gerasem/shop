@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import apiService from '@/services/api2/api'
 import type { IItem } from '@/interfaces/IItem'
 import ApiService from '@/services/api2/api'
 import type { ICategory } from '@/interfaces/ICategory'
@@ -29,14 +28,11 @@ export const useItemStore = defineStore('item', () => {
 
     const endpoint = `/products/category/${categoryHandle}${limit ? `?limit=${limit}` : ''}`
 
-    const data = await apiService.get<IItem[]>(endpoint)
+    const data = await ApiService.getItemsByCategory(endpoint)
 
     itemsOnMainPage.value.push({
       category: categoryHandle,
-      products: data.map((item: IItem) => ({
-        slug: item.title.toLowerCase().replace(/\s+/g, '-'),
-        ...item,
-      })),
+      products: data,
     })
 
     console.log('get items by category', items.value)
@@ -58,10 +54,10 @@ export const useItemStore = defineStore('item', () => {
   }
 
   const getItemBySlug = async (slug: string) => {
-    const data = await apiService.get<IItem>('/products/1')
+    /* const data = await apiService.get<IItem>('/products/1')
 
     currentItem.value = data
-    console.log('getItemBySlug', currentItem.value)
+    console.log('getItemBySlug', currentItem.value) */
   }
 
   const itemsByCategory = (categoryHandle: string) => {

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import CartItem from '@/components/cart/CartItem.vue'
-import { useMeta } from '@/composables/useMeta.ts'
 import { useI18n } from 'vue-i18n'
 import { onMounted } from 'vue'
 import { useCategoryStore } from '@/stores/CategoryStore'
+import { useSeoMeta } from '@unhead/vue'
 
 const categoryStore = useCategoryStore()
 
@@ -15,7 +15,9 @@ const { t } = useI18n()
 
 const deleteItemsFromCart = () => {}
 
-useMeta('Cart', 'cart description')
+useSeoMeta({
+  title: 'Shopping Cart',
+})
 </script>
 
 <template>
