@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Item from '@/components/item/Item.vue'
-import { useI18n } from 'vue-i18n'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import { useItemStore } from '@/stores/ItemStore'
@@ -8,6 +7,7 @@ import { useLoader } from '@/composables/useLoader'
 import { onMounted, computed } from 'vue'
 import ItemSkeleton from '@/components/item/ItemSkeleton.vue'
 import type { ICategory } from '@/interfaces/ICategory'
+import CategoryPreviewHeader from '@/components/category/CategoryPreviewHeader.vue'
 
 const props = defineProps<{
   category: ICategory
@@ -19,7 +19,6 @@ onMounted(() => {
 
 const itemStore = useItemStore()
 const { loading } = useLoader()
-const { t } = useI18n()
 
 const items = computed(() => {
   return itemStore.itemsByCategoryForMainPage(props.category.handle)
@@ -28,17 +27,7 @@ const items = computed(() => {
 
 <template>
   <div class="category__preview-container">
-    <div class="title__container">
-      <h2 class="title is-2">{{ category.name }}</h2>
-
-      <RouterLink
-        :to="`category/${category.handle}`"
-        class="title__link"
-      >
-        {{ t('Show all') }}
-        {{ category.name }}
-      </RouterLink>
-    </div>
+    <CategoryPreviewHeader :category="category" />
 
     <swiper
       :slidesPerView="1.2"

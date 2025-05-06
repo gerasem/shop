@@ -9,7 +9,6 @@ import { HttpTypes } from '@medusajs/types'
 export const useItemStore = defineStore('item', () => {
   const items = ref<IItem[]>([])
   const itemsOnMainPage = ref<IItem[]>([])
-  const currentItem = ref<HttpTypes.StoreProduct | null>(null)
 
   const getItemsByCategory = async (category: ICategory) => {
     if (items.value.some((item) => item.category === category.handle)) return
@@ -46,12 +45,6 @@ export const useItemStore = defineStore('item', () => {
     }
   }
 
-  const getItemByHandle = async (handle: string) => {
-    const product = await ApiService.fetchItemByHandle(handle)
-
-    currentItem.value = product
-  }
-
   const itemsByCategory = (categoryHandle: string): HttpTypes.StoreProduct[] | [] => {
     return items.value.find((item) => item.category === categoryHandle)?.products || []
   }
@@ -63,12 +56,10 @@ export const useItemStore = defineStore('item', () => {
   return {
     items,
     itemsOnMainPage,
-    currentItem,
     itemsByCategoryForMainPage,
     getItemsByCategory,
     itemsByCategory,
     getAllItems,
     getItemsForMainPage,
-    getItemByHandle,
   }
 })

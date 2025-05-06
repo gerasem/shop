@@ -5,14 +5,15 @@ import Title from '@/components/content/Title.vue'
 import Button from '@/components/button/Button.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
 import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
-import { onMounted, watch, computed } from 'vue'
+import { onMounted, watch, computed, ref } from 'vue'
 import { useLoader } from '@/composables/useLoader'
-import { useItemStore } from '@/stores/ItemStore'
 import { useCategoryStore } from '@/stores/CategoryStore'
 import { useRoute } from 'vue-router'
 import { useSeoMeta } from '@unhead/vue'
+import { HttpTypes } from '@medusajs/types'
+import ApiService from '@/services/api/api'
 
-//todo use new api
+const item = ref<HttpTypes.StoreProduct | null>(null)
 
 onMounted(async () => {
   await categoryStore.getCategories()
@@ -21,11 +22,10 @@ onMounted(async () => {
 
 const route = useRoute()
 const categoryStore = useCategoryStore()
-const itemStore = useItemStore()
 const { loading } = useLoader()
 
-const init = (handle: string): void => {
-  itemStore.getItemByHandle(handle)
+const init = async (handle: string): Promise<void> => {
+  item.value = await ApiService.fetchItemByHandle(handle)
   categoryStore.setCurrentCategory('pants')
 }
 
@@ -37,7 +37,7 @@ watch(
 )
 
 useSeoMeta({
-  title: computed(() => (itemStore.currentItem ? itemStore.currentItem.name : '')),
+  title: item.value?.title,
 })
 </script>
 
@@ -54,15 +54,15 @@ useSeoMeta({
 
       <div class="column is-half">
         <Title :loading="loading">
-          {{ itemStore.currentItem?.title }}
+          {{ item?.title }}
         </Title>
 
         <!-- <div class="title__container">
           <h1
-            v-if="itemStore.currentItem"
+            v-if="item"
             class="title is-2"
           >
-            {{ itemStore.currentItem?.title }}
+            {{ item?.title }}
           </h1>
 
           <h1

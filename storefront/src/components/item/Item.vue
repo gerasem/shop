@@ -13,7 +13,7 @@ defineProps<{
   >
     <img
       class="image is-square item__image"
-      :src="item.thumbnail as string"
+      :src="item.thumbnail ? item.thumbnail : '/images/placeholder.png'"
       :alt="item.title"
     />
 

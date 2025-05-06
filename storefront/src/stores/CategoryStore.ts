@@ -2,8 +2,11 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import ApiService from '@/services/api/api'
 import type { ICategory } from '@/interfaces/ICategory'
+import { useRouter } from 'vue-router'
 
 export const useCategoryStore = defineStore('category', () => {
+  const router = useRouter()
+
   const categories = ref<ICategory[]>([])
   const currentCategory = ref<ICategory | null>(null)
 
@@ -11,15 +14,17 @@ export const useCategoryStore = defineStore('category', () => {
     if (categories.value.length) {
       return
     }
-
     categories.value = await ApiService.fetchCategories()
   }
 
   const setCurrentCategory = (hanlde: string) => {
-    console.log('setCurrentCategory()', categories.value)
-    //todo redirect 404 if category not found
     if (!categories.value.length) return
-    currentCategory.value = categories.value.find((cat: ICategory) => cat.handle === hanlde) || null
+    const findedCategory = categories.value.find((cat: ICategory) => cat.handle === hanlde)
+    if (!findedCategory) {
+      router.push({ name: '404' })
+    } else {
+      currentCategory.value = findedCategory
+    }
   }
 
   return { categories, getCategories, currentCategory, setCurrentCategory }

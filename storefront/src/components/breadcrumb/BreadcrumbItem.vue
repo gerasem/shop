@@ -14,9 +14,9 @@ const categoryStore = useCategoryStore()
       <li>
         <RouterLink :to="localePath('/')">Home</RouterLink>
       </li>
-      <li>
-        <RouterLink :to="localePath(`category/${categoryStore.currentCategory?.handle}`)">
-          {{ categoryStore.currentCategory?.name }}
+      <li v-if="categoryStore.currentCategory">
+        <RouterLink :to="localePath(`category/${categoryStore.currentCategory.handle}`)">
+          {{ categoryStore.currentCategory.name }}
         </RouterLink>
       </li>
     </ul>

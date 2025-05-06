@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import CategoryTitle from '@/components/category/CategoryTitle.vue'
 import { useCategoryStore } from '@/stores/CategoryStore'
-import { useLoader } from '@/composables/useLoader'
 import CategorySkeletonGroup from '@/components/category/CategorySkeletonGroup.vue'
 
 const categoryStore = useCategoryStore()
-const { loading } = useLoader()
 </script>
 
 <template>

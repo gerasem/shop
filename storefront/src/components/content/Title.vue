@@ -17,7 +17,7 @@ defineProps<{
       v-else
       class="title is-2"
     >
-      <slot />
+      <slot></slot>
     </h1>
 
     <!-- <div class="select">

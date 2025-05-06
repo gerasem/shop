@@ -3,7 +3,7 @@ import { useI18n } from 'vue-i18n'
 
 const { locale, t } = useI18n()
 
-const supportedLocales: String[] = ['de', 'en']
+const supportedLocales: string[] = ['de', 'en']
 </script>
 
 <template>

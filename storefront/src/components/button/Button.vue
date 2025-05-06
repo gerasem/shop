@@ -20,7 +20,7 @@ defineProps<{
     />
 
     <span class="px-2">
-      <slot />
+      <slot></slot>
     </span>
   </button>
 </template>
