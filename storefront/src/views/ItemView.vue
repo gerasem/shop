@@ -12,7 +12,7 @@ import { useRoute } from 'vue-router'
 import { useSeoMeta } from '@unhead/vue'
 import { HttpTypes } from '@medusajs/types'
 import ApiService from '@/services/api/api'
-
+import { useRegionStore } from '@/stores/RegionStore'
 const item = ref<HttpTypes.StoreProduct | null>(null)
 
 onMounted(async () => {
@@ -22,10 +22,15 @@ onMounted(async () => {
 
 const route = useRoute()
 const categoryStore = useCategoryStore()
+const { region } = useRegionStore()
 const { loading } = useLoader()
 
 const init = async (handle: string): Promise<void> => {
-  item.value = await ApiService.fetchItemByHandle(handle)
+  const regionId = region?.id
+  if (!regionId) {
+    throw new Error('Region ID is not available')
+  }
+  item.value = await ApiService.fetchItemByHandle(handle, regionId)
   categoryStore.setCurrentCategory('pants')
 }
 

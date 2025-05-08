@@ -8,9 +8,12 @@ const loader = useLoader()
 const FIELDS_ITEM_LIST = 'id,title,handle,thumbnail,*categories,*variants'
 
 class ApiService {
-  static async handleRequest<T>(id: string, callback: () => Promise<T>): Promise<T> {
+  protected static loaderId: number = 0
+
+  protected static async handleRequest<T>(callback: () => Promise<T>): Promise<T> {
     try {
-      loader.startLoading(id)
+      loader.startLoading(this.loaderId)
+
       return await callback()
     } catch (error: unknown) {
       const toastStore = useToastStore()
@@ -18,18 +21,17 @@ class ApiService {
       if (error instanceof Error) {
         console.error('API Error:', error.message)
         toastStore.addError('API Error', error.message)
-      } else {
-        console.error('API Error:', error)
       }
 
       throw error
     } finally {
-      loader.stopLoading(id)
+      loader.stopLoading(this.loaderId)
+      this.loaderId++
     }
   }
 
   static async fetchCategories(): Promise<HttpTypes.StoreProductCategory[] | []> {
-    return this.handleRequest('fetchCategories', async () => {
+    return this.handleRequest(async () => {
       const { product_categories } = await sdk.store.category.list()
 
       return product_categories.map((product) => ({
@@ -41,12 +43,13 @@ class ApiService {
 
   static async fetchItemsByCategory(
     categoryId: string,
+    regionId: string,
     limit: number = 50,
   ): Promise<HttpTypes.StoreProduct[] | []> {
-    return this.handleRequest('fetchItemsByCategory', async () => {
+    return this.handleRequest(async () => {
       const { products } = await sdk.store.product.list({
         category_id: categoryId,
-        region_id: 'reg_01JR3YZXEGWJ49X3CSPXY3HVS2',
+        region_id: regionId,
         limit,
         fields: FIELDS_ITEM_LIST,
       })
@@ -54,14 +57,31 @@ class ApiService {
     })
   }
 
-  static async fetchItemByHandle(handle: string): Promise<HttpTypes.StoreProduct> {
-    return this.handleRequest('fetchItemByHandle', async () => {
+  static async fetchItemByHandle(
+    handle: string,
+    regionId: string,
+  ): Promise<HttpTypes.StoreProduct> {
+    return this.handleRequest(async () => {
       const { products } = await sdk.store.product.list({
         handle,
-        region_id: 'reg_01JR3YZXEGWJ49X3CSPXY3HVS2',
+        region_id: regionId,
         fields: FIELDS_ITEM_LIST,
       })
       return products[0]
+    })
+  }
+
+  static async fetchRegions(): Promise<HttpTypes.StoreRegion[]> {
+    return this.handleRequest(async () => {
+      const { regions } = await sdk.store.region.list()
+      return regions
+    })
+  }
+
+  static async retriveSelectedRegion(regionId: string): Promise<HttpTypes.StoreRegion> {
+    return this.handleRequest(async () => {
+      const { region: dataRegion } = await sdk.store.region.retrieve(regionId)
+      return dataRegion
     })
   }
 }
