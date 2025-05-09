@@ -24,7 +24,11 @@ export const useItemStore = defineStore('item', () => {
   const getItemsForMainPage = async (category: ICategory, limit?: number) => {
     if (itemsOnMainPage.value.some((item) => item.category === category.handle)) return
 
-    const products = await ApiService.fetchItemsByCategory(category.id, 'items-on-main', limit)
+    const products = await ApiService.fetchItemsByCategory(
+      category.id,
+      `items-${category.handle}`,
+      limit,
+    )
 
     itemsOnMainPage.value.push({
       category: category.handle,
