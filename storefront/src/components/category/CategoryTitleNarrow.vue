@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import CategoryTitle from '@/components/category/CategoryTitle.vue'
 import { useCategoryStore } from '@/stores/CategoryStore'
+import { useLoaderStore } from '@/stores/LoaderStore'
 import CategorySkeletonGroup from '@/components/category/CategorySkeletonGroup.vue'
 
 const categoryStore = useCategoryStore()
+const loaderStore = useLoaderStore()
 </script>
 
 <template>
   <div class="is-full category__container">
-    <template v-if="categoryStore.categories.length === 0"> </template>
-
     <CategorySkeletonGroup
-      v-if="categoryStore.categories.length === 0"
+      v-if="loaderStore.isLoadingKey('categories')"
       :count="5"
     />
 

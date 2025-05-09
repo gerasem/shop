@@ -10,7 +10,7 @@ defineProps<{
       v-if="loading"
       class="title is-2 is-skeleton"
     >
-      Category
+      Title
     </h1>
 
     <h1
@@ -20,12 +20,6 @@ defineProps<{
       <slot></slot>
     </h1>
 
-    <!-- <div class="select">
-      <select>
-        <option>Select dropdown</option>
-        <option>With options</option>
-      </select>
-    </div> -->
   </div>
 </template>
 

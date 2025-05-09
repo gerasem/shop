@@ -1,18 +1,20 @@
 import { sdk } from '@/services/medusa/config'
-import { useLoader } from '@/composables/useLoader'
 import { useToastStore } from '@/stores/ToastStore'
+import { useLoaderStore } from '@/stores/LoaderStore'
 import { HttpTypes } from '@medusajs/types'
-
-const loader = useLoader()
 
 const FIELDS_ITEM_LIST = 'id,title,handle,thumbnail,*categories,*variants'
 
 class ApiService {
-  protected static loaderId: number = 0
+  protected static async handleRequest<T>(
+    callback: () => Promise<T>,
+    options: { loaderKey?: string },
+  ): Promise<T> {
+    const loaderStore = useLoaderStore()
+    const loaderKey = options.loaderKey || 'default'
 
-  protected static async handleRequest<T>(callback: () => Promise<T>): Promise<T> {
     try {
-      loader.startLoading(this.loaderId)
+      loaderStore.startLoading(loaderKey)
 
       return await callback()
     } catch (error: unknown) {
@@ -25,64 +27,84 @@ class ApiService {
 
       throw error
     } finally {
-      loader.stopLoading(this.loaderId)
-      this.loaderId++
+      loaderStore.stopLoading(loaderKey)
     }
   }
 
-  static async fetchCategories(): Promise<HttpTypes.StoreProductCategory[] | []> {
-    return this.handleRequest(async () => {
-      const { product_categories } = await sdk.store.category.list()
+  static async fetchCategories(
+    loaderKey: string = 'fetchCategories',
+  ): Promise<HttpTypes.StoreProductCategory[] | []> {
+    return this.handleRequest(
+      async () => {
+        const { product_categories } = await sdk.store.category.list()
 
-      return product_categories.map((product) => ({
-        ...product,
-        image: `https://placehold.co/200?text=${product.name}`,
-      }))
-    })
+        return product_categories.map((product) => ({
+          ...product,
+          image: `https://placehold.co/200?text=${product.name}`,
+        }))
+      },
+      { loaderKey },
+    )
   }
 
   static async fetchItemsByCategory(
     categoryId: string,
-    regionId: string,
+    loaderKey: string = 'fetchItemsByCategory',
     limit: number = 50,
   ): Promise<HttpTypes.StoreProduct[] | []> {
-    return this.handleRequest(async () => {
-      const { products } = await sdk.store.product.list({
-        category_id: categoryId,
-        region_id: regionId,
-        limit,
-        fields: FIELDS_ITEM_LIST,
-      })
-      return products
-    })
+    return this.handleRequest(
+      async () => {
+        const { products } = await sdk.store.product.list({
+          category_id: categoryId,
+          region_id: 'reg_01JTKR6SBY5P705E73XMCH2CQ9',
+          limit,
+          fields: FIELDS_ITEM_LIST,
+        })
+        return products
+      },
+      { loaderKey },
+    )
   }
 
   static async fetchItemByHandle(
     handle: string,
-    regionId: string,
+    loaderKey: string = 'fetchItemByHandle',
   ): Promise<HttpTypes.StoreProduct> {
-    return this.handleRequest(async () => {
-      const { products } = await sdk.store.product.list({
-        handle,
-        region_id: regionId,
-        fields: FIELDS_ITEM_LIST,
-      })
-      return products[0]
-    })
+    return this.handleRequest(
+      async () => {
+        const { products } = await sdk.store.product.list({
+          handle,
+          region_id: 'reg_01JTKR6SBY5P705E73XMCH2CQ9',
+          fields: FIELDS_ITEM_LIST,
+        })
+        return products[0]
+      },
+      { loaderKey },
+    )
   }
 
-  static async fetchRegions(): Promise<HttpTypes.StoreRegion[]> {
-    return this.handleRequest(async () => {
-      const { regions } = await sdk.store.region.list()
-      return regions
-    })
+  static async fetchRegions(loaderKey: string = 'fetchRegions'): Promise<HttpTypes.StoreRegion[]> {
+    return this.handleRequest(
+      async () => {
+        const { regions } = await sdk.store.region.list()
+        return regions
+      },
+      { loaderKey },
+    )
   }
 
-  static async retriveSelectedRegion(regionId: string): Promise<HttpTypes.StoreRegion> {
-    return this.handleRequest(async () => {
-      const { region: dataRegion } = await sdk.store.region.retrieve(regionId)
-      return dataRegion
-    })
+  static async retriveSelectedRegion(
+    loaderKey: string = 'retriveSelectedRegion',
+  ): Promise<HttpTypes.StoreRegion> {
+    return this.handleRequest(
+      async () => {
+        const { region: dataRegion } = await sdk.store.region.retrieve(
+          'reg_01JTKR6SBY5P705E73XMCH2CQ9',
+        )
+        return dataRegion
+      },
+      { loaderKey },
+    )
   }
 }
 

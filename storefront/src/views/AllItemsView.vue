@@ -3,22 +3,18 @@ import Text2Columns from '@/components/content/Text2Columns.vue'
 import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
 import { onMounted } from 'vue'
 import { useItemStore } from '@/stores/ItemStore'
-import { useLoader } from '@/composables/useLoader'
 import ItemSkeletonContainer from '@/components/item/ItemSkeletonGroup.vue'
-import { useCategoryStore } from '@/stores/CategoryStore'
 import { useSeoMeta } from '@unhead/vue'
 import Title from '@/components/content/Title.vue'
 import ItemContainer from '@/components/item/ItemContainer.vue'
-
-const categoryStore = useCategoryStore()
+import { useLoaderStore } from '@/stores/LoaderStore'
 
 onMounted(async () => {
-  await categoryStore.getCategories()
-  itemStore.getAllItems()
+  await itemStore.getAllItems()
 })
 
 const itemStore = useItemStore()
-const { loading } = useLoader()
+const loaderStore = useLoaderStore()
 
 useSeoMeta({
   title: 'All Items',
@@ -32,7 +28,7 @@ useSeoMeta({
     <Title>All Items</Title>
 
     <ItemSkeletonContainer
-      v-if="loading"
+      v-if="loaderStore.isLoadingKey('items')"
       :count="8"
     />
 
@@ -43,7 +39,7 @@ useSeoMeta({
       >
         <h2 class="title is-3">{{ category.category }}</h2>
 
-        <ItemContainer :items="category.products" />
+        <ItemContainer :items="category.products" :loading="!loaderStore.isLoadingKey('items')"/>
       </template>
     </template>
   </div>

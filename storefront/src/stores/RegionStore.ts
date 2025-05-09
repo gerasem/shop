@@ -22,8 +22,8 @@ export const useRegionStore = defineStore('region', () => {
     }
   }
 
-  // Initialize regions and region on store creation
-  fetchRegions().then(async () => {
+  const initRegions = async () => {
+    await fetchRegions()
     const regionId = localStorage.getItem('region_id')
     if (!regionId) {
       if (regions.value.length) {
@@ -32,11 +32,12 @@ export const useRegionStore = defineStore('region', () => {
     } else {
       region.value = await ApiService.retriveSelectedRegion(regionId)
     }
-  })
+  }
 
   return {
     regions,
     region,
     setRegion,
+    initRegions
   }
 })

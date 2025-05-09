@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Text2Columns from '@/components/content/Text2Columns.vue'
-import { onMounted } from 'vue'
 import { useSeoMeta } from '@unhead/vue'
 import CategoryCard from '@/components/category/CategoryCard.vue'
 import CategoryPreview from '@/components/category/CategoryPreview.vue'
@@ -8,14 +7,12 @@ import CategoryTitleNarrow from '@/components/category/CategoryTitleNarrow.vue'
 import { useDevice } from '@/composables/useDevice.ts'
 import CategoryPreviewMobile from '@/components/category/CategoryPreviewMobile.vue'
 import { useCategoryStore } from '@/stores/CategoryStore'
+import { useLoaderStore } from '@/stores/LoaderStore'
 import CategoryCardSkeleton from '@/components/category/CategoryCardSkeleton.vue'
 
 const { isMobile } = useDevice()
 const categoryStore = useCategoryStore()
-
-onMounted(() => {
-  categoryStore.getCategories()
-})
+const loaderStore = useLoaderStore()
 
 useSeoMeta({
   title: 'Home',
@@ -39,7 +36,7 @@ useSeoMeta({
     <div class="container is-fluid">
       <div class="columns is-5-tablet is-6-desktop is-8-fullhd">
         <div class="column is-one-third-tablet is-one-fifth-desktop">
-          <template v-if="categoryStore.categories.length === 0">
+          <template v-if="loaderStore.isLoadingKey('categories')">
             <CategoryCardSkeleton
               v-for="skeleton in 5"
               :key="skeleton"

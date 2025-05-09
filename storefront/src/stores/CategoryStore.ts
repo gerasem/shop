@@ -6,7 +6,6 @@ import { useRouter } from 'vue-router'
 
 export const useCategoryStore = defineStore('category', () => {
   const router = useRouter()
-
   const categories = ref<ICategory[]>([])
   const currentCategory = ref<ICategory | null>(null)
 
@@ -14,12 +13,13 @@ export const useCategoryStore = defineStore('category', () => {
     if (categories.value.length) {
       return
     }
-    categories.value = await ApiService.fetchCategories()
+    categories.value = await ApiService.fetchCategories('categories');
   }
 
   const setCurrentCategory = (hanlde: string) => {
     if (!categories.value.length) return
     const findedCategory = categories.value.find((cat: ICategory) => cat.handle === hanlde)
+    
     if (!findedCategory) {
       router.push({ name: '404' })
     } else {

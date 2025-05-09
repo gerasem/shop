@@ -5,32 +5,27 @@ import Title from '@/components/content/Title.vue'
 import Button from '@/components/button/Button.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
 import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
-import { onMounted, watch, computed, ref } from 'vue'
-import { useLoader } from '@/composables/useLoader'
+import { onMounted, watch, ref } from 'vue'
 import { useCategoryStore } from '@/stores/CategoryStore'
 import { useRoute } from 'vue-router'
 import { useSeoMeta } from '@unhead/vue'
 import { HttpTypes } from '@medusajs/types'
 import ApiService from '@/services/api/api'
-import { useRegionStore } from '@/stores/RegionStore'
+import { useLoaderStore } from '@/stores/LoaderStore'
+
+
 const item = ref<HttpTypes.StoreProduct | null>(null)
 
 onMounted(async () => {
-  await categoryStore.getCategories()
   init(route.params.handle as string)
 })
 
 const route = useRoute()
 const categoryStore = useCategoryStore()
-const { region } = useRegionStore()
-const { loading } = useLoader()
+const loaderStore = useLoaderStore()
 
 const init = async (handle: string): Promise<void> => {
-  const regionId = region?.id
-  if (!regionId) {
-    throw new Error('Region ID is not available')
-  }
-  item.value = await ApiService.fetchItemByHandle(handle, regionId)
+  item.value = await ApiService.fetchItemByHandle(handle, "item")
   categoryStore.setCurrentCategory('pants')
 }
 
@@ -58,7 +53,7 @@ useSeoMeta({
       </div>
 
       <div class="column is-half">
-        <Title :loading="loading">
+        <Title :loading="loaderStore.isLoadingKey('item')">
           {{ item?.title }}
         </Title>
 
@@ -83,8 +78,8 @@ useSeoMeta({
     </div>
   </div>
 
-  <Text2Columns header="About us"
-    >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores expedita, maiores! Ab cum
+  <Text2Columns header="About us">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores expedita, maiores! Ab cum
     porro voluptates voluptatibus voluptatum. Adipisci architecto at, atque cumque deleniti eveniet
     exercitationem expedita, id illum iure, iusto maiores molestias nisi nobis non rerum suscipit
     tempora unde velit veniam veritatis voluptas voluptate. Adipisci delectus distinctio dolores

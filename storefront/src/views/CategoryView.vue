@@ -5,21 +5,22 @@ import { useCategoryStore } from '@/stores/CategoryStore'
 import { useRoute } from 'vue-router'
 import { onMounted, watch, computed } from 'vue'
 import { useItemStore } from '@/stores/ItemStore'
-import { useLoader } from '@/composables/useLoader'
 import ItemSkeletonContainer from '@/components/item/ItemSkeletonGroup.vue'
 import { useSeoMeta } from '@unhead/vue'
 import Title from '@/components/content/Title.vue'
 import ItemContainer from '@/components/item/ItemContainer.vue'
+import { useLoaderStore } from '@/stores/LoaderStore'
+
+const loaderStore = useLoaderStore()
+
 
 onMounted(async () => {
-  await categoryStore.getCategories()
   init(route.params.handle as string)
 })
 
 const route = useRoute()
 const categoryStore = useCategoryStore()
 const itemStore = useItemStore()
-const { loading } = useLoader()
 
 const init = (handle: string): void => {
   categoryStore.setCurrentCategory(handle)
@@ -51,18 +52,19 @@ useSeoMeta({
   <CategoriesNarrow />
 
   <div class="container is-fluid">
-    <Title :loading="!categoryStore.currentCategory">
+    <Title :loading="loaderStore.isLoadingKey('categories')">
       {{ categoryStore.currentCategory?.name }}
     </Title>
 
     <ItemSkeletonContainer
-      v-if="loading"
+      v-if="loaderStore.isLoadingKey('items')"
       :count="8"
     />
 
     <ItemContainer
       v-else
       :items="items"
+      :loading="!loaderStore.isLoadingKey('items')"
     />
   </div>
 

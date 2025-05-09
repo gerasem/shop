@@ -1,23 +1,23 @@
 <script setup lang="ts">
 import { useItemStore } from '@/stores/ItemStore'
 import { useCategoryStore } from '@/stores/CategoryStore'
+import { useLoaderStore } from '@/stores/LoaderStore'
 
 const categoryStore = useCategoryStore()
 const itemStore = useItemStore()
+const loaderStore = useLoaderStore()
 </script>
 
 <template>
-  <div class="columns">
+  <div class="debug columns">
     <div class="column">
       <pre>
-        {{ itemStore.items }}
+        {{ loaderStore.activeLoaders }}
       </pre>
     </div>
 
     <div class="column">
-      <pre>
-        {{ categoryStore.categories }}
-      </pre>
+      <pre></pre>
     </div>
   </div>
 </template>
@@ -28,5 +28,14 @@ pre {
   overflow-y: auto;
   font-size: 12px;
   line-height: 14px;
+}
+
+.debug {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 </style>

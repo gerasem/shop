@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useLoader } from '@/composables/useLoader'
-const { loading } = useLoader()
+import { useLoaderStore } from '@/stores/LoaderStore'
+const loaderStore = useLoaderStore()
 </script>
 
 <template>
   <div
-    v-if="loading"
+    v-if="loaderStore.isLoading"
     class="loader"
   >
     <progress

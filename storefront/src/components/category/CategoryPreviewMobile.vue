@@ -3,7 +3,7 @@ import Item from '@/components/item/Item.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import { useItemStore } from '@/stores/ItemStore'
-import { useLoader } from '@/composables/useLoader'
+import { useLoaderStore } from '@/stores/LoaderStore'
 import { onMounted, computed } from 'vue'
 import ItemSkeleton from '@/components/item/ItemSkeleton.vue'
 import type { ICategory } from '@/interfaces/ICategory'
@@ -18,7 +18,7 @@ onMounted(() => {
 })
 
 const itemStore = useItemStore()
-const { loading } = useLoader()
+const loaderStore = useLoaderStore()
 
 const items = computed(() => {
   return itemStore.itemsByCategoryForMainPage(props.category.handle)
@@ -33,7 +33,7 @@ const items = computed(() => {
       :slidesPerView="1.2"
       :space-between="30"
     >
-      <template v-if="loading">
+      <template v-if="loaderStore.isLoadingKey('items-on-main')">
         <swiper-slide
           v-for="skeleton in 2"
           :key="skeleton"
@@ -53,7 +53,7 @@ const items = computed(() => {
     </swiper>
 
     <p
-      v-if="!loading && items.length === 0"
+      v-if="!loaderStore.isLoadingKey('items-on-main') && items.length === 0"
       class=""
     >
       Nothing found
