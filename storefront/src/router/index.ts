@@ -1,14 +1,13 @@
 import { createRouter, createWebHistory, type Router, RouterView } from 'vue-router'
-import { handleLocaleRouting } from './beforeEnter'
+import { handleRouting } from './beforeEnter'
 import HomeView from '@/views/HomeView.vue'
-import { init } from '@/utils/initialize';
 const router: Router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/:locale(en|de)?',
       component: RouterView,
-      beforeEnter: handleLocaleRouting,
+      beforeEnter: handleRouting,
       children: [
         {
           path: '',
@@ -54,10 +53,5 @@ const router: Router = createRouter({
     },
   ],
 })
-
-router.beforeEach((to, from, next) => {
-  init().catch((error) => console.error('Initialization error:', error));
-  next();
-});
 
 export default router
