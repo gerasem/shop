@@ -2,6 +2,7 @@ import { sdk } from '@/services/medusa/config'
 import { useToastStore } from '@/stores/ToastStore'
 import { useLoaderStore } from '@/stores/LoaderStore'
 import { HttpTypes } from '@medusajs/types'
+import { useRegionStore } from '@/stores/RegionStore'
 
 const FIELDS_ITEM_LIST = 'id,title,handle,thumbnail,*categories,*variants'
 
@@ -54,11 +55,13 @@ class ApiService {
     loaderKey: string = 'fetchItemsByCategory',
     limit: number = 50,
   ): Promise<HttpTypes.StoreProduct[] | []> {
+    const { regionId } = useRegionStore()
+
     return this.handleRequest(
       async () => {
         const { products } = await sdk.store.product.list({
           category_id: categoryId,
-          region_id: 'reg_01JTKR6SBY5P705E73XMCH2CQ9',
+          region_id: regionId,
           limit,
           fields: FIELDS_ITEM_LIST,
         })
@@ -72,11 +75,13 @@ class ApiService {
     handle: string,
     loaderKey: string = 'fetchItemByHandle',
   ): Promise<HttpTypes.StoreProduct> {
+    const { regionId } = useRegionStore()
+
     return this.handleRequest(
       async () => {
         const { products } = await sdk.store.product.list({
           handle,
-          region_id: 'reg_01JTKR6SBY5P705E73XMCH2CQ9',
+          region_id: regionId,
           fields: FIELDS_ITEM_LIST,
         })
         return products[0]
@@ -95,7 +100,7 @@ class ApiService {
     )
   }
 
-  static async retriveSelectedRegion(
+  /*  static async retriveSelectedRegion(
     loaderKey: string = 'retriveSelectedRegion',
   ): Promise<HttpTypes.StoreRegion> {
     return this.handleRequest(
@@ -107,7 +112,7 @@ class ApiService {
       },
       { loaderKey },
     )
-  }
+  } */
 }
 
 export default ApiService
