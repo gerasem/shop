@@ -8,7 +8,7 @@ defineProps<{
 
 <template>
   <RouterLink
-    :to="`item/${item.handle}`"
+    :to="`/item/${item.handle}`"
     class="item"
   >
     <img

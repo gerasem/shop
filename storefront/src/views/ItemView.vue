@@ -4,8 +4,8 @@ import Gallery from '@/components/gallery/Gallery.vue'
 import Title from '@/components/content/Title.vue'
 import Button from '@/components/button/Button.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
-import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
-import { onMounted, watch, ref } from 'vue'
+import CategoryTitleNarrow from '@/components/category/CategoryTitleNarrow.vue'
+import { watch, ref } from 'vue'
 import { useCategoryStore } from '@/stores/CategoryStore'
 import { useRoute } from 'vue-router'
 import { useSeoMeta } from '@unhead/vue'
@@ -13,27 +13,19 @@ import { HttpTypes } from '@medusajs/types'
 import ApiService from '@/services/api/api'
 import { useLoaderStore } from '@/stores/LoaderStore'
 
-
 const item = ref<HttpTypes.StoreProduct | null>(null)
-
-onMounted(async () => {
-  init(route.params.handle as string)
-})
 
 const route = useRoute()
 const categoryStore = useCategoryStore()
 const loaderStore = useLoaderStore()
 
-const init = async (handle: string): Promise<void> => {
-  item.value = await ApiService.fetchItemByHandle(handle, "item")
-  categoryStore.setCurrentCategory('pants')
-}
-
 watch(
   () => route.params.handle,
-  (newHandle) => {
-    init(newHandle as string)
+  async (newHandle) => {
+    item.value = await ApiService.fetchItemByHandle(newHandle as string, 'item')
+    categoryStore.setCurrentCategory('pants')
   },
+  { immediate: true },
 )
 
 useSeoMeta({
@@ -42,7 +34,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <CategoriesNarrow />
+  <CategoryTitleNarrow />
 
   <div class="container is-fluid">
     <BreadcrumbItem />

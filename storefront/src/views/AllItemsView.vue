@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Text2Columns from '@/components/content/Text2Columns.vue'
-import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
+import CategoryTitleNarrow from '@/components/category/CategoryTitleNarrow.vue'
 import { onMounted } from 'vue'
 import { useItemStore } from '@/stores/ItemStore'
 import ItemSkeletonContainer from '@/components/item/ItemSkeletonGroup.vue'
@@ -22,7 +22,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <CategoriesNarrow />
+  <CategoryTitleNarrow />
 
   <div class="container is-fluid">
     <Title>All Items</Title>

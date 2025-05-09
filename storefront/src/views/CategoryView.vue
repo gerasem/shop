@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import Text2Columns from '@/components/content/Text2Columns.vue'
-import CategoriesNarrow from '@/components/category/CategoryTitleNarrow.vue'
+import CategoryTitleNarrow from '@/components/category/CategoryTitleNarrow.vue'
 import { useCategoryStore } from '@/stores/CategoryStore'
 import { useRoute } from 'vue-router'
-import { onMounted, watch, computed } from 'vue'
+import { watch, computed } from 'vue'
 import { useItemStore } from '@/stores/ItemStore'
 import ItemSkeletonContainer from '@/components/item/ItemSkeletonGroup.vue'
 import { useSeoMeta } from '@unhead/vue'
@@ -13,21 +13,9 @@ import { useLoaderStore } from '@/stores/LoaderStore'
 
 const loaderStore = useLoaderStore()
 
-
-onMounted(async () => {
-  init(route.params.handle as string)
-})
-
 const route = useRoute()
 const categoryStore = useCategoryStore()
 const itemStore = useItemStore()
-
-const init = (handle: string): void => {
-  categoryStore.setCurrentCategory(handle)
-  if (categoryStore.currentCategory) {
-    itemStore.getItemsByCategory(categoryStore.currentCategory)
-  }
-}
 
 const items = computed(() => {
   if (categoryStore.currentCategory) {
@@ -39,8 +27,12 @@ const items = computed(() => {
 watch(
   () => route.params.handle,
   (newHandle) => {
-    init(newHandle as string)
+    categoryStore.setCurrentCategory(newHandle as string)
+    if (categoryStore.currentCategory) {
+      itemStore.getItemsByCategory(categoryStore.currentCategory)
+    }
   },
+  { immediate: true },
 )
 
 useSeoMeta({
@@ -49,7 +41,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <CategoriesNarrow />
+  <CategoryTitleNarrow />
 
   <div class="container is-fluid">
     <Title :loading="loaderStore.isLoadingKey('categories')">
@@ -69,7 +61,7 @@ useSeoMeta({
   </div>
 
   <Text2Columns header="About item">
-    >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores expedita, maiores! Ab cum
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores expedita, maiores! Ab cum
     porro voluptates voluptatibus voluptatum. Adipisci architecto at, atque cumque deleniti eveniet
     exercitationem expedita, id illum iure, iusto maiores molestias nisi nobis non rerum suscipit
     tempora unde velit veniam veritatis voluptas voluptate. Adipisci delectus distinctio dolores

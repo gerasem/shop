@@ -5,5 +5,5 @@ export const init = async () => {
   const categoryStore = useCategoryStore()
   const regionStore = useRegionStore()
 
-  await Promise.all([categoryStore.getCategories(), regionStore.initRegions()])
+  await Promise.all([regionStore.initRegions(), categoryStore.getCategories()])
 }

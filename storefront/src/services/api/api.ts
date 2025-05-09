@@ -36,8 +36,10 @@ class ApiService {
   ): Promise<HttpTypes.StoreProductCategory[] | []> {
     return this.handleRequest(
       async () => {
+        console.log('FetchCategories start', loaderKey)
         const { product_categories } = await sdk.store.category.list()
 
+        console.log('FetchCategories end', loaderKey)
         return product_categories.map((product) => ({
           ...product,
           image: `https://placehold.co/200?text=${product.name}`,
