@@ -113,6 +113,90 @@ class ApiService {
       { loaderKey },
     )
   } */
+
+  static async createCart(
+    data: { region_id: string },
+    loaderKey: string = 'createCart',
+  ): Promise<HttpTypes.StoreCart> {
+    return ApiService.handleRequest(
+      async () => {
+        const { cart } = await sdk.store.cart.create(data)
+        return cart
+      },
+      { loaderKey },
+    )
+  }
+
+  static async retrieveCart(
+    cartId: string,
+    options: { fields: string },
+    loaderKey: string = 'retrieveCart',
+  ): Promise<HttpTypes.StoreCart> {
+    return ApiService.handleRequest(
+      async () => {
+        const { cart } = await sdk.store.cart.retrieve(cartId, options)
+        return cart
+      },
+      { loaderKey },
+    )
+  }
+
+  static async updateCart(
+    cartId: string,
+    data: HttpTypes.StoreUpdateCart,
+    loaderKey: string = 'updateCart',
+  ): Promise<HttpTypes.StoreCart> {
+    return ApiService.handleRequest(
+      async () => {
+        const { cart } = await sdk.store.cart.update(cartId, data)
+        return cart
+      },
+      { loaderKey },
+    )
+  }
+
+  static async createCartLineItem(
+    cartId: string,
+    data: { variant_id: string; quantity: number },
+    loaderKey: string = 'createCartLineItem',
+  ): Promise<HttpTypes.StoreCart> {
+    return ApiService.handleRequest(
+      async () => {
+        const { cart } = await sdk.store.cart.createLineItem(cartId, data)
+        return cart
+      },
+      { loaderKey },
+    )
+  }
+
+  static async updateCartLineItem(
+    cartId: string,
+    itemId: string,
+    data: { quantity: number },
+    loaderKey: string = 'updateCartLineItem',
+  ): Promise<HttpTypes.StoreCart> {
+    return ApiService.handleRequest(
+      async () => {
+        const { cart } = await sdk.store.cart.updateLineItem(cartId, itemId, data)
+        return cart
+      },
+      { loaderKey },
+    )
+  }
+
+  static async addCartShippingMethod(
+    cartId: string,
+    data: HttpTypes.StoreAddCartShippingMethods,
+    loaderKey: string = 'addCartShippingMethod',
+  ): Promise<HttpTypes.StoreCart> {
+    return ApiService.handleRequest(
+      async () => {
+        const { cart } = await sdk.store.cart.addShippingMethod(cartId, data)
+        return cart
+      },
+      { loaderKey },
+    )
+  }
 }
 
 export default ApiService

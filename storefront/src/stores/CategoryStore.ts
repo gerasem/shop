@@ -15,7 +15,7 @@ export const useCategoryStore = defineStore('category', () => {
     if (categories.value.length) {
       return
     }
-    categories.value = await ApiService.fetchCategories(loaderStore.LOADER_KEYS.CATEGORIES);
+    categories.value = await ApiService.fetchCategories(loaderStore.LOADER_KEYS.CATEGORIES)
   }
 
   const setCurrentCategory = (hanlde: string) => {

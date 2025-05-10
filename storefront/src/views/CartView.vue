@@ -2,6 +2,9 @@
 import CartItem from '@/components/cart/CartItem.vue'
 import { useI18n } from 'vue-i18n'
 import { useSeoMeta } from '@unhead/vue'
+import { useLoaderStore } from '@/stores/LoaderStore'
+
+const loaderStore = useLoaderStore()
 
 const { t } = useI18n()
 
@@ -13,6 +16,13 @@ useSeoMeta({
 </script>
 
 <template>
+  <!--   <div
+    v-if="loaderStore.isLoadingKey('addToCart')"
+    class="skeleton"
+  >
+    <div class="skeleton-item"></div>
+  </div> -->
+
   <div class="container is-fluid">
     <template v-if="true">
       <div class="columns">
