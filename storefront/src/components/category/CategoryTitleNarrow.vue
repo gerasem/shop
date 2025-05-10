@@ -11,7 +11,7 @@ const loaderStore = useLoaderStore()
 <template>
   <div class="is-full category__container">
     <CategorySkeletonGroup
-      v-if="loaderStore.isLoadingKey('categories')"
+      v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.CATEGORIES)"
       :count="5"
     />
 

@@ -22,7 +22,7 @@ const loaderStore = useLoaderStore()
 watch(
   () => route.params.handle,
   async (newHandle) => {
-    item.value = await ApiService.fetchItemByHandle(newHandle as string, 'item')
+    item.value = await ApiService.fetchItemByHandle(newHandle as string, loaderStore.LOADER_KEYS.ITEMS)
     categoryStore.setCurrentCategory('pants')
   },
   { immediate: true },
@@ -45,7 +45,7 @@ useSeoMeta({
       </div>
 
       <div class="column is-half">
-        <Title :loading="loaderStore.isLoadingKey('item')">
+        <Title :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEMS)">
           {{ item?.title }}
         </Title>
 

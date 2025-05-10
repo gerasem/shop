@@ -3,8 +3,11 @@ import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import ApiService from '@/services/api/api'
 import { HttpTypes } from '@medusajs/types'
+import { useLoaderStore } from '@/stores/LoaderStore'
 
 export const useRegionStore = defineStore('region', () => {
+  const loaderStore = useLoaderStore()
+
   const regions = ref<HttpTypes.StoreRegion[]>([])
   const region = ref<HttpTypes.StoreRegion | null>(null)
   const regionId = computed(() => {
@@ -18,7 +21,7 @@ export const useRegionStore = defineStore('region', () => {
     if (regions.value.length) {
       return
     }
-    regions.value = await ApiService.fetchRegions('regions')
+    regions.value = await ApiService.fetchRegions(loaderStore.LOADER_KEYS.REGIONS)
     console.log('regions', regions.value)
   }
 
@@ -40,10 +43,7 @@ export const useRegionStore = defineStore('region', () => {
   }
 
   return {
-    regions,
-    region,
     regionId,
-    setRegion,
     initRegions,
   }
 })

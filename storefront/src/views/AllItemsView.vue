@@ -28,7 +28,7 @@ useSeoMeta({
     <Title>All Items</Title>
 
     <ItemSkeletonContainer
-      v-if="loaderStore.isLoadingKey('items')"
+      v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEMS)"
       :count="8"
     />
 
@@ -39,7 +39,7 @@ useSeoMeta({
       >
         <h2 class="title is-3">{{ category.category }}</h2>
 
-        <ItemContainer :items="category.products" :loading="!loaderStore.isLoadingKey('items')"/>
+        <ItemContainer :items="category.products" :loading="!loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEMS)"/>
       </template>
     </template>
   </div>

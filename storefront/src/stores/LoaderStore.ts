@@ -18,5 +18,15 @@ export const useLoaderStore = defineStore('loader', () => {
     console.log('stopLoading', key)
   }
 
-  return { isLoading, isLoadingKey, startLoading, stopLoading, activeLoaders }
+  const LOADER_KEYS = {
+    CATEGORIES: 'CATEGORIES',
+    PRODUCTS: 'PRODUCTS',
+    PRODUCT: 'PRODUCT',
+    CART: 'CART',
+    ITEMS: 'ITEMS',
+    ITEMS_ON_MAIN: 'ITEMS_ON_MAIN',
+    REGIONS: 'REGIONS',
+  }
+
+  return { isLoading, isLoadingKey, startLoading, stopLoading, activeLoaders, LOADER_KEYS }
 })

@@ -44,19 +44,19 @@ useSeoMeta({
   <CategoryTitleNarrow />
 
   <div class="container is-fluid">
-    <Title :loading="loaderStore.isLoadingKey('categories')">
+    <Title :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.CATEGORIES)">
       {{ categoryStore.currentCategory?.name }}
     </Title>
 
     <ItemSkeletonContainer
-      v-if="loaderStore.isLoadingKey('items')"
+      v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEMS)"
       :count="8"
     />
 
     <ItemContainer
       v-else
       :items="items"
-      :loading="!loaderStore.isLoadingKey('items')"
+      :loading="!loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEMS)"
     />
   </div>
 

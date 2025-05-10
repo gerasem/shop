@@ -33,7 +33,7 @@ const items = computed(() => {
       :slidesPerView="1.2"
       :space-between="30"
     >
-      <template v-if="loaderStore.isLoadingKey('items-on-main')">
+      <template v-if="loaderStore.isLoadingKey(`items-${category.handle}`)">
         <swiper-slide
           v-for="skeleton in 2"
           :key="skeleton"
@@ -53,7 +53,7 @@ const items = computed(() => {
     </swiper>
 
     <p
-      v-if="!loaderStore.isLoadingKey('items-on-main') && items.length === 0"
+      v-if="!loaderStore.isLoadingKey(`items-${category.handle}`) && items.length === 0"
       class=""
     >
       Nothing found

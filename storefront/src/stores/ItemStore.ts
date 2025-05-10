@@ -5,15 +5,16 @@ import ApiService from '@/services/api/api'
 import type { ICategory } from '@/interfaces/ICategory'
 import { useCategoryStore } from '@/stores/CategoryStore'
 import { HttpTypes } from '@medusajs/types'
+import { useLoaderStore } from '@/stores/LoaderStore'
 
 export const useItemStore = defineStore('item', () => {
   const items = ref<IItem[]>([])
   const itemsOnMainPage = ref<IItem[]>([])
-
+  const loaderStore = useLoaderStore()
   const getItemsByCategory = async (category: ICategory) => {
     if (items.value.some((item) => item.category === category.handle)) return
 
-    const products = await ApiService.fetchItemsByCategory(category.id, 'items')
+    const products = await ApiService.fetchItemsByCategory(category.id, loaderStore.LOADER_KEYS.ITEMS)
 
     items.value.push({
       category: category.handle,

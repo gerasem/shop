@@ -36,7 +36,7 @@ useSeoMeta({
     <div class="container is-fluid">
       <div class="columns is-5-tablet is-6-desktop is-8-fullhd">
         <div class="column is-one-third-tablet is-one-fifth-desktop">
-          <template v-if="loaderStore.isLoadingKey('categories')">
+          <template v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.CATEGORIES)">
             <CategoryCardSkeleton
               v-for="skeleton in 5"
               :key="skeleton"
