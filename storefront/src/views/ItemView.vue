@@ -5,15 +5,20 @@ import Title from '@/components/content/Title.vue'
 import Button from '@/components/button/Button.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
 import CategoryTitleNarrow from '@/components/category/CategoryTitleNarrow.vue'
-import { watch, ref } from 'vue'
+import { watch, ref, computed } from 'vue'
 import { useCategoryStore } from '@/stores/CategoryStore'
 import { useRoute } from 'vue-router'
 import { useSeoMeta } from '@unhead/vue'
 import { HttpTypes } from '@medusajs/types'
 import ApiService from '@/services/api/api'
 import { useLoaderStore } from '@/stores/LoaderStore'
+import { useI18n } from 'vue-i18n'
+import { useProductPrice } from '@/composables/useProductPrice'
+
+const { getProductPrice } = useProductPrice()
 
 const item = ref<HttpTypes.StoreProduct | null>(null)
+const { t } = useI18n()
 
 const route = useRoute()
 const categoryStore = useCategoryStore()
@@ -22,11 +27,30 @@ const loaderStore = useLoaderStore()
 watch(
   () => route.params.handle,
   async (newHandle) => {
-    item.value = await ApiService.fetchItemByHandle(newHandle as string, loaderStore.LOADER_KEYS.ITEMS)
-    categoryStore.setCurrentCategory('pants')
+    item.value = await ApiService.fetchItemByHandle(
+      newHandle as string,
+      loaderStore.LOADER_KEYS.ITEM,
+    )
+    if (item.value && item.value?.categories) {
+      categoryStore.setCurrentCategory(item.value?.categories[0]?.handle)
+    }
   },
   { immediate: true },
 )
+
+/* const { cheapestPrice } = getProductPrice({
+  product: item.value as HttpTypes.StoreProduct,
+}) */
+
+const cheapestPrice = computed(() => {
+  if (!item.value) {
+    return null
+  }
+  const { cheapestPrice } = getProductPrice({
+    product: item.value as HttpTypes.StoreProduct,
+  })
+  return cheapestPrice
+})
 
 useSeoMeta({
   title: item.value?.title,
@@ -37,7 +61,7 @@ useSeoMeta({
   <CategoryTitleNarrow />
 
   <div class="container is-fluid">
-    <BreadcrumbItem />
+    <BreadcrumbItem :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)" />
 
     <div class="columns is-mobile is-5-tablet is-6-desktop is-8-fullhd">
       <div class="column is-half">
@@ -45,25 +69,25 @@ useSeoMeta({
       </div>
 
       <div class="column is-half">
-        <Title :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEMS)">
+        <Title :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)">
           {{ item?.title }}
         </Title>
 
-        <!-- <div class="title__container">
-          <h1
-            v-if="item"
-            class="title is-2"
-          >
-            {{ item?.title }}
-          </h1>
+        <h3
+          v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)"
+          class="title is-4 has-skeleton"
+        >
+          Price
+        </h3>
 
-          <h1
-            v-else
-            class="title is-2 is-skeleton"
-          >
-            Item
-          </h1>
-        </div> -->
+        <h3
+          v-if="cheapestPrice"
+          :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)"
+          class="title is-3"
+        >
+          {{ t('from') }}
+          {{ cheapestPrice.calculated_price }}
+        </h3>
 
         <Button icon="bag">Add to Cart</Button>
       </div>

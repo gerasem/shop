@@ -1,5 +1,6 @@
 {
   "hello": "Hello",
   "contact": "Contact",
-  "cart": "Cart"
+  "cart": "Cart",
+  "from": "From"
 }

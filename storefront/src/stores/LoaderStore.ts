@@ -10,12 +10,12 @@ export const useLoaderStore = defineStore('loader', () => {
 
   const startLoading = (key: string) => {
     activeLoaders.value.add(key)
-    console.log('startLoading', key)
+    //console.log('startLoading', key)
   }
 
   const stopLoading = (key: string) => {
     activeLoaders.value.delete(key)
-    console.log('stopLoading', key)
+    //console.log('stopLoading', key)
   }
 
   const LOADER_KEYS = {
@@ -24,6 +24,7 @@ export const useLoaderStore = defineStore('loader', () => {
     PRODUCT: 'PRODUCT',
     CART: 'CART',
     ITEMS: 'ITEMS',
+    ITEM: 'ITEM',
     ITEMS_ON_MAIN: 'ITEMS_ON_MAIN',
     REGIONS: 'REGIONS',
   }

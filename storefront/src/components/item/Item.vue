@@ -1,14 +1,24 @@
 <script setup lang="ts">
 import { HttpTypes } from '@medusajs/types'
+import { useProductPrice } from '@/composables/useProductPrice'
+import { localePath } from '@/composables/localePath.ts'
+import { useI18n } from 'vue-i18n'
 
-defineProps<{
+const { getProductPrice } = useProductPrice()
+const { t } = useI18n()
+
+const props = defineProps<{
   item: HttpTypes.StoreProduct
 }>()
+
+const { cheapestPrice } = getProductPrice({
+  product: props.item,
+})
 </script>
 
 <template>
   <RouterLink
-    :to="`/item/${item.handle}`"
+    :to="localePath(`item/${item.handle}`)"
     class="item"
   >
     <img
@@ -20,7 +30,13 @@ defineProps<{
     <div class="item__bottom">
       <h3 class="item__title">{{ item.title }}</h3>
 
-      <div class="item__price">{{ item.price }}€</div>
+      <div
+        v-if="cheapestPrice"
+        class="item__price"
+      >
+      {{ t('from') }}
+      {{ cheapestPrice.calculated_price }}
+      </div>
     </div>
   </RouterLink>
 </template>

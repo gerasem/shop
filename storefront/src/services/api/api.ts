@@ -37,10 +37,10 @@ class ApiService {
   ): Promise<HttpTypes.StoreProductCategory[] | []> {
     return this.handleRequest(
       async () => {
-        console.log('FetchCategories start', loaderKey)
+        //console.log('FetchCategories start', loaderKey)
         const { product_categories } = await sdk.store.category.list()
 
-        console.log('FetchCategories end', loaderKey)
+        //console.log('FetchCategories end', loaderKey)
         return product_categories.map((product) => ({
           ...product,
           image: `https://placehold.co/200?text=${product.name}`,
@@ -57,6 +57,7 @@ class ApiService {
   ): Promise<HttpTypes.StoreProduct[] | []> {
     const { regionId } = useRegionStore()
 
+    console.log('REGION ID', regionId)
     return this.handleRequest(
       async () => {
         const { products } = await sdk.store.product.list({
@@ -75,6 +76,7 @@ class ApiService {
     handle: string,
     loaderKey: string = 'fetchItemByHandle',
   ): Promise<HttpTypes.StoreProduct> {
+
     const { regionId } = useRegionStore()
 
     return this.handleRequest(
@@ -82,7 +84,7 @@ class ApiService {
         const { products } = await sdk.store.product.list({
           handle,
           region_id: regionId,
-          fields: FIELDS_ITEM_LIST,
+          fields: "*categories",
         })
         return products[0]
       },
