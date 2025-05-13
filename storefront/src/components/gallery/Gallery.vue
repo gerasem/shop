@@ -2,54 +2,13 @@
 import PhotoSwipeLightbox from 'photoswipe/lightbox'
 import 'photoswipe/style.css'
 import { onMounted, onUnmounted, ref } from 'vue'
+import { HttpTypes } from '@medusajs/types'
 
-//@ts-ignore
-let lightbox = ref<null | PhotoSwipeLightbox>(null)
+const lightbox = ref<null | PhotoSwipeLightbox>(null)
 
-const imagesData = [
-  {
-    largeURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg',
-    thumbnailURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg',
-    width: 1875,
-    height: 2500,
-  },
-  {
-    largeURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg',
-    thumbnailURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg',
-    width: 1669,
-    height: 2500,
-  },
-  {
-    largeURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg',
-    thumbnailURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg',
-    width: 2500,
-    height: 1666,
-  },
-  {
-    largeURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg',
-    thumbnailURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg',
-    width: 1669,
-    height: 2500,
-  },
-  {
-    largeURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg',
-    thumbnailURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg',
-    width: 2500,
-    height: 1666,
-  },
-  {
-    largeURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg',
-    thumbnailURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg',
-    width: 1669,
-    height: 2500,
-  },
-  {
-    largeURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg',
-    thumbnailURL: 'https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg',
-    width: 2500,
-    height: 1666,
-  },
-]
+defineProps<{
+  item: HttpTypes.StoreProduct
+}>()
 
 onMounted(() => {
   if (!lightbox.value) {
@@ -75,20 +34,19 @@ onUnmounted(() => {
     id="gallery"
     class="gallery"
   >
-    <a
-      v-for="(image, key) in imagesData"
-      :key="key"
-      :href="image.largeURL"
-      :data-pswp-width="image.width"
-      :data-pswp-height="image.height"
-      target="_blank"
-      rel="noreferrer"
-    >
-      <img
-        :src="image.thumbnailURL"
-        alt=""
-      />
-    </a>
+    <template v-if="item.images">
+      <a
+        v-for="(image, key) in item.images"
+        :key="key"
+        :href="image.url"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img
+          :src="image.url"
+          alt=""
+        /> </a
+    ></template>
   </div>
 </template>
 

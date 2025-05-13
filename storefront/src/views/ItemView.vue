@@ -38,10 +38,6 @@ watch(
   { immediate: true },
 )
 
-/* const { cheapestPrice } = getProductPrice({
-  product: item.value as HttpTypes.StoreProduct,
-}) */
-
 const cheapestPrice = computed(() => {
   if (!item.value) {
     return null
@@ -65,7 +61,10 @@ useSeoMeta({
 
     <div class="columns is-mobile is-5-tablet is-6-desktop is-8-fullhd">
       <div class="column is-half">
-        <Gallery />
+        <Gallery
+          v-if="item"
+          :item="item"
+        />
       </div>
 
       <div class="column is-half">
