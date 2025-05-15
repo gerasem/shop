@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useCategoryStore } from '@/stores/CategoryStore'
 import { localePath } from '@/composables/localePath'
+import Icon from '@/components/media/Icon.vue'
 
 const categoryStore = useCategoryStore()
 defineProps<{
@@ -18,15 +19,13 @@ defineProps<{
         <li class="breadcrumb__skeleton">
           <span class="is-skeleton">Loading...</span>
         </li>
-        <li class="breadcrumb__skeleton">
-          <span class="is-skeleton">Loading...</span>
-        </li>
       </template>
       <template v-else>
-        <li>
-          <RouterLink :to="localePath('/')">Home</RouterLink>
-        </li>
         <li v-if="categoryStore.currentCategory">
+          <Icon
+            icon="arrow-left"
+            class="pr-2"
+          />
           <RouterLink :to="localePath(`category/${categoryStore.currentCategory.handle}`)">
             {{ categoryStore.currentCategory.name }}
           </RouterLink>

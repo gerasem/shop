@@ -4,7 +4,8 @@ import 'photoswipe/style.css'
 import { HttpTypes } from '@medusajs/types'
 
 const props = defineProps<{
-  item: HttpTypes.StoreProduct
+  item: HttpTypes.StoreProduct | null
+  loading: boolean
 }>()
 
 const getImageSize = (url: string) => {
@@ -22,7 +23,7 @@ const getImageSize = (url: string) => {
 }
 
 const openGallery = async (startIndex: number) => {
-  if (!props.item.images) {
+  if (!props.item?.images) {
     return
   }
   const items = await Promise.all(props.item.images.map((img) => getImageSize(img.url)))
@@ -42,21 +43,38 @@ const openGallery = async (startIndex: number) => {
     id="gallery"
     class="gallery__row"
   >
-    <template v-if="item.images">
-      <a
-        v-for="(image, key) in item.images"
-        :key="key"
-        href="#"
-        target="_blank"
-        rel="noreferrer"
-        class="gallery__item"
-        @click.prevent="openGallery(key)"
+    <template v-if="loading">
+      <figure
+        v-for="skeleton in 4"
+        :key="skeleton"
+        class="block image is-256x256 is-skeleton"
       >
         <img
-          :src="image.url"
-          :alt="`Image ${key + 1}`"
+          alt="Placeholder"
+          src="https://placehold.co/128x128"
         />
-      </a>
+      </figure>
+    </template>
+
+    <template v-else>
+      <template v-if="item?.images">
+        <a
+          v-for="(image, key) in item.images"
+          :key="key"
+          href="#"
+          target="_blank"
+          rel="noreferrer"
+          class="gallery__item"
+          @click.prevent="openGallery(key)"
+        >
+          <img
+            :src="image.url"
+            :alt="`Image ${key + 1}`"
+          />
+        </a>
+      </template>
+
+      <p v-else>No images</p>
     </template>
   </div>
 </template>
@@ -68,7 +86,6 @@ const openGallery = async (startIndex: number) => {
   flex-wrap: wrap;
 
   &__row {
-    margin: 30px 30px 30px 0;
     column-count: 2;
     column-gap: 15px;
   }

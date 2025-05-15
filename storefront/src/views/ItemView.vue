@@ -62,7 +62,7 @@ useSeoMeta({
     <div class="columns is-mobile is-5-tablet is-6-desktop is-8-fullhd">
       <div class="column is-half">
         <Gallery
-          v-if="item"
+          :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)"
           :item="item"
         />
       </div>
