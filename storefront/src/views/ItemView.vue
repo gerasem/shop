@@ -81,10 +81,9 @@ useSeoMeta({
 
         <h3
           v-if="cheapestPrice"
-          :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)"
           class="title is-3"
         >
-          {{ t('from') }}
+          {{ item?.variants?.length > 1 ? t('from') : '' }}
           {{ cheapestPrice.calculated_price }}
         </h3>
 

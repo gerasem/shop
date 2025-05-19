@@ -22,11 +22,11 @@ defineProps<{
       </template>
       <template v-else>
         <li v-if="categoryStore.currentCategory">
-          <Icon
-            icon="arrow-left"
-            class="pr-2"
-          />
           <RouterLink :to="localePath(`category/${categoryStore.currentCategory.handle}`)">
+            <Icon
+              icon="arrow-left"
+              class="pr-2"
+            />
             {{ categoryStore.currentCategory.name }}
           </RouterLink>
         </li>

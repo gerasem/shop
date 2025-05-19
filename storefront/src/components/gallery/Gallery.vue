@@ -42,6 +42,7 @@ const openGallery = async (startIndex: number) => {
   <div
     id="gallery"
     class="gallery__row"
+    :class="{ 'gallery__row--one-image': item?.images?.length === 1 }"
   >
     <template v-if="loading">
       <figure
@@ -88,6 +89,13 @@ const openGallery = async (startIndex: number) => {
   &__row {
     column-count: 2;
     column-gap: 15px;
+
+    &--one-image {
+      column-count: 1;
+      img {
+        max-height: 80vh;
+      }
+    }
   }
 
   &__item {
