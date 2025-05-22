@@ -64,8 +64,6 @@ watch(
 </template>
 
 <style scoped lang="scss">
-@forward 'bulma/sass/elements/notification';
-
 .notification {
   min-width: 500px;
   max-width: 80%;

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import BreadcrumbItem from '@/components/breadcrumb/BreadcrumbItem.vue'
+import ProductActions from '@/components/item-view/ProductActions.vue'
 import Gallery from '@/components/gallery/Gallery.vue'
 import Title from '@/components/content/Title.vue'
-import Button from '@/components/button/Button.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
 import CategoryTitleNarrow from '@/components/category/CategoryTitleNarrow.vue'
 import { watch, ref, computed } from 'vue'
@@ -12,13 +12,11 @@ import { useSeoMeta } from '@unhead/vue'
 import { HttpTypes } from '@medusajs/types'
 import ApiService from '@/services/api/api'
 import { useLoaderStore } from '@/stores/LoaderStore'
-import { useI18n } from 'vue-i18n'
 import { useProductPrice } from '@/composables/useProductPrice'
 
 const { getProductPrice } = useProductPrice()
 
 const item = ref<HttpTypes.StoreProduct | null>(null)
-const { t } = useI18n()
 
 const route = useRoute()
 const categoryStore = useCategoryStore()
@@ -72,7 +70,7 @@ useSeoMeta({
           {{ item?.title }}
         </Title>
 
-        <h3
+        <!-- <h3
           v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)"
           class="title is-4 has-skeleton"
         >
@@ -85,9 +83,15 @@ useSeoMeta({
         >
           {{ item?.variants?.length > 1 ? t('from') : '' }}
           {{ cheapestPrice.calculated_price }}
-        </h3>
+        </h3> -->
 
-        <Button icon="bag">Add to Cart</Button>
+        <ProductActions
+          v-if="item"
+          :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)"
+          :product="item"
+        />
+
+        <!--<Button icon="bag">Add to Cart</Button>-->
       </div>
     </div>
   </div>

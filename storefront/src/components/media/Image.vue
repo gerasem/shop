@@ -17,7 +17,7 @@ const imageExtension = computed(() => {
 
 const loadImage = defineAsyncComponent({
   loader: () => import(`@/assets/images/${imageName.value}.${imageExtension.value}`),
-  errorComponent: defineAsyncComponent(() => import(`@/assets/icons/_default.svg`)),
+  errorComponent: defineAsyncComponent(() => import(`@/assets/images/_default-image.svg`)),
 })
 </script>
 

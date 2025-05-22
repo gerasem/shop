@@ -1,4 +1,3 @@
-// stores/region.js
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import ApiService from '@/services/api/api'

@@ -28,5 +28,6 @@
 @use 'bulma/sass/form' with (
   $input-shadow: none
 );
+@forward 'bulma/sass/elements/notification';
 // Import the themes so that all CSS variables have a value
 @forward 'bulma/sass/themes';

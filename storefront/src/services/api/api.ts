@@ -32,9 +32,7 @@ class ApiService {
     }
   }
 
-  static async fetchCategories(
-    loaderKey: string = 'fetchCategories',
-  ): Promise<HttpTypes.StoreProductCategory[] | []> {
+  static async fetchCategories(loaderKey: string): Promise<HttpTypes.StoreProductCategory[] | []> {
     return this.handleRequest(
       async () => {
         //console.log('FetchCategories start', loaderKey)
@@ -52,7 +50,7 @@ class ApiService {
 
   static async fetchItemsByCategory(
     categoryId: string,
-    loaderKey: string = 'fetchItemsByCategory',
+    loaderKey: string,
     limit: number = 50,
   ): Promise<HttpTypes.StoreProduct[] | []> {
     const { regionId } = useRegionStore()
@@ -74,9 +72,8 @@ class ApiService {
 
   static async fetchItemByHandle(
     handle: string,
-    loaderKey: string = 'fetchItemByHandle',
+    loaderKey: string,
   ): Promise<HttpTypes.StoreProduct> {
-
     const { regionId } = useRegionStore()
 
     return this.handleRequest(
@@ -84,7 +81,8 @@ class ApiService {
         const { products } = await sdk.store.product.list({
           handle,
           region_id: regionId,
-          fields: "*categories",
+          fields:
+            '*categories,*variants.calculated_price,+variants.inventory_quantity,+metadata,+tags',
         })
         return products[0]
       },
@@ -92,7 +90,7 @@ class ApiService {
     )
   }
 
-  static async fetchRegions(loaderKey: string = 'fetchRegions'): Promise<HttpTypes.StoreRegion[]> {
+  static async fetchRegions(loaderKey: string): Promise<HttpTypes.StoreRegion[]> {
     return this.handleRequest(
       async () => {
         const { regions } = await sdk.store.region.list()
@@ -118,7 +116,7 @@ class ApiService {
 
   static async createCart(
     data: { region_id: string },
-    loaderKey: string = 'createCart',
+    loaderKey: string,
   ): Promise<HttpTypes.StoreCart> {
     return ApiService.handleRequest(
       async () => {
@@ -132,7 +130,7 @@ class ApiService {
   static async retrieveCart(
     cartId: string,
     options: { fields: string },
-    loaderKey: string = 'retrieveCart',
+    loaderKey: string,
   ): Promise<HttpTypes.StoreCart> {
     return ApiService.handleRequest(
       async () => {
@@ -146,7 +144,7 @@ class ApiService {
   static async updateCart(
     cartId: string,
     data: HttpTypes.StoreUpdateCart,
-    loaderKey: string = 'updateCart',
+    loaderKey: string,
   ): Promise<HttpTypes.StoreCart> {
     return ApiService.handleRequest(
       async () => {
@@ -160,7 +158,7 @@ class ApiService {
   static async createCartLineItem(
     cartId: string,
     data: { variant_id: string; quantity: number },
-    loaderKey: string = 'createCartLineItem',
+    loaderKey: string,
   ): Promise<HttpTypes.StoreCart> {
     return ApiService.handleRequest(
       async () => {
@@ -175,7 +173,7 @@ class ApiService {
     cartId: string,
     itemId: string,
     data: { quantity: number },
-    loaderKey: string = 'updateCartLineItem',
+    loaderKey: string,
   ): Promise<HttpTypes.StoreCart> {
     return ApiService.handleRequest(
       async () => {
@@ -189,7 +187,7 @@ class ApiService {
   static async addCartShippingMethod(
     cartId: string,
     data: HttpTypes.StoreAddCartShippingMethods,
-    loaderKey: string = 'addCartShippingMethod',
+    loaderKey: string,
   ): Promise<HttpTypes.StoreCart> {
     return ApiService.handleRequest(
       async () => {
