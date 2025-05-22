@@ -20,13 +20,10 @@ export const useLoaderStore = defineStore('loader', () => {
 
   const LOADER_KEYS = {
     CATEGORIES: 'CATEGORIES',
-    PRODUCTS: 'PRODUCTS',
-    PRODUCT: 'PRODUCT',
-    CART: 'CART',
     ITEMS: 'ITEMS',
     ITEM: 'ITEM',
-    ITEMS_ON_MAIN: 'ITEMS_ON_MAIN',
     REGIONS: 'REGIONS',
+    ADD_TO_CART: 'ADD_TO_CART',
   }
 
   return { isLoading, isLoadingKey, startLoading, stopLoading, activeLoaders, LOADER_KEYS }

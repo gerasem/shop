@@ -7,6 +7,9 @@ import ProductPrice from '@/components/item-view/ProductPrice.vue'
 import OptionSelect from '@/components/item-view/OptionSelect.vue'
 import Button from '@/components/button/Button.vue'
 import { isEqual } from '@/utils/productUtils.ts'
+import { useLoaderStore } from '@/stores/LoaderStore'
+
+const loaderStore = useLoaderStore()
 
 const props = defineProps<{
   product: HttpTypes.StoreProduct
@@ -14,7 +17,6 @@ const props = defineProps<{
 
 const cartStore = useCartStore()
 const options = ref<Record<string, string | undefined>>({})
-const isAdding = ref(false)
 
 // check if only 1 variant
 onMounted(() => {
@@ -89,7 +91,7 @@ const handleAddToCart = async () => {
           @update-option="setOptionValue(option.id, $event)"
           :title="option.title || ''"
           data-testid="product-options"
-          :disabled="isAdding"
+          :disabled="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ADD_TO_CART)"
         />
       </div>
       <br />
@@ -103,7 +105,7 @@ const handleAddToCart = async () => {
     />
 
     <Button
-      v-if="isAdding"
+      v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ADD_TO_CART)"
       disabled
       class="button is-primary is-loading"
       data-testid="loading"
