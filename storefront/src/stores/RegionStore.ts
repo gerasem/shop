@@ -10,9 +10,9 @@ export const useRegionStore = defineStore('region', () => {
   const regions = ref<HttpTypes.StoreRegion[]>([])
   const region = ref<HttpTypes.StoreRegion | null>(null)
   const regionId = computed(() => {
-    const regionId = localStorage.getItem('region_id')
-    if (regionId) {
-      return regionId
+    const regionInLS = localStorage.getItem('region_id')
+    if (regionInLS) {
+      return regionInLS
     }
     if (region.value) {
       return region.value.id
@@ -21,7 +21,8 @@ export const useRegionStore = defineStore('region', () => {
   })
 
   const fetchRegions = async () => {
-    if (regions.value.length) {
+    const regionInLS = localStorage.getItem('region_id')
+    if (regionInLS || regions.value.length) {
       return
     }
     regions.value = await ApiService.fetchRegions(loaderStore.LOADER_KEYS.REGIONS)
