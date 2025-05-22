@@ -13,6 +13,7 @@ import ApiService from '@/services/api/api'
 import { useLoaderStore } from '@/stores/LoaderStore'
 import { useProductPrice } from '@/composables/useProductPrice'
 import Header from '@/components/content/Header.vue'
+import Button from '@/components/button/Button.vue'
 
 const { getProductPrice } = useProductPrice()
 
@@ -72,9 +73,22 @@ useSeoMeta({
           {{ item?.title }}
         </Header>
 
+        <div v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)">
+          <Header
+            :level="4"
+            class="block has-skeleton"
+          >
+            Price
+          </Header>
 
+          <Header
+            :level="2"
+            class="block has-skeleton"
+          >
+            Add to Cart
+          </Header>
+        </div>
 
-        <!--:loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)"-->
         <ProductActions
           v-if="item"
           :product="item"

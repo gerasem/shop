@@ -27,7 +27,7 @@ const selectedPrice = computed(() =>
     v-if="selectedPrice"
     class="content"
   >
-    <span
+    <h4
       class="title is-4"
       :class="{ 'has-text-info': selectedPrice.price_type === 'sale' }"
       data-testid="product-price"
@@ -35,7 +35,7 @@ const selectedPrice = computed(() =>
     >
       <span v-if="!variant">From </span>
       {{ selectedPrice.calculated_price }}
-    </span>
+    </h4>
 
     <div v-if="selectedPrice.price_type === 'sale'">
       <p>
