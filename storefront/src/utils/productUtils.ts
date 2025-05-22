@@ -13,7 +13,7 @@ export function optionsAsKeymap(
   )
 }
 
-export function isEqual(obj1: Record<string, string>, obj2: Record<string, string>): boolean {
+export function isEqual(obj1: Record<string, string | undefined>, obj2: Record<string, string | undefined>): boolean {
   const keys1 = Object.keys(obj1)
   const keys2 = Object.keys(obj2)
 

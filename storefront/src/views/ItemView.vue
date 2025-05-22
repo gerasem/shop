@@ -72,28 +72,13 @@ useSeoMeta({
           {{ item?.title }}
         </Header>
 
-        <!-- <h3
-          v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)"
-          class="title is-4 has-skeleton"
-        >
-          Price
-        </h3>
 
-        <h3
-          v-if="cheapestPrice"
-          class="title is-3"
-        >
-          {{ item?.variants?.length > 1 ? t('from') : '' }}
-          {{ cheapestPrice.calculated_price }}
-        </h3> -->
 
+        <!--:loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)"-->
         <ProductActions
           v-if="item"
-          :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)"
           :product="item"
         />
-
-        <!--<Button icon="bag">Add to Cart</Button>-->
       </div>
     </div>
   </div>

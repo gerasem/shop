@@ -102,24 +102,6 @@ const handleAddToCart = async () => {
       :variant="selectedVariant"
     />
 
-    <!-- Кнопка "Добавить в корзину" -->
-    <!-- <Button
-      @click="handleAddToCart"
-      :disabled="!inStock || !selectedVariant || isAdding || !isValidVariant"
-      class="button is-primary"
-      :class="{
-        'is-loading': isAdding,
-        'is-static': !inStock || !selectedVariant || !isValidVariant,
-      }"
-      data-testid="add-product-button"
-      :icon="selectedVariant ? 'bag' : ''"
-    >
-      <span v-if="isAdding">Добавление...</span>
-      <span v-else-if="!selectedVariant">Choose variant</span>
-      <span v-else-if="!inStock || !isValidVariant">Out of Stock</span>
-      <span v-else>Add to Cart</span>
-    </Button> -->
-
     <Button
       v-if="isAdding"
       disabled

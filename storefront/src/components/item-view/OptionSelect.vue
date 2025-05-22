@@ -5,7 +5,7 @@ import Button from '@/components/button/Button.vue'
 
 const props = defineProps<{
   option: HttpTypes.StoreProductOption
-  current: HttpTypes.StoreProductOption
+  current: string | undefined
   title: string
   disabled?: boolean
 }>()
