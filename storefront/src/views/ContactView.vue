@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useSeoMeta } from '@unhead/vue'
 import CategoryTitleNarrow from '@/components/category/CategoryTitleNarrow.vue'
-import Title from '@/components/content/Title.vue'
+import Header from '@/components/content/Header.vue'
 
 useSeoMeta({
   title: 'Contact',
@@ -12,7 +12,7 @@ useSeoMeta({
   <CategoryTitleNarrow />
 
   <div class="container is-fluid">
-    <Title>Contact</Title>
+    <Header :level="1">Contact</Header>
   </div>
 </template>
 

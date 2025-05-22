@@ -7,7 +7,7 @@ import { watch, computed } from 'vue'
 import { useItemStore } from '@/stores/ItemStore'
 import ItemSkeletonContainer from '@/components/item/ItemSkeletonGroup.vue'
 import { useSeoMeta } from '@unhead/vue'
-import Title from '@/components/content/Title.vue'
+import Header from '@/components/content/Header.vue'
 import ItemContainer from '@/components/item/ItemContainer.vue'
 import { useLoaderStore } from '@/stores/LoaderStore'
 
@@ -44,9 +44,9 @@ useSeoMeta({
   <CategoryTitleNarrow />
 
   <div class="container is-fluid">
-    <Title :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.CATEGORIES)">
+    <Header :level="1" :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.CATEGORIES)">
       {{ categoryStore.currentCategory?.name }}
-    </Title>
+    </Header>
 
     <ItemSkeletonContainer
       v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEMS)"

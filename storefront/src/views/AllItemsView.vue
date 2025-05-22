@@ -5,9 +5,9 @@ import { onMounted } from 'vue'
 import { useItemStore } from '@/stores/ItemStore'
 import ItemSkeletonContainer from '@/components/item/ItemSkeletonGroup.vue'
 import { useSeoMeta } from '@unhead/vue'
-import Title from '@/components/content/Title.vue'
 import ItemContainer from '@/components/item/ItemContainer.vue'
 import { useLoaderStore } from '@/stores/LoaderStore'
+import Header from '@/components/content/Header.vue'
 
 onMounted(async () => {
   await itemStore.getAllItems()
@@ -25,7 +25,7 @@ useSeoMeta({
   <CategoryTitleNarrow />
 
   <div class="container is-fluid">
-    <Title>All Items</Title>
+    <Header :level="1">All Items</Header>
 
     <ItemSkeletonContainer
       v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEMS)"
@@ -37,9 +37,13 @@ useSeoMeta({
         v-for="category in itemStore.items"
         :key="category.category"
       >
-        <h2 class="title is-3">{{ category.category }}</h2>
 
-        <ItemContainer :items="category.products" :loading="!loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEMS)"/>
+        <Header :level="3">{{ category.category }}</Header>
+
+        <ItemContainer
+          :items="category.products"
+          :loading="!loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEMS)"
+        />
       </template>
     </template>
   </div>

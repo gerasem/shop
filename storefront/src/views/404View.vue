@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useSeoMeta } from '@unhead/vue'
 import CategoryTitleNarrow from '@/components/category/CategoryTitleNarrow.vue'
-import Title from '@/components/content/Title.vue'
+import Header from '@/components/content/Header.vue'
 
 useSeoMeta({
   title: '404 Error',
@@ -12,7 +12,7 @@ useSeoMeta({
   <CategoryTitleNarrow />
 
   <div class="container is-fluid">
-    <Title>Error 404: Nothing found</Title>
+    <Header :level="1">Error 404: Nothing found</Header>
 
     <p>Nothing found</p>
   </div>

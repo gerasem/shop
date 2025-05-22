@@ -2,7 +2,6 @@
 import BreadcrumbItem from '@/components/breadcrumb/BreadcrumbItem.vue'
 import ProductActions from '@/components/item-view/ProductActions.vue'
 import Gallery from '@/components/gallery/Gallery.vue'
-import Title from '@/components/content/Title.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
 import CategoryTitleNarrow from '@/components/category/CategoryTitleNarrow.vue'
 import { watch, ref, computed } from 'vue'
@@ -13,6 +12,7 @@ import { HttpTypes } from '@medusajs/types'
 import ApiService from '@/services/api/api'
 import { useLoaderStore } from '@/stores/LoaderStore'
 import { useProductPrice } from '@/composables/useProductPrice'
+import Header from '@/components/content/Header.vue'
 
 const { getProductPrice } = useProductPrice()
 
@@ -35,7 +35,6 @@ watch(
   },
   { immediate: true },
 )
-
 const cheapestPrice = computed(() => {
   if (!item.value) {
     return null
@@ -47,7 +46,7 @@ const cheapestPrice = computed(() => {
 })
 
 useSeoMeta({
-  title: item.value?.title,
+  title: computed(() => item.value?.title),
 })
 </script>
 
@@ -66,9 +65,12 @@ useSeoMeta({
       </div>
 
       <div class="column is-half">
-        <Title :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)">
+        <Header
+          :level="1"
+          :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)"
+        >
           {{ item?.title }}
-        </Title>
+        </Header>
 
         <!-- <h3
           v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)"

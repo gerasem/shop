@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Header from '@/components/content/Header.vue'
+
 defineProps<{
   header?: string
 }>()
@@ -7,7 +9,7 @@ defineProps<{
 <template>
   <section class="section">
     <div class="container is-fullhd">
-      <h2 class="title is-2">{{ header }}</h2>
+      <Header :level="2">{{ header }}</Header>
 
       <p class="content text__paragraph text__paragraph--2-columns">
         <slot></slot>

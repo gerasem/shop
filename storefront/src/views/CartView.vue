@@ -3,6 +3,7 @@ import CartItem from '@/components/cart/CartItem.vue'
 import { useI18n } from 'vue-i18n'
 import { useSeoMeta } from '@unhead/vue'
 import { useLoaderStore } from '@/stores/LoaderStore'
+import Header from '@/components/content/Header.vue'
 
 const loaderStore = useLoaderStore()
 
@@ -27,7 +28,7 @@ useSeoMeta({
     <template v-if="true">
       <div class="columns">
         <div class="column is-two-thirds">
-          <h2 class="title is-2">Shopping Cart</h2>
+          <Header :level="2">Shopping Cart</Header>
 
           <template
             v-for="item in 5"
@@ -97,7 +98,7 @@ useSeoMeta({
     </template>
 
     <template v-else>
-      <h2 class="title is-2">Shopping Cart</h2>
+      <Header :level="2">Shopping Cart</Header>
 
       <p>{{ t('Shopping cart is empty') }}</p>
     </template>
