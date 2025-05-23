@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import type { HttpTypes } from '@medusajs/types'
-import { useCartStore } from '@/stores/CartStore'
 import { optionsAsKeymap } from '@/utils/productUtils.ts'
 import ProductPrice from '@/components/item-view/ProductPrice.vue'
 import OptionSelect from '@/components/item-view/OptionSelect.vue'
-import Button from '@/components/button/Button.vue'
+import AddToCart from '@/components/item-view/AddToCart.vue'
 import { isEqual } from '@/utils/productUtils.ts'
 import { useLoaderStore } from '@/stores/LoaderStore'
 
@@ -15,7 +14,6 @@ const props = defineProps<{
   product: HttpTypes.StoreProduct
 }>()
 
-const cartStore = useCartStore()
 const options = ref<Record<string, string | undefined>>({})
 
 // check if only 1 variant
@@ -27,7 +25,7 @@ onMounted(() => {
 })
 
 // selected variant
-const selectedVariant = computed(() => {
+const selectedVariant = computed((): HttpTypes.StoreProductVariant | undefined => {
   if (!props.product.variants?.length) {
     return undefined
   }
@@ -63,14 +61,6 @@ const inStock = computed(() => {
 const setOptionValue = (optionId: string, value: string) => {
   options.value = { ...options.value, [optionId]: value }
 }
-
-// add to cart
-const handleAddToCart = async () => {
-  if (!selectedVariant.value?.id) {
-    return
-  }
-  await cartStore.addToCart(selectedVariant.value.id, 1)
-}
 </script>
 
 <template>
@@ -99,46 +89,29 @@ const handleAddToCart = async () => {
 
     <!-- product prices -->
     <ProductPrice
-      v-if="selectedVariant"
       :product="product"
       :variant="selectedVariant"
     />
 
-    <Button
-      v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ADD_TO_CART)"
-      disabled
-      class="button is-primary is-loading"
-      data-testid="loading"
-    >
-      Adding...
-    </Button>
-
     <div
-      v-else-if="!selectedVariant"
+      v-if="!selectedVariant"
       class="notification is-warning is-light"
     >
       Choose variant
     </div>
 
-    <Button
+    <div
       v-else-if="!inStock || !isValidVariant"
-      disabled
-      class="button is-primary is-static"
-      data-testid="out-of-stock"
-      icon="bag-x"
+      class="notification is-error is-light"
     >
-      Out of inStock
-    </Button>
+      Out of Stock
+    </div>
 
-    <Button
+    <AddToCart
       v-else
-      @click="handleAddToCart"
-      class="button is-primary"
-      data-testid="add-to-cart"
-      icon="bag"
-    >
-      Add to Cart
-    </Button>
+      :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ADD_TO_CART)"
+      :selectedVariant="selectedVariant"
+    />
   </div>
 </template>
 

@@ -11,9 +11,9 @@ useSeoMeta({
 <template>
   <CategoryTitleNarrow />
 
-  <div class="container is-fluid">
+  <main class="container is-fluid">
     <Header :level="1">Error 404: Nothing found</Header>
 
     <p>Nothing found</p>
-  </div>
+  </main>
 </template>

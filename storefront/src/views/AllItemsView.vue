@@ -24,7 +24,7 @@ useSeoMeta({
 <template>
   <CategoryTitleNarrow />
 
-  <div class="container is-fluid">
+  <main class="container is-fluid">
     <Header :level="1">All Items</Header>
 
     <ItemSkeletonContainer
@@ -37,7 +37,6 @@ useSeoMeta({
         v-for="category in itemStore.items"
         :key="category.category"
       >
-
         <Header :level="3">{{ category.category }}</Header>
 
         <ItemContainer
@@ -46,9 +45,9 @@ useSeoMeta({
         />
       </template>
     </template>
-  </div>
+  </main>
 
-  <Text2Columns header="About us">
+  <Text2Columns>
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores expedita, maiores! Ab cum
     porro voluptates voluptatibus voluptatum. Adipisci architecto at, atque cumque deleniti eveniet
     exercitationem expedita, id illum iure, iusto maiores molestias nisi nobis non rerum suscipit

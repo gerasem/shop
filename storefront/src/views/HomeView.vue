@@ -23,17 +23,17 @@ useSeoMeta({
   <template v-if="isMobile">
     <CategoryTitleNarrow />
 
-    <div class="container is-fluid">
+    <main class="container is-fluid">
       <CategoryPreviewMobile
         v-for="category in categoryStore.categories"
         :key="category.id"
         :category="category"
       />
-    </div>
+    </main>
   </template>
 
   <template v-else>
-    <div class="container is-fluid">
+    <main class="container is-fluid">
       <div class="columns is-5-tablet is-6-desktop is-8-fullhd">
         <div class="column is-one-third-tablet is-one-fifth-desktop">
           <template v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.CATEGORIES)">
@@ -60,7 +60,7 @@ useSeoMeta({
           />
         </div>
       </div>
-    </div>
+    </main>
   </template>
 
   <Text2Columns header="About us">

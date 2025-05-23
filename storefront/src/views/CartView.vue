@@ -24,7 +24,7 @@ useSeoMeta({
     <div class="skeleton-item"></div>
   </div> -->
 
-  <div class="container is-fluid">
+  <main class="container is-fluid">
     <template v-if="true">
       <div class="columns">
         <div class="column is-two-thirds">
@@ -102,7 +102,7 @@ useSeoMeta({
 
       <p>{{ t('Shopping cart is empty') }}</p>
     </template>
-  </div>
+  </main>
 </template>
 
 <style lang="scss" scoped>

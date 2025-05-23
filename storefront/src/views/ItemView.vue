@@ -15,13 +15,15 @@ import { useProductPrice } from '@/composables/useProductPrice'
 import Header from '@/components/content/Header.vue'
 import Button from '@/components/button/Button.vue'
 
+const categoryStore = useCategoryStore()
+const loaderStore = useLoaderStore()
+
 const { getProductPrice } = useProductPrice()
 
 const item = ref<HttpTypes.StoreProduct | null>(null)
 
 const route = useRoute()
-const categoryStore = useCategoryStore()
-const loaderStore = useLoaderStore()
+
 
 watch(
   () => route.params.handle,
@@ -54,7 +56,7 @@ useSeoMeta({
 <template>
   <CategoryTitleNarrow />
 
-  <div class="container is-fluid">
+  <main class="container is-fluid">
     <BreadcrumbItem :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)" />
 
     <div class="columns is-mobile is-5-tablet is-6-desktop is-8-fullhd">
@@ -95,11 +97,9 @@ useSeoMeta({
         />
       </div>
     </div>
-  </div>
+  </main>
 
-  <Text2Columns v-if="item">
-    {{ item.description }}
-  </Text2Columns>
+  <Text2Columns v-if="item"> {{ item.description }} </Text2Columns>
 </template>
 
 <style scoped lang="scss"></style>

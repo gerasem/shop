@@ -43,7 +43,7 @@ useSeoMeta({
 <template>
   <CategoryTitleNarrow />
 
-  <div class="container is-fluid">
+  <main class="container is-fluid">
     <Header :level="1" :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.CATEGORIES)">
       {{ categoryStore.currentCategory?.name }}
     </Header>
@@ -58,7 +58,7 @@ useSeoMeta({
       :items="items"
       :loading="!loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEMS)"
     />
-  </div>
+  </main>
 
   <Text2Columns header="About item">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores expedita, maiores! Ab cum

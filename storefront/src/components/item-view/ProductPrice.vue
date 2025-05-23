@@ -5,7 +5,7 @@ import { useProductPrice } from '@/composables/useProductPrice'
 
 const props = defineProps<{
   product: HttpTypes.StoreProduct
-  variant: HttpTypes.StoreProductVariant
+  variant: HttpTypes.StoreProductVariant | undefined
 }>()
 
 const { getProductPrice } = useProductPrice()

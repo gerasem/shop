@@ -11,9 +11,9 @@ useSeoMeta({
 <template>
   <CategoryTitleNarrow />
 
-  <div class="container is-fluid">
+  <main class="container is-fluid">
     <Header :level="1">Contact</Header>
-  </div>
+  </main>
 </template>
 
 <style scoped lang="scss"></style>

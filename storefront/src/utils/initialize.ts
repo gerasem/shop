@@ -8,5 +8,6 @@ export const init = async () => {
   const cartStore = useCartStore()
 
   await Promise.all([regionStore.initRegions(), categoryStore.getCategories()])
+  console.log("init")
   cartStore.initializeCart()
 }
