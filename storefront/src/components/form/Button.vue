@@ -19,12 +19,18 @@ defineProps<{
       :height="16"
     />
 
-    <span class="px-2">
-      <slot></slot>
-    </span>
+    <slot></slot>
   </button>
 </template>
 
 <style lang="scss" scoped>
 @forward 'bulma/sass/elements/button';
+
+.button {
+  gap: 10px;
+
+  &:disabled > * {
+    cursor: not-allowed !important;
+  }
+}
 </style>

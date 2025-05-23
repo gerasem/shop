@@ -11,7 +11,9 @@ import Toast from '@/components/toast/Toast.vue'
   <Loader />
   <InformationBanner />
   <Navbar />
-  <RouterView />
+  <div id="content">
+    <RouterView />
+  </div>
   <Footer />
   <Toast />
 </template>

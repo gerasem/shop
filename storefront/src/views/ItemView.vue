@@ -13,7 +13,7 @@ import ApiService from '@/services/api/api'
 import { useLoaderStore } from '@/stores/LoaderStore'
 import { useProductPrice } from '@/composables/useProductPrice'
 import Header from '@/components/content/Header.vue'
-import Button from '@/components/button/Button.vue'
+import Button from '@/components/form/Button.vue'
 
 const categoryStore = useCategoryStore()
 const loaderStore = useLoaderStore()
@@ -23,7 +23,6 @@ const { getProductPrice } = useProductPrice()
 const item = ref<HttpTypes.StoreProduct | null>(null)
 
 const route = useRoute()
-
 
 watch(
   () => route.params.handle,
