@@ -24,6 +24,12 @@ const quantityError = computed(() => {
   return quantity.value > inventoryQuantity.value
 })
 
+const showAvailableCount = computed(() => {
+  return inventoryQuantity.value > 10
+    ? 'Available in lagre quantity'
+    : `Only ${inventoryQuantity.value} items left in stock`
+})
+
 // add to cart
 const handleAddToCart = async () => {
   if (!props.selectedVariant?.id) {
@@ -78,7 +84,10 @@ const incrementCount = () => {
       Only {{ inventoryQuantity }} items are currently in stock
     </p>
 
-    <div v-else>
+    <div
+      v-else
+      class="add-to-cart__button-container"
+    >
       <Button
         v-if="loading"
         disabled
@@ -97,6 +106,8 @@ const incrementCount = () => {
       >
         Add to Cart
       </Button>
+
+      <p>{{ showAvailableCount }}</p>
     </div>
   </div>
 </template>
@@ -129,6 +140,12 @@ const incrementCount = () => {
     display: flex;
     gap: 40px;
     align-items: center;
+    margin-bottom: 30px;
+  }
+  &__button-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
   }
 }
 </style>
