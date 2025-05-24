@@ -20,6 +20,10 @@ const inventoryQuantity = computed(() => {
   return 1000
 })
 
+const quantityError = computed(() => {
+  return quantity.value > inventoryQuantity.value
+})
+
 // add to cart
 const handleAddToCart = async () => {
   if (!props.selectedVariant?.id) {
@@ -53,6 +57,7 @@ const incrementCount = () => {
       <Input
         v-model="quantity"
         class="add-to-cart__input"
+        :class="{ 'is-danger': quantityError }"
         min="1"
         type="number"
         :max="selectedVariant ? inventoryQuantity : 1000"
@@ -66,7 +71,14 @@ const incrementCount = () => {
       ></Button>
     </div>
 
-    <div>
+    <p
+      v-if="quantityError"
+      class="has-text-danger"
+    >
+      Only {{ inventoryQuantity }} items are currently in stock
+    </p>
+
+    <div v-else>
       <Button
         v-if="loading"
         disabled
@@ -81,7 +93,7 @@ const incrementCount = () => {
         @click="handleAddToCart"
         class="button is-primary"
         data-testid="add-to-cart"
-        icon="bag-plus"
+        icon="bag"
       >
         Add to Cart
       </Button>
@@ -116,6 +128,7 @@ const incrementCount = () => {
   &__container {
     display: flex;
     gap: 40px;
+    align-items: center;
   }
 }
 </style>
