@@ -127,14 +127,13 @@ class ApiService {
     )
   }
 
-  static async retrieveCart(
-    cartId: string,
-    options: { fields: string },
-    loaderKey: string,
-  ): Promise<HttpTypes.StoreCart> {
+  static async retrieveCart(cartId: string, loaderKey: string): Promise<HttpTypes.StoreCart> {
     return ApiService.handleRequest(
       async () => {
-        const { cart } = await sdk.store.cart.retrieve(cartId, options)
+        const { cart } = await sdk.store.cart.retrieve(cartId, {
+          fields:
+            '*items,*region,*items.product,*items.variant,+inventory_quantity,*items.thumbnail,*items.metadata,+items.total,*promotions,+shipping_methods.name',
+        })
         return cart
       },
       { loaderKey },

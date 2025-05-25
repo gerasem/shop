@@ -1,23 +1,25 @@
 <script setup lang="ts">
 import { localePath } from '@/composables/localePath'
 import Icon from '@/components/media/Icon.vue'
+import { HttpTypes } from '@medusajs/types'
+import { convertToLocale } from '@/utils/priceUtils'
+import Input from '@/components/form/Input.vue'
 
 defineProps<{
-  item: Object
+  item: HttpTypes.StoreCartLineItem
 }>()
 
-const deleteItemWithConfirm = (event: Event, itemId: string) => {}
+const deleteItemWithConfirm = () => {}
 
 const changeItemCount = (count: number, item) => {}
 </script>
 
 <template>
   <div class="cart__item is-flex">
-    <RouterLink :to="localePath(`item`)">
+    <RouterLink :to="localePath(`item/${item.product_handle}`)">
       <div class="cart__image-container">
         <img
-          v-if="true"
-          :src="'https://placehold.co/400x400'"
+          :src="item.thumbnail"
           :alt="'item'"
           class="cart__image is-block"
         />
@@ -26,18 +28,15 @@ const changeItemCount = (count: number, item) => {}
 
     <div class="cart__main">
       <div class="cart__prices is-flex">
-        <div
-          class="cart__price"
-          v-if="true"
-        >
-          {{ 1100 }}
-          <span>x {{ 1 }}</span>
-          {{ 1100 }}
+        <div class="cart__price">
+          {{ convertToLocale({ amount: item.unit_price ?? 0 }) }}
+          <span>x {{ item.quantity }}</span>
+          {{ convertToLocale({ amount: item.unit_price * item.quantity }) }}
         </div>
 
         <div
+          v-if="false"
           class="cart__old-price"
-          v-if="true"
         >
           {{ 1200 }}
         </div>
@@ -50,21 +49,21 @@ const changeItemCount = (count: number, item) => {}
         </div>
       </div>
 
-      <h4 class="cart__title">Item 123</h4>
+      <h4 class="cart__title">{{ item.product_title }} : {{ item.title }}</h4>
     </div>
 
-    <input
-      class="input"
-      style="width: 100px"
-      type="text"
-      placeholder="Text input"
-    />
+    <Input
+      :value="item.quantity"
+      class="cart__input"
+      min="1"
+      type="number"
+    ></Input>
 
     <Icon
       :width="25"
       :height="25"
       icon="x-lg"
-      @click="deleteItemWithConfirm($event, 1)"
+      @click="deleteItemWithConfirm()"
     />
   </div>
 </template>
@@ -86,6 +85,10 @@ const changeItemCount = (count: number, item) => {}
       height: 1px;
       background: $background-gray;
     }
+  }
+
+  &__input {
+    width: 50px;
   }
 
   &__image-container {

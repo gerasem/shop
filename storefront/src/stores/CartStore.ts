@@ -19,10 +19,8 @@ export const useCartStore = defineStore('cart', () => {
     if (cartId) {
       const dataCart = await ApiService.retrieveCart(
         cartId,
-        {
-          fields: '+items.variant.*,+items.variant.options.*,+items.variant.options.option.*',
-        },
-        'initializeCart',
+
+        loaderStore.LOADER_KEYS.ADD_TO_CART,
       )
       cart.value = dataCart
       localStorage.setItem('cart_id', dataCart.id)

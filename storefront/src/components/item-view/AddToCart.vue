@@ -21,6 +21,12 @@ const inventoryQuantity = computed(() => {
 })
 
 const quantityError = computed(() => {
+  if(props.selectedVariant?.allow_backorder) {
+    return false
+  }
+  if(!props.selectedVariant?.manage_inventory) {
+    return false
+  }
   return quantity.value > inventoryQuantity.value
 })
 
