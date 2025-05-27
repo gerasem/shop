@@ -14,7 +14,10 @@ export const useItemStore = defineStore('item', () => {
   const getItemsByCategory = async (category: ICategory) => {
     if (items.value.some((item) => item.category === category.handle)) return
 
-    const products = await ApiService.fetchItemsByCategory(category.id, loaderStore.LOADER_KEYS.ITEMS)
+    const products = await ApiService.fetchItemsByCategory(
+      category.id,
+      loaderStore.LOADER_KEYS.ITEMS,
+    )
 
     items.value.push({
       category: category.handle,

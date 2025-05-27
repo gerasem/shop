@@ -11,7 +11,7 @@ export async function handleRouting(
   next: NavigationGuardNext,
 ): Promise<void> {
   console.log('handle routing')
-  // load categories, region and some necessary data from api 
+  // load categories, region and some necessary data from api
   init().catch((error) => console.error('Initialization error:', error))
 
   const lang = to.params.locale || detectUserLanguage()

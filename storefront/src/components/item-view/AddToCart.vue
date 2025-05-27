@@ -21,10 +21,10 @@ const inventoryQuantity = computed(() => {
 })
 
 const quantityError = computed(() => {
-  if(props.selectedVariant?.allow_backorder) {
+  if (props.selectedVariant?.allow_backorder) {
     return false
   }
-  if(!props.selectedVariant?.manage_inventory) {
+  if (!props.selectedVariant?.manage_inventory) {
     return false
   }
   return quantity.value > inventoryQuantity.value
@@ -67,10 +67,12 @@ const incrementCount = () => {
       ></Button>
 
       <Input
-        v-model="quantity"
+        v-model.number="quantity"
+        inputmode="numeric"
         class="add-to-cart__input"
         :class="{ 'is-danger': quantityError }"
         min="1"
+        pattern="[0-9]*"
         type="number"
         :max="selectedVariant ? inventoryQuantity : 1000"
       ></Input>

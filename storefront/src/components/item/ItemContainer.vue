@@ -6,8 +6,6 @@ defineProps<{
   items: HttpTypes.StoreProduct[]
   loading: boolean
 }>()
-
-
 </script>
 
 <template>

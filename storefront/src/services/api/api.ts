@@ -132,7 +132,7 @@ class ApiService {
       async () => {
         const { cart } = await sdk.store.cart.retrieve(cartId, {
           fields:
-            '*items,*region,*items.product,*items.variant,+inventory_quantity,*items.thumbnail,*items.metadata,+items.total,*promotions,+shipping_methods.name',
+            '*items, *region, *items.product, *items.variant, *items.thumbnail, *items.metadata, +items.total, *promotions, +shipping_methods.name',
         })
         return cart
       },

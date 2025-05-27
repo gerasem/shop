@@ -44,7 +44,10 @@ useSeoMeta({
   <CategoryTitleNarrow />
 
   <main class="container is-fluid">
-    <Header :level="1" :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.CATEGORIES)">
+    <Header
+      :level="1"
+      :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.CATEGORIES)"
+    >
       {{ categoryStore.currentCategory?.name }}
     </Header>
 

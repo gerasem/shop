@@ -34,8 +34,8 @@ const { cheapestPrice } = getProductPrice({
         v-if="cheapestPrice"
         class="item__price"
       >
-      {{ t('from') }}
-      {{ cheapestPrice.calculated_price }}
+        {{ t('from') }}
+        {{ cheapestPrice.calculated_price }}
       </div>
     </div>
   </RouterLink>
