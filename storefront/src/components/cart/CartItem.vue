@@ -3,15 +3,40 @@ import { localePath } from '@/composables/localePath'
 import Icon from '@/components/media/Icon.vue'
 import { HttpTypes } from '@medusajs/types'
 import { convertToLocale } from '@/utils/priceUtils'
-import Input from '@/components/form/Input.vue'
+import CartQuantity from '@/components/cart/CartQuantity.vue'
+import { computed } from 'vue'
+import { useItemStore } from '@/stores/ItemStore'
 
-defineProps<{
+const props = defineProps<{
   item: HttpTypes.StoreCartLineItem
 }>()
+const itemStore = useItemStore()
+
+const quantity = defineModel<number>('quantity', { default: 1 })
+quantity.value = props.item.quantity
 
 const deleteItemWithConfirm = () => {}
 
 const changeItemCount = (count: number, item) => {}
+
+const inventoryQuantity = computed(() => {
+  if (props.item.variant?.allow_backorder || !props.item.variant?.manage_inventory) {
+    return 1000
+  }
+
+  //todo make api request
+  return 1000
+})
+
+const quantityError = computed(() => {
+  if (props.item.variant?.allow_backorder || !props.item.variant?.manage_inventory) {
+    return false
+  }
+
+  return quantity?.value > inventoryQuantity.value
+})
+
+//todo wathc quantity, send changed qty to api with debounce function
 </script>
 
 <template>
@@ -29,12 +54,12 @@ const changeItemCount = (count: number, item) => {}
     <div class="cart__main">
       <div class="cart__prices is-flex">
         <div class="cart__price">
-          {{ convertToLocale({ amount: item.unit_price ?? 0 }) }}
+          {{ convertToLocale({ amount: item.unit_price }) }}
           <span>x {{ item.quantity }}</span>
-          {{ convertToLocale({ amount: item.unit_price * item.quantity }) }}
+          {{ convertToLocale({ amount: item.total }) }}
         </div>
 
-        <div
+        <!-- <div
           v-if="false"
           class="cart__old-price"
         >
@@ -46,18 +71,17 @@ const changeItemCount = (count: number, item) => {}
           v-if="false"
         >
           %
-        </div>
+        </div> -->
       </div>
 
       <h4 class="cart__title">{{ item.product_title }} : {{ item.title }}</h4>
     </div>
 
-    <Input
-      :value="item.quantity"
-      class="cart__input"
-      min="1"
-      type="number"
-    ></Input>
+    <CartQuantity
+      v-model:quantity="quantity"
+      :inventoryQuantity="inventoryQuantity"
+      :quantityError="quantityError"
+    />
 
     <Icon
       :width="25"

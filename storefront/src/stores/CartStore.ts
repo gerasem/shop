@@ -7,21 +7,18 @@ import type { HttpTypes } from '@medusajs/types'
 
 export const useCartStore = defineStore('cart', () => {
   const cart = ref<HttpTypes.StoreCart | undefined>(undefined)
+
   const loaderStore = useLoaderStore()
+  const regionStore = useRegionStore()
 
   const initializeCart = async () => {
-    const regionStore = useRegionStore()
     if (!regionStore.regionId) {
       return
     }
 
     const cartId = localStorage.getItem('cart_id')
     if (cartId) {
-      const dataCart = await ApiService.retrieveCart(
-        cartId,
-
-        loaderStore.LOADER_KEYS.ADD_TO_CART,
-      )
+      const dataCart = await ApiService.retrieveCart(cartId, loaderStore.LOADER_KEYS.ADD_TO_CART)
       cart.value = dataCart
       localStorage.setItem('cart_id', dataCart.id)
     } else {
@@ -30,7 +27,7 @@ export const useCartStore = defineStore('cart', () => {
   }
 
   watch(
-    () => useRegionStore().regionId,
+    () => regionStore.regionId,
     async (newRegion) => {
       if (!cart.value || !newRegion || cart.value.region_id === newRegion) {
         return
@@ -48,7 +45,6 @@ export const useCartStore = defineStore('cart', () => {
   )
 
   const refreshCart = async () => {
-    const regionStore = useRegionStore()
     if (!regionStore.regionId) {
       return
     }

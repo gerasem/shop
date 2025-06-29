@@ -10,8 +10,10 @@ import { useLoaderStore } from '@/stores/LoaderStore'
 export const useItemStore = defineStore('item', () => {
   const items = ref<IItem[]>([])
   const itemsOnMainPage = ref<IItem[]>([])
-  const loaderStore = useLoaderStore()
+
   const getItemsByCategory = async (category: ICategory) => {
+    const loaderStore = useLoaderStore()
+
     if (items.value.some((item) => item.category === category.handle)) return
 
     const products = await ApiService.fetchItemsByCategory(

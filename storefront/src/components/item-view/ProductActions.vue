@@ -109,7 +109,6 @@ const setOptionValue = (optionId: string, value: string) => {
 
     <AddToCart
       v-else
-      :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ADD_TO_CART)"
       :selectedVariant="selectedVariant"
     />
   </div>

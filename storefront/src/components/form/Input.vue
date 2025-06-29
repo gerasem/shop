@@ -2,25 +2,25 @@
 defineProps<{
   icon?: string
   disabled?: boolean
-  modelValue: string | number
 }>()
 
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: string | number): void
-}>()
+const input = defineModel<number | string>('input', { required: true })
 
-const updateInput = (event: Event) => {
-  const input = event.target as HTMLInputElement
-  emit('update:modelValue', input.value)
-}
+// const emit = defineEmits<{
+//   (e: 'update:modelValue', value: string | number): void
+// }>()
+
+// const updateInput = (event: Event) => {
+//   const input = event.target as HTMLInputElement
+//   emit('update:modelValue', input.value)
+// }
 </script>
 
 <template>
   <input
     class="input"
     type="text"
-    @input="updateInput"
-    :value="modelValue"
+    v-model="input"
   />
 </template>
 

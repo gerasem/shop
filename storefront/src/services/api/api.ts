@@ -4,18 +4,17 @@ import { useLoaderStore } from '@/stores/LoaderStore'
 import { HttpTypes } from '@medusajs/types'
 import { useRegionStore } from '@/stores/RegionStore'
 
-const FIELDS_ITEM_LIST = 'id,title,handle,thumbnail,*categories,*variants'
+const { regionId } = useRegionStore()
 
 class ApiService {
   protected static async handleRequest<T>(
     callback: () => Promise<T>,
-    options: { loaderKey?: string },
+    options: { loaderKey: string },
   ): Promise<T> {
     const loaderStore = useLoaderStore()
-    const loaderKey = options.loaderKey || 'default'
 
     try {
-      loaderStore.startLoading(loaderKey)
+      loaderStore.startLoading(options.loaderKey)
 
       return await callback()
     } catch (error: unknown) {
@@ -28,17 +27,15 @@ class ApiService {
 
       throw error
     } finally {
-      loaderStore.stopLoading(loaderKey)
+      loaderStore.stopLoading(options.loaderKey)
     }
   }
 
   static async fetchCategories(loaderKey: string): Promise<HttpTypes.StoreProductCategory[] | []> {
     return this.handleRequest(
       async () => {
-        //console.log('FetchCategories start', loaderKey)
         const { product_categories } = await sdk.store.category.list()
 
-        //console.log('FetchCategories end', loaderKey)
         return product_categories.map((product) => ({
           ...product,
           image: `https://placehold.co/200?text=${product.name}`,
@@ -53,16 +50,13 @@ class ApiService {
     loaderKey: string,
     limit: number = 50,
   ): Promise<HttpTypes.StoreProduct[] | []> {
-    const { regionId } = useRegionStore()
-
-    console.log('REGION ID', regionId)
     return this.handleRequest(
       async () => {
         const { products } = await sdk.store.product.list({
           category_id: categoryId,
           region_id: regionId,
           limit,
-          fields: FIELDS_ITEM_LIST,
+          fields: 'id,title,handle,thumbnail,*categories,*variants',
         })
         return products
       },
@@ -74,7 +68,6 @@ class ApiService {
     handle: string,
     loaderKey: string,
   ): Promise<HttpTypes.StoreProduct> {
-    const { regionId } = useRegionStore()
 
     return this.handleRequest(
       async () => {

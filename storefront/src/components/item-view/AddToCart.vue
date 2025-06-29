@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import Button from '@/components/form/Button.vue'
-import Input from '@/components/form/Input.vue'
 import { useCartStore } from '@/stores/CartStore'
 import type { HttpTypes } from '@medusajs/types'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
+import CartQuantity from '@/components/cart/CartQuantity.vue'
+import { useLoaderStore } from '@/stores/LoaderStore'
 
 const props = defineProps<{
-  loading: boolean
   selectedVariant: HttpTypes.StoreProductVariant | undefined
 }>()
 
-const quantity = ref<number>(1)
+const quantity = defineModel<number>('quantity', { default: 1 })
 const cartStore = useCartStore()
+const loaderStore = useLoaderStore()
 
 const inventoryQuantity = computed(() => {
   if (props.selectedVariant?.inventory_quantity) {
@@ -21,13 +22,11 @@ const inventoryQuantity = computed(() => {
 })
 
 const quantityError = computed(() => {
-  if (props.selectedVariant?.allow_backorder) {
+  if (props.selectedVariant?.allow_backorder || !props.selectedVariant?.manage_inventory) {
     return false
   }
-  if (!props.selectedVariant?.manage_inventory) {
-    return false
-  }
-  return quantity.value > inventoryQuantity.value
+
+  return quantity?.value > inventoryQuantity.value
 })
 
 const showAvailableCount = computed(() => {
@@ -43,47 +42,16 @@ const handleAddToCart = async () => {
   }
   await cartStore.addToCart(props.selectedVariant.id, quantity.value)
 }
-
-const decrementCount = () => {
-  if (quantity.value > 1) {
-    quantity.value--
-  }
-}
-const incrementCount = () => {
-  if (quantity.value < inventoryQuantity.value) {
-    quantity.value++
-  }
-}
 </script>
 
 <template>
   <div class="add-to-cart__container">
-    <div class="add-to-cart__quantity-block">
-      <Button
-        class="is-white"
-        icon="dash-lg"
-        :disabled="quantity <= 1"
-        @click="decrementCount()"
-      ></Button>
-
-      <Input
-        v-model.number="quantity"
-        inputmode="numeric"
-        class="add-to-cart__input"
-        :class="{ 'is-danger': quantityError }"
-        min="1"
-        pattern="[0-9]*"
-        type="number"
-        :max="selectedVariant ? inventoryQuantity : 1000"
-      ></Input>
-
-      <Button
-        class="is-white"
-        icon="plus-lg"
-        :disabled="quantity >= inventoryQuantity"
-        @click="incrementCount()"
-      ></Button>
-    </div>
+    <CartQuantity
+      v-model:quantity="quantity"
+      :variant="selectedVariant"
+      :inventoryQuantity="inventoryQuantity"
+      :quantityError="quantityError"
+    />
 
     <p
       v-if="quantityError"
@@ -97,7 +65,7 @@ const incrementCount = () => {
       class="add-to-cart__button-container"
     >
       <Button
-        v-if="loading"
+        v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ADD_TO_CART)"
         disabled
         class="button is-primary is-loading"
         data-testid="loading"
@@ -122,34 +90,13 @@ const incrementCount = () => {
 
 <style lang="scss" scoped>
 .add-to-cart {
-  &__input {
-    width: 50px;
-    text-align: center;
-
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
-    /* Firefox */
-    &[type='number'] {
-      -moz-appearance: textfield;
-    }
-  }
-
-  &__quantity-block {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-
   &__container {
     display: flex;
     gap: 40px;
     align-items: center;
     margin-bottom: 30px;
   }
+
   &__button-container {
     display: flex;
     align-items: center;

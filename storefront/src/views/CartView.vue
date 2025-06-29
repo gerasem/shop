@@ -37,12 +37,11 @@ useSeoMeta({
       <div class="column is-two-thirds">
         <Header :level="2">Shopping Cart</Header>
 
-        <template
+        <CartItem
           v-for="item in items"
           :key="item.id"
-        >
-          <CartItem :item="item" />
-        </template>
+          :item="item"
+        />
 
         <p v-if="!items?.length">{{ t('Shopping cart is empty') }}</p>
       </div>
@@ -53,20 +52,23 @@ useSeoMeta({
             {{ t('Free Shipping on all orders over 50€') }}
           </div>
 
-          <div
+          <!-- <div
             v-if="false"
             class="cart__info cart__info--error"
           >
             Coupon Error
-          </div>
+          </div> -->
 
           <div class="cart__form-container">
             <div class="has-text-centered">
-              <div class="columns">
+              <div
+                v-if="cartStore.cart?.subtotal"
+                class="columns"
+              >
                 <div class="column">{{ t('Sub-Total') }}:</div>
                 <div class="column">
                   <span class="cart__form-price">{{
-                    convertToLocale({ amount: cartStore.cart?.subtotal ?? 0 })
+                    convertToLocale({ amount: cartStore.cart.subtotal })
                   }}</span>
                 </div>
               </div>
@@ -74,17 +76,20 @@ useSeoMeta({
               <div class="columns">
                 <div class="column">{{ t('Shipping') }}:</div>
                 <div class="column">
-                  <span class="cart__form-price">
-                    {{
-                      cartStore.cart?.shipping_total === 0
-                        ? 'free'
-                        : convertToLocale({ amount: cartStore.cart?.shipping_total ?? 0 })
-                    }}
+                  <span
+                    v-if="cartStore.cart?.shipping_total === 0"
+                    class="cart__form-price"
+                  >
+                    free
+                  </span>
+
+                  <span v-else>
+                    {{ convertToLocale({ amount: cartStore.cart.shipping_total }) }}
                   </span>
                 </div>
               </div>
 
-              <div
+              <!-- <div
                 class="columns"
                 v-if="false"
               >
@@ -94,13 +99,16 @@ useSeoMeta({
                     {{ 0 }}
                   </span>
                 </div>
-              </div>
+              </div> -->
 
-              <div class="columns">
+              <div
+                v-if="cartStore.cart?.total"
+                class="columns"
+              >
                 <div class="column">{{ t('Total price') }}:</div>
                 <div class="column">
                   <span class="cart__form-price cart__form-price--total">
-                    {{ convertToLocale({ amount: cartStore.cart?.total ?? 0 }) }}
+                    {{ convertToLocale({ amount: cartStore.cart.total }) }}
                   </span>
                 </div>
               </div>

@@ -6,12 +6,12 @@ import { useRouter } from 'vue-router'
 import { useLoaderStore } from '@/stores/LoaderStore'
 
 export const useCategoryStore = defineStore('category', () => {
-  const router = useRouter()
   const categories = ref<ICategory[]>([])
   const currentCategory = ref<ICategory | null>(null)
-  const loaderStore = useLoaderStore()
 
   const getCategories = async () => {
+    const loaderStore = useLoaderStore()
+
     if (categories.value.length) {
       return
     }
@@ -19,6 +19,8 @@ export const useCategoryStore = defineStore('category', () => {
   }
 
   const setCurrentCategory = (hanlde: string) => {
+    const router = useRouter()
+
     if (!categories.value.length) return
     const findedCategory = categories.value.find((cat: ICategory) => cat.handle === hanlde)
 
