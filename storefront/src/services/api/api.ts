@@ -4,9 +4,13 @@ import { useLoaderStore } from '@/stores/LoaderStore'
 import { HttpTypes } from '@medusajs/types'
 import { useRegionStore } from '@/stores/RegionStore'
 
-const { regionId } = useRegionStore()
-
 class ApiService {
+  static regionId = ''
+
+  constructor() {
+    ApiService.regionId = useRegionStore().regionId
+  }
+
   protected static async handleRequest<T>(
     callback: () => Promise<T>,
     options: { loaderKey: string },
@@ -54,7 +58,7 @@ class ApiService {
       async () => {
         const { products } = await sdk.store.product.list({
           category_id: categoryId,
-          region_id: regionId,
+          region_id: this.regionId,
           limit,
           fields: 'id,title,handle,thumbnail,*categories,*variants',
         })
@@ -68,12 +72,11 @@ class ApiService {
     handle: string,
     loaderKey: string,
   ): Promise<HttpTypes.StoreProduct> {
-
     return this.handleRequest(
       async () => {
         const { products } = await sdk.store.product.list({
           handle,
-          region_id: regionId,
+          region_id: this.regionId,
           fields:
             '*categories,*variants.calculated_price,+variants.inventory_quantity,+metadata,+tags',
         })

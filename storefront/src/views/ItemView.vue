@@ -11,14 +11,10 @@ import { useSeoMeta } from '@unhead/vue'
 import { HttpTypes } from '@medusajs/types'
 import ApiService from '@/services/api/api'
 import { useLoaderStore } from '@/stores/LoaderStore'
-import { useProductPrice } from '@/composables/useProductPrice'
 import Header from '@/components/content/Header.vue'
-import Button from '@/components/form/Button.vue'
 
 const categoryStore = useCategoryStore()
 const loaderStore = useLoaderStore()
-
-const { getProductPrice } = useProductPrice()
 
 const item = ref<HttpTypes.StoreProduct | null>(null)
 
@@ -37,15 +33,6 @@ watch(
   },
   { immediate: true },
 )
-const cheapestPrice = computed(() => {
-  if (!item.value) {
-    return null
-  }
-  const { cheapestPrice } = getProductPrice({
-    product: item.value as HttpTypes.StoreProduct,
-  })
-  return cheapestPrice
-})
 
 useSeoMeta({
   title: computed(() => item.value?.title),
@@ -74,6 +61,7 @@ useSeoMeta({
           {{ item?.title }}
         </Header>
 
+        <!-- Skelettons -->
         <div v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)">
           <Header
             :level="4"

@@ -20,10 +20,10 @@ const countOfItems = computed(() => {
     :to="localePath('cart')"
     :title="convertToLocale({ amount: cartStore.cart?.total ?? 0 })"
   >
-    <figure
+    <span
       v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ADD_TO_CART)"
-      class="image is-24x24 is-skeleton"
-    ></figure>
+      class="loading-spinner"
+    ></span>
 
     <Icon
       v-else
@@ -39,11 +39,6 @@ const countOfItems = computed(() => {
       class="navbar__count"
       >{{ countOfItems }}</span
     >
-
-    <figure
-      v-else
-      class="image is-16x16 is-skeleton"
-    ></figure>
   </RouterLink>
 </template>
 
