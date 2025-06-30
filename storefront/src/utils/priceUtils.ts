@@ -5,8 +5,10 @@ export const getPercentageDiff = (original: number, calculated: number): string 
 }
 
 export const convertToLocale = ({ amount }: { amount: number }): string => {
-  return new Intl.NumberFormat('de-DE', {
+  const formatted = new Intl.NumberFormat('de-DE', {
     style: 'currency',
     currency: 'EUR',
   }).format(amount)
+
+  return formatted.replace(/\./g, '')
 }

@@ -7,6 +7,7 @@ import Header from '@/components/content/Header.vue'
 import { useCartStore } from '@/stores/CartStore'
 import { convertToLocale } from '@/utils/priceUtils'
 import { computed } from 'vue'
+import CartCalculatedPrice from '@/components/cart/CartCalculatedPrice.vue'
 
 const cartStore = useCartStore()
 const loaderStore = useLoaderStore()
@@ -61,57 +62,28 @@ useSeoMeta({
 
           <div class="cart__form-container">
             <div class="has-text-centered">
-              <div
-                v-if="cartStore.cart?.subtotal"
-                class="columns"
-              >
-                <div class="column">{{ t('Sub-Total') }}:</div>
-                <div class="column">
-                  <span class="cart__form-price">{{
-                    convertToLocale({ amount: cartStore.cart.subtotal })
-                  }}</span>
-                </div>
-              </div>
+              <CartCalculatedPrice
+                label="Sub Total"
+                :value="cartStore.cart?.subtotal"
+              />
 
-              <div class="columns">
-                <div class="column">{{ t('Shipping') }}:</div>
-                <div class="column">
-                  <span
-                    v-if="cartStore.cart?.shipping_total === 0"
-                    class="cart__form-price"
-                  >
-                    free
-                  </span>
+              <CartCalculatedPrice
+                label="Shipping"
+                :value="cartStore.cart?.shipping_total"
+              />
 
-                  <span v-else>
-                    {{ convertToLocale({ amount: cartStore.cart.shipping_total }) }}
-                  </span>
-                </div>
-              </div>
-
-              <!-- <div
-                class="columns"
+              <CartCalculatedPrice
                 v-if="false"
-              >
-                <div class="column cart__form-price--discount">Discount ():</div>
-                <div class="column">
-                  <span class="cart__form-price cart__form-price--discount">
-                    {{ 0 }}
-                  </span>
-                </div>
-              </div> -->
+                class="cart--discount"
+                label="Discount"
+                :value="0"
+              />
 
-              <div
-                v-if="cartStore.cart?.total"
-                class="columns"
-              >
-                <div class="column">{{ t('Total price') }}:</div>
-                <div class="column">
-                  <span class="cart__form-price cart__form-price--total">
-                    {{ convertToLocale({ amount: cartStore.cart.total }) }}
-                  </span>
-                </div>
-              </div>
+              <CartCalculatedPrice
+                class="cart--total"
+                label="Total price"
+                :value="cartStore.cart?.total"
+              />
 
               <div class="columns">
                 <div class="column"></div>
@@ -142,18 +114,6 @@ useSeoMeta({
 
   &__form-container {
     padding: 1.5rem;
-  }
-
-  &__form-price {
-    font-weight: 600;
-
-    &--total {
-      color: $color-secondary;
-    }
-
-    &--discount {
-      color: $color-primary;
-    }
   }
 
   &__info {

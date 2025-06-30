@@ -15,18 +15,18 @@ const countOfItems = computed(() => {
 </script>
 
 <template>
+  <span
+    v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ADD_TO_CART)"
+    class="loading-spinner"
+  ></span>
+
   <RouterLink
+    v-else
     class="navbar__icon-link"
     :to="localePath('cart')"
     :title="convertToLocale({ amount: cartStore.cart?.total ?? 0 })"
   >
-    <span
-      v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ADD_TO_CART)"
-      class="loading-spinner"
-    ></span>
-
     <Icon
-      v-else
       icon="bag"
       :width="24"
       :height="24"
@@ -35,7 +35,7 @@ const countOfItems = computed(() => {
     />
 
     <span
-      v-if="countOfItems && !loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ADD_TO_CART)"
+      v-if="countOfItems"
       class="navbar__count"
       >{{ countOfItems }}</span
     >
