@@ -11,7 +11,7 @@ export const useRegionStore = defineStore('region', () => {
   const initRegions = async () => {
     const regionIdinLS = localStorage.getItem('region_id')
 
-    if (regionIdinLS) {
+    if (regionIdinLS && regionId.value === regionIdinLS) {
       regionId.value = regionIdinLS
     } else {
       const regions = await ApiService.fetchRegions(loaderStore.LOADER_KEYS.REGIONS)
