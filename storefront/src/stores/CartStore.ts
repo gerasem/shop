@@ -12,21 +12,22 @@ export const useCartStore = defineStore('cart', () => {
   const regionStore = useRegionStore()
 
   const initializeCart = async () => {
-    if (!regionStore.regionId) {
-      return
-    }
-
     const cartId = localStorage.getItem('cart_id')
     if (cartId) {
       const dataCart = await ApiService.retrieveCart(cartId, loaderStore.LOADER_KEYS.ADD_TO_CART)
-      cart.value = dataCart
-      localStorage.setItem('cart_id', dataCart.id)
+
+      console.log('retrieveCart', dataCart)
+      if (dataCart) {
+        cart.value = dataCart
+      } else {
+        refreshCart()
+      }
     } else {
-      await refreshCart()
+      refreshCart()
     }
   }
 
-  watch(
+  /*   watch(
     () => regionStore.regionId,
     async (newRegion) => {
       if (!cart.value || !newRegion || cart.value.region_id === newRegion) {
@@ -42,49 +43,37 @@ export const useCartStore = defineStore('cart', () => {
       localStorage.setItem('cart_id', dataCart.id)
     },
     { immediate: true },
-  )
+  ) */
 
   const refreshCart = async () => {
-    if (!regionStore.regionId) {
-      return
-    }
-
-    try {
-      const dataCart = await ApiService.createCart(
-        { region_id: regionStore.regionId },
-        'refreshCart',
-      )
-      cart.value = dataCart
-      localStorage.setItem('cart_id', dataCart.id)
-      return dataCart
-    } catch (err) {
-      console.error('Error update cart', err)
-      return undefined
-    }
+    console.log('Refresh cart')
+    const dataCart = await ApiService.createCart(
+      { region_id: regionStore.regionId },
+      loaderStore.LOADER_KEYS.ADD_TO_CART,
+    )
+    cart.value = dataCart
+    localStorage.setItem('cart_id', dataCart.id)
+    return dataCart
   }
 
   const addToCart = async (variantId: string, quantity: number): Promise<HttpTypes.StoreCart> => {
-    try {
-      let newCart = cart.value
-      if (!newCart) {
-        newCart = await refreshCart()
-        if (!newCart) {
-          throw new Error('Error creating cart')
-        }
-      }
-
-      const dataCart = await ApiService.createCartLineItem(
-        newCart.id,
-        { variant_id: variantId, quantity },
-        loaderStore.LOADER_KEYS.ADD_TO_CART,
-      )
-      cart.value = dataCart
-      localStorage.setItem('cart_id', dataCart.id)
-      return dataCart
-    } catch (err) {
-      console.error('Error add to cart', err)
-      throw err
+    if (!cart.value) {
+      await refreshCart()
+      throw new Error('Error initializing cart')
     }
+
+    const dataCart = await ApiService.createCartLineItem(
+      cart.value?.id,
+      {
+        variant_id: variantId,
+        quantity,
+      },
+      loaderStore.LOADER_KEYS.ADD_TO_CART,
+    )
+    console.log('addToCart get cart', dataCart)
+    cart.value = dataCart
+    localStorage.setItem('cart_id', dataCart.id)
+    return dataCart
   }
 
   const updateCart = async ({
@@ -124,23 +113,19 @@ export const useCartStore = defineStore('cart', () => {
     quantity: number,
   ): Promise<HttpTypes.StoreCart> => {
     if (!cart.value) {
+      await refreshCart()
       throw new Error('Error initializing cart')
     }
 
-    try {
-      const dataCart = await ApiService.updateCartLineItem(
-        cart.value.id,
-        itemId,
-        { quantity },
-        'updateCartItemQuantity',
-      )
-      cart.value = dataCart
-      localStorage.setItem('cart_id', dataCart.id)
-      return dataCart
-    } catch (err) {
-      console.error('Error updating qty of item:', err)
-      throw err
-    }
+    const dataCart = await ApiService.updateCartLineItem(
+      cart.value.id,
+      itemId,
+      { quantity },
+      loaderStore.LOADER_KEYS.ADD_TO_CART,
+    )
+    cart.value = dataCart
+    localStorage.setItem('cart_id', dataCart.id)
+    return dataCart
   }
 
   const unsetCart = () => {

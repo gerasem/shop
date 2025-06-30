@@ -4,6 +4,9 @@ import { useLoaderStore } from '@/stores/LoaderStore'
 import { HttpTypes } from '@medusajs/types'
 import { useRegionStore } from '@/stores/RegionStore'
 
+const CART_FIELDS =
+  '*items, *region, *items.product, *items.variant, *items.thumbnail, *items.metadata, +items.total, *promotions, +shipping_methods.name'
+
 class ApiService {
   static regionId = ''
 
@@ -127,8 +130,7 @@ class ApiService {
     return ApiService.handleRequest(
       async () => {
         const { cart } = await sdk.store.cart.retrieve(cartId, {
-          fields:
-            '*items, *region, *items.product, *items.variant, *items.thumbnail, *items.metadata, +items.total, *promotions, +shipping_methods.name',
+          fields: CART_FIELDS,
         })
         return cart
       },
@@ -157,7 +159,9 @@ class ApiService {
   ): Promise<HttpTypes.StoreCart> {
     return ApiService.handleRequest(
       async () => {
-        const { cart } = await sdk.store.cart.createLineItem(cartId, data)
+        const { cart } = await sdk.store.cart.createLineItem(cartId, data, {
+          fields: CART_FIELDS,
+        })
         return cart
       },
       { loaderKey },
@@ -172,7 +176,9 @@ class ApiService {
   ): Promise<HttpTypes.StoreCart> {
     return ApiService.handleRequest(
       async () => {
-        const { cart } = await sdk.store.cart.updateLineItem(cartId, itemId, data)
+        const { cart } = await sdk.store.cart.updateLineItem(cartId, itemId, data, {
+          fields: CART_FIELDS,
+        })
         return cart
       },
       { loaderKey },
