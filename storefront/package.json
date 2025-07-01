@@ -22,6 +22,7 @@
     "@unhead/vue": "^2.0.8",
     "@vueuse/core": "^13.1.0",
     "bulma": "^1.0.4",
+    "lodash.debounce": "^4.0.8",
     "photoswipe": "^5.4.4",
     "pinia": "^3.0.2",
     "swiper": "^11.2.6",
@@ -33,6 +34,7 @@
   "devDependencies": {
     "@tsconfig/node22": "^22.0.1",
     "@types/jsdom": "^21.1.7",
+    "@types/lodash.debounce": "^4.0.9",
     "@types/node": "^22.15.14",
     "@vitejs/plugin-vue": "^5.2.3",
     "@vitest/eslint-plugin": "1.1.44",

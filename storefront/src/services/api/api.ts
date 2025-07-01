@@ -145,7 +145,9 @@ class ApiService {
   ): Promise<HttpTypes.StoreCart> {
     return ApiService.handleRequest(
       async () => {
-        const { cart } = await sdk.store.cart.update(cartId, data)
+        const { cart } = await sdk.store.cart.update(cartId, data, {
+          fields: CART_FIELDS,
+        })
         return cart
       },
       { loaderKey },

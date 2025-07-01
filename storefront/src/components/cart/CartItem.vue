@@ -4,20 +4,28 @@ import Icon from '@/components/media/Icon.vue'
 import { HttpTypes } from '@medusajs/types'
 import { convertToLocale } from '@/utils/priceUtils'
 import CartQuantity from '@/components/cart/CartQuantity.vue'
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { useItemStore } from '@/stores/ItemStore'
+import { useCartStore } from '@/stores/CartStore'
+import debounce from 'lodash.debounce'
 
 const props = defineProps<{
   item: HttpTypes.StoreCartLineItem
 }>()
 const itemStore = useItemStore()
+const cartStore = useCartStore()
 
 const quantity = defineModel<number>('quantity', { default: 1 })
 quantity.value = props.item.quantity
 
 const deleteItemWithConfirm = () => {}
 
-const changeItemCount = (count: number, item) => {}
+const changeItemCount = () => {
+  console.log('changeItemCount', props.item.id, quantity.value)
+  if (!quantityError.value) {
+    cartStore.updateItemQuantity(props.item.id, quantity.value)
+  }
+}
 
 const inventoryQuantity = computed(() => {
   if (props.item.variant?.allow_backorder || !props.item.variant?.manage_inventory) {
@@ -36,7 +44,13 @@ const quantityError = computed(() => {
   return quantity?.value > inventoryQuantity.value
 })
 
-//todo wathc quantity, send changed qty to api with debounce function
+watch(
+  quantity,
+  debounce(() => {
+    console.log('getSearchedItems()')
+    changeItemCount()
+  }, 500),
+)
 </script>
 
 <template>
