@@ -117,7 +117,7 @@ export const useCartStore = defineStore('cart', () => {
       loaderStore.LOADER_KEYS.ADD_TO_CART,
     )
   }
-  
+
   const unsetCart = () => {
     cart.value = undefined
     localStorage.removeItem('cart_id')

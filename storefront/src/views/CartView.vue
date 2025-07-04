@@ -15,7 +15,8 @@ const loaderStore = useLoaderStore()
 const { t } = useI18n()
 
 const items = computed(() => {
-  return cartStore.cart?.items
+  const itemsInCart = cartStore.cart?.items
+  return itemsInCart?.sort((a, b) => a.title.localeCompare(b.title))
 })
 
 const deleteItemsFromCart = () => {}

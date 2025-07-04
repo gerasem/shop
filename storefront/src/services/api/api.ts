@@ -221,20 +221,6 @@ class ApiService {
       },
       { loaderKey },
     )
-
-    sdk.store.product
-      .retrieve(itemId, {
-        fields: `*variants.calculated_price,+variants.inventory_quantity`,
-      })
-      .then(({ product }) => {
-        if (product.variants) {
-          const variant = product.variants.find((v) => v.id === variantId)
-          if (variant) {
-            return variant.inventory_quantity
-          }
-        }
-      })
-    return 1000
   }
 }
 
