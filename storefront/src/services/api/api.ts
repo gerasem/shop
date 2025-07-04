@@ -200,6 +200,42 @@ class ApiService {
       { loaderKey },
     )
   }
+
+  static async fetchItemQuantityForItem(
+    itemId: string,
+    variantId: string,
+    loaderKey: string,
+  ): Promise<number> {
+    return ApiService.handleRequest(
+      async () => {
+        const { product } = await sdk.store.product.retrieve(itemId, {
+          fields: `*variants.calculated_price,+variants.inventory_quantity`,
+        })
+        if (product.variants) {
+          const variant = product.variants.find((v) => v.id === variantId)
+          if (variant) {
+            return variant.inventory_quantity || 0
+          }
+        }
+        return 1000
+      },
+      { loaderKey },
+    )
+
+    sdk.store.product
+      .retrieve(itemId, {
+        fields: `*variants.calculated_price,+variants.inventory_quantity`,
+      })
+      .then(({ product }) => {
+        if (product.variants) {
+          const variant = product.variants.find((v) => v.id === variantId)
+          if (variant) {
+            return variant.inventory_quantity
+          }
+        }
+      })
+    return 1000
+  }
 }
 
 export default ApiService

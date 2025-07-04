@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { useRegionStore } from '@/stores/RegionStore'
 import { useLoaderStore } from '@/stores/LoaderStore'
 import ApiService from '@/services/api/api'
@@ -26,24 +26,6 @@ export const useCartStore = defineStore('cart', () => {
       refreshCart()
     }
   }
-
-  /*   watch(
-    () => regionStore.regionId,
-    async (newRegion) => {
-      if (!cart.value || !newRegion || cart.value.region_id === newRegion) {
-        return
-      }
-
-      const dataCart = await ApiService.updateCart(
-        cart.value.id,
-        { region_id: newRegion },
-        'updateCartRegion',
-      )
-      cart.value = dataCart
-      localStorage.setItem('cart_id', dataCart.id)
-    },
-    { immediate: true },
-  ) */
 
   const refreshCart = async () => {
     console.log('Refresh cart')
@@ -76,7 +58,7 @@ export const useCartStore = defineStore('cart', () => {
     return dataCart
   }
 
-  const updateCart = async ({
+  /*  const updateCart = async ({
     updateData,
     shippingMethodData,
   }: {
@@ -106,7 +88,7 @@ export const useCartStore = defineStore('cart', () => {
       console.error('Error update cart:', err)
       return undefined
     }
-  }
+  } */
 
   const updateItemQuantity = async (
     itemId: string,
@@ -128,6 +110,14 @@ export const useCartStore = defineStore('cart', () => {
     return dataCart
   }
 
+  const getItemQuantity = async (itemId: string, variantId: string): Promise<number> => {
+    return await ApiService.fetchItemQuantityForItem(
+      itemId,
+      variantId,
+      loaderStore.LOADER_KEYS.ADD_TO_CART,
+    )
+  }
+  
   const unsetCart = () => {
     cart.value = undefined
     localStorage.removeItem('cart_id')
@@ -137,9 +127,9 @@ export const useCartStore = defineStore('cart', () => {
     cart,
     initializeCart,
     addToCart,
-    updateCart,
     refreshCart,
     updateItemQuantity,
     unsetCart,
+    getItemQuantity,
   }
 })

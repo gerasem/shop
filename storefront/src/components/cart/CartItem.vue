@@ -4,26 +4,34 @@ import Icon from '@/components/media/Icon.vue'
 import { HttpTypes } from '@medusajs/types'
 import { convertToLocale } from '@/utils/priceUtils'
 import CartQuantity from '@/components/cart/CartQuantity.vue'
-import { computed, watch } from 'vue'
-import { useItemStore } from '@/stores/ItemStore'
+import { computed, ref, watch } from 'vue'
 import { useCartStore } from '@/stores/CartStore'
 import debounce from 'lodash.debounce'
 
 const props = defineProps<{
   item: HttpTypes.StoreCartLineItem
 }>()
-const itemStore = useItemStore()
 const cartStore = useCartStore()
+
+const inventoryQuantityFromApi = ref<number | null>(null)
 
 const quantity = defineModel<number>('quantity', { default: 1 })
 quantity.value = props.item.quantity
 
 const deleteItemWithConfirm = () => {}
 
-const changeItemCount = () => {
+const changeItemCount = async () => {
   console.log('changeItemCount', props.item.id, quantity.value)
   if (!quantityError.value) {
     cartStore.updateItemQuantity(props.item.id, quantity.value)
+  }
+
+  console.log('props.item.variant_id', props.item.product_id, props.item.variant_id)
+  if (props.item?.product_id && props.item.variant_id) {
+    inventoryQuantityFromApi.value = await cartStore.getItemQuantity(
+      props.item?.product_id,
+      props.item.variant_id,
+    )
   }
 }
 
@@ -32,7 +40,9 @@ const inventoryQuantity = computed(() => {
     return 1000
   }
 
-  //todo make api request
+  if (inventoryQuantityFromApi.value !== null) {
+    return inventoryQuantityFromApi.value
+  }
   return 1000
 })
 
@@ -47,7 +57,7 @@ const quantityError = computed(() => {
 watch(
   quantity,
   debounce(() => {
-    console.log('getSearchedItems()')
+    console.log('changeItemCount debounce')
     changeItemCount()
   }, 500),
 )
