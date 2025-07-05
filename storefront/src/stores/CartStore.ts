@@ -90,10 +90,7 @@ export const useCartStore = defineStore('cart', () => {
     }
   } */
 
-  const updateItemQuantity = async (
-    itemId: string,
-    quantity: number,
-  ): Promise<HttpTypes.StoreCart> => {
+  const updateItemQuantity = async (itemId: string, quantity: number): Promise<void> => {
     if (!cart.value) {
       await refreshCart()
       throw new Error('Error initializing cart')
@@ -107,7 +104,7 @@ export const useCartStore = defineStore('cart', () => {
     )
     cart.value = dataCart
     localStorage.setItem('cart_id', dataCart.id)
-    return dataCart
+    //return dataCart
   }
 
   const getItemQuantity = async (itemId: string, variantId: string): Promise<number> => {
@@ -123,6 +120,19 @@ export const useCartStore = defineStore('cart', () => {
     localStorage.removeItem('cart_id')
   }
 
+  const removeItem = async (item: HttpTypes.StoreCartLineItem): Promise<void> => {
+    if (cart.value) {
+      const dataCart = await ApiService.removeItem(
+        cart.value.id,
+        item,
+        loaderStore.LOADER_KEYS.ADD_TO_CART,
+      )
+
+      cart.value = dataCart
+      localStorage.setItem('cart_id', dataCart.id)
+    }
+  }
+
   return {
     cart,
     initializeCart,
@@ -131,5 +141,6 @@ export const useCartStore = defineStore('cart', () => {
     updateItemQuantity,
     unsetCart,
     getItemQuantity,
+    removeItem,
   }
 })

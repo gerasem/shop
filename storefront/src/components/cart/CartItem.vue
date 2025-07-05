@@ -18,7 +18,9 @@ const inventoryQuantityFromApi = ref<number | null>(null)
 const quantity = defineModel<number>('quantity', { default: 1 })
 quantity.value = props.item.quantity
 
-const deleteItemWithConfirm = () => {}
+const deleteItemWithConfirm = () => {
+  cartStore.removeItem(props.item)
+}
 
 const changeItemCount = async () => {
   console.log('changeItemCount', props.item.id, quantity.value)
@@ -80,7 +82,13 @@ watch(
         <div class="cart__price">
           {{ convertToLocale({ amount: item.unit_price }) }}
           <span>x {{ item.quantity }}</span>
-          {{ convertToLocale({ amount: item.total }) }}
+          <template v-if="item.total">
+            {{ convertToLocale({ amount: item.total }) }}
+          </template>
+
+          <template v-else>
+            {{ convertToLocale({ amount: item.unit_price * item.quantity }) }}
+          </template>
         </div>
 
         <!-- <div
@@ -108,8 +116,8 @@ watch(
     />
 
     <Icon
-      :width="25"
-      :height="25"
+      :width="18"
+      :height="18"
       icon="x-lg"
       @click="deleteItemWithConfirm()"
     />

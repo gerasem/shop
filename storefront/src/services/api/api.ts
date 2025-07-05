@@ -5,7 +5,7 @@ import { HttpTypes } from '@medusajs/types'
 import { useRegionStore } from '@/stores/RegionStore'
 
 const CART_FIELDS =
-  '*items, *region, *items.product, *items.variant, *items.thumbnail, *items.metadata, +items.total, *promotions, +shipping_methods.name'
+  '*items,+items.total,*region,*items.product,*items.variant,*items.thumbnail,*items.metadata,*promotions,+shipping_methods.name'
 
 class ApiService {
   static regionId = ''
@@ -218,6 +218,28 @@ class ApiService {
           }
         }
         return 1000
+      },
+      { loaderKey },
+    )
+  }
+
+  static async removeItem(
+    cartId: string,
+    item: HttpTypes.StoreCartLineItem,
+    loaderKey: string,
+  ): Promise<HttpTypes.StoreCart> {
+    const toastStore = useToastStore()
+
+    return ApiService.handleRequest(
+      async () => {
+        const { deleted, parent: cart } = await sdk.store.cart.deleteLineItem(cartId, item.id, {
+          fields: CART_FIELDS,
+        })
+
+        if (deleted) {
+          toastStore.addSuccess(`Item ${item.title} has been deleted`)
+        }
+        return cart
       },
       { loaderKey },
     )
