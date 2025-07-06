@@ -63,7 +63,8 @@ class ApiService {
           category_id: categoryId,
           region_id: this.regionId,
           limit,
-          fields: 'id,title,handle,thumbnail,*categories,*variants',
+          fields:
+            'id,title,handle,thumbnail,*categories,*variants,+variants.calculated_price,+variants.inventory_quantity',
         })
         return products
       },
