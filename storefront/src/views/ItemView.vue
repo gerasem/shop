@@ -45,15 +45,15 @@ useSeoMeta({
   <main class="container is-fluid">
     <BreadcrumbItem :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)" />
 
-    <div class="columns is-mobile is-5-tablet is-6-desktop is-8-fullhd">
-      <div class="column is-half">
+    <div class="columns is-5-tablet is-6-desktop is-8-fullhd is-tablet">
+      <div class="column is-three-fifths-widescreen is-half-desktop">
         <Gallery
           :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)"
           :item="item"
         />
       </div>
 
-      <div class="column is-half">
+      <div class="column is-desktop">
         <Header
           :level="1"
           :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)"

@@ -20,12 +20,18 @@ const prices = computed(() =>
 const selectedPrice = computed(() =>
   props.variant ? prices.value.variantPrice : prices.value.cheapestPrice,
 )
+
+const showAvailableCount = computed(() => {
+  return props.variant?.inventory_quantity && props.variant?.inventory_quantity > 10
+    ? 'Available in lagre quantity'
+    : `Only ${props.variant?.inventory_quantity} items left in stock`
+})
 </script>
 
 <template>
   <div
     v-if="selectedPrice"
-    class="content"
+    class="is-flex item__price-container"
   >
     <h4
       class="title is-4"
@@ -51,10 +57,17 @@ const selectedPrice = computed(() =>
 
       <span class="has-text-info">-{{ selectedPrice.percentage_diff }}%</span>
     </div>
+
+    <p>{{ showAvailableCount }}</p>
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+.item {
+  &__price-container {
+    justify-content: space-between;
+  }
+}
 .is-crossed {
   text-decoration: line-through;
 }

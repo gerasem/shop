@@ -29,12 +29,6 @@ const quantityError = computed(() => {
   return quantity?.value > inventoryQuantity.value
 })
 
-const showAvailableCount = computed(() => {
-  return inventoryQuantity.value > 10
-    ? 'Available in lagre quantity'
-    : `Only ${inventoryQuantity.value} items left in stock`
-})
-
 // add to cart
 const handleAddToCart = async () => {
   if (!props.selectedVariant?.id) {
@@ -82,10 +76,9 @@ const handleAddToCart = async () => {
       >
         Add to Cart
       </Button>
-
-      <p>{{ showAvailableCount }}</p>
     </div>
   </div>
+
 </template>
 
 <style lang="scss" scoped>

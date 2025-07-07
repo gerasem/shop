@@ -4,11 +4,7 @@ import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 
-const links = [
-  { path: '', text: 'Home' },
-  { path: 'category', text: 'Category' },
-  { path: 'cart', text: 'Cart' },
-]
+const links = [{ path: 'category', text: 'All Items' }]
 </script>
 
 <template>
