@@ -11,11 +11,11 @@ defineProps<{
 </script>
 
 <template>
-  <div class="columns">
+  <div class="columns cart__price-container">
     <div class="column">{{ t(label) }}:</div>
     <div class="column">
       <span
-        v-if="value"
+        v-if="value !== undefined"
         class="cart__form-price"
         >{{ convertToLocale({ amount: value }) }}</span
       >
@@ -27,6 +27,10 @@ defineProps<{
 
 <style lang="scss" scoped>
 .cart {
+  &__price-container {
+    margin-bottom: 0;
+  }
+
   &__form-price {
     font-weight: 600;
   }

@@ -61,7 +61,7 @@ const handleAddToCart = async () => {
       <Button
         v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ADD_TO_CART)"
         disabled
-        class="button is-primary is-loading"
+        class="is-primary is-loading is-fullwidth"
         data-testid="loading"
       >
         Adding...
@@ -70,7 +70,7 @@ const handleAddToCart = async () => {
       <Button
         v-else
         @click="handleAddToCart"
-        class="button is-primary"
+        class="is-primary is-fullwidth"
         data-testid="add-to-cart"
         icon="bag"
       >
@@ -78,7 +78,6 @@ const handleAddToCart = async () => {
       </Button>
     </div>
   </div>
-
 </template>
 
 <style lang="scss" scoped>
@@ -94,6 +93,7 @@ const handleAddToCart = async () => {
     display: flex;
     align-items: center;
     gap: 20px;
+    width: 100%;
   }
 }
 </style>

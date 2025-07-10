@@ -8,6 +8,7 @@ import { useCartStore } from '@/stores/CartStore'
 import { convertToLocale } from '@/utils/priceUtils'
 import { computed } from 'vue'
 import CartCalculatedPrice from '@/components/cart/CartCalculatedPrice.vue'
+import Button from '@/components/form/Button.vue'
 
 const cartStore = useCartStore()
 const loaderStore = useLoaderStore()
@@ -86,9 +87,11 @@ useSeoMeta({
                 :value="cartStore.cart?.total"
               />
 
-              <div class="columns">
-                <div class="column"></div>
-              </div>
+              <Button
+                icon="bag"
+                class="mt-2 is-primary is-fullwidth"
+                >{{ t('Checkout') }}</Button
+              >
 
               <div class="columns">
                 <div class="column"></div>
