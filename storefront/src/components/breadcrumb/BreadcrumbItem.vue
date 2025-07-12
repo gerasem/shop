@@ -36,8 +36,6 @@ defineProps<{
 </template>
 
 <style scoped lang="scss">
-@forward 'bulma/sass/components/breadcrumb';
-
 .breadcrumb__skeleton {
   gap: 10px;
   padding-right: 10px;

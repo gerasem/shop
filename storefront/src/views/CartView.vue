@@ -5,10 +5,10 @@ import { useSeoMeta } from '@unhead/vue'
 import { useLoaderStore } from '@/stores/LoaderStore'
 import Header from '@/components/content/Header.vue'
 import { useCartStore } from '@/stores/CartStore'
-import { convertToLocale } from '@/utils/priceUtils'
 import { computed } from 'vue'
 import CartCalculatedPrice from '@/components/cart/CartCalculatedPrice.vue'
 import Button from '@/components/form/Button.vue'
+import { localePath } from '@/composables/localePath.ts'
 
 const cartStore = useCartStore()
 const loaderStore = useLoaderStore()
@@ -19,8 +19,6 @@ const items = computed(() => {
   const itemsInCart = cartStore.cart?.items
   return itemsInCart?.sort((a, b) => a.title.localeCompare(b.title))
 })
-
-const deleteItemsFromCart = () => {}
 
 useSeoMeta({
   title: 'Shopping Cart',
@@ -87,11 +85,13 @@ useSeoMeta({
                 :value="cartStore.cart?.total"
               />
 
-              <Button
-                icon="bag"
-                class="mt-2 is-primary is-fullwidth"
-                >{{ t('Checkout') }}</Button
-              >
+              <RouterLink :to="localePath(`checkout`)">
+                <Button
+                  icon="bag"
+                  class="mt-4 is-primary is-fullwidth"
+                  >{{ t('Checkout') }}</Button
+                >
+              </RouterLink>
 
               <div class="columns">
                 <div class="column"></div>

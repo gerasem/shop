@@ -26,6 +26,8 @@
 @forward 'bulma/sass/grid';
 @forward 'bulma/sass/base/skeleton';
 @forward 'bulma/sass/helpers/typography';
+@forward 'bulma/sass/components/breadcrumb';
+
 @use 'bulma/sass/form' with (
   $input-shadow: none
 );
