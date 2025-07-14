@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import CartItem from '@/components/cart/CartItem.vue'
 import { useI18n } from 'vue-i18n'
 import { useSeoMeta } from '@unhead/vue'
 import { useLoaderStore } from '@/stores/LoaderStore'
 import Header from '@/components/content/Header.vue'
 import { useCartStore } from '@/stores/CartStore'
-import { computed, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import CartCalculatedPrice from '@/components/cart/CartCalculatedPrice.vue'
 import Button from '@/components/form/Button.vue'
-import BreadcrumbCheckout from '@/components/breadcrumb/BreadcrumbCheckout.vue'
 import Input from '@/components/form/Input.vue'
+import CartSteps from '@/components/cart/CartSteps.vue'
 
 const cartStore = useCartStore()
 const loaderStore = useLoaderStore()
@@ -57,12 +56,11 @@ onMounted(() => {
   </div> -->
 
   <main class="container is-fluid">
+    <CartSteps />
+
     <div class="columns">
       <div class="column is-two-thirds">
-        <div class="checkout__title-container">
-          <BreadcrumbCheckout />
-          <Header :level="2">{{ t('Checkout') }}</Header>
-        </div>
+        <Header :level="2">{{ t('Checkout') }}</Header>
 
         <Header :level="3">{{ t('Address') }}</Header>
 
@@ -243,14 +241,6 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-.checkout {
-  &__title-container {
-    display: flex;
-    gap: 40px;
-    align-items: center;
-    margin-bottom: 40px;
-  }
-}
 .cart {
   &__form {
     position: sticky;

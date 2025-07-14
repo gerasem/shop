@@ -8,6 +8,7 @@ import { useCartStore } from '@/stores/CartStore'
 import { computed } from 'vue'
 import CartCalculatedPrice from '@/components/cart/CartCalculatedPrice.vue'
 import Button from '@/components/form/Button.vue'
+import CartSteps from '@/components/cart/CartSteps.vue'
 import { localePath } from '@/composables/localePath.ts'
 
 const cartStore = useCartStore()
@@ -34,6 +35,7 @@ useSeoMeta({
   </div> -->
 
   <main class="container is-fluid">
+    <CartSteps />
     <div class="columns">
       <div class="column is-two-thirds">
         <Header :level="2">Shopping Cart</Header>
