@@ -52,6 +52,11 @@ const router: Router = createRouter({
           component: () => import('@/views/CheckoutView.vue'),
         },
         {
+          path: 'payment',
+          name: 'payment',
+          component: () => import('@/views/PaymentView.vue'),
+        },
+        {
           path: '404',
           name: '404',
           component: () => import('@/views/404View.vue'),

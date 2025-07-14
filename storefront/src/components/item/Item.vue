@@ -46,6 +46,7 @@ const { cheapestPrice } = getProductPrice({
   &__image {
     width: 100%;
     object-fit: cover;
+    background-color: $background-gray;
   }
 
   &__bottom {

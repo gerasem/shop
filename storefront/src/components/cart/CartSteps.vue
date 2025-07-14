@@ -16,9 +16,6 @@ const steps = [
 ]
 
 onMounted(() => {
-  console.log('steps')
-  console.log(route)
-
   switch (route.name) {
     case 'cart':
       currentIndex.value = 1
@@ -27,10 +24,9 @@ onMounted(() => {
       currentIndex.value = 2
       break
     case 'payment':
-      currentIndex.value = 2
+      currentIndex.value = 3
       break
   }
-  console.log('currentIndex.value', currentIndex.value)
 })
 </script>
 
@@ -60,11 +56,13 @@ onMounted(() => {
 
 .cart-steps {
   position: relative;
+  margin-top: 40px;
+  margin-bottom: 40px !important;
 
   &:before {
     content: '';
     height: 2px;
-    width: 70%;
+    width: 100vmin;
     background-color: $color-secondary;
     position: absolute;
     left: 50%;
