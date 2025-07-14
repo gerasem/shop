@@ -78,9 +78,8 @@ defineProps<{
 .cart {
   &__form {
     position: sticky;
-    top: 40px;
+    top: 80px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-    margin-top: 30px;
     @media (max-width: $screen-lg-max) {
       margin: 2rem 0;
     }

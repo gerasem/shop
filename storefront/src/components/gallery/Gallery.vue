@@ -104,6 +104,11 @@ const openGallery = async (startIndex: number) => {
     margin-bottom: 15px;
     break-inside: avoid;
     cursor: zoom-in;
+
+    img {
+      background-color: $background-gray;
+      min-height: 250px;
+    }
   }
 }
 </style>
