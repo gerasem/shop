@@ -5,9 +5,13 @@ import type { HttpTypes } from '@medusajs/types'
 import { computed } from 'vue'
 import CartQuantity from '@/components/cart/CartQuantity.vue'
 import { useLoaderStore } from '@/stores/LoaderStore'
+import { useToastStore } from '@/stores/ToastStore'
+
+const toastStore = useToastStore()
 
 const props = defineProps<{
   selectedVariant: HttpTypes.StoreProductVariant | undefined
+  item: HttpTypes.StoreProduct
 }>()
 
 const quantity = defineModel<number>('quantity', { default: 1 })
@@ -35,6 +39,7 @@ const handleAddToCart = async () => {
     return
   }
   await cartStore.addToCart(props.selectedVariant.id, quantity.value)
+  toastStore.addSuccess(`Item ${props.item.title} has been added`)
 }
 </script>
 

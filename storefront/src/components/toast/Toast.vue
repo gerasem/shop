@@ -10,11 +10,11 @@ const toaster = createToaster({ placement: 'bottom', overlap: true, gap: 15 })
 const getClass = (type: string): string => {
   switch (type) {
     case 'success':
-      return 'is-success'
+      return 'is-success is-light'
     case 'error':
-      return 'is-danger'
+      return 'is-danger is-light'
     case 'info':
-      return 'is-warning'
+      return 'is-warning is-light'
     default:
       return ''
   }
@@ -48,9 +48,7 @@ watch(
         :class="getClass(toast.type)"
       >
         <Toast.CloseTrigger class="notification__delete">
-          <button>
-            <Icon icon="x-lg" />
-          </button>
+          <Icon icon="x-lg" />
         </Toast.CloseTrigger>
         <Toast.Title class="notification__title">{{ toast.title }}</Toast.Title>
         <Toast.Description v-if="toast.description">

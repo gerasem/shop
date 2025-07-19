@@ -110,6 +110,7 @@ const setOptionValue = (optionId: string, value: string) => {
     <AddToCart
       v-else
       :selectedVariant="selectedVariant"
+      :item="product"
     />
   </div>
 </template>

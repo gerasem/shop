@@ -238,7 +238,7 @@ class ApiService {
         })
 
         if (deleted) {
-          toastStore.addSuccess(`Item ${item.title} has been deleted`)
+          toastStore.addInfo(`Item ${item.title} has been deleted`)
         }
         return cart
       },
