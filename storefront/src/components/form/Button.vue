@@ -29,6 +29,11 @@ defineProps<{
 .button {
   gap: 10px;
 
+  &:has(svg) {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
   &:disabled > * {
     cursor: not-allowed !important;
   }

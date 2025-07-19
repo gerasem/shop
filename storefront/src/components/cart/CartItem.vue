@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { localePath } from '@/composables/localePath'
-import Icon from '@/components/media/Icon.vue'
+import Button from '@/components/form/Button.vue'
 import { HttpTypes } from '@medusajs/types'
 import { convertToLocale } from '@/utils/priceUtils'
 import CartQuantity from '@/components/cart/CartQuantity.vue'
@@ -115,12 +115,11 @@ watch(
       :quantityError="quantityError"
     />
 
-    <Icon
-      :width="18"
-      :height="18"
+    <Button
+      class="is-white"
       icon="x-lg"
       @click="deleteItemWithConfirm()"
-    />
+    ></Button>
   </div>
 </template>
 
