@@ -18,7 +18,7 @@ const inventoryQuantityFromApi = ref<number | null>(null)
 const quantity = defineModel<number>('quantity', { default: 1 })
 quantity.value = props.item.quantity
 
-const deleteItemWithConfirm = () => {
+const deleteItem = () => {
   cartStore.removeItem(props.item)
 }
 
@@ -118,7 +118,7 @@ watch(
     <Button
       class="is-white"
       icon="x-lg"
-      @click="deleteItemWithConfirm()"
+      @click="deleteItem()"
     ></Button>
   </div>
 </template>

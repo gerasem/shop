@@ -6,7 +6,7 @@
 
 @forward 'bulma/sass/base';
 @forward 'bulma/sass/components/card';
-@forward 'bulma/sass/components/modal';
+
 //@forward "bulma/sass/elements/icon";
 @forward 'bulma/sass/elements/content';
 @forward 'bulma/sass/elements/title';
@@ -31,6 +31,8 @@
 @use 'bulma/sass/form' with (
   $input-shadow: none
 );
+@forward 'bulma/sass/elements/button';
+
 @forward 'bulma/sass/elements/notification';
 // Import the themes so that all CSS variables have a value
 @forward 'bulma/sass/themes';

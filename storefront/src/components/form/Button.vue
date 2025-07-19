@@ -24,8 +24,6 @@ defineProps<{
 </template>
 
 <style lang="scss" scoped>
-@forward 'bulma/sass/elements/button';
-
 .button {
   gap: 10px;
 
