@@ -2,17 +2,12 @@ import { sdk } from '@/services/medusa/config'
 import { useToastStore } from '@/stores/ToastStore'
 import { useLoaderStore } from '@/stores/LoaderStore'
 import { HttpTypes } from '@medusajs/types'
-import { useRegionStore } from '@/stores/RegionStore'
 
 const CART_FIELDS =
   '*items,+items.total,*region,*items.product,*items.variant,*items.thumbnail,*items.metadata,*promotions,+shipping_methods.name'
 
 class ApiService {
-  static regionId = ''
-
-  constructor() {
-    ApiService.regionId = useRegionStore().regionId
-  }
+  static regionId = import.meta.env.VITE_DEFAULT_REGION_ID || ''
 
   protected static async handleRequest<T>(
     callback: () => Promise<T>,
@@ -90,37 +85,14 @@ class ApiService {
     )
   }
 
-  static async fetchRegions(loaderKey: string): Promise<HttpTypes.StoreRegion[]> {
-    return this.handleRequest(
-      async () => {
-        const { regions } = await sdk.store.region.list()
-        return regions
-      },
-      { loaderKey },
-    )
-  }
-
-  /*  static async retriveSelectedRegion(
-    loaderKey: string = 'retriveSelectedRegion',
-  ): Promise<HttpTypes.StoreRegion> {
-    return this.handleRequest(
-      async () => {
-        const { region: dataRegion } = await sdk.store.region.retrieve(
-          'reg_01JTKR6SBY5P705E73XMCH2CQ9',
-        )
-        return dataRegion
-      },
-      { loaderKey },
-    )
-  } */
-
   static async createCart(
-    data: { region_id: string },
     loaderKey: string,
   ): Promise<HttpTypes.StoreCart> {
     return ApiService.handleRequest(
       async () => {
-        const { cart } = await sdk.store.cart.create(data)
+        const { cart } = await sdk.store.cart.create(
+          { region_id: this.regionId }
+        )
         return cart
       },
       { loaderKey },

@@ -21,10 +21,11 @@ To get started, follow these steps:
 1. **Install a medusa store**
    ```bash
    cd /medusa
+   chmod +x start.sh
+   npm i 
    npm run docker:up
    docker compose logs -f
    docker compose run --rm medusa npx medusa user -e admin@example.com -p supersecret
-   npm i
    ```
 
 2. **Run medusa.js**
@@ -35,6 +36,7 @@ To get started, follow these steps:
 
 4. **Run frontend (vue app)**
    add VITE_PUBLIC_MEDUSA_PUBLISHABLE_KEY in storeftont .env file (generate it in medusa admin panel)
+   add VITE_DEFAULT_REGION_ID in storeftont .env file
    ```bash
    cd /storefront
    npm run dev

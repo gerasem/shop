@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { useRegionStore } from '@/stores/RegionStore'
 import { useLoaderStore } from '@/stores/LoaderStore'
 import ApiService from '@/services/api/api'
 import type { HttpTypes } from '@medusajs/types'
@@ -9,7 +8,6 @@ export const useCartStore = defineStore('cart', () => {
   const cart = ref<HttpTypes.StoreCart | undefined>(undefined)
 
   const loaderStore = useLoaderStore()
-  const regionStore = useRegionStore()
 
   const initializeCart = async () => {
     const cartId = localStorage.getItem('cart_id')
@@ -30,7 +28,6 @@ export const useCartStore = defineStore('cart', () => {
   const refreshCart = async () => {
     console.log('Refresh cart')
     const dataCart = await ApiService.createCart(
-      { region_id: regionStore.regionId },
       loaderStore.LOADER_KEYS.ADD_TO_CART,
     )
     cart.value = dataCart
