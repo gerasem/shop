@@ -55,10 +55,10 @@ const showAvailableCount = computed(() => {
         </span>
       </p>
 
-      <span class="has-text-info">-{{ selectedPrice.percentage_diff }}%</span>
+      <!--<span class="has-text-info">-{{ selectedPrice.percentage_diff }}%</span>-->
     </div>
 
-    <p>{{ showAvailableCount }}</p>
+    <p v-if="variant">{{ showAvailableCount }}</p>
   </div>
 </template>
 

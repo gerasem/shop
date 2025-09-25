@@ -62,14 +62,18 @@ onMounted(() => {
   &:before {
     content: '';
     height: 2px;
-    width: 100vmin;
+    width: 75%;
     background-color: $color-secondary;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     z-index: -1;
-  }
 
+    @media (max-width: $screen-md-max) {
+      display: none;
+    }
+  }
+  
   &__item {
     color: $text-muted;
     &--active {

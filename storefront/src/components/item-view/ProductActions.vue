@@ -95,7 +95,7 @@ const setOptionValue = (optionId: string, value: string) => {
 
     <div
       v-if="!selectedVariant"
-      class="notification is-warning is-light"
+      class="notification is-warning is-light mt-2"
     >
       Choose variant
     </div>

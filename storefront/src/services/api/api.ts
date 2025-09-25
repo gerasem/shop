@@ -183,6 +183,7 @@ class ApiService {
       async () => {
         const { product } = await sdk.store.product.retrieve(itemId, {
           fields: `*variants.calculated_price,+variants.inventory_quantity`,
+          region_id: this.regionId,
         })
         if (product.variants) {
           const variant = product.variants.find((v) => v.id === variantId)

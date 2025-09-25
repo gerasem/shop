@@ -23,25 +23,19 @@ const deleteItem = () => {
 }
 
 const changeItemCount = async () => {
-  console.log('changeItemCount', props.item.id, quantity.value)
   if (!quantityError.value) {
     cartStore.updateItemQuantity(props.item.id, quantity.value)
   }
 
-  console.log('props.item.variant_id', props.item.product_id, props.item.variant_id)
-  if (props.item?.product_id && props.item.variant_id) {
+  if (inventoryQuantityFromApi.value === null && props.item.product_id && props.item.variant_id) {
     inventoryQuantityFromApi.value = await cartStore.getItemQuantity(
-      props.item?.product_id,
+      props.item.product_id,
       props.item.variant_id,
     )
   }
 }
 
 const inventoryQuantity = computed(() => {
-  if (props.item.variant?.allow_backorder || !props.item.variant?.manage_inventory) {
-    return 1000
-  }
-
   if (inventoryQuantityFromApi.value !== null) {
     return inventoryQuantityFromApi.value
   }

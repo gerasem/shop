@@ -22,7 +22,6 @@ export const useLoaderStore = defineStore('loader', () => {
     CATEGORIES: 'CATEGORIES',
     ITEMS: 'ITEMS',
     ITEM: 'ITEM',
-    REGIONS: 'REGIONS',
     ADD_TO_CART: 'ADD_TO_CART',
   }
 
