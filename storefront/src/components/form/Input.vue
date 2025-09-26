@@ -1,10 +1,11 @@
 <script setup lang="ts">
 defineProps<{
   icon?: string
-  disabled?: boolean
+  type?: string
+  placeholder?: string
 }>()
 
-const input = defineModel<number | string>('input', { required: true })
+const input = defineModel<number | string | undefined>('input', { required: true })
 
 // const emit = defineEmits<{
 //   (e: 'update:modelValue', value: string | number): void
@@ -19,7 +20,7 @@ const input = defineModel<number | string>('input', { required: true })
 <template>
   <input
     class="input"
-    type="text"
+    :type="type || 'text'"
     v-model="input"
   />
 </template>
