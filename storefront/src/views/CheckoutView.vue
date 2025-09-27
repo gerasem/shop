@@ -15,7 +15,7 @@ const { t } = useI18n()
 
 const contactFormRef = ref(null)
 
-const isContactFormValid = computed(() => formRef.value?.isValid?.valid)
+const isContactFormValid = computed(() => contactFormRef.value?.isValid?.valid)
 
 useSeoMeta({
   title: 'Checkout',
