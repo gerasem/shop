@@ -10,6 +10,8 @@ defineProps<{
   items: IRadio[]
 }>()
 const id = useId()
+
+const input = defineModel<number | string | undefined>('input', { required: true })
 </script>
 
 <template>
@@ -22,6 +24,7 @@ const id = useId()
       <input
         type="radio"
         :name="id"
+        v-model="input"
       />
       {{ radio.name }}
     </label>
