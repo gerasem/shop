@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useForm } from 'vee-validate'
 import { defineRule, configure } from 'vee-validate'
@@ -34,7 +33,7 @@ interface IUser {
   phone: string
 }
 
-const { errors, defineField, validate, meta } = useForm<IUser>({
+const { errors, defineField, meta } = useForm<IUser>({
   validationSchema: {
     firstname: 'required|min:2',
     lastname: 'required|min:2',
@@ -59,8 +58,7 @@ const [zip, zipAttrs] = defineField('zip')
 const [phone, phoneAttrs] = defineField('phone')
 
 defineExpose({
-  validate,
-  isValid: computed(() => meta.valid),
+  isValid: meta,
 })
 </script>
 

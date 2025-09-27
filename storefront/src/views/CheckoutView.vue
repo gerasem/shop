@@ -3,7 +3,7 @@ import { useI18n } from 'vue-i18n'
 import { useSeoMeta } from '@unhead/vue'
 import { useLoaderStore } from '@/stores/LoaderStore'
 import Header from '@/components/content/Header.vue'
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import CartSteps from '@/components/cart/CartSteps.vue'
 import RadioGroup from '@/components/form/RadioGroup.vue'
 import CartTotalPrices from '@/components/cart/CartTotalPrices.vue'
@@ -12,6 +12,10 @@ import CartAddressFrom from '@/components/cart/CartAddressFrom.vue'
 const loaderStore = useLoaderStore()
 
 const { t } = useI18n()
+
+const contactFormRef = ref(null)
+
+const isContactFormValid = computed(() => formRef.value?.isValid?.valid)
 
 useSeoMeta({
   title: 'Checkout',
@@ -41,7 +45,7 @@ onMounted(() => {
           <div class="column is-two-thirds">
             <Header :level="3">{{ t('Address') }}</Header>
 
-            <CartAddressFrom />
+            <CartAddressFrom ref="contactFormRef" />
 
             <label class="checkbox">
               <input
@@ -80,7 +84,10 @@ onMounted(() => {
       </div>
 
       <div class="column is-one-third">
-        <CartTotalPrices :onCartPage="true" :button="{ name: 'Weiter', icon: 'bag', path: 'checkout' }" />
+        <CartTotalPrices
+          :onCartPage="true"
+          :button="{ name: 'Weiter', icon: 'bag', path: 'checkout', disabled: !isContactFormValid }"
+        />
       </div>
     </div>
   </main>

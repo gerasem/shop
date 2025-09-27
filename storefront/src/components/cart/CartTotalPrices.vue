@@ -13,6 +13,7 @@ interface IButton {
   name: string
   icon: string
   path: string
+  disabled?: boolean
 }
 
 defineProps<{
@@ -65,6 +66,7 @@ defineProps<{
           <Button
             :icon="button.icon"
             class="mt-4 is-primary is-fullwidth"
+            :disabled="button.disabled"
             >{{ t(button.name) }}</Button
           >
         </RouterLink>
