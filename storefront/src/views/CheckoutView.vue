@@ -18,17 +18,28 @@ const router = useRouter()
 const { t } = useI18n()
 
 const contactFormRef = ref(null)
+const contactFormBillingRef = ref(null)
 
 const isContactFormValid = computed(() => contactFormRef.value?.isValid?.valid)
+const isContactFormBillingValid = computed(() => contactFormBillingRef.value?.isValid?.valid)
 
 useSeoMeta({
   title: 'Checkout',
 })
 
 onMounted(() => {
-  console.log('cartStore.cart ', cartStore.cart)
   if (cartStore.cart?.items?.length === 0) {
     router.push({ name: 'cart' })
+  }
+})
+
+const billingAddressSameAsShippingAddress = ref<boolean>(true)
+
+const allFormsValid = computed(() => {
+  if (!billingAddressSameAsShippingAddress.value) {
+    return isContactFormValid.value && isContactFormBillingValid.value
+  } else {
+    return isContactFormValid.value
   }
 })
 </script>
@@ -50,17 +61,25 @@ onMounted(() => {
 
         <div class="columns">
           <div class="column is-two-thirds">
-            <Header :level="3">{{ t('Address') }}</Header>
+            <CartAddressFrom
+              ref="contactFormRef"
+              :header="t('Address')"
+            />
 
-            <CartAddressFrom ref="contactFormRef" />
-
-            <label class="checkbox">
+            <label class="checkbox mt-4">
               <input
                 type="checkbox"
-                checked
+                v-model="billingAddressSameAsShippingAddress"
               />
-              Billing address same as shipping address
+              Billing address same as shipping address {{ isContactFormBillingValid }}
             </label>
+
+            <CartAddressFrom
+              v-if="!billingAddressSameAsShippingAddress"
+              ref="contactFormBillingRef"
+              class="mt-4"
+              :header="t('Billing Address')"
+            />
           </div>
           <div class="column is-one-thirds pl-5">
             <Header :level="4">{{ t('Shipping') }}</Header>
@@ -93,7 +112,12 @@ onMounted(() => {
       <div class="column is-one-third">
         <CartTotalPrices
           :onCartPage="true"
-          :button="{ name: 'Weiter', icon: 'bag', path: 'checkout', disabled: !isContactFormValid }"
+          :button="{
+            name: 'Weiter',
+            icon: 'bag',
+            path: 'checkout',
+            disabled: !allFormsValid,
+          }"
         />
       </div>
     </div>
