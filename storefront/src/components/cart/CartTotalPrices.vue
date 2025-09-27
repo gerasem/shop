@@ -17,6 +17,7 @@ interface IButton {
 
 defineProps<{
   button: IButton
+  onCartPage?: boolean
 }>()
 </script>
 
@@ -40,23 +41,25 @@ defineProps<{
           :value="cartStore.cart?.subtotal"
         />
 
-        <CartCalculatedPrice
-          label="Shipping"
-          :value="cartStore.cart?.shipping_total"
-        />
+        <template v-if="onCartPage">
+          <CartCalculatedPrice
+            label="Shipping"
+            :value="cartStore.cart?.shipping_total"
+          />
 
-        <CartCalculatedPrice
-          v-if="false"
-          class="cart--discount"
-          label="Discount"
-          :value="0"
-        />
+          <CartCalculatedPrice
+            v-if="false"
+            class="cart--discount"
+            label="Discount"
+            :value="0"
+          />
 
-        <CartCalculatedPrice
-          class="cart--total"
-          label="Total price"
-          :value="cartStore.cart?.total"
-        />
+          <CartCalculatedPrice
+            class="cart--total"
+            label="Total price"
+            :value="cartStore.cart?.total"
+          />
+        </template>
 
         <RouterLink :to="localePath(button.path)">
           <Button

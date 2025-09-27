@@ -80,7 +80,7 @@ onMounted(() => {
       </div>
 
       <div class="column is-one-third">
-        <CartTotalPrices :button="{ name: 'Weiter', icon: 'bag', path: 'checkout' }" />
+        <CartTotalPrices :onCartPage="true" :button="{ name: 'Weiter', icon: 'bag', path: 'checkout' }" />
       </div>
     </div>
   </main>
