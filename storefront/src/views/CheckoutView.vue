@@ -8,8 +8,12 @@ import CartSteps from '@/components/cart/CartSteps.vue'
 import RadioGroup from '@/components/form/RadioGroup.vue'
 import CartTotalPrices from '@/components/cart/CartTotalPrices.vue'
 import CartAddressFrom from '@/components/cart/CartAddressFrom.vue'
+import { useCartStore } from '@/stores/CartStore'
+import { useRouter } from 'vue-router'
 
 const loaderStore = useLoaderStore()
+const cartStore = useCartStore()
+const router = useRouter()
 
 const { t } = useI18n()
 
@@ -22,7 +26,10 @@ useSeoMeta({
 })
 
 onMounted(() => {
-  //todo go to cart page if cart is empty
+  console.log('cartStore.cart ', cartStore.cart)
+  if (cartStore.cart?.items?.length === 0) {
+    router.push({ name: 'cart' })
+  }
 })
 </script>
 
