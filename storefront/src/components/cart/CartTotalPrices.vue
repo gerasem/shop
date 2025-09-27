@@ -4,8 +4,10 @@ import { useI18n } from 'vue-i18n'
 import CartCalculatedPrice from '@/components/cart/CartCalculatedPrice.vue'
 import Button from '@/components/form/Button.vue'
 import { useCartStore } from '@/stores/CartStore'
+import { useLoaderStore } from '@/stores/LoaderStore'
 
 const cartStore = useCartStore()
+const loaderStore = useLoaderStore()
 
 const { t } = useI18n()
 
@@ -20,6 +22,8 @@ defineProps<{
   button: IButton
   onCartPage?: boolean
 }>()
+
+
 </script>
 
 <template>
@@ -66,6 +70,7 @@ defineProps<{
           <Button
             :icon="button.icon"
             class="mt-4 is-primary is-fullwidth"
+            :class="{ 'is-loading': loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ADD_TO_CART) }"
             :disabled="button.disabled"
             >{{ t(button.name) }}</Button
           >
