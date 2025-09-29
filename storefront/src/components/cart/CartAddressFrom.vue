@@ -2,7 +2,7 @@
 import { useI18n } from 'vue-i18n'
 import { useForm } from 'vee-validate'
 import { defineRule, configure } from 'vee-validate'
-import { required, email, min } from '@vee-validate/rules'
+import { required, min } from '@vee-validate/rules'
 import Input from '@/components/form/Input.vue'
 import Header from '@/components/content/Header.vue'
 
@@ -11,7 +11,6 @@ defineProps<{
 }>()
 
 defineRule('required', required)
-defineRule('email', email)
 defineRule('min', min)
 
 const { t } = useI18n()
@@ -20,7 +19,6 @@ configure({
     const field = t(ctx.field)
     return {
       required: t('field_required', { field }),
-      email: t('invalid_email'),
       min: t('min_length', { field, length: ctx.rule.params[0] }),
     }[ctx.rule.name]
   },
@@ -29,38 +27,32 @@ configure({
 interface IUser {
   firstname: string
   lastname: string
-  mail: string
   street: string
   house: string
   city: string
   country: string
   zip: string
-  phone: string
 }
 
 const { errors, defineField, meta } = useForm<IUser>({
   validationSchema: {
     firstname: 'required|min:2',
     lastname: 'required|min:2',
-    mail: 'required|email',
     street: 'required',
     house: 'required',
     city: 'required',
     country: 'required',
     zip: 'required|min:4',
-    phone: 'required|min:5',
   },
 })
 
 const [firstname, firstnameAttrs] = defineField('firstname')
 const [lastname, lastnameAttrs] = defineField('lastname')
-const [mail, mailAttrs] = defineField('mail')
 const [street, streetAttrs] = defineField('street')
 const [house, houseAttrs] = defineField('house')
 const [city, cityAttrs] = defineField('city')
 const [country, countryAttrs] = defineField('country')
 const [zip, zipAttrs] = defineField('zip')
-const [phone, phoneAttrs] = defineField('phone')
 
 defineExpose({
   isValid: meta,
@@ -74,17 +66,17 @@ defineExpose({
     <div class="columns">
       <div class="column is-half">
         <div class="field">
-          <label class="label">{{ t('Firstname') }}</label>
+          <label class="label">{{ t('Firstname') }} <span>*</span></label>
           <div class="control">
             <Input
               v-model:input="firstname"
               v-bind="firstnameAttrs"
-              :placeholder="t('Firstname')"
+              :placeholder="`${t('Firstname')} *`"
               :class="{ 'is-danger': errors.firstname }"
             />
             <p
               v-if="errors.firstname"
-              class="error"
+              class="has-text-danger	"
             >
               {{ errors.firstname }}
             </p>
@@ -94,17 +86,17 @@ defineExpose({
 
       <div class="column is-half">
         <div class="field">
-          <label class="label">{{ t('Lastname') }}</label>
+          <label class="label">{{ t('Lastname') }} <span>*</span></label>
           <div class="control">
             <Input
               v-model:input="lastname"
               v-bind="lastnameAttrs"
-              :placeholder="t('Lastname')"
+              :placeholder="`${t('Lastname')} *`"
               :class="{ 'is-danger': errors.lastname }"
             />
             <p
               v-if="errors.lastname"
-              class="error"
+              class="has-text-danger	"
             >
               {{ errors.lastname }}
             </p>
@@ -114,63 +106,19 @@ defineExpose({
     </div>
 
     <div class="columns">
-      <div class="column is-half">
-        <div class="field">
-          <label class="label">{{ t('Email') }}</label>
-          <div class="control">
-            <Input
-              v-model:input="mail"
-              v-bind="mailAttrs"
-              type="email"
-              :placeholder="t('Email')"
-              :class="{ 'is-danger': errors.mail }"
-            />
-            <p
-              v-if="errors.mail"
-              class="error"
-            >
-              {{ errors.mail }}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="column is-half">
-        <div class="field">
-          <label class="label">{{ t('Phone') }}</label>
-          <div class="control">
-            <Input
-              v-model:input="phone"
-              v-bind="phoneAttrs"
-              type="tel"
-              :placeholder="t('Phone')"
-              :class="{ 'is-danger': errors.phone }"
-            />
-            <p
-              v-if="errors.phone"
-              class="error"
-            >
-              {{ errors.phone }}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="columns">
       <div class="column is-four-fifths">
         <div class="field">
-          <label class="label">{{ t('Street') }}</label>
+          <label class="label">{{ t('Street') }} <span>*</span></label>
           <div class="control">
             <Input
               v-model:input="street"
               v-bind="streetAttrs"
-              :placeholder="t('Street')"
+              :placeholder="`${t('Street')} *`"
               :class="{ 'is-danger': errors.street }"
             />
             <p
               v-if="errors.street"
-              class="error"
+              class="has-text-danger	"
             >
               {{ errors.street }}
             </p>
@@ -180,17 +128,17 @@ defineExpose({
 
       <div class="column is-one-fifths">
         <div class="field">
-          <label class="label">{{ t('House') }}</label>
+          <label class="label">{{ t('House') }} <span>*</span></label>
           <div class="control">
             <Input
               v-model:input="house"
               v-bind="houseAttrs"
-              :placeholder="t('House')"
+              :placeholder="`${t('House')} *`"
               :class="{ 'is-danger': errors.house }"
             />
             <p
               v-if="errors.house"
-              class="error"
+              class="has-text-danger	"
             >
               {{ errors.house }}
             </p>
@@ -200,19 +148,19 @@ defineExpose({
     </div>
 
     <div class="columns">
-      <div class="column is-one-fifths">
+      <div class="column is-one-fourth">
         <div class="field">
-          <label class="label">{{ t('Zip Code') }}</label>
+          <label class="label">{{ t('Zip Code') }} <span>*</span></label>
           <div class="control">
             <Input
               v-model:input="zip"
               v-bind="zipAttrs"
-              :placeholder="t('Zip Code')"
+              :placeholder="`${t('Zip Code')} *`"
               :class="{ 'is-danger': errors.zip }"
             />
             <p
               v-if="errors.zip"
-              class="error"
+              class="has-text-danger	has-text-danger	"
             >
               {{ errors.zip }}
             </p>
@@ -220,19 +168,19 @@ defineExpose({
         </div>
       </div>
 
-      <div class="column is-three-fifths">
+      <div class="column is-half">
         <div class="field">
-          <label class="label">{{ t('City') }}</label>
+          <label class="label">{{ t('City') }} <span>*</span></label>
           <div class="control">
             <Input
               v-model:input="city"
               v-bind="cityAttrs"
-              :placeholder="t('City')"
+              :placeholder="`${t('City')} *`"
               :class="{ 'is-danger': errors.city }"
             />
             <p
               v-if="errors.city"
-              class="error"
+              class="has-text-danger	"
             >
               {{ errors.city }}
             </p>
@@ -240,19 +188,19 @@ defineExpose({
         </div>
       </div>
 
-      <div class="column is-one-fifths">
+      <div class="column is-one-fourth">
         <div class="field">
-          <label class="label">{{ t('Country') }}</label>
+          <label class="label">{{ t('Country') }} <span>*</span></label>
           <div class="control">
             <Input
               v-model:input="country"
               v-bind="countryAttrs"
-              :placeholder="t('Country')"
+              :placeholder="`${t('Country')} *`"
               :class="{ 'is-danger': errors.country }"
             />
             <p
               v-if="errors.country"
-              class="error"
+              class="has-text-danger	"
             >
               {{ errors.country }}
             </p>
@@ -264,17 +212,5 @@ defineExpose({
 </template>
 
 <style scoped>
-.field .error {
-  color: red;
-  font-size: 0.8rem;
-  margin-top: 0.25rem;
-}
-.input.is-danger {
-  border-color: red;
-}
-.error {
-  color: red;
-  font-size: 0.8rem;
-  margin-top: 0.25rem;
-}
+
 </style>

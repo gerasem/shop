@@ -9,7 +9,8 @@ import CartTotalPrices from '@/components/cart/CartTotalPrices.vue'
 import CartAddressFrom from '@/components/cart/CartAddressFrom.vue'
 import { useCartStore } from '@/stores/CartStore'
 import { useRouter } from 'vue-router'
-import CartPaymentAndShipping from '@/components/cart/CartPaymentAndShipping.vue'
+import CartPaymentAndShippingForm from '@/components/cart/CartPaymentAndShippingForm.vue'
+import CartEmailAndPhoneForm from '@/components/cart/CartEmailAndPhoneForm.vue'
 
 const loaderStore = useLoaderStore()
 const cartStore = useCartStore()
@@ -20,12 +21,14 @@ const { t } = useI18n()
 const contactFormRef = ref(null)
 const contactFormBillingRef = ref(null)
 const paymentAndShippingFormRef = ref(null)
+const emailAndPhoneFormRef = ref(null)
 
 const isContactFormValid = computed(() => contactFormRef.value?.isValid?.valid)
 const isContactFormBillingValid = computed(() => contactFormBillingRef.value?.isValid?.valid)
 const isPaymentAndShippingFormValid = computed(
   () => paymentAndShippingFormRef.value?.isValid?.valid,
 )
+const isEmailAndPhoneFormValid = computed(() => emailAndPhoneFormRef.value?.isValid?.valid)
 useSeoMeta({
   title: 'Checkout',
 })
@@ -39,15 +42,12 @@ onMounted(() => {
 const billingAddressSameAsShippingAddress = ref<boolean>(true)
 
 const allFormsValid = computed(() => {
-  if (!billingAddressSameAsShippingAddress.value) {
-    return (
-      isPaymentAndShippingFormValid.value &&
-      isContactFormValid.value &&
-      isContactFormBillingValid.value
-    )
-  } else {
-    return isPaymentAndShippingFormValid.value && isContactFormValid.value
-  }
+  return (
+    isPaymentAndShippingFormValid.value &&
+    isContactFormValid.value &&
+    isEmailAndPhoneFormValid.value &&
+    (!billingAddressSameAsShippingAddress.value ? isContactFormBillingValid.value : true)
+  )
 })
 </script>
 
@@ -73,13 +73,15 @@ const allFormsValid = computed(() => {
               :header="t('Address')"
             />
 
-            <label class="checkbox mt-4">
+            <label class="checkbox my-4">
               <input
                 type="checkbox"
                 v-model="billingAddressSameAsShippingAddress"
               />
-              Billing address same as shipping address {{ isContactFormBillingValid }}
+              Billing address same as shipping address
             </label>
+
+            <CartEmailAndPhoneForm ref="emailAndPhoneFormRef" />
 
             <CartAddressFrom
               v-if="!billingAddressSameAsShippingAddress"
@@ -89,7 +91,7 @@ const allFormsValid = computed(() => {
             />
           </div>
           <div class="column is-one-thirds pl-5">
-            <CartPaymentAndShipping ref="paymentAndShippingFormRef" />
+            <CartPaymentAndShippingForm ref="paymentAndShippingFormRef" />
           </div>
         </div>
       </div>

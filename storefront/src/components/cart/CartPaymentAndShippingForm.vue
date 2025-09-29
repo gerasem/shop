@@ -47,7 +47,12 @@ defineExpose({
       ]"
       class="is-flex-direction-column"
     />
-    <p>{{ errors.shipping }}</p>
+    <p
+      v-if="errors.shipping"
+      class="has-text-danger"
+    >
+      {{ errors.shipping }}
+    </p>
 
     <Header
       :level="3"
@@ -64,14 +69,13 @@ defineExpose({
       class="is-flex-direction-column"
       :error="errors.payment"
     />
-    <p>{{ errors.payment }}</p>
+    <p
+      v-if="errors.payment"
+      class="has-text-danger"
+    >
+      {{ errors.payment }}
+    </p>
   </div>
 </template>
 
-<style lang="scss" scoped>
-.error {
-  color: red;
-  font-size: 0.8rem;
-  margin-top: 0.25rem;
-}
-</style>
+<style lang="scss" scoped></style>

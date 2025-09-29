@@ -2,7 +2,6 @@
 defineProps<{
   icon?: string
   type?: string
-  placeholder?: string
 }>()
 
 const input = defineModel<number | string | undefined>('input', { required: true })
