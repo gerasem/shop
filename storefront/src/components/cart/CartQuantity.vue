@@ -5,6 +5,7 @@ import Button from '@/components/form/Button.vue'
 const props = defineProps<{
   inventoryQuantity: number
   quantityError: boolean
+  loading?: boolean
 }>()
 
 const quantity = defineModel<number>('quantity', { required: true })
@@ -31,7 +32,15 @@ const incrementCount = () => {
       @click="decrementCount()"
     ></Button>
 
+    <div
+      v-if="loading"
+      class="cart__spinner"
+    >
+      <span class="loading-spinner"></span>
+    </div>
+
     <Input
+      v-else
       v-model:input.number="quantity"
       inputmode="numeric"
       class="cart__input"
@@ -73,6 +82,12 @@ const incrementCount = () => {
     &[type='number'] {
       -moz-appearance: textfield;
     }
+  }
+
+  &__spinner {
+    width: 50px;
+    display: flex;
+    justify-content: center;
   }
 }
 </style>

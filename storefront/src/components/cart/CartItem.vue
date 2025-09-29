@@ -7,11 +7,14 @@ import CartQuantity from '@/components/cart/CartQuantity.vue'
 import { computed, ref, watch } from 'vue'
 import { useCartStore } from '@/stores/CartStore'
 import debounce from 'lodash.debounce'
+import { useLoaderStore } from '@/stores/LoaderStore'
 
 const props = defineProps<{
   item: HttpTypes.StoreCartLineItem
 }>()
+
 const cartStore = useCartStore()
+const loaderStore = useLoaderStore()
 
 const inventoryQuantityFromApi = ref<number | null>(null)
 
@@ -23,14 +26,14 @@ const deleteItem = () => {
 }
 
 const changeItemCount = async () => {
-  if (!quantityError.value) {
+  if (!quantityError.value && typeof quantity.value === 'number') {
     cartStore.updateItemQuantity(props.item.id, quantity.value)
   }
 
-  if (inventoryQuantityFromApi.value === null && props.item.product_id && props.item.variant_id) {
+  if (inventoryQuantityFromApi.value === null) {
     inventoryQuantityFromApi.value = await cartStore.getItemQuantity(
-      props.item.product_id,
-      props.item.variant_id,
+      props.item.product_id || '',
+      props.item.variant_id || '',
     )
   }
 }
@@ -75,13 +78,13 @@ watch(
       <div class="cart__prices is-flex">
         <div class="cart__price">
           {{ convertToLocale({ amount: item.unit_price }) }}
-          <span>x {{ item.quantity }}</span>
-          <template v-if="item.total">
-            {{ convertToLocale({ amount: item.total }) }}
-          </template>
-
+          <span
+            v-if="loaderStore.isLoadingKey(`${loaderStore.LOADER_KEYS.EDIT_CART}-${item.id}`)"
+            class="loading-spinner"
+          ></span>
           <template v-else>
-            {{ convertToLocale({ amount: item.unit_price * item.quantity }) }}
+            <span>x {{ item.quantity }}</span>
+            {{ convertToLocale({ amount: item.total }) }}
           </template>
         </div>
 
@@ -104,9 +107,10 @@ watch(
     </div>
 
     <CartQuantity
-      v-model:quantity="quantity"
+      v-model:quantity.number="quantity"
       :inventoryQuantity="inventoryQuantity"
       :quantityError="quantityError"
+      :loading="loaderStore.isLoadingKey(`${loaderStore.LOADER_KEYS.EDIT_CART}-${item.id}`)"
     />
 
     <Button
@@ -179,6 +183,8 @@ watch(
   &__price {
     font-size: 1.125rem;
     font-weight: 600;
+    display: flex;
+    align-items: center;
 
     span {
       font-weight: 400;

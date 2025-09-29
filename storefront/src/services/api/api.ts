@@ -85,14 +85,10 @@ class ApiService {
     )
   }
 
-  static async createCart(
-    loaderKey: string,
-  ): Promise<HttpTypes.StoreCart> {
+  static async createCart(loaderKey: string): Promise<HttpTypes.StoreCart> {
     return ApiService.handleRequest(
       async () => {
-        const { cart } = await sdk.store.cart.create(
-          { region_id: this.regionId }
-        )
+        const { cart } = await sdk.store.cart.create({ region_id: this.regionId })
         return cart
       },
       { loaderKey },
@@ -201,19 +197,18 @@ class ApiService {
     cartId: string,
     item: HttpTypes.StoreCartLineItem,
     loaderKey: string,
-  ): Promise<HttpTypes.StoreCart> {
+  ): Promise<void> {
     const toastStore = useToastStore()
 
     return ApiService.handleRequest(
       async () => {
-        const { deleted, parent: cart } = await sdk.store.cart.deleteLineItem(cartId, item.id, {
+        const { deleted } = await sdk.store.cart.deleteLineItem(cartId, item.id, {
           fields: CART_FIELDS,
         })
 
         if (deleted) {
           toastStore.addInfo(`Item ${item.title} has been deleted`)
         }
-        return cart
       },
       { loaderKey },
     )

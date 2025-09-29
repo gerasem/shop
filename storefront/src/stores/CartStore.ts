@@ -18,18 +18,16 @@ export const useCartStore = defineStore('cart', () => {
       if (dataCart) {
         cart.value = dataCart
       } else {
-        refreshCart()
+        await refreshCart()
       }
     } else {
-      refreshCart()
+      await refreshCart()
     }
   }
 
   const refreshCart = async () => {
     console.log('Refresh cart')
-    const dataCart = await ApiService.createCart(
-      loaderStore.LOADER_KEYS.ADD_TO_CART,
-    )
+    const dataCart = await ApiService.createCart(loaderStore.LOADER_KEYS.ADD_TO_CART)
     cart.value = dataCart
     localStorage.setItem('cart_id', dataCart.id)
     return dataCart
@@ -97,7 +95,7 @@ export const useCartStore = defineStore('cart', () => {
       cart.value.id,
       itemId,
       { quantity },
-      loaderStore.LOADER_KEYS.ADD_TO_CART,
+      `${loaderStore.LOADER_KEYS.EDIT_CART}-${itemId}`,
     )
     cart.value = dataCart
     localStorage.setItem('cart_id', dataCart.id)
@@ -108,7 +106,7 @@ export const useCartStore = defineStore('cart', () => {
     return await ApiService.fetchItemQuantityForItem(
       itemId,
       variantId,
-      loaderStore.LOADER_KEYS.ADD_TO_CART,
+      loaderStore.LOADER_KEYS.GET_ITEM_QUANTITY,
     )
   }
 
@@ -119,14 +117,9 @@ export const useCartStore = defineStore('cart', () => {
 
   const removeItem = async (item: HttpTypes.StoreCartLineItem): Promise<void> => {
     if (cart.value) {
-      const dataCart = await ApiService.removeItem(
-        cart.value.id,
-        item,
-        loaderStore.LOADER_KEYS.ADD_TO_CART,
-      )
+      await ApiService.removeItem(cart.value.id, item, loaderStore.LOADER_KEYS.ADD_TO_CART)
 
-      cart.value = dataCart
-      localStorage.setItem('cart_id', dataCart.id)
+      await initializeCart()
     }
   }
 
