@@ -49,6 +49,15 @@ const allFormsValid = computed(() => {
     (!billingAddressSameAsShippingAddress.value ? isContactFormBillingValid.value : true)
   )
 })
+
+const validateForms = () => {
+  contactFormRef.value.validate()
+  if (!billingAddressSameAsShippingAddress) {
+    contactFormBillingRef.value.validate()
+  }
+  paymentAndShippingFormRef.value.validate()
+  emailAndPhoneFormRef.value.validate()
+}
 </script>
 
 <template>
@@ -102,9 +111,10 @@ const allFormsValid = computed(() => {
           :button="{
             name: 'Weiter',
             icon: 'bag',
-            path: 'checkout',
-            disabled: !allFormsValid,
+            path: 'payment',
           }"
+          :disabled="!allFormsValid"
+          @validate-forms="validateForms()"
         />
       </div>
     </div>

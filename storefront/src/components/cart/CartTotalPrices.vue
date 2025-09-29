@@ -5,10 +5,11 @@ import CartCalculatedPrice from '@/components/cart/CartCalculatedPrice.vue'
 import Button from '@/components/form/Button.vue'
 import { useCartStore } from '@/stores/CartStore'
 import { useLoaderStore } from '@/stores/LoaderStore'
-import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const cartStore = useCartStore()
 const loaderStore = useLoaderStore()
+const router = useRouter()
 
 const { t } = useI18n()
 
@@ -19,10 +20,23 @@ interface IButton {
   disabled?: boolean
 }
 
-defineProps<{
+const props = defineProps<{
   button: IButton
   onCartPage?: boolean
+  disabled?: boolean
 }>()
+
+const emit = defineEmits<{
+  (e: 'validate-forms'): void
+}>()
+
+const handleClick = () => {
+  if (props.disabled) {
+    emit('validate-forms')
+  } else {
+    router.push({ name: 'payment' })
+  }
+}
 </script>
 
 <template>
@@ -65,19 +79,19 @@ defineProps<{
           />
         </template>
 
-        <RouterLink :to="localePath(button.path)">
-          <Button
-            :icon="button.icon"
-            class="mt-4 is-primary is-fullwidth"
-            :class="{
-              'is-loading':
-                loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ADD_TO_CART) ||
-                loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.EDIT_CART),
-            }"
-            :disabled="button.disabled"
-            >{{ t(button.name) }}</Button
-          >
-        </RouterLink>
+        <Button
+          @click="handleClick()"
+          :icon="button.icon"
+          class="mt-4 is-fullwidth"
+          :class="{
+            'is-loading':
+              loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ADD_TO_CART) ||
+              loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.EDIT_CART),
+            'is-light': disabled,
+            'is-primary': !disabled,
+          }"
+          >{{ t(button.name) }}</Button
+        >
 
         <div class="columns">
           <div class="column"></div>

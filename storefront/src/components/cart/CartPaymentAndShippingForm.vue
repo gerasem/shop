@@ -31,6 +31,7 @@ const [payment, paymentAttrs] = defineField('payment')
 
 defineExpose({
   isValid: meta,
+  validate
 })
 </script>
 

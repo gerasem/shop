@@ -34,7 +34,7 @@ interface IUser {
   zip: string
 }
 
-const { errors, defineField, meta } = useForm<IUser>({
+const { errors, defineField, validate, meta } = useForm<IUser>({
   validationSchema: {
     firstname: 'required|min:2',
     lastname: 'required|min:2',
@@ -56,6 +56,7 @@ const [zip, zipAttrs] = defineField('zip')
 
 defineExpose({
   isValid: meta,
+  validate,
 })
 </script>
 

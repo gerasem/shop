@@ -50,7 +50,8 @@ useSeoMeta({
 
       <div class="column is-one-third">
         <CartTotalPrices
-          :button="{ name: 'Weiter', icon: 'bag', path: 'checkout', disabled: items?.length === 0 }"
+          :button="{ name: 'Weiter', icon: 'bag', path: 'checkout' }"
+          :disabled="items?.length === 0"
         />
       </div>
     </div>

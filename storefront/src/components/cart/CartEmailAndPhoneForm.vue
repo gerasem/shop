@@ -33,6 +33,7 @@ const phone = ref<string>('')
 
 defineExpose({
   isValid: meta,
+  validate
 })
 </script>
 
