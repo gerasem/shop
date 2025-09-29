@@ -7,27 +7,31 @@ import CartQuantity from '@/components/cart/CartQuantity.vue'
 import { computed, ref, watch } from 'vue'
 import { useCartStore } from '@/stores/CartStore'
 import debounce from 'lodash.debounce'
-import { useLoaderStore } from '@/stores/LoaderStore'
 
 const props = defineProps<{
   item: HttpTypes.StoreCartLineItem
 }>()
 
 const cartStore = useCartStore()
-const loaderStore = useLoaderStore()
 
 const inventoryQuantityFromApi = ref<number | null>(null)
+const loadingQuantity = ref<boolean>(false)
+const loadingDelete = ref<boolean>(false)
 
 const quantity = defineModel<number>('quantity', { default: 1 })
 quantity.value = props.item.quantity
 
-const deleteItem = () => {
-  cartStore.removeItem(props.item)
+const deleteItem = async () => {
+  loadingDelete.value = true
+  await cartStore.removeItem(props.item)
+  loadingDelete.value = false
 }
 
 const changeItemCount = async () => {
   if (!quantityError.value && typeof quantity.value === 'number') {
-    cartStore.updateItemQuantity(props.item.id, quantity.value)
+    loadingQuantity.value = true
+    await cartStore.updateItemQuantity(props.item.id, quantity.value)
+    loadingQuantity.value = false
   }
 
   if (inventoryQuantityFromApi.value === null) {
@@ -79,7 +83,7 @@ watch(
         <div class="cart__price">
           {{ convertToLocale({ amount: item.unit_price }) }}
           <span
-            v-if="loaderStore.isLoadingKey(`${loaderStore.LOADER_KEYS.EDIT_CART}-${item.id}`)"
+            v-if="loadingQuantity"
             class="loading-spinner"
           ></span>
           <template v-else>
@@ -110,13 +114,16 @@ watch(
       v-model:quantity.number="quantity"
       :inventoryQuantity="inventoryQuantity"
       :quantityError="quantityError"
-      :loading="loaderStore.isLoadingKey(`${loaderStore.LOADER_KEYS.EDIT_CART}-${item.id}`)"
+      :loading="loadingQuantity"
     />
 
     <Button
       class="is-white"
       icon="x-lg"
       @click="deleteItem()"
+      :class="{
+        'is-loading': loadingDelete,
+      }"
     ></Button>
   </div>
 </template>

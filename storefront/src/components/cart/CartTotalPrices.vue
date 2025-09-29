@@ -5,6 +5,7 @@ import CartCalculatedPrice from '@/components/cart/CartCalculatedPrice.vue'
 import Button from '@/components/form/Button.vue'
 import { useCartStore } from '@/stores/CartStore'
 import { useLoaderStore } from '@/stores/LoaderStore'
+import { ref } from 'vue'
 
 const cartStore = useCartStore()
 const loaderStore = useLoaderStore()
@@ -22,8 +23,6 @@ defineProps<{
   button: IButton
   onCartPage?: boolean
 }>()
-
-
 </script>
 
 <template>
@@ -70,7 +69,11 @@ defineProps<{
           <Button
             :icon="button.icon"
             class="mt-4 is-primary is-fullwidth"
-            :class="{ 'is-loading': loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ADD_TO_CART) }"
+            :class="{
+              'is-loading':
+                loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ADD_TO_CART) ||
+                loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.EDIT_CART),
+            }"
             :disabled="button.disabled"
             >{{ t(button.name) }}</Button
           >

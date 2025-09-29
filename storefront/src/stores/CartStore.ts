@@ -95,7 +95,7 @@ export const useCartStore = defineStore('cart', () => {
       cart.value.id,
       itemId,
       { quantity },
-      `${loaderStore.LOADER_KEYS.EDIT_CART}-${itemId}`,
+      loaderStore.LOADER_KEYS.EDIT_CART,
     )
     cart.value = dataCart
     localStorage.setItem('cart_id', dataCart.id)
