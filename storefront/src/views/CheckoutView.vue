@@ -10,7 +10,7 @@ import CartAddressFrom from '@/components/cart/CartAddressFrom.vue'
 import { useCartStore } from '@/stores/CartStore'
 import { useRouter } from 'vue-router'
 import CartPaymentAndShippingForm from '@/components/cart/CartPaymentAndShippingForm.vue'
-import CartEmailAndPhoneForm from '@/components/cart/CartEmailAndPhoneForm.vue'
+import CartEmailForm from '@/components/cart/CartEmailForm.vue'
 
 const loaderStore = useLoaderStore()
 const cartStore = useCartStore()
@@ -18,17 +18,17 @@ const router = useRouter()
 
 const { t } = useI18n()
 
-const contactFormRef = ref(null)
-const contactFormBillingRef = ref(null)
-const paymentAndShippingFormRef = ref(null)
-const emailAndPhoneFormRef = ref(null)
+const contactFormRef = ref<InstanceType<typeof CartAddressFrom>>()
+const contactFormBillingRef = ref<InstanceType<typeof CartAddressFrom>>()
+const paymentAndShippingFormRef = ref<InstanceType<typeof CartPaymentAndShippingForm>>()
+const emailFormRef = ref<InstanceType<typeof CartEmailForm>>()
 
 const isContactFormValid = computed(() => contactFormRef.value?.isValid?.valid)
 const isContactFormBillingValid = computed(() => contactFormBillingRef.value?.isValid?.valid)
 const isPaymentAndShippingFormValid = computed(
   () => paymentAndShippingFormRef.value?.isValid?.valid,
 )
-const isEmailAndPhoneFormValid = computed(() => emailAndPhoneFormRef.value?.isValid?.valid)
+const isEmailFormValid = computed(() => emailFormRef.value?.isValid?.valid)
 useSeoMeta({
   title: 'Checkout',
 })
@@ -45,18 +45,18 @@ const allFormsValid = computed(() => {
   return (
     isPaymentAndShippingFormValid.value &&
     isContactFormValid.value &&
-    isEmailAndPhoneFormValid.value &&
+    isEmailFormValid.value &&
     (!billingAddressSameAsShippingAddress.value ? isContactFormBillingValid.value : true)
   )
 })
 
 const validateForms = () => {
-  contactFormRef.value.validate()
-  if (!billingAddressSameAsShippingAddress) {
-    contactFormBillingRef.value.validate()
+  contactFormRef.value?.validate()
+  if (!billingAddressSameAsShippingAddress.value) {
+    contactFormBillingRef.value?.validate()
   }
-  paymentAndShippingFormRef.value.validate()
-  emailAndPhoneFormRef.value.validate()
+  paymentAndShippingFormRef.value?.validate()
+  emailFormRef.value?.validate()
 }
 </script>
 
@@ -72,11 +72,13 @@ const validateForms = () => {
     <CartSteps />
 
     <div class="columns">
-      <div class="column is-two-thirds">
+      <div class="column is-three-quarters">
         <Header :level="2">{{ t('Checkout') }}</Header>
 
         <div class="columns">
-          <div class="column is-two-thirds">
+          <div class="column is-half">
+            <CartEmailForm ref="emailFormRef" />
+
             <CartAddressFrom
               ref="contactFormRef"
               :header="t('Address')"
@@ -90,8 +92,6 @@ const validateForms = () => {
               Billing address same as shipping address
             </label>
 
-            <CartEmailAndPhoneForm ref="emailAndPhoneFormRef" />
-
             <CartAddressFrom
               v-if="!billingAddressSameAsShippingAddress"
               ref="contactFormBillingRef"
@@ -99,13 +99,13 @@ const validateForms = () => {
               :header="t('Billing Address')"
             />
           </div>
-          <div class="column is-one-thirds pl-5">
+          <div class="column is-half pl-5">
             <CartPaymentAndShippingForm ref="paymentAndShippingFormRef" />
           </div>
         </div>
       </div>
 
-      <div class="column is-one-third">
+      <div class="column is-one-quarter">
         <CartTotalPrices
           :onCartPage="true"
           :button="{

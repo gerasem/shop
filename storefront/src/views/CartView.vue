@@ -17,9 +17,9 @@ const { t } = useI18n()
 
 const items = computed(() => {
   const itemsInCart = cartStore.cart?.items
-  return itemsInCart?.sort(
-    (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
-  )
+  return itemsInCart?.sort((a, b) => {
+    return new Date(b.created_at || '').getTime() - new Date(a.created_at || '').getTime()
+  })
 })
 
 useSeoMeta({
@@ -38,7 +38,7 @@ useSeoMeta({
   <main class="container is-fluid">
     <CartSteps />
     <div class="columns">
-      <div class="column is-two-thirds">
+      <div class="column is-three-quarters">
         <Header :level="2">Shopping Cart</Header>
 
         <CartItem
@@ -50,7 +50,7 @@ useSeoMeta({
         <p v-if="!items?.length">{{ t('Shopping cart is empty') }}</p>
       </div>
 
-      <div class="column is-one-third">
+      <div class="column is-one-quarter">
         <CartTotalPrices
           :button="{ name: 'Weiter', icon: 'bag', path: 'checkout' }"
           :disabled="items?.length === 0"

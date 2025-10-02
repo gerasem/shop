@@ -5,6 +5,7 @@ import { defineRule, configure } from 'vee-validate'
 import { required, min } from '@vee-validate/rules'
 import Input from '@/components/form/Input.vue'
 import Header from '@/components/content/Header.vue'
+import { ref } from 'vue'
 
 defineProps<{
   header: string
@@ -54,6 +55,8 @@ const [city, cityAttrs] = defineField('city')
 const [country, countryAttrs] = defineField('country')
 const [zip, zipAttrs] = defineField('zip')
 
+const phone = ref<string>('')
+
 defineExpose({
   isValid: meta,
   validate,
@@ -77,7 +80,7 @@ defineExpose({
             />
             <p
               v-if="errors.firstname"
-              class="has-text-danger	"
+              class="has-text-danger"
             >
               {{ errors.firstname }}
             </p>
@@ -97,7 +100,7 @@ defineExpose({
             />
             <p
               v-if="errors.lastname"
-              class="has-text-danger	"
+              class="has-text-danger"
             >
               {{ errors.lastname }}
             </p>
@@ -107,7 +110,7 @@ defineExpose({
     </div>
 
     <div class="columns">
-      <div class="column is-four-fifths">
+      <div class="column is-three-quarters">
         <div class="field">
           <label class="label">{{ t('Street') }} <span>*</span></label>
           <div class="control">
@@ -119,7 +122,7 @@ defineExpose({
             />
             <p
               v-if="errors.street"
-              class="has-text-danger	"
+              class="has-text-danger"
             >
               {{ errors.street }}
             </p>
@@ -127,7 +130,7 @@ defineExpose({
         </div>
       </div>
 
-      <div class="column is-one-fifths">
+      <div class="column is-one-quarter">
         <div class="field">
           <label class="label">{{ t('House') }} <span>*</span></label>
           <div class="control">
@@ -139,7 +142,7 @@ defineExpose({
             />
             <p
               v-if="errors.house"
-              class="has-text-danger	"
+              class="has-text-danger"
             >
               {{ errors.house }}
             </p>
@@ -161,7 +164,7 @@ defineExpose({
             />
             <p
               v-if="errors.zip"
-              class="has-text-danger	has-text-danger	"
+              class="has-text-danger has-text-danger"
             >
               {{ errors.zip }}
             </p>
@@ -169,7 +172,7 @@ defineExpose({
         </div>
       </div>
 
-      <div class="column is-half">
+      <div class="column is-three-quarters">
         <div class="field">
           <label class="label">{{ t('City') }} <span>*</span></label>
           <div class="control">
@@ -181,15 +184,30 @@ defineExpose({
             />
             <p
               v-if="errors.city"
-              class="has-text-danger	"
+              class="has-text-danger"
             >
               {{ errors.city }}
             </p>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="column is-one-fourth">
+    <div class="columns">
+      <div class="column is-half">
+        <div class="field">
+          <label class="label">{{ t('Phone') }}</label>
+          <div class="control">
+            <Input
+              v-model:input="phone"
+              type="tel"
+              :placeholder="t('Phone')"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-half">
         <div class="field">
           <label class="label">{{ t('Country') }} <span>*</span></label>
           <div class="control">
@@ -201,7 +219,7 @@ defineExpose({
             />
             <p
               v-if="errors.country"
-              class="has-text-danger	"
+              class="has-text-danger"
             >
               {{ errors.country }}
             </p>
@@ -212,6 +230,4 @@ defineExpose({
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

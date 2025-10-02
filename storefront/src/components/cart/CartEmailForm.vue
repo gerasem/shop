@@ -29,7 +29,6 @@ const { errors, defineField, validate, meta } = useForm<{
 })
 const [mail, mailAttrs] = defineField('mail')
 
-const phone = ref<string>('')
 
 defineExpose({
   isValid: meta,
@@ -60,18 +59,7 @@ defineExpose({
       </div>
     </div>
 
-    <div class="column is-half">
-      <div class="field">
-        <label class="label">{{ t('Phone') }}</label>
-        <div class="control">
-          <Input
-            v-model:input="phone"
-            type="tel"
-            :placeholder="t('Phone')"
-          />
-        </div>
-      </div>
-    </div>
+
   </div>
 </template>
 

@@ -81,6 +81,8 @@ watch(
     <div class="cart__main">
       <div class="cart__prices is-flex">
         <div class="cart__price">
+          <h4 class="cart__title">{{ item.product_title }} : {{ item.title }}</h4>
+
           {{ convertToLocale({ amount: item.unit_price }) }}
           <span
             v-if="loadingQuantity"
@@ -106,8 +108,6 @@ watch(
           %
         </div> -->
       </div>
-
-      <h4 class="cart__title">{{ item.product_title }} : {{ item.title }}</h4>
     </div>
 
     <CartQuantity
@@ -192,6 +192,7 @@ watch(
     font-weight: 600;
     display: flex;
     align-items: center;
+    width: 100%;
 
     span {
       font-weight: 400;
@@ -211,6 +212,7 @@ watch(
 
   &__title {
     font-size: 1rem;
+    margin-right: 40px;
   }
 
   &__actions {
