@@ -60,6 +60,15 @@ const phone = ref<string>('')
 defineExpose({
   isValid: meta,
   validate,
+  address: {
+    first_name: firstname,
+    last_name: lastname,
+    address_1: `${street} ${house}`,
+    postal_code: zip,
+    city,
+    country_code: 'de',
+    phone: phone.value,
+  },
 })
 </script>
 

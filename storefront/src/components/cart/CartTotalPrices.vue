@@ -28,12 +28,14 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'validate-forms'): void
+  (e: 'send-form'): void
 }>()
 
 const handleClick = () => {
   if (props.disabled) {
     emit('validate-forms')
   } else {
+    emit('send-form')
     router.push({ name: props.button.path })
   }
 }

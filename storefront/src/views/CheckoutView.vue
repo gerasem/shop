@@ -50,13 +50,29 @@ const allFormsValid = computed(() => {
   )
 })
 
-const validateForms = () => {
+const validateForms = async () => {
   contactFormRef.value?.validate()
   if (!billingAddressSameAsShippingAddress.value) {
     contactFormBillingRef.value?.validate()
   }
   paymentAndShippingFormRef.value?.validate()
   emailFormRef.value?.validate()
+  // const address = {
+  //   first_name: firstName,
+  //   last_name: lastName,
+  //   address_1: address1,
+  //   company,
+  //   postal_code: postalCode,
+  //   city,
+  //   country_code: countryCode || cart.region?.countries?.[0].iso_2,
+  //   province,
+  //   phone: phoneNumber,
+  // }
+  //await cartStore.updateCart()
+}
+
+const sendForm = () => {
+  console.log('ADDRESS', contactFormRef.value?.address)
 }
 </script>
 
@@ -115,6 +131,7 @@ const validateForms = () => {
           }"
           :disabled="!allFormsValid"
           @validate-forms="validateForms()"
+          @send-form="sendForm()"
         />
       </div>
     </div>
