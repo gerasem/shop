@@ -34,7 +34,7 @@ const handleClick = () => {
   if (props.disabled) {
     emit('validate-forms')
   } else {
-    router.push({ name: 'payment' })
+    router.push({ name: props.button.path })
   }
 }
 </script>

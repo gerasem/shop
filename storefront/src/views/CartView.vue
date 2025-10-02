@@ -17,7 +17,9 @@ const { t } = useI18n()
 
 const items = computed(() => {
   const itemsInCart = cartStore.cart?.items
-  return itemsInCart?.sort((a, b) => a.title.localeCompare(b.title))
+  return itemsInCart?.sort(
+    (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+  )
 })
 
 useSeoMeta({

@@ -53,7 +53,8 @@ export const useCartStore = defineStore('cart', () => {
     return dataCart
   }
 
-  /*  const updateCart = async ({
+  //https://docs.medusajs.com/resources/storefront-development/guides/express-checkout#implement-submit-action-function
+  const updateCart = async ({
     updateData,
     shippingMethodData,
   }: {
@@ -83,7 +84,7 @@ export const useCartStore = defineStore('cart', () => {
       console.error('Error update cart:', err)
       return undefined
     }
-  } */
+  }
 
   const updateItemQuantity = async (itemId: string, quantity: number): Promise<void> => {
     if (!cart.value) {
@@ -132,5 +133,6 @@ export const useCartStore = defineStore('cart', () => {
     unsetCart,
     getItemQuantity,
     removeItem,
+    updateCart,
   }
 })
