@@ -40,8 +40,10 @@ const billingAddress = ref<IUserAddress>({
   phone: cartStore.cart?.billing_address?.phone || '',
 })
 
-// todo get from api 
+// todo get from api
 const shipping = ref<string>('')
+const selectedShippingId = ref<string>('')
+
 const payment = ref<string>('')
 //const isFormValid = ref<boolean>(false)
 
@@ -50,6 +52,7 @@ useSeoMeta({
 })
 
 onMounted(() => {
+  cartStore.getShippingOptions()
   if (cartStore.cart?.items?.length === 0) {
     router.push({ name: 'cart' })
   }
@@ -112,6 +115,10 @@ const handleSubmit = async (event: Event) => {
   <main class="container is-fluid">
     <CartSteps />
 
+    <pre>
+      {{ cartStore.shippingOptions }}
+    </pre>
+
     <form
       ref="formRef"
       @submit.prevent="handleSubmit"
@@ -147,8 +154,9 @@ const handleSubmit = async (event: Event) => {
             </div>
             <div class="column is-half pl-5">
               <CartPaymentAndShippingForm
+                v-model="selectedShippingId"
+                :options="cartStore.shippingOptions"
                 v-model:payment="payment"
-                v-model:shipping="shipping"
               />
             </div>
           </div>

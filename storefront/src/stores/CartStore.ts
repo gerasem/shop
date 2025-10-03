@@ -6,6 +6,7 @@ import type { HttpTypes } from '@medusajs/types'
 
 export const useCartStore = defineStore('cart', () => {
   const cart = ref<HttpTypes.StoreCart | undefined>(undefined)
+  const shippingOptions = ref<HttpTypes.StoreCartShippingOption[] | undefined>(undefined)
 
   const loaderStore = useLoaderStore()
 
@@ -53,6 +54,7 @@ export const useCartStore = defineStore('cart', () => {
     return dataCart
   }
 
+  //todo refactoring needs
   const updateCart = async ({
     updateData,
     shippingMethodData,
@@ -70,13 +72,17 @@ export const useCartStore = defineStore('cart', () => {
     try {
       let returnedCart = cart.value
       if (updateData) {
-        returnedCart = await ApiService.updateCart(cart.value.id, updateData, 'updateCartData')
+        returnedCart = await ApiService.updateCart(
+          cart.value.id,
+          updateData,
+          loaderStore.LOADER_KEYS.EDIT_CART,
+        )
       }
       if (shippingMethodData) {
         returnedCart = await ApiService.addCartShippingMethod(
           cart.value.id,
           shippingMethodData,
-          'addCartShippingMethod',
+          loaderStore.LOADER_KEYS.EDIT_CART,
         )
       }
       cart.value = returnedCart
@@ -88,8 +94,7 @@ export const useCartStore = defineStore('cart', () => {
 
   const updateItemQuantity = async (itemId: string, quantity: number): Promise<void> => {
     if (!cart.value) {
-      await refreshCart()
-      throw new Error('Error initializing cart')
+      return
     }
 
     const dataCart = await ApiService.updateCartLineItem(
@@ -124,8 +129,19 @@ export const useCartStore = defineStore('cart', () => {
     }
   }
 
+  const getShippingOptions = async (): Promise<void> => {
+    if (!cart.value) {
+      return
+    }
+    shippingOptions.value = await ApiService.fetchShippingOptions(
+      cart.value.id,
+      loaderStore.LOADER_KEYS.EDIT_CART,
+    )
+  }
+
   return {
     cart,
+    shippingOptions,
     initializeCart,
     addToCart,
     refreshCart,
@@ -134,5 +150,6 @@ export const useCartStore = defineStore('cart', () => {
     getItemQuantity,
     removeItem,
     updateCart,
+    getShippingOptions,
   }
 })

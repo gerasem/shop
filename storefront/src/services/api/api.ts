@@ -213,6 +213,21 @@ class ApiService {
       { loaderKey },
     )
   }
+
+  static async fetchShippingOptions(
+    cartId: string,
+    loaderKey: string,
+  ): Promise<HttpTypes.StoreCartShippingOption[]> {
+    return ApiService.handleRequest(
+      async () => {
+        const { shipping_options } = await sdk.store.fulfillment.listCartOptions({
+          cart_id: cartId,
+        })
+        return shipping_options
+      },
+      { loaderKey },
+    )
+  }
 }
 
 export default ApiService
