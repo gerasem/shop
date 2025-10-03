@@ -58,15 +58,44 @@ const billingAddressSameAsShippingAddress = ref<boolean>(true)
 
 const formRef = ref<HTMLFormElement | null>(null)
 
-const handleSubmit = (event: Event) => {
+const handleSubmit = async (event: Event) => {
+  console.log('event', event)
   const form = formRef.value
   if (form?.checkValidity()) {
     console.log('Form is valid')
-    console.log(email, userAddress, billingAddress, shipping, payment)
+    console.log(email.value, userAddress.value, billingAddress.value, shipping.value, payment.value)
 
-    
+    const transformUserAddress = {
+      first_name: userAddress.value.firstname,
+      last_name: userAddress.value.lastname,
+      address_1: userAddress.value.address,
+      postal_code: userAddress.value.zip,
+      city: userAddress.value.city,
+      country_code: 'de',
+      phone: userAddress.value.phone,
+    }
+
+    const transformBillingAddress = {
+      first_name: billingAddress.value.firstname,
+      last_name: billingAddress.value.lastname,
+      address_1: billingAddress.value.address,
+      postal_code: billingAddress.value.zip,
+      city: billingAddress.value.city,
+      country_code: 'de',
+      phone: billingAddress.value.phone,
+    }
+
+    await cartStore.updateCart({
+      updateData: {
+        email: email.value,
+        shipping_address: transformUserAddress,
+        billing_address: billingAddressSameAsShippingAddress.value
+          ? transformBillingAddress
+          : transformUserAddress,
+      },
+    })
   } else {
-    form?.reportValidity() // Показать нативные сообщения об ошибках
+    form?.reportValidity()
   }
 }
 </script>

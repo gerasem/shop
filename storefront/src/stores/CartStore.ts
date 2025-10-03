@@ -53,7 +53,6 @@ export const useCartStore = defineStore('cart', () => {
     return dataCart
   }
 
-  //https://docs.medusajs.com/resources/storefront-development/guides/express-checkout#implement-submit-action-function
   const updateCart = async ({
     updateData,
     shippingMethodData,
@@ -61,7 +60,10 @@ export const useCartStore = defineStore('cart', () => {
     updateData?: HttpTypes.StoreUpdateCart
     shippingMethodData?: HttpTypes.StoreAddCartShippingMethods
   }): Promise<HttpTypes.StoreCart | undefined> => {
-    if (!cart.value || (!updateData && !shippingMethodData)) {
+    console.log('updateData', updateData)
+    console.log('cart.value', cart.value)
+    console.log('false?', !cart.value || !updateData)
+    if (!cart.value) {
       return cart.value
     }
 
