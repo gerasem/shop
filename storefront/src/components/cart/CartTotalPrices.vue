@@ -17,28 +17,27 @@ interface IButton {
   name: string
   icon: string
   path: string
-  disabled?: boolean
 }
 
 const props = defineProps<{
   button: IButton
-  onCartPage?: boolean
+  showAllPrices?: boolean
   disabled?: boolean
 }>()
 
-const emit = defineEmits<{
-  (e: 'validate-forms'): void
-  (e: 'send-form'): void
-}>()
+// const emit = defineEmits<{
+//   (e: 'validate-forms'): void
+//   (e: 'send-form'): void
+// }>()
 
-const handleClick = () => {
-  if (props.disabled) {
-    emit('validate-forms')
-  } else {
-    emit('send-form')
-    router.push({ name: props.button.path })
-  }
-}
+// const handleClick = () => {
+//   if (props.disabled) {
+//     emit('validate-forms')
+//   } else {
+//     emit('send-form')
+//     router.push({ name: props.button.path })
+//   }
+// }
 </script>
 
 <template>
@@ -61,7 +60,7 @@ const handleClick = () => {
           :value="cartStore.cart?.subtotal"
         />
 
-        <template v-if="onCartPage">
+        <template v-if="showAllPrices">
           <CartCalculatedPrice
             label="Shipping"
             :value="cartStore.cart?.shipping_total"
@@ -82,7 +81,7 @@ const handleClick = () => {
         </template>
 
         <Button
-          @click="handleClick()"
+          type="submit"
           :icon="button.icon"
           class="mt-4 is-fullwidth"
           :class="{

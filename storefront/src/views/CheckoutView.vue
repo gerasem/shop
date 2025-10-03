@@ -11,6 +11,7 @@ import { useCartStore } from '@/stores/CartStore'
 import { useRouter } from 'vue-router'
 import CartPaymentAndShippingForm from '@/components/cart/CartPaymentAndShippingForm.vue'
 import CartEmailForm from '@/components/cart/CartEmailForm.vue'
+import type { IUserAddress } from '@/interfaces/IUserAddress'
 
 const loaderStore = useLoaderStore()
 const cartStore = useCartStore()
@@ -18,17 +19,31 @@ const router = useRouter()
 
 const { t } = useI18n()
 
-const contactFormRef = ref<InstanceType<typeof CartAddressFrom>>()
-const contactFormBillingRef = ref<InstanceType<typeof CartAddressFrom>>()
-const paymentAndShippingFormRef = ref<InstanceType<typeof CartPaymentAndShippingForm>>()
-const emailFormRef = ref<InstanceType<typeof CartEmailForm>>()
+const email = ref<string>('')
+const userAddress = ref<IUserAddress>({
+  firstname: '',
+  lastname: '',
+  address: '',
+  city: '',
+  country: '',
+  zip: '',
+  phone: '',
+})
 
-const isContactFormValid = computed(() => contactFormRef.value?.isValid?.valid)
-const isContactFormBillingValid = computed(() => contactFormBillingRef.value?.isValid?.valid)
-const isPaymentAndShippingFormValid = computed(
-  () => paymentAndShippingFormRef.value?.isValid?.valid,
-)
-const isEmailFormValid = computed(() => emailFormRef.value?.isValid?.valid)
+const billingAddress = ref<IUserAddress>({
+  firstname: '',
+  lastname: '',
+  address: '',
+  city: '',
+  country: '',
+  zip: '',
+  phone: '',
+})
+
+const shipping = ref<string>('')
+const payment = ref<string>('')
+//const isFormValid = ref<boolean>(false)
+
 useSeoMeta({
   title: 'Checkout',
 })
@@ -41,38 +56,18 @@ onMounted(() => {
 
 const billingAddressSameAsShippingAddress = ref<boolean>(true)
 
-const allFormsValid = computed(() => {
-  return (
-    isPaymentAndShippingFormValid.value &&
-    isContactFormValid.value &&
-    isEmailFormValid.value &&
-    (!billingAddressSameAsShippingAddress.value ? isContactFormBillingValid.value : true)
-  )
-})
+const formRef = ref<HTMLFormElement | null>(null)
 
-const validateForms = async () => {
-  contactFormRef.value?.validate()
-  if (!billingAddressSameAsShippingAddress.value) {
-    contactFormBillingRef.value?.validate()
+const handleSubmit = (event: Event) => {
+  const form = formRef.value
+  if (form?.checkValidity()) {
+    console.log('Form is valid')
+    console.log(email, userAddress, billingAddress, shipping, payment)
+
+    
+  } else {
+    form?.reportValidity() // Показать нативные сообщения об ошибках
   }
-  paymentAndShippingFormRef.value?.validate()
-  emailFormRef.value?.validate()
-  // const address = {
-  //   first_name: firstName,
-  //   last_name: lastName,
-  //   address_1: address1,
-  //   company,
-  //   postal_code: postalCode,
-  //   city,
-  //   country_code: countryCode || cart.region?.countries?.[0].iso_2,
-  //   province,
-  //   phone: phoneNumber,
-  // }
-  //await cartStore.updateCart()
-}
-
-const sendForm = () => {
-  console.log('ADDRESS', contactFormRef.value?.address)
 }
 </script>
 
@@ -87,54 +82,61 @@ const sendForm = () => {
   <main class="container is-fluid">
     <CartSteps />
 
-    <div class="columns">
-      <div class="column is-three-quarters">
-        <Header :level="2">{{ t('Checkout') }}</Header>
+    <form
+      ref="formRef"
+      @submit.prevent="handleSubmit"
+      novalidate
+    >
+      <div class="columns">
+        <div class="column is-three-quarters">
+          <Header :level="2">{{ t('Checkout') }}</Header>
 
-        <div class="columns">
-          <div class="column is-half">
-            <CartEmailForm ref="emailFormRef" />
+          <div class="columns">
+            <div class="column is-half">
+              <CartEmailForm v-model:email="email" />
 
-            <CartAddressFrom
-              ref="contactFormRef"
-              :header="t('Address')"
-            />
-
-            <label class="checkbox my-4">
-              <input
-                type="checkbox"
-                v-model="billingAddressSameAsShippingAddress"
+              <CartAddressFrom
+                :header="t('Address')"
+                v-model:address="userAddress"
               />
-              Billing address same as shipping address
-            </label>
 
-            <CartAddressFrom
-              v-if="!billingAddressSameAsShippingAddress"
-              ref="contactFormBillingRef"
-              class="mt-4"
-              :header="t('Billing Address')"
-            />
-          </div>
-          <div class="column is-half pl-5">
-            <CartPaymentAndShippingForm ref="paymentAndShippingFormRef" />
+              <label class="checkbox my-4">
+                <input
+                  type="checkbox"
+                  v-model="billingAddressSameAsShippingAddress"
+                />
+                Billing address same as shipping address
+              </label>
+
+              <CartAddressFrom
+                v-if="!billingAddressSameAsShippingAddress"
+                class="mt-4"
+                :header="t('Billing Address')"
+                v-model:address="billingAddress"
+              />
+            </div>
+            <div class="column is-half pl-5">
+              <CartPaymentAndShippingForm
+                v-model:payment="payment"
+                v-model:shipping="shipping"
+              />
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="column is-one-quarter">
-        <CartTotalPrices
-          :onCartPage="true"
-          :button="{
-            name: 'Weiter',
-            icon: 'bag',
-            path: 'payment',
-          }"
-          :disabled="!allFormsValid"
-          @validate-forms="validateForms()"
-          @send-form="sendForm()"
-        />
+        <div class="column is-one-quarter">
+          <CartTotalPrices
+            :showAllPrices="true"
+            :button="{
+              name: 'Weiter',
+              icon: 'bag',
+              path: 'payment',
+            }"
+            :disabled="false"
+          />
+        </div>
       </div>
-    </div>
+    </form>
   </main>
 </template>
 

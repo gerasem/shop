@@ -1,39 +1,10 @@
 <script setup lang="ts">
-import { defineRule, configure } from 'vee-validate'
-import { required, email } from '@vee-validate/rules'
-import { useForm } from 'vee-validate'
 import { useI18n } from 'vue-i18n'
-import { ref } from 'vue'
 import Input from '@/components/form/Input.vue'
 
 const { t } = useI18n()
-defineRule('required', required)
-defineRule('email', email)
 
-configure({
-  generateMessage: (ctx) => {
-    const field = t(ctx.field)
-    return {
-      required: t('field_required', { field }),
-      email: t('invalid_email'),
-    }[ctx.rule.name]
-  },
-})
-
-const { errors, defineField, validate, meta } = useForm<{
-  mail: string
-}>({
-  validationSchema: {
-    mail: 'required|email',
-  },
-})
-const [mail, mailAttrs] = defineField('mail')
-
-
-defineExpose({
-  isValid: meta,
-  validate
-})
+const email = defineModel<string>('email', { required: true })
 </script>
 
 <template>
@@ -43,23 +14,14 @@ defineExpose({
         <label class="label">{{ t('Email') }} <span>*</span></label>
         <div class="control">
           <Input
-            v-model:input="mail"
-            v-bind="mailAttrs"
+            v-model:input="email"
             type="email"
             :placeholder="`${t('Email')} *`"
-            :class="{ 'is-danger': errors.mail }"
+            required
           />
-          <p
-            v-if="errors.mail"
-            class="has-text-danger	"
-          >
-            {{ errors.mail }}
-          </p>
         </div>
       </div>
     </div>
-
-
   </div>
 </template>
 
