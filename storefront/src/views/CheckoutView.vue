@@ -19,27 +19,28 @@ const router = useRouter()
 
 const { t } = useI18n()
 
-const email = ref<string>('')
+const email = ref<string>(cartStore.cart?.email || '')
 const userAddress = ref<IUserAddress>({
-  firstname: '',
-  lastname: '',
-  address: '',
-  city: '',
-  country: '',
-  zip: '',
-  phone: '',
+  firstname: cartStore.cart?.shipping_address?.first_name || '',
+  lastname: cartStore.cart?.shipping_address?.last_name || '',
+  address: cartStore.cart?.shipping_address?.address_1 || '',
+  city: cartStore.cart?.shipping_address?.city || '',
+  country: cartStore.cart?.shipping_address?.country_code || '',
+  zip: cartStore.cart?.shipping_address?.postal_code || '',
+  phone: cartStore.cart?.shipping_address?.phone || '',
 })
 
 const billingAddress = ref<IUserAddress>({
-  firstname: '',
-  lastname: '',
-  address: '',
-  city: '',
-  country: '',
-  zip: '',
-  phone: '',
+  firstname: cartStore.cart?.billing_address?.first_name || '',
+  lastname: cartStore.cart?.billing_address?.last_name || '',
+  address: cartStore.cart?.billing_address?.address_1 || '',
+  city: cartStore.cart?.billing_address?.city || '',
+  country: cartStore.cart?.billing_address?.country_code || '',
+  zip: cartStore.cart?.billing_address?.postal_code || '',
+  phone: cartStore.cart?.billing_address?.phone || '',
 })
 
+// todo get from api 
 const shipping = ref<string>('')
 const payment = ref<string>('')
 //const isFormValid = ref<boolean>(false)

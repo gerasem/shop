@@ -59,12 +59,12 @@ export const useCartStore = defineStore('cart', () => {
   }: {
     updateData?: HttpTypes.StoreUpdateCart
     shippingMethodData?: HttpTypes.StoreAddCartShippingMethods
-  }): Promise<HttpTypes.StoreCart | undefined> => {
+  }): Promise<void> => {
     console.log('updateData', updateData)
     console.log('cart.value', cart.value)
     console.log('false?', !cart.value || !updateData)
     if (!cart.value) {
-      return cart.value
+      return
     }
 
     try {
@@ -81,10 +81,8 @@ export const useCartStore = defineStore('cart', () => {
       }
       cart.value = returnedCart
       localStorage.setItem('cart_id', returnedCart.id)
-      return returnedCart
     } catch (err) {
       console.error('Error update cart:', err)
-      return undefined
     }
   }
 
