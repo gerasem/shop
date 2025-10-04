@@ -80,18 +80,20 @@ watch(
 
     <div class="cart__main">
       <div class="cart__prices is-flex">
-        <div class="cart__price">
+        <div class="cart__info">
           <h4 class="cart__title">{{ item.product_title }} : {{ item.title }}</h4>
 
-          {{ convertToLocale({ amount: item.unit_price }) }}
-          <span
-            v-if="loadingQuantity"
-            class="loading-spinner"
-          ></span>
-          <template v-else>
-            <span>x {{ item.quantity }}</span>
-            {{ convertToLocale({ amount: item.total }) }}
-          </template>
+          <div class="cart__price">
+            {{ convertToLocale({ amount: item.unit_price }) }}
+            <span
+              v-if="loadingQuantity"
+              class="loading-spinner"
+            ></span>
+            <template v-else>
+              <span>x {{ item.quantity }}</span>
+              {{ convertToLocale({ amount: item.total }) }}
+            </template>
+          </div>
         </div>
 
         <!-- <div
@@ -198,6 +200,7 @@ watch(
       font-weight: 400;
       font-size: 1rem;
       margin: 0 20px;
+      flex: none;
     }
   }
 
@@ -217,6 +220,14 @@ watch(
 
   &__actions {
     align-items: center;
+  }
+
+  &__info {
+    display: flex;
+
+    @media (max-width: $screen-xl-max) {
+      flex-direction: column;
+    }
   }
 }
 </style>
