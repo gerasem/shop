@@ -1,43 +1,25 @@
 <script setup lang="ts">
-import { localePath } from '@/composables/localePath.ts'
 import { useI18n } from 'vue-i18n'
 import CartCalculatedPrice from '@/components/cart/CartCalculatedPrice.vue'
 import Button from '@/components/form/Button.vue'
 import { useCartStore } from '@/stores/CartStore'
 import { useLoaderStore } from '@/stores/LoaderStore'
-import { useRouter } from 'vue-router'
 
 const cartStore = useCartStore()
 const loaderStore = useLoaderStore()
-const router = useRouter()
 
 const { t } = useI18n()
 
 interface IButton {
   name: string
   icon: string
-  path: string
 }
 
-const props = defineProps<{
+defineProps<{
   button: IButton
   showAllPrices?: boolean
   disabled?: boolean
 }>()
-
-// const emit = defineEmits<{
-//   (e: 'validate-forms'): void
-//   (e: 'send-form'): void
-// }>()
-
-// const handleClick = () => {
-//   if (props.disabled) {
-//     emit('validate-forms')
-//   } else {
-//     emit('send-form')
-//     router.push({ name: props.button.path })
-//   }
-// }
 </script>
 
 <template>

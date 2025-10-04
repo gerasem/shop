@@ -12,7 +12,9 @@ import { useRouter } from 'vue-router'
 import CartPaymentAndShippingForm from '@/components/cart/CartPaymentAndShippingForm.vue'
 import CartEmailForm from '@/components/cart/CartEmailForm.vue'
 import type { IUserAddress } from '@/interfaces/IUserAddress'
+import { useToastStore } from '@/stores/ToastStore'
 
+const toastStore = useToastStore()
 const loaderStore = useLoaderStore()
 const cartStore = useCartStore()
 const router = useRouter()
@@ -52,7 +54,6 @@ useSeoMeta({
 })
 
 onMounted(() => {
-  cartStore.getShippingOptions()
   if (cartStore.cart?.items?.length === 0) {
     router.push({ name: 'cart' })
   }
@@ -62,12 +63,10 @@ const billingAddressSameAsShippingAddress = ref<boolean>(true)
 
 const formRef = ref<HTMLFormElement | null>(null)
 
-const handleSubmit = async (event: Event) => {
-  console.log('event', event)
+const handleSubmit = async () => {
   const form = formRef.value
   if (form?.checkValidity()) {
     console.log('Form is valid')
-    console.log(email.value, userAddress.value, billingAddress.value, shipping.value, payment.value)
 
     const transformUserAddress = {
       first_name: userAddress.value.firstname,
@@ -98,8 +97,11 @@ const handleSubmit = async (event: Event) => {
           : transformUserAddress,
       },
     })
+
+    router.push({ name: 'payment' })
   } else {
     form?.reportValidity()
+    toastStore.addError(`Please fill all required fields`)
   }
 }
 </script>
@@ -115,13 +117,9 @@ const handleSubmit = async (event: Event) => {
   <main class="container is-fluid">
     <CartSteps />
 
-    <pre>
-      {{ cartStore.shippingOptions }}
-    </pre>
-
     <form
       ref="formRef"
-      @submit.prevent="handleSubmit"
+      @submit.prevent="handleSubmit()"
       novalidate
     >
       <div class="columns">
@@ -168,7 +166,6 @@ const handleSubmit = async (event: Event) => {
             :button="{
               name: 'Weiter',
               icon: 'bag',
-              path: 'payment',
             }"
             :disabled="false"
           />

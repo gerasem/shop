@@ -2,13 +2,20 @@
 import RadioGroup from '@/components/form/RadioGroup.vue'
 import Header from '@/components/content/Header.vue'
 import { useI18n } from 'vue-i18n'
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useCartStore } from '@/stores/CartStore'
 import { HttpTypes } from '@medusajs/types'
 import { convertToLocale } from '@/utils/priceUtils'
 
 const cartStore = useCartStore()
 
+watch(
+  () => cartStore.cart,
+  () => {
+    cartStore.getShippingOptions()
+  },
+  { immediate: true },
+)
 const { t } = useI18n()
 
 const emit = defineEmits<{
@@ -20,6 +27,7 @@ const modelValue = defineModel<string>('modelValue', { required: true })
 const payment = defineModel<string>('payment', { required: true })
 
 const radioItems = computed(() => {
+  console.log('cartStore.shippingOptions', cartStore.shippingOptions)
   if (!cartStore.shippingOptions) {
     return
   }

@@ -9,7 +9,9 @@ import { computed } from 'vue'
 import CartSteps from '@/components/cart/CartSteps.vue'
 import CartTotalPrices from '@/components/cart/CartTotalPrices.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const cartStore = useCartStore()
 const loaderStore = useLoaderStore()
 
@@ -21,6 +23,11 @@ const items = computed(() => {
     return new Date(b.created_at || '').getTime() - new Date(a.created_at || '').getTime()
   })
 })
+
+const handleSubmit = () => {
+  // proceed to checkout
+  router.push({ name: 'checkout' })
+}
 
 useSeoMeta({
   title: 'Shopping Cart',
@@ -37,26 +44,29 @@ useSeoMeta({
 
   <main class="container is-fluid">
     <CartSteps />
-    <div class="columns">
-      <div class="column is-three-quarters">
-        <Header :level="2">Shopping Cart</Header>
 
-        <CartItem
-          v-for="item in items"
-          :key="item.id"
-          :item="item"
-        />
+    <form @submit.prevent="handleSubmit()">
+      <div class="columns">
+        <div class="column is-three-quarters">
+          <Header :level="2">Shopping Cart</Header>
 
-        <p v-if="!items?.length">{{ t('Shopping cart is empty') }}</p>
+          <CartItem
+            v-for="item in items"
+            :key="item.id"
+            :item="item"
+          />
+
+          <p v-if="!items?.length">{{ t('Shopping cart is empty') }}</p>
+        </div>
+
+        <div class="column is-one-quarter">
+          <CartTotalPrices
+            :button="{ name: 'Weiter', icon: 'bag' }"
+            :disabled="items?.length === 0"
+          />
+        </div>
       </div>
-
-      <div class="column is-one-quarter">
-        <CartTotalPrices
-          :button="{ name: 'Weiter', icon: 'bag', path: 'checkout' }"
-          :disabled="items?.length === 0"
-        />
-      </div>
-    </div>
+    </form>
   </main>
 
   <Text2Columns header="How to buy?">
