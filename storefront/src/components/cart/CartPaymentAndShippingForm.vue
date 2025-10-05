@@ -10,7 +10,7 @@ import { convertToLocale } from '@/utils/priceUtils'
 const cartStore = useCartStore()
 
 onMounted(async () => {
-  if (!cartStore.shippingOptions) {
+  if (!cartStore.shippingOptions?.length) {
     await cartStore.getShippingOptions()
   }
 })

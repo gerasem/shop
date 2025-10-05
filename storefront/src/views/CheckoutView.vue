@@ -48,8 +48,12 @@ const selectedShippingId = ref<string>('')
 
 watch(selectedShippingId, (newVal) => {
   console.log('Selected shipping option ID changed:', newVal)
-
-  cartStore.selectShippingOption(newVal)
+  if (
+    cartStore.cart?.shipping_methods &&
+    selectedShippingId.value !== cartStore.cart?.shipping_methods[0].shipping_option_id
+  ) {
+    cartStore.selectShippingOption(newVal)
+  }
 })
 const payment = ref<string>('')
 //const isFormValid = ref<boolean>(false)
@@ -61,6 +65,10 @@ useSeoMeta({
 onMounted(() => {
   if (cartStore.cart?.items?.length === 0) {
     router.push({ name: 'cart' })
+  }
+
+  if (cartStore.cart?.shipping_methods && cartStore.cart?.shipping_methods[0]?.shipping_option_id) {
+    selectedShippingId.value = cartStore.cart?.shipping_methods[0].shipping_option_id
   }
 })
 
@@ -159,7 +167,6 @@ const handleSubmit = async () => {
               <CartPaymentAndShippingForm
                 v-if="cartStore.cart"
                 v-model="selectedShippingId"
-                :options="cartStore.shippingOptions"
                 v-model:payment="payment"
               />
             </div>
@@ -168,7 +175,6 @@ const handleSubmit = async () => {
 
         <div class="column is-one-quarter">
           <CartTotalPrices
-            :showAllPrices="true"
             :button="{
               name: 'Weiter',
               icon: 'bag',

@@ -17,7 +17,6 @@ interface IButton {
 
 defineProps<{
   button: IButton
-  showAllPrices?: boolean
   disabled?: boolean
 }>()
 </script>
@@ -39,10 +38,10 @@ defineProps<{
       <div class="has-text-centered">
         <CartCalculatedPrice
           label="Sub Total"
-          :value="cartStore.cart?.subtotal"
+          :value="cartStore.cart?.item_subtotal"
         />
 
-        <template v-if="showAllPrices">
+        <template v-if="cartStore.cart?.shipping_total">
           <CartCalculatedPrice
             label="Shipping"
             :value="cartStore.cart?.shipping_total"

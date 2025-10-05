@@ -45,7 +45,7 @@ onMounted(() => {
       </div>
 
       <div class="column is-one-third">
-        <CartTotalPrices :button="{ name: 'Pay', icon: 'bag', path: 'checkout' }" />
+        <CartTotalPrices :button="{ name: 'Pay', icon: 'bag' }" />
       </div>
     </div>
   </main>
