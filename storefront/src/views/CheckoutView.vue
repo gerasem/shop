@@ -3,7 +3,7 @@ import { useI18n } from 'vue-i18n'
 import { useSeoMeta } from '@unhead/vue'
 import { useLoaderStore } from '@/stores/LoaderStore'
 import Header from '@/components/content/Header.vue'
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import CartSteps from '@/components/cart/CartSteps.vue'
 import CartTotalPrices from '@/components/cart/CartTotalPrices.vue'
 import CartAddressFrom from '@/components/cart/CartAddressFrom.vue'
@@ -46,6 +46,11 @@ const billingAddress = ref<IUserAddress>({
 const shipping = ref<string>('')
 const selectedShippingId = ref<string>('')
 
+watch(selectedShippingId, (newVal) => {
+  console.log('Selected shipping option ID changed:', newVal)
+
+  cartStore.selectShippingOption(newVal)
+})
 const payment = ref<string>('')
 //const isFormValid = ref<boolean>(false)
 
@@ -152,6 +157,7 @@ const handleSubmit = async () => {
             </div>
             <div class="column is-half pl-5">
               <CartPaymentAndShippingForm
+                v-if="cartStore.cart"
                 v-model="selectedShippingId"
                 :options="cartStore.shippingOptions"
                 v-model:payment="payment"

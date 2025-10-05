@@ -10,6 +10,7 @@ defineProps<{
 <template>
   <button
     class="button"
+    type="button"
     :disabled="disabled"
   >
     <Icon

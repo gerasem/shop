@@ -9,13 +9,11 @@ import { convertToLocale } from '@/utils/priceUtils'
 
 const cartStore = useCartStore()
 
-watch(
-  () => cartStore.cart,
-  () => {
-    cartStore.getShippingOptions()
-  },
-  { immediate: true },
-)
+onMounted(async () => {
+  if (!cartStore.shippingOptions) {
+    await cartStore.getShippingOptions()
+  }
+})
 const { t } = useI18n()
 
 const emit = defineEmits<{

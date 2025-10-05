@@ -139,6 +139,22 @@ export const useCartStore = defineStore('cart', () => {
     )
   }
 
+  const selectShippingOption = async (optionId: string) => {
+    if (!cart.value) {
+      return
+    }
+
+    if (optionId !== '') {
+      const returnedCart = await ApiService.addCartShippingMethod(
+        cart.value.id,
+        { option_id: optionId },
+        loaderStore.LOADER_KEYS.EDIT_CART,
+      )
+
+      cart.value = returnedCart
+    }
+  }
+
   return {
     cart,
     shippingOptions,
@@ -151,5 +167,6 @@ export const useCartStore = defineStore('cart', () => {
     removeItem,
     updateCart,
     getShippingOptions,
+    selectShippingOption,
   }
 })

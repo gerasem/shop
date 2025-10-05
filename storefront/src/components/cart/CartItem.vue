@@ -57,6 +57,12 @@ const quantityError = computed(() => {
   return quantity?.value > inventoryQuantity.value
 })
 
+const totalPrice = computed(() => {
+  if (props.item.total) {
+    return props.item.total
+  }
+  return props.item.unit_price * (props.item.quantity || 1)
+})
 watch(
   quantity,
   debounce(() => {
@@ -91,7 +97,7 @@ watch(
             ></span>
             <template v-else>
               <span>x {{ item.quantity }}</span>
-              {{ convertToLocale({ amount: item.total }) }}
+              {{ convertToLocale({ amount: totalPrice }) }}
             </template>
           </div>
         </div>
