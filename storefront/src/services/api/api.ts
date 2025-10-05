@@ -228,6 +228,21 @@ class ApiService {
       { loaderKey },
     )
   }
+
+  static async fetchPaymentOptions(
+    regionId: string,
+    loaderKey: string,
+  ): Promise<HttpTypes.StorePaymentProvider[]> {
+    return ApiService.handleRequest(
+      async () => {
+        const { payment_providers } = await sdk.store.payment.listPaymentProviders({
+          region_id: regionId,
+        })
+        return payment_providers
+      },
+      { loaderKey },
+    )
+  }
 }
 
 export default ApiService

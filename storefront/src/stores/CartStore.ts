@@ -7,6 +7,7 @@ import type { HttpTypes } from '@medusajs/types'
 export const useCartStore = defineStore('cart', () => {
   const cart = ref<HttpTypes.StoreCart | undefined>(undefined)
   const shippingOptions = ref<HttpTypes.StoreCartShippingOption[] | undefined>(undefined)
+  const paymentOptions = ref<HttpTypes.StorePaymentProvider[] | undefined>(undefined)
 
   const loaderStore = useLoaderStore()
 
@@ -155,6 +156,17 @@ export const useCartStore = defineStore('cart', () => {
     }
   }
 
+  const getPaymentOptions = async (): Promise<void> => {
+    if (!cart.value || !cart.value?.region_id) {
+      return
+    }
+
+    paymentOptions.value = await ApiService.fetchPaymentOptions(
+      cart.value.region_id,
+      loaderStore.LOADER_KEYS.EDIT_CART,
+    )
+  }
+
   return {
     cart,
     shippingOptions,
@@ -168,5 +180,7 @@ export const useCartStore = defineStore('cart', () => {
     updateCart,
     getShippingOptions,
     selectShippingOption,
+    getPaymentOptions,
+    paymentOptions,
   }
 })

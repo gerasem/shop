@@ -42,8 +42,6 @@ const billingAddress = ref<IUserAddress>({
   phone: cartStore.cart?.billing_address?.phone || '',
 })
 
-// todo get from api
-const shipping = ref<string>('')
 const selectedShippingId = ref<string>('')
 
 watch(selectedShippingId, (newVal) => {
@@ -55,7 +53,7 @@ watch(selectedShippingId, (newVal) => {
     cartStore.selectShippingOption(newVal)
   }
 })
-const payment = ref<string>('')
+const selectedPaymentId = ref<string>('')
 //const isFormValid = ref<boolean>(false)
 
 useSeoMeta({
@@ -166,8 +164,8 @@ const handleSubmit = async () => {
             <div class="column is-half pl-5">
               <CartPaymentAndShippingForm
                 v-if="cartStore.cart"
-                v-model="selectedShippingId"
-                v-model:payment="payment"
+                v-model:shippingId="selectedShippingId"
+                v-model:paymentId="selectedPaymentId"
               />
             </div>
           </div>

@@ -2,29 +2,32 @@
 import RadioGroup from '@/components/form/RadioGroup.vue'
 import Header from '@/components/content/Header.vue'
 import { useI18n } from 'vue-i18n'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useCartStore } from '@/stores/CartStore'
-import { HttpTypes } from '@medusajs/types'
 import { convertToLocale } from '@/utils/priceUtils'
 
 const cartStore = useCartStore()
 
 onMounted(async () => {
-  if (!cartStore.shippingOptions?.length) {
+  if (!cartStore.shippingOptions) {
     await cartStore.getShippingOptions()
+  }
+  if (!cartStore.paymentOptions) {
+    await cartStore.getPaymentOptions()
   }
 })
 const { t } = useI18n()
 
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void
+defineEmits<{
+  (e: 'update:shippingId', value: string): void
+  (e: 'update:paymentId', value: string): void
 }>()
 
-const modelValue = defineModel<string>('modelValue', { required: true })
+const shippingId = defineModel<string>('shippingId', { required: true })
 
-const payment = defineModel<string>('payment', { required: true })
+const paymentId = defineModel<string>('paymentId', { required: true })
 
-const radioItems = computed(() => {
+const shippingItems = computed(() => {
   console.log('cartStore.shippingOptions', cartStore.shippingOptions)
   if (!cartStore.shippingOptions) {
     return
@@ -42,12 +45,29 @@ const radioItems = computed(() => {
     }))
 })
 
-const selectedOption = computed(() => {
-  if (!radioItems.value) {
+const selectedShipping = computed(() => {
+  if (!shippingItems.value) {
     return
   }
-  const selectedId = modelValue.value
-  return radioItems.value.find((opt) => opt.id === selectedId)
+  return shippingItems.value.find((opt) => opt.id === shippingId.value)
+})
+
+const paymentProviderMap: Record<string, string> = {
+  pp_system_default: 'Default Payment',
+}
+
+const paymentItems = computed(() => {
+  console.log('cartStore.paymentProviders', cartStore.paymentOptions)
+  if (!cartStore.paymentOptions) {
+    return []
+  }
+  return cartStore.paymentOptions
+    .filter((provider) => provider.is_enabled)
+    .map((provider) => ({
+      id: provider.id,
+      name: t(paymentProviderMap[provider.id] || provider.id),
+      value: provider.id,
+    }))
 })
 </script>
 
@@ -56,36 +76,35 @@ const selectedOption = computed(() => {
     <Header :level="3">{{ t('Shipping') }}</Header>
 
     <RadioGroup
-      v-if="radioItems"
-      v-model="modelValue"
+      v-if="shippingItems"
+      v-model="shippingId"
       name="shipping_option"
-      :items="radioItems"
+      :items="shippingItems"
       :label="t('Choose Shipping')"
       required
     />
 
     <div
-      v-if="selectedOption"
+      v-if="selectedShipping"
       class="mt-4 p-4 has-background-info-light"
     >
-      <p class="has-text-weight-semibold">{{ selectedOption.name }}</p>
-      <p class="is-size-7 has-text-grey">{{ selectedOption.description }}</p>
-      <p class="has-text-weight-bold">{{ selectedOption.price }}</p>
+      <p class="has-text-weight-semibold">{{ selectedShipping.name }}</p>
+      <p class="is-size-7 has-text-grey">{{ selectedShipping.description }}</p>
+      <p class="has-text-weight-bold">{{ selectedShipping.price }}</p>
     </div>
-    <!-- <Header
+
+    <Header
       :level="3"
       class="mt-6"
       >{{ t('Payment') }}</Header
     >
     <RadioGroup
-
-      v-model:input="payment"
-      :items="[
-        { name: 'PayPal', value: 'paypal' },
-        { name: 'Überweisung', value: 'ueberweisung' },
-      ]"
-      class="is-flex-direction-column"
-    /> -->
+      v-model="paymentId"
+      name="payment_option"
+      :items="paymentItems"
+      required
+      :label="'Payment Method'"
+    />
   </div>
 </template>
 
