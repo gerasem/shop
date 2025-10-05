@@ -50,7 +50,7 @@ watch(selectedShippingId, (newVal) => {
   console.log('Selected shipping option ID changed:', newVal)
   if (
     cartStore.cart?.shipping_methods &&
-    selectedShippingId.value !== cartStore.cart?.shipping_methods[0].shipping_option_id
+    selectedShippingId.value !== cartStore.cart?.shipping_methods[0]?.shipping_option_id
   ) {
     cartStore.selectShippingOption(newVal)
   }

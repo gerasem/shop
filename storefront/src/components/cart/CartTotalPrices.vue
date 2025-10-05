@@ -41,7 +41,7 @@ defineProps<{
           :value="cartStore.cart?.item_subtotal"
         />
 
-        <template v-if="cartStore.cart?.shipping_total">
+        <template v-if="cartStore.cart?.shipping_methods && cartStore.cart?.shipping_methods[0]">
           <CartCalculatedPrice
             label="Shipping"
             :value="cartStore.cart?.shipping_total"
