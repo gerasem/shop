@@ -243,6 +243,21 @@ class ApiService {
       { loaderKey },
     )
   }
+
+  /*
+  sdk.store.payment.initiatePaymentSession(
+  cart, // assuming you already have the cart object.
+  {
+    provider_id: "pp_stripe_stripe",
+    data: {
+      // any data relevant for the provider.
+    }
+  }
+)
+.then(({ payment_collection }) => {
+  console.log(payment_collection)
+})
+  */
 }
 
 export default ApiService

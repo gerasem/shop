@@ -2,7 +2,7 @@
 import RadioGroup from '@/components/form/RadioGroup.vue'
 import Header from '@/components/content/Header.vue'
 import { useI18n } from 'vue-i18n'
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useCartStore } from '@/stores/CartStore'
 import { convertToLocale } from '@/utils/priceUtils'
 
@@ -62,7 +62,7 @@ const paymentItems = computed(() => {
     return []
   }
   return cartStore.paymentOptions
-    .filter((provider) => provider.is_enabled)
+    .filter((provider: HttpTypes.StorePaymentProvider) => provider.is_enabled)
     .map((provider) => ({
       id: provider.id,
       name: t(paymentProviderMap[provider.id] || provider.id),
@@ -103,7 +103,7 @@ const paymentItems = computed(() => {
       name="payment_option"
       :items="paymentItems"
       required
-      :label="'Payment Method'"
+      :label="t('Payment Method')"
     />
   </div>
 </template>
