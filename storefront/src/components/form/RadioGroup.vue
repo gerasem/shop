@@ -53,6 +53,7 @@ defineEmits<{
 
   &:has(input:invalid) {
     color: var(--invalid-border-color);
+    border-color: var(--invalid-border-color);
   }
 }
 
@@ -60,14 +61,5 @@ defineEmits<{
   display: flex;
   align-items: center;
   gap: 0.5rem;
-
-  & input[type='radio'] {
-    margin-right: 0.5rem;
-
-    &:focus {
-      outline: none;
-      box-shadow: 0 0 0 0.125em rgba($color-primary, 0.25);
-    }
-  }
 }
 </style>

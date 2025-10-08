@@ -12,6 +12,7 @@ import CartPaymentOptions from '@/components/cart/CartPaymentOptions.vue'
 import CartEmailForm from '@/components/cart/CartEmailForm.vue'
 import type { IUserAddress } from '@/interfaces/IUserAddress'
 import { useToastStore } from '@/stores/ToastStore'
+import Checkbox from '@/components/form/Checkbox.vue'
 
 const toastStore = useToastStore()
 const cartStore = useCartStore()
@@ -114,6 +115,8 @@ const handleSubmit = async () => {
     toastStore.addError(`Please fill all required fields`)
   }
 }
+
+const terms = ref<boolean>(false)
 </script>
 
 <template>
@@ -169,9 +172,18 @@ const handleSubmit = async () => {
           :button="{
             name: 'Weiter',
             icon: 'bag',
+            disabled: !isFormValid,
           }"
-          :disabled="false"
-        />
+        >
+          <template #terms>
+            <Checkbox
+              v-model="terms"
+              label="Agree to Terms"
+              name="terms"
+              required
+            />
+          </template>
+        </CartTotalPrices>
       </div>
     </div>
   </form>

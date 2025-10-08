@@ -13,11 +13,11 @@ const { t } = useI18n()
 interface IButton {
   name: string
   icon: string
+  disabled?: boolean
 }
 
 defineProps<{
   button: IButton
-  disabled?: boolean
 }>()
 </script>
 
@@ -61,6 +61,8 @@ defineProps<{
           />
         </template>
 
+        <slot name="terms"></slot>
+
         <Button
           type="submit"
           :icon="button.icon"
@@ -69,8 +71,8 @@ defineProps<{
             'is-loading':
               loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ADD_TO_CART) ||
               loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.EDIT_CART),
-            'is-light': disabled,
-            'is-primary': !disabled,
+            'is-light': button.disabled,
+            'is-primary': !button.disabled,
           }"
           >{{ t(button.name) }}</Button
         >
