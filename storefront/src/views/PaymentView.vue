@@ -40,11 +40,11 @@ onMounted(() => {
     <CartSteps />
 
     <div class="columns">
-      <div class="column is-two-thirds-tablet is-three-quarters-fullhd">
+      <div class="column is-two-thirds-tablet is-three-quarters-desktop">
         <Header :level="1">{{ t('Payment') }}</Header>
       </div>
 
-      <div class="column is-one-third-tablet is-one-quarter-fullhd">
+      <div class="column is-one-third-tablet is-one-quarter-desktop">
         <CartTotalPrices :button="{ name: 'Pay', icon: 'bag' }" />
       </div>
     </div>

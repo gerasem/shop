@@ -124,11 +124,11 @@ const handleSubmit = async () => {
     :class="{ 'is-invalid': !isFormValid }"
   >
     <div class="columns">
-      <div class="column is-two-thirds-tablet is-three-quarters-fullhd">
+      <div class="column is-two-thirds-tablet is-three-quarters-desktop">
         <Header :level="1">{{ t('Checkout') }}</Header>
 
         <div class="columns is-multiline">
-          <div class="column is-full-tablet is-half-desktop">
+          <div class="column is-full-tablet is-two-thirds-desktop">
             <CartEmailForm v-model:email="email" />
 
             <CartAddressFrom
@@ -151,7 +151,7 @@ const handleSubmit = async () => {
               v-model:address="billingAddress"
             />
           </div>
-          <div class="column is-full-tablet is-half-desktop pl-5">
+          <div class="column is-full-tablet is-one-third-desktop pl-5">
             <CartShippingOptions
               v-if="cartStore.cart"
               v-model:shippingId="selectedShippingId"
@@ -164,7 +164,7 @@ const handleSubmit = async () => {
         </div>
       </div>
 
-      <div class="column is-one-third-tablet is-one-quarter-fullhd">
+      <div class="column is-one-third-tablet is-one-quarter-desktop">
         <CartTotalPrices
           :button="{
             name: 'Weiter',

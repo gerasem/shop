@@ -47,7 +47,7 @@ useSeoMeta({
 
     <form @submit.prevent="handleSubmit()">
       <div class="columns">
-        <div class="column is-two-thirds-tablet is-three-quarters-fullhd">
+        <div class="column is-two-thirds-tablet is-three-quarters-desktop">
           <Header :level="1">Shopping Cart</Header>
 
           <CartItem
@@ -59,7 +59,7 @@ useSeoMeta({
           <p v-if="!items?.length">{{ t('Shopping cart is empty') }}</p>
         </div>
 
-        <div class="column is-one-third-tablet is-one-quarter-fullhd">
+        <div class="column is-one-third-tablet is-one-quarter-desktop">
           <CartTotalPrices
             :button="{ name: 'Weiter', icon: 'bag' }"
             :disabled="items?.length === 0"
