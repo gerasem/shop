@@ -50,24 +50,24 @@ defineEmits<{
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  &:has(input:invalid) {
+    color: var(--invalid-border-color);
+  }
 }
 
 .radio {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-}
 
-.radio input[type='radio'] {
-  margin-right: 0.5rem;
-}
+  & input[type='radio'] {
+    margin-right: 0.5rem;
 
-.radio input[type='radio']:focus {
-  outline: none;
-  box-shadow: 0 0 0 0.125em rgba($color-primary, 0.25);
-}
-
-.radio input:invalid {
-  border-color: $color-secondary;
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 0.125em rgba($color-primary, 0.25);
+    }
+  }
 }
 </style>

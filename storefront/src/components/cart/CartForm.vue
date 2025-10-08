@@ -52,7 +52,7 @@ watch(selectedShippingId, (newVal) => {
   }
 })
 const selectedPaymentId = ref<string>('')
-//const isFormValid = ref<boolean>(false)
+const isFormValid = ref<boolean>(true)
 
 useSeoMeta({
   title: 'Checkout',
@@ -76,7 +76,7 @@ const handleSubmit = async () => {
   const form = formRef.value
   if (form?.checkValidity()) {
     console.log('Form is valid')
-
+    isFormValid.value = true
     const transformUserAddress = {
       first_name: userAddress.firstname,
       last_name: userAddress.lastname,
@@ -110,6 +110,7 @@ const handleSubmit = async () => {
     router.push({ name: 'payment' })
   } else {
     form?.reportValidity()
+    isFormValid.value = false
     toastStore.addError(`Please fill all required fields`)
   }
 }
@@ -120,6 +121,7 @@ const handleSubmit = async () => {
     ref="formRef"
     @submit.prevent="handleSubmit()"
     novalidate
+    :class="{ 'is-invalid': !isFormValid }"
   >
     <div class="columns">
       <div class="column is-two-thirds-tablet is-three-quarters-fullhd">
@@ -175,4 +177,14 @@ const handleSubmit = async () => {
   </form>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+form {
+  --invalid-border-color: inherit;
+  --invalid-placeholder-color: #b2b2b2;
+
+  &.is-invalid {
+    --invalid-border-color: #ff3860;
+    --invalid-placeholder-color: #ff3860;
+  }
+}
+</style>
