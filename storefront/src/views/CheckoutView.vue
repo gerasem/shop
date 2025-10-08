@@ -3,13 +3,14 @@ import { useI18n } from 'vue-i18n'
 import { useSeoMeta } from '@unhead/vue'
 import { useLoaderStore } from '@/stores/LoaderStore'
 import Header from '@/components/content/Header.vue'
-import { computed, onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import CartSteps from '@/components/cart/CartSteps.vue'
 import CartTotalPrices from '@/components/cart/CartTotalPrices.vue'
 import CartAddressFrom from '@/components/cart/CartAddressFrom.vue'
 import { useCartStore } from '@/stores/CartStore'
 import { useRouter } from 'vue-router'
-import CartPaymentAndShippingForm from '@/components/cart/CartPaymentAndShippingForm.vue'
+import CartShippingOptions from '@/components/cart/CartShippingOptions.vue'
+import CartPaymentOptions from '@/components/cart/CartPaymentOptions.vue'
 import CartEmailForm from '@/components/cart/CartEmailForm.vue'
 import type { IUserAddress } from '@/interfaces/IUserAddress'
 import { useToastStore } from '@/stores/ToastStore'
@@ -162,9 +163,12 @@ const handleSubmit = async () => {
               />
             </div>
             <div class="column is-half pl-5">
-              <CartPaymentAndShippingForm
+              <CartShippingOptions
                 v-if="cartStore.cart"
                 v-model:shippingId="selectedShippingId"
+              />
+              <CartPaymentOptions
+                v-if="cartStore.cart"
                 v-model:paymentId="selectedPaymentId"
               />
             </div>

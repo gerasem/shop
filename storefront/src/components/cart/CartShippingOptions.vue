@@ -12,20 +12,14 @@ onMounted(async () => {
   if (!cartStore.shippingOptions) {
     await cartStore.getShippingOptions()
   }
-  if (!cartStore.paymentOptions) {
-    await cartStore.getPaymentOptions()
-  }
 })
 const { t } = useI18n()
 
 defineEmits<{
   (e: 'update:shippingId', value: string): void
-  (e: 'update:paymentId', value: string): void
 }>()
 
 const shippingId = defineModel<string>('shippingId', { required: true })
-
-const paymentId = defineModel<string>('paymentId', { required: true })
 
 const shippingItems = computed(() => {
   console.log('cartStore.shippingOptions', cartStore.shippingOptions)
@@ -51,24 +45,6 @@ const selectedShipping = computed(() => {
   }
   return shippingItems.value.find((opt) => opt.id === shippingId.value)
 })
-
-const paymentProviderMap: Record<string, string> = {
-  pp_system_default: 'Default Payment',
-}
-
-const paymentItems = computed(() => {
-  console.log('cartStore.paymentProviders', cartStore.paymentOptions)
-  if (!cartStore.paymentOptions) {
-    return []
-  }
-  return cartStore.paymentOptions
-    .filter((provider: HttpTypes.StorePaymentProvider) => provider.is_enabled)
-    .map((provider) => ({
-      id: provider.id,
-      name: t(paymentProviderMap[provider.id] || provider.id),
-      value: provider.id,
-    }))
-})
 </script>
 
 <template>
@@ -92,19 +68,6 @@ const paymentItems = computed(() => {
       <p class="is-size-7 has-text-grey">{{ selectedShipping.description }}</p>
       <p class="has-text-weight-bold">{{ selectedShipping.price }}</p>
     </div>
-
-    <Header
-      :level="3"
-      class="mt-6"
-      >{{ t('Payment') }}</Header
-    >
-    <RadioGroup
-      v-model="paymentId"
-      name="payment_option"
-      :items="paymentItems"
-      required
-      :label="t('Payment Method')"
-    />
   </div>
 </template>
 
