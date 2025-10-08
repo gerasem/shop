@@ -49,6 +49,7 @@ const incrementCount = () => {
       pattern="[0-9]*"
       type="number"
       :max="inventoryQuantity"
+      name="item quantity"
     ></Input>
 
     <Button
@@ -82,12 +83,20 @@ const incrementCount = () => {
     &[type='number'] {
       -moz-appearance: textfield;
     }
+
+    @media (max-width: $screen-lg-max) {
+      font-size: 0.8rem;
+      width: 40px;
+    }
   }
 
   &__spinner {
     width: 50px;
     display: flex;
     justify-content: center;
+    @media (max-width: $screen-lg-max) {
+      width: 40px;
+    }
   }
 }
 </style>

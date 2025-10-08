@@ -207,6 +207,15 @@ watch(
       font-size: 1rem;
       margin: 0 20px;
       flex: none;
+
+      @media (max-width: $screen-lg-max) {
+        font-size: 0.9rem;
+        margin: 0 10px;
+      }
+    }
+
+    @media (max-width: $screen-lg-max) {
+      font-size: 1rem;
     }
   }
 
@@ -222,6 +231,10 @@ watch(
   &__title {
     font-size: 1rem;
     margin-right: 40px;
+
+    @media (max-width: $screen-lg-max) {
+      font-size: 0.9rem;
+    }
   }
 
   &__actions {

@@ -135,11 +135,11 @@ const handleSubmit = async () => {
       novalidate
     >
       <div class="columns">
-        <div class="column is-three-quarters">
-          <Header :level="2">{{ t('Checkout') }}</Header>
+        <div class="column is-two-thirds-tablet is-three-quarters-fullhd">
+          <Header :level="1">{{ t('Checkout') }}</Header>
 
-          <div class="columns">
-            <div class="column is-half">
+          <div class="columns is-multiline">
+            <div class="column is-full-tablet is-half-desktop">
               <CartEmailForm v-model:email="email" />
 
               <CartAddressFrom
@@ -162,7 +162,7 @@ const handleSubmit = async () => {
                 v-model:address="billingAddress"
               />
             </div>
-            <div class="column is-half pl-5">
+            <div class="column is-full-tablet is-half-desktop pl-5">
               <CartShippingOptions
                 v-if="cartStore.cart"
                 v-model:shippingId="selectedShippingId"
@@ -175,7 +175,7 @@ const handleSubmit = async () => {
           </div>
         </div>
 
-        <div class="column is-one-quarter">
+        <div class="column is-one-third-tablet is-one-quarter-fullhd">
           <CartTotalPrices
             :button="{
               name: 'Weiter',
