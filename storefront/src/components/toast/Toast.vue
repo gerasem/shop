@@ -3,9 +3,10 @@ import Icon from '@/components/media/Icon.vue'
 import { Toast, Toaster, createToaster } from '@ark-ui/vue/toast'
 import { watch } from 'vue'
 import { useToastStore } from '@/stores/ToastStore'
+import type { IToast } from '@/interfaces/IToast'
 
 const toastStore = useToastStore()
-const toaster = createToaster({ placement: 'bottom', overlap: true, gap: 15 })
+const toaster = createToaster({ placement: 'bottom', overlap: false, gap: 15 })
 
 const getClass = (type: string): string => {
   switch (type) {
@@ -22,15 +23,28 @@ const getClass = (type: string): string => {
 
 watch(
   () => toastStore.toasts,
-  (newToast) => {
-    if (newToast.length > 0) {
-      const latestToast = newToast[newToast.length - 1]
+  (newToasts) => {
+    if (newToasts.length > 0) {
+      const latestToast: IToast = { ...newToasts[newToasts.length - 1] }
 
-      toaster.create({
+      const toastObject: IToast = {
         title: latestToast.title,
         description: latestToast.description,
         type: latestToast.type,
-      })
+      }
+
+      if (latestToast.action) {
+        toastObject.action = {
+          label: latestToast.action.label,
+          onClick: latestToast.action.onClick,
+        }
+      }
+
+      if (latestToast.duration) {
+        toastObject.duration = latestToast.duration
+      }
+
+      toaster.create(toastObject)
     }
   },
   { deep: true },
@@ -56,6 +70,13 @@ watch(
             {{ toast.description }}
           </p>
         </Toast.Description>
+
+        <Toast.ActionTrigger
+          v-if="toast.action"
+          class="notification__action-button"
+        >
+          {{ toast.action?.label }}
+        </Toast.ActionTrigger>
       </div>
     </Toast.Root>
   </Toaster>
@@ -74,6 +95,18 @@ watch(
 
   &__title {
     font-weight: 700;
+  }
+
+  &__action-button {
+    background: white;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 4px;
+    transition: 0.2s;
+
+    &:hover {
+      background: #e4e4e4;
+    }
   }
 }
 </style>

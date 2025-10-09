@@ -24,7 +24,15 @@ class ApiService {
 
       if (error instanceof Error) {
         console.error('API Error:', error.message)
-        toastStore.addError('API Error', error.message)
+        toastStore.addError(
+          'API Error',
+          error.message,
+          {
+            label: 'Reload Page',
+            onClick: () => window.location.reload(),
+          },
+          10000,
+        )
       }
 
       throw error
