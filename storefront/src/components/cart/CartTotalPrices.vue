@@ -70,7 +70,8 @@ defineProps<{
           :class="{
             'is-loading':
               loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ADD_TO_CART) ||
-              loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.EDIT_CART),
+              loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.EDIT_CART) ||
+              loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.INITIALIZE_CART),
             'is-light': button.disabled,
             'is-primary': !button.disabled,
           }"

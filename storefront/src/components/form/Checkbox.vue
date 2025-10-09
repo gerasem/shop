@@ -6,7 +6,7 @@ const { t } = useI18n()
 const modelValue = defineModel<boolean>({ required: true })
 
 defineProps<{
-  label?: string
+  label: string
   name?: string
   required?: boolean
   disabled?: boolean
@@ -15,11 +15,6 @@ defineProps<{
 
 <template>
   <div class="field">
-    <label
-      v-if="label"
-      class="label"
-      >{{ t(label) }}</label
-    >
     <div class="control">
       <label
         class="checkbox"
@@ -32,7 +27,7 @@ defineProps<{
           :required="required"
           :disabled="disabled"
         />
-        {{ t(label || 'Checkbox') }}
+        {{ t(label) }}
       </label>
     </div>
   </div>

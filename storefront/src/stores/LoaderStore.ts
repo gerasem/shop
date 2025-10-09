@@ -26,6 +26,7 @@ export const useLoaderStore = defineStore('loader', () => {
     EDIT_CART: 'EDIT_CART',
     DELETE_ITEM: 'DELETE_ITEM',
     GET_ITEM_QUANTITY: 'GET_ITEM_QUANTITY',
+    INITIALIZE_CART: 'INITIALIZE_CART',
   }
 
   return { isLoading, isLoadingKey, startLoading, stopLoading, activeLoaders, LOADER_KEYS }

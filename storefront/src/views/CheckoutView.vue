@@ -7,13 +7,6 @@ const cartStore = useCartStore()
 </script>
 
 <template>
-  <!--   <div
-    v-if="loaderStore.isLoadingKey('addToCart')"
-    class="skeleton"
-  >
-    <div class="skeleton-item"></div>
-  </div> -->
-
   <main class="container is-fluid">
     <CartSteps />
 

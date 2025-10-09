@@ -25,7 +25,6 @@ const items = computed(() => {
 })
 
 const handleSubmit = () => {
-  // proceed to checkout
   router.push({ name: 'checkout' })
 }
 
@@ -35,13 +34,6 @@ useSeoMeta({
 </script>
 
 <template>
-  <!--   <div
-    v-if="loaderStore.isLoadingKey('addToCart')"
-    class="skeleton"
-  >
-    <div class="skeleton-item"></div>
-  </div> -->
-
   <main class="container is-fluid">
     <CartSteps />
 
@@ -50,13 +42,36 @@ useSeoMeta({
         <div class="column is-two-thirds-tablet is-three-quarters-desktop">
           <Header :level="1">Shopping Cart</Header>
 
+          <template v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.INITIALIZE_CART)">
+            <article
+              class="media"
+              v-for="skeleton in 3"
+              :key="skeleton"
+            >
+              <figure class="media-left">
+                <p class="image is-128x128 is-skeleton">
+                  <img alt="Placeholder image" />
+                </p>
+              </figure>
+              <div class="media-content">
+                <div class="skeleton-block mt-5"></div>
+              </div>
+            </article>
+          </template>
+
+          <p
+            v-else-if="!items?.length"
+            class="my-6 has-text-centered"
+          >
+            Your cart is empty.
+          </p>
+
           <CartItem
+            v-else
             v-for="item in items"
             :key="item.id"
             :item="item"
           />
-
-          <p v-if="!items?.length">{{ t('Shopping cart is empty') }}</p>
         </div>
 
         <div class="column is-one-third-tablet is-one-quarter-desktop">

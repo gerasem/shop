@@ -159,6 +159,7 @@ const terms = ref<boolean>(false)
               v-if="cartStore.cart"
               v-model:shippingId="selectedShippingId"
             />
+
             <CartPaymentOptions
               v-if="cartStore.cart"
               v-model:paymentId="selectedPaymentId"
@@ -177,6 +178,7 @@ const terms = ref<boolean>(false)
         >
           <template #terms>
             <Checkbox
+              class="is-flex is-justify-content-center mt-3"
               v-model="terms"
               label="Agree to Terms"
               name="terms"

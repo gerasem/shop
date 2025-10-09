@@ -14,7 +14,10 @@ export const useCartStore = defineStore('cart', () => {
   const initializeCart = async () => {
     const cartId = localStorage.getItem('cart_id')
     if (cartId) {
-      const dataCart = await ApiService.retrieveCart(cartId, loaderStore.LOADER_KEYS.ADD_TO_CART)
+      const dataCart = await ApiService.retrieveCart(
+        cartId,
+        loaderStore.LOADER_KEYS.INITIALIZE_CART,
+      )
 
       console.log('retrieveCart', dataCart)
       if (dataCart) {

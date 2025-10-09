@@ -16,7 +16,10 @@ const countOfItems = computed(() => {
 
 <template>
   <span
-    v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ADD_TO_CART)"
+    v-if="
+      loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ADD_TO_CART) ||
+      loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.INITIALIZE_CART)
+    "
     class="loading-spinner"
   ></span>
 
