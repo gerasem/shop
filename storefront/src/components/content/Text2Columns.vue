@@ -7,15 +7,13 @@ defineProps<{
 </script>
 
 <template>
-  <section class="section">
-    <div class="container is-fullhd">
-      <Header :level="2">{{ header }}</Header>
+  <div class="content">
+    <Header :level="2">{{ header }}</Header>
 
-      <p class="content text__paragraph text__paragraph--2-columns">
-        <slot></slot>
-      </p>
-    </div>
-  </section>
+    <p class="content text__paragraph text__paragraph--2-columns">
+      <slot></slot>
+    </p>
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -23,7 +21,7 @@ defineProps<{
   &__paragraph {
     &--2-columns {
       column-count: 2;
-      column-gap: 50px;
+      column-gap: 40px;
 
       @media (max-width: $screen-md-max) {
         column-count: 1;
