@@ -47,12 +47,22 @@ const paymentItems = computed(() => {
       class="mt-6"
       >{{ t('Payment') }}</Header
     >
+
+    <template v-if="!paymentItems.length">
+      <div class="skeleton-lines">
+        <div></div>
+      </div>
+      <div class="mt-5 skeleton-lines">
+        <div></div>
+      </div>
+    </template>
+
     <RadioGroup
+      v-else
       v-model="paymentId"
       name="payment_option"
       :items="paymentItems"
       required
-      :label="t('Payment Method')"
     />
   </div>
 </template>

@@ -24,7 +24,7 @@ const shippingId = defineModel<string>('shippingId', { required: true })
 const shippingItems = computed(() => {
   console.log('cartStore.shippingOptions', cartStore.shippingOptions)
   if (!cartStore.shippingOptions) {
-    return
+    return []
   }
   return cartStore.shippingOptions
     .filter((option) => option.provider.is_enabled && !option.insufficient_inventory)
@@ -51,12 +51,20 @@ const selectedShipping = computed(() => {
   <div>
     <Header :level="3">{{ t('Shipping') }}</Header>
 
+    <template v-if="!shippingItems.length">
+      <div class="skeleton-lines">
+        <div></div>
+      </div>
+      <div class="mt-5 skeleton-lines">
+        <div></div>
+      </div>
+    </template>
+
     <RadioGroup
-      v-if="shippingItems"
+      v-else
       v-model="shippingId"
       name="shipping_option"
       :items="shippingItems"
-      :label="t('Choose Shipping')"
       required
     />
 
