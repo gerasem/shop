@@ -252,6 +252,16 @@ class ApiService {
     )
   }
 
+  static async sendContactForm(): Promise<void> {
+    const loaderStore = useLoaderStore()
+
+    loaderStore.startLoading(loaderStore.LOADER_KEYS.SEND_CONTACT_FORM)
+
+    setTimeout(() => {
+      loaderStore.stopLoading(loaderStore.LOADER_KEYS.SEND_CONTACT_FORM)
+    }, 1000)
+  }
+
   /*
   sdk.store.payment.initiatePaymentSession(
   cart, // assuming you already have the cart object.

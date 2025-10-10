@@ -10,6 +10,7 @@ import { useToastStore } from '@/stores/ToastStore'
 import { useLoaderStore } from '@/stores/LoaderStore'
 import Button from '@/components/form/Button.vue'
 import Textarea from '@/components/form/Textarea.vue'
+import ApiService from '@/services/api/api'
 
 const { t } = useI18n()
 const toastStore = useToastStore()
@@ -37,6 +38,7 @@ const handleSubmit = async () => {
     console.log('Form is valid')
     isFormValid.value = true
     formSent.value = true
+    ApiService.sendContactForm()
     console.log('Contact form sent successful')
   } else {
     form?.reportValidity()
@@ -104,7 +106,7 @@ useSeoMeta({
           <Button
             type="submit"
             icon="EnvelopeArrowUp"
-            class="mt-4 is-fullwidth"
+            class="mt-4 px-6"
             :class="{
               'is-loading': loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.SEND_CONTACT_FORM),
               'is-light': !isFormValid,
@@ -114,7 +116,10 @@ useSeoMeta({
           >
         </form>
       </div>
-      <div class="column"></div>
+      <div class="column">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse incidunt sed veritatis quos
+        recusandae eligendi adipisci veniam aliquam libero qui.
+      </div>
     </div>
   </main>
 </template>
