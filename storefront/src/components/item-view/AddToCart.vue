@@ -6,7 +6,9 @@ import { computed } from 'vue'
 import CartQuantity from '@/components/cart/CartQuantity.vue'
 import { useLoaderStore } from '@/stores/LoaderStore'
 import { useToastStore } from '@/stores/ToastStore'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const toastStore = useToastStore()
 
 const props = defineProps<{
@@ -39,7 +41,10 @@ const handleAddToCart = async () => {
     return
   }
   await cartStore.addToCart(props.selectedVariant.id, quantity.value)
-  toastStore.addSuccess(`Item ${props.item.title} has been added`)
+  toastStore.addSuccess(`Item ${props.item.title} has been added`, '', {
+    label: 'Go to Checkout',
+    onClick: () => router.push({ name: 'cart' }),
+  })
 }
 </script>
 

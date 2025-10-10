@@ -73,7 +73,7 @@ watch(
 
         <Toast.ActionTrigger
           v-if="toast.action"
-          class="notification__action-button"
+          class="button is-white mt-2"
         >
           {{ toast.action?.label }}
         </Toast.ActionTrigger>
