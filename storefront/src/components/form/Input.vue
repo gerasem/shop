@@ -1,8 +1,4 @@
 <script setup lang="ts">
-defineProps<{
-  icon?: string
-}>()
-
 const input = defineModel<number | string | undefined>('input', { required: true })
 </script>
 

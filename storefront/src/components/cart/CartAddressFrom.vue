@@ -2,7 +2,6 @@
 import { useI18n } from 'vue-i18n'
 import Input from '@/components/form/Input.vue'
 import Header from '@/components/content/Header.vue'
-import { ref } from 'vue'
 import type { IUserAddress } from '@/interfaces/IUserAddress'
 
 defineProps<{
@@ -108,11 +107,16 @@ const address = defineModel<IUserAddress>('address', { required: true })
 
       <div class="column is-half">
         <div class="field">
-          <label class="label">{{ t('Country') }} <span>*</span></label>
+          <label
+            id="country"
+            class="label"
+            >{{ t('Country') }} <span>*</span></label
+          >
           <div class="control">
             <Input
               v-model:input="address.country"
               :placeholder="`${t('Country')} *`"
+              name="country"
               required
             />
           </div>

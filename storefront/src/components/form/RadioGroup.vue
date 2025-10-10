@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-
-const { t } = useI18n()
-
 defineProps<{
   modelValue: string
   name: string
@@ -21,7 +17,7 @@ defineEmits<{
     <label
       v-if="label"
       class="label"
-      >{{ t(label) }}</label
+      >{{ label }}</label
     >
     <div class="control">
       <div class="radio-group">
@@ -38,7 +34,7 @@ defineEmits<{
             :required="required && index === 0"
             @change="$emit('update:modelValue', item.value)"
           />
-          {{ t(item.name) }}
+          {{ item.name }}
         </label>
       </div>
     </div>

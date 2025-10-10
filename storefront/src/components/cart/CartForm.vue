@@ -139,13 +139,12 @@ const terms = ref<boolean>(false)
               v-model:address="userAddress"
             />
 
-            <label class="checkbox my-4">
-              <input
-                type="checkbox"
-                v-model="billingAddressSameAsShippingAddress"
-              />
-              Billing address same as shipping address
-            </label>
+            <Checkbox
+              class="my-3"
+              v-model="billingAddressSameAsShippingAddress"
+              label="Billing address same as shipping address"
+              name="isBillingAddeessSameAsShippingAddress"
+            />
 
             <CartAddressFrom
               v-if="!billingAddressSameAsShippingAddress"
@@ -194,7 +193,7 @@ const terms = ref<boolean>(false)
 <style lang="scss" scoped>
 form {
   --invalid-border-color: inherit;
-  --invalid-placeholder-color: #b2b2b2;
+  --invalid-placeholder-color: rgb(214, 217, 224);
 
   &.is-invalid {
     --invalid-border-color: #ff3860;
