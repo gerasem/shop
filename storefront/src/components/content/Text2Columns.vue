@@ -8,7 +8,11 @@ defineProps<{
 
 <template>
   <div class="content">
-    <Header :level="2">{{ header }}</Header>
+    <Header
+      v-if="header"
+      :level="2"
+      >{{ header }}</Header
+    >
 
     <p class="content text__paragraph text__paragraph--2-columns">
       <slot></slot>

@@ -96,17 +96,5 @@ watch(
   &__title {
     font-weight: 700;
   }
-
-  &__action-button {
-    background: white;
-    padding: 10px 15px;
-    margin-top: 10px;
-    border-radius: 4px;
-    transition: 0.2s;
-
-    &:hover {
-      background: #e4e4e4;
-    }
-  }
 }
 </style>

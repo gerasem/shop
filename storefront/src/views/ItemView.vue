@@ -86,7 +86,11 @@ useSeoMeta({
     </div>
   </main>
 
-  <Text2Columns v-if="item"> {{ item.description }} </Text2Columns>
+  <section class="section">
+    <div class="container is-fullhd">
+      <Text2Columns v-if="item"> {{ item.description }} </Text2Columns>
+    </div>
+  </section>
 </template>
 
 <style scoped lang="scss"></style>
