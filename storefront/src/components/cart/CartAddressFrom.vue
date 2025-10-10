@@ -19,108 +19,73 @@ const address = defineModel<IUserAddress>('address', { required: true })
 
     <div class="columns">
       <div class="column is-half">
-        <div class="field">
-          <label class="label">{{ t('Firstname') }} <span>*</span></label>
-          <div class="control">
-            <Input
-              v-model:input="address.firstname"
-              :placeholder="`${t('Firstname')} *`"
-              required
-            />
-          </div>
-        </div>
+        <Input
+          v-model:input="address.firstname"
+          :label="t('Firstname')"
+          name="firstname"
+          required
+        />
       </div>
 
       <div class="column is-half">
-        <div class="field">
-          <label class="label">{{ t('Lastname') }} <span>*</span></label>
-          <div class="control">
-            <Input
-              v-model:input="address.lastname"
-              :placeholder="`${t('Lastname')} *`"
-              required
-            />
-          </div>
-        </div>
+        <Input
+          v-model:input="address.lastname"
+          :label="t('Lastname')"
+          name="lastname"
+          required
+        />
       </div>
     </div>
 
     <div class="columns">
       <div class="column is-full">
-        <div class="field">
-          <label class="label">{{ t('Address') }} <span>*</span></label>
-          <div class="control">
-            <Input
-              v-model:input="address.address"
-              :placeholder="`${t('Address')} *`"
-              required
-            />
-          </div>
-        </div>
+        <Input
+          v-model:input="address.address"
+          :label="t('Address')"
+          name="address"
+          required
+        />
       </div>
     </div>
 
     <div class="columns">
       <div class="column is-one-fourth">
-        <div class="field">
-          <label class="label">{{ t('Zip Code') }} <span>*</span></label>
-          <div class="control">
-            <Input
-              v-model:input="address.zip"
-              inputmode="numeric"
-              pattern="\d*"
-              :placeholder="`${t('Zip Code')} *`"
-              required
-            />
-          </div>
-        </div>
+        <Input
+          v-model:input="address.zip"
+          :label="t('Zip Code')"
+          name="zip"
+          required
+        />
       </div>
 
       <div class="column is-three-quarters">
-        <div class="field">
-          <label class="label">{{ t('City') }} <span>*</span></label>
-          <div class="control">
-            <Input
-              v-model:input="address.city"
-              :placeholder="`${t('City')} *`"
-              required
-            />
-          </div>
-        </div>
+        <Input
+          v-model:input="address.city"
+          :label="t('City')"
+          name="city"
+          required
+        />
       </div>
     </div>
 
     <div class="columns">
       <div class="column is-half">
-        <div class="field">
-          <label class="label">{{ t('Phone') }}</label>
-          <div class="control">
-            <Input
-              v-model:input="address.phone"
-              type="tel"
-              :placeholder="t('Phone')"
-              required
-            />
-          </div>
-        </div>
+        <Input
+          v-model:input="address.phone"
+          :label="t('Phone')"
+          name="phone"
+          type="tel"
+          required
+        />
       </div>
 
       <div class="column is-half">
-        <div class="field">
-          <label
-            id="country"
-            class="label"
-            >{{ t('Country') }} <span>*</span></label
-          >
-          <div class="control">
-            <Input
-              v-model:input="address.country"
-              :placeholder="`${t('Country')} *`"
-              name="country"
-              required
-            />
-          </div>
-        </div>
+        <Input
+          v-model:input="address.country"
+          :label="t('Country')"
+          name="country"
+          required
+        />
       </div>
     </div>
   </div>

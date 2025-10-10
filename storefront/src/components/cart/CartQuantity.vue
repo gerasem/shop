@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Input from '@/components/form/Input.vue'
 import Button from '@/components/form/Button.vue'
 
 const props = defineProps<{
@@ -39,18 +38,18 @@ const incrementCount = () => {
       <span class="loading-spinner"></span>
     </div>
 
-    <Input
+    <input
       v-else
-      v-model:input.number="quantity"
+      v-model.number="quantity"
       inputmode="numeric"
-      class="cart__input"
+      class="input cart__input"
       :class="{ 'is-danger': quantityError }"
       min="1"
       pattern="[0-9]*"
       type="number"
       :max="inventoryQuantity"
       name="item quantity"
-    ></Input>
+    />
 
     <Button
       class="is-white"

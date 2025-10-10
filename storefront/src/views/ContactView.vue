@@ -67,30 +67,22 @@ useSeoMeta({
         >
           <div class="columns">
             <div class="column">
-              <div class="field">
-                <label class="label">{{ t('Name') }} <span>*</span></label>
-                <div class="control">
-                  <Input
-                    v-model:input="userData.name"
-                    :placeholder="`${t('Name')} *`"
-                    required
-                  />
-                </div>
-              </div>
+              <Input
+                v-model:input="userData.name"
+                :label="t('Name')"
+                name="name"
+                required
+              />
             </div>
 
             <div class="column">
-              <div class="field">
-                <label class="label">{{ t('Email') }} <span>*</span></label>
-                <div class="control">
-                  <Input
-                    type="email"
-                    v-model:input="userData.email"
-                    :placeholder="`${t('Email')} *`"
-                    required
-                  />
-                </div>
-              </div>
+              <Input
+                v-model:input="userData.email"
+                :label="t('Email')"
+                name="email"
+                required
+                type="email"
+              />
             </div>
           </div>
 
