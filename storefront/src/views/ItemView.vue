@@ -57,11 +57,12 @@ useSeoMeta({
         <Header
           :level="1"
           :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)"
+          v-if="item"
         >
-          {{ item?.title }}
+          {{ item.title }}
         </Header>
 
-        <!-- Skelettons -->
+        <!-- Skeletons -->
         <div v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)">
           <Header
             :level="4"

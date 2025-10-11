@@ -60,7 +60,7 @@ useSeoMeta({
           </template>
 
           <p
-            v-else-if="!items?.length"
+            v-else-if="items?.length === 0"
             class="my-6 has-text-centered"
           >
             Your cart is empty.
