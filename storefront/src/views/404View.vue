@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useSeoMeta } from '@unhead/vue'
 import CategoryTitleNarrow from '@/components/category/CategoryTitleNarrow.vue'
 import Header from '@/components/content/Header.vue'
+import { useSeoMeta } from '@unhead/vue'
 
 useSeoMeta({
   title: '404 Error',

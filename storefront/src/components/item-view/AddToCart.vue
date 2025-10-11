@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import Button from '@/components/form/Button.vue'
-import { useCartStore } from '@/stores/CartStore'
-import type { HttpTypes } from '@medusajs/types'
-import { computed } from 'vue'
 import CartQuantity from '@/components/cart/CartQuantity.vue'
 import { useLoaderStore } from '@/stores/LoaderStore'
 import { useToastStore } from '@/stores/ToastStore'
+import Button from '@/components/form/Button.vue'
+import { useCartStore } from '@/stores/CartStore'
+import type { HttpTypes } from '@medusajs/types'
 import { useRouter } from 'vue-router'
+import { computed } from 'vue'
 
 const router = useRouter()
 const toastStore = useToastStore()

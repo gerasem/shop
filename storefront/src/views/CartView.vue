@@ -1,15 +1,15 @@
 <script setup lang="ts">
+import CartTotalPrices from '@/components/cart/CartTotalPrices.vue'
+import Text2Columns from '@/components/content/Text2Columns.vue'
+import CartSteps from '@/components/cart/CartSteps.vue'
 import CartItem from '@/components/cart/CartItem.vue'
-import { useI18n } from 'vue-i18n'
-import { useSeoMeta } from '@unhead/vue'
 import { useLoaderStore } from '@/stores/LoaderStore'
 import Header from '@/components/content/Header.vue'
 import { useCartStore } from '@/stores/CartStore'
-import { computed } from 'vue'
-import CartSteps from '@/components/cart/CartSteps.vue'
-import CartTotalPrices from '@/components/cart/CartTotalPrices.vue'
-import Text2Columns from '@/components/content/Text2Columns.vue'
+import { useSeoMeta } from '@unhead/vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+import { computed } from 'vue'
 
 const router = useRouter()
 const cartStore = useCartStore()

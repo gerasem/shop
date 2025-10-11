@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import PhotoSwipeLightbox from 'photoswipe/lightbox'
-import 'photoswipe/style.css'
 import { HttpTypes } from '@medusajs/types'
+import 'photoswipe/style.css'
 
 const props = defineProps<{
   item: HttpTypes.StoreProduct | null

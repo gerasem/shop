@@ -1,7 +1,7 @@
+import NavbarContact from '@/components/navbar/NavbarContact.vue'
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { createI18n } from 'vue-i18n'
-import NavbarContact from '@/components/navbar/NavbarContact.vue'
 import router from '@/router'
 
 const messages = {

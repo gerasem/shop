@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import type { HttpTypes } from '@medusajs/types'
-import { optionsAsKeymap } from '@/utils/productUtils.ts'
 import ProductPrice from '@/components/item-view/ProductPrice.vue'
 import OptionSelect from '@/components/item-view/OptionSelect.vue'
 import AddToCart from '@/components/item-view/AddToCart.vue'
-import { isEqual } from '@/utils/productUtils.ts'
+import { optionsAsKeymap } from '@/utils/productUtils.ts'
 import { useLoaderStore } from '@/stores/LoaderStore'
+import { isEqual } from '@/utils/productUtils.ts'
+import type { HttpTypes } from '@medusajs/types'
+import { ref, computed, onMounted } from 'vue'
 
 const loaderStore = useLoaderStore()
 

@@ -1,6 +1,6 @@
+import type { IToast, IToastAction } from '@/interfaces/IToast'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { IToast, IToastAction } from '@/interfaces/IToast'
 
 export const useToastStore = defineStore('toast', () => {
   const toasts = ref<IToast[]>([])

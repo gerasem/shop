@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-import Input from '@/components/form/Input.vue'
-import Header from '@/components/content/Header.vue'
 import type { IUserAddress } from '@/interfaces/IUserAddress'
+import Header from '@/components/content/Header.vue'
+import Input from '@/components/form/Input.vue'
+import { useI18n } from 'vue-i18n'
 
 defineProps<{
   header: string

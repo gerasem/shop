@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
 import type { ICategory } from '@/interfaces/ICategory'
 import Header from '@/components/content/Header.vue'
+import { useI18n } from 'vue-i18n'
 
 defineProps<{
   category: ICategory

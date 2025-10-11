@@ -1,6 +1,6 @@
-import { sdk } from '@/services/medusa/config'
-import { useToastStore } from '@/stores/ToastStore'
 import { useLoaderStore } from '@/stores/LoaderStore'
+import { useToastStore } from '@/stores/ToastStore'
+import { sdk } from '@/services/medusa/config'
 import { HttpTypes } from '@medusajs/types'
 
 const CART_FIELDS =

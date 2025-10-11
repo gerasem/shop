@@ -1,9 +1,9 @@
+import type { ICategory } from '@/interfaces/ICategory'
+import { useLoaderStore } from '@/stores/LoaderStore'
+import ApiService from '@/services/api/api'
+import { useRouter } from 'vue-router'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import ApiService from '@/services/api/api'
-import type { ICategory } from '@/interfaces/ICategory'
-import { useRouter } from 'vue-router'
-import { useLoaderStore } from '@/stores/LoaderStore'
 
 export const useCategoryStore = defineStore('category', () => {
   const categories = ref<ICategory[]>([])

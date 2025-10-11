@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import type { HttpTypes } from '@medusajs/types'
 import { useProductPrice } from '@/composables/useProductPrice'
+import type { HttpTypes } from '@medusajs/types'
+import { computed } from 'vue'
 
 const props = defineProps<{
   product: HttpTypes.StoreProduct

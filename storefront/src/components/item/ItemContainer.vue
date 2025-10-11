@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { HttpTypes } from '@medusajs/types'
 import Item from '@/components/item/Item.vue'
+import { HttpTypes } from '@medusajs/types'
 
 defineProps<{
   items: HttpTypes.StoreProduct[]
