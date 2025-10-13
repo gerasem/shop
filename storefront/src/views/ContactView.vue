@@ -42,6 +42,9 @@ const handleSubmit = async () => {
     ApiService.sendContactForm()
     console.log('Contact form sent successful')
     successModal.value?.show()
+    userData.name = ''
+    userData.email = ''
+    userData.comment = ''
   } else {
     form?.reportValidity()
     isFormValid.value = false
