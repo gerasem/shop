@@ -3,12 +3,13 @@ import { useSeoMeta } from '@unhead/vue'
 import CategoryTitleNarrow from '@/components/category/CategoryTitleNarrow.vue'
 import Header from '@/components/content/Header.vue'
 import { useI18n } from 'vue-i18n'
-import { reactive, ref } from 'vue'
+import { reactive, ref, useTemplateRef } from 'vue'
 import Input from '@/components/form/Input.vue'
 import Checkbox from '@/components/form/Checkbox.vue'
 import { useToastStore } from '@/stores/ToastStore'
 import { useLoaderStore } from '@/stores/LoaderStore'
 import Button from '@/components/form/Button.vue'
+import ModalDialog from '@/components/modal/ModalDialog.vue'
 import Textarea from '@/components/form/Textarea.vue'
 import ApiService from '@/services/api/api'
 
@@ -40,6 +41,7 @@ const handleSubmit = async () => {
     formSent.value = true
     ApiService.sendContactForm()
     console.log('Contact form sent successful')
+    successModal.value?.show()
   } else {
     form?.reportValidity()
     isFormValid.value = false
@@ -47,12 +49,28 @@ const handleSubmit = async () => {
   }
 }
 
+interface ModalDialogExposed {
+  show: () => void
+  close: () => void
+}
+
+const successModal = ref<ModalDialogExposed | null>(null)
+
 useSeoMeta({
   title: 'Contact',
 })
 </script>
 
 <template>
+  <ModalDialog
+    ref="successModal"
+    title="Your message has been sent"
+  >
+    Thank you for getting in touch! Your message has been successfully sent, and our team will
+    review it shortly. We’ll get back to you as soon as possible — usually within a few business
+    days. In the meantime, feel free to browse our website or follow us on social media for updates.
+  </ModalDialog>
+
   <CategoryTitleNarrow />
 
   <main class="container is-fluid">
