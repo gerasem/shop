@@ -2,6 +2,9 @@
 import type { ICategory } from '@/interfaces/ICategory'
 import Header from '@/components/content/Header.vue'
 import { useI18n } from 'vue-i18n'
+import { useLoaderStore } from '@/stores/LoaderStore';
+
+const loaderStore = useLoaderStore()
 
 defineProps<{
   category: ICategory
@@ -11,10 +14,14 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <Header :level="2">
+  <Header :level="2" :loading="loaderStore.isLoadingKey(`items-${category.handle}`)">
     {{ category.name }}
     <template #action>
-      <RouterLink :to="`category/${category.handle}`">
+      <div v-if="loaderStore.isLoadingKey(`items-${category.handle}`)" class="skeleton-lines">
+        <div></div>
+      </div>
+
+      <RouterLink v-else :to="`category/${category.handle}`">
         {{ t('Show all') }}
         {{ category.name }}
       </RouterLink>

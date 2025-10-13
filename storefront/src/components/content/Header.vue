@@ -19,7 +19,7 @@ const tag = computed(() => `h${props.level}`)
     <component
       :is="tag"
       class="title"
-      :class="[`is-${level}`, { 'is-skeleton header__skeleton': loading }]"
+      :class="[`is-${level}`, { 'has-skeleton header__skeleton': loading }]"
     >
       <span v-if="loading">Title</span>
       <slot> </slot>
@@ -33,7 +33,7 @@ const tag = computed(() => `h${props.level}`)
     v-else
     :is="tag"
     class="title"
-    :class="[`is-${level}`, { 'is-skeleton header__skeleton': loading }]"
+    :class="[`is-${level}`, { 'has-skeleton header__skeleton': loading }]"
   >
     <span v-if="loading">Title</span>
     <slot> </slot>

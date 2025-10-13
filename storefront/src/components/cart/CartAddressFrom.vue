@@ -3,12 +3,14 @@ import type { IUserAddress } from '@/interfaces/IUserAddress'
 import Header from '@/components/content/Header.vue'
 import Input from '@/components/form/Input.vue'
 import { useI18n } from 'vue-i18n'
+import { useLoaderStore } from '@/stores/LoaderStore';
 
 defineProps<{
   header: string
 }>()
 
 const { t } = useI18n()
+const loaderStore = useLoaderStore()
 
 const address = defineModel<IUserAddress>('address', { required: true })
 </script>
@@ -23,6 +25,7 @@ const address = defineModel<IUserAddress>('address', { required: true })
           v-model:input="address.firstname"
           :label="t('Firstname')"
           name="firstname"
+          :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.INITIALIZE_CART)"
           required
         />
       </div>
@@ -32,6 +35,7 @@ const address = defineModel<IUserAddress>('address', { required: true })
           v-model:input="address.lastname"
           :label="t('Lastname')"
           name="lastname"
+          :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.INITIALIZE_CART)"
           required
         />
       </div>
@@ -43,6 +47,7 @@ const address = defineModel<IUserAddress>('address', { required: true })
           v-model:input="address.address"
           :label="t('Address')"
           name="address"
+          :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.INITIALIZE_CART)"
           required
         />
       </div>
@@ -54,6 +59,7 @@ const address = defineModel<IUserAddress>('address', { required: true })
           v-model:input="address.zip"
           :label="t('Zip Code')"
           name="zip"
+          :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.INITIALIZE_CART)"
           required
         />
       </div>
@@ -63,6 +69,7 @@ const address = defineModel<IUserAddress>('address', { required: true })
           v-model:input="address.city"
           :label="t('City')"
           name="city"
+          :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.INITIALIZE_CART)"
           required
         />
       </div>
@@ -75,6 +82,7 @@ const address = defineModel<IUserAddress>('address', { required: true })
           :label="t('Phone')"
           name="phone"
           type="tel"
+          :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.INITIALIZE_CART)"
           required
         />
       </div>
@@ -84,6 +92,7 @@ const address = defineModel<IUserAddress>('address', { required: true })
           v-model:input="address.country"
           :label="t('Country')"
           name="country"
+          :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.INITIALIZE_CART)"
           required
         />
       </div>

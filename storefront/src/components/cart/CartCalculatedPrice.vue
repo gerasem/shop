@@ -8,6 +8,7 @@ const { t } = useI18n()
 const props = defineProps<{
   value: number | undefined
   label: string
+  loading?: boolean
 }>()
 
 const animatedValue = ref<number | undefined>(props.value)
@@ -40,7 +41,11 @@ watch(
 <template>
   <div class="columns cart__price-container">
     <div class="column">{{ t(label) }}:</div>
-    <div class="column">
+    <div v-if="loading" class="column">
+      <span class="tag is-skeleton">Loading ...</span>
+    </div>
+
+    <div v-else class="column">
       <span
         v-if="animatedValue !== undefined"
         class="cart__form-price"

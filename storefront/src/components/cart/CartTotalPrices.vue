@@ -39,12 +39,14 @@ defineProps<{
         <CartCalculatedPrice
           label="Sub Total"
           :value="cartStore.cart?.item_subtotal"
+          :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.INITIALIZE_CART)"
         />
 
         <template v-if="cartStore.cart?.shipping_methods && cartStore.cart?.shipping_methods[0]">
           <CartCalculatedPrice
             label="Shipping"
             :value="cartStore.cart?.shipping_total"
+            :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.INITIALIZE_CART)"
           />
 
           <CartCalculatedPrice
@@ -52,12 +54,14 @@ defineProps<{
             class="cart--discount"
             label="Discount"
             :value="0"
+            :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.INITIALIZE_CART)"
           />
 
           <CartCalculatedPrice
             class="cart--total"
             label="Total price"
             :value="cartStore.cart?.total"
+            :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.INITIALIZE_CART)"
           />
         </template>
 

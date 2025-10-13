@@ -10,7 +10,7 @@ const cartStore = useCartStore()
   <main class="container is-fluid">
     <CartSteps />
 
-    <CartForm v-if="cartStore.cart" />
+    <CartForm />
   </main>
 </template>
 
