@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { HttpTypes } from '@medusajs/types'
 import { useProductPrice } from '@/composables/useProductPrice'
 import { localePath } from '@/composables/localePath.ts'
+import { HttpTypes } from '@medusajs/types'
 import { useI18n } from 'vue-i18n'
 
 const { getProductPrice } = useProductPrice()

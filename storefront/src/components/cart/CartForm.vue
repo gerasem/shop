@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-import { useSeoMeta } from '@unhead/vue'
-import Header from '@/components/content/Header.vue'
-import { onMounted, reactive, ref, watch } from 'vue'
-import CartTotalPrices from '@/components/cart/CartTotalPrices.vue'
-import CartAddressFrom from '@/components/cart/CartAddressFrom.vue'
-import { useCartStore } from '@/stores/CartStore'
-import { useRouter } from 'vue-router'
 import CartShippingOptions from '@/components/cart/CartShippingOptions.vue'
 import CartPaymentOptions from '@/components/cart/CartPaymentOptions.vue'
+import CartTotalPrices from '@/components/cart/CartTotalPrices.vue'
+import CartAddressFrom from '@/components/cart/CartAddressFrom.vue'
 import CartEmailForm from '@/components/cart/CartEmailForm.vue'
 import type { IUserAddress } from '@/interfaces/IUserAddress'
-import { useToastStore } from '@/stores/ToastStore'
 import Checkbox from '@/components/form/Checkbox.vue'
+import { onMounted, reactive, ref, watch } from 'vue'
+import Header from '@/components/content/Header.vue'
+import { useToastStore } from '@/stores/ToastStore'
+import { useCartStore } from '@/stores/CartStore'
+import { useSeoMeta } from '@unhead/vue'
+import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
 const toastStore = useToastStore()
 const cartStore = useCartStore()

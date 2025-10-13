@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
 import CartCalculatedPrice from '@/components/cart/CartCalculatedPrice.vue'
+import { useLoaderStore } from '@/stores/LoaderStore'
 import Button from '@/components/form/Button.vue'
 import { useCartStore } from '@/stores/CartStore'
-import { useLoaderStore } from '@/stores/LoaderStore'
+import { useI18n } from 'vue-i18n'
 
 const cartStore = useCartStore()
 const loaderStore = useLoaderStore()

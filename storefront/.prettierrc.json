@@ -4,5 +4,9 @@
   "singleQuote": true,
   "printWidth": 100,
   "tabWidth": 2,
-  "singleAttributePerLine": true
+  "singleAttributePerLine": true,
+  "plugins": ["prettier-plugin-sort-imports"],
+  "importOrder": ["^vue$", "^@/(.*)$", "^[./]"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }

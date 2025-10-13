@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import Text2Columns from '@/components/content/Text2Columns.vue'
 import CategoryTitleNarrow from '@/components/category/CategoryTitleNarrow.vue'
-import { onMounted } from 'vue'
-import { useItemStore } from '@/stores/ItemStore'
 import ItemSkeletonContainer from '@/components/item/ItemSkeletonGroup.vue'
-import { useSeoMeta } from '@unhead/vue'
+import Text2Columns from '@/components/content/Text2Columns.vue'
 import ItemContainer from '@/components/item/ItemContainer.vue'
 import { useLoaderStore } from '@/stores/LoaderStore'
 import Header from '@/components/content/Header.vue'
+import { useItemStore } from '@/stores/ItemStore'
+import { useSeoMeta } from '@unhead/vue'
+import { onMounted } from 'vue'
 
 onMounted(async () => {
   await itemStore.getAllItems()
@@ -62,7 +62,6 @@ useSeoMeta({
       >
     </div>
   </section>
-
 </template>
 
 <style scoped lang="scss"></style>

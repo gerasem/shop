@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { useI18n } from 'vue-i18n'
 import { convertToLocale } from '@/utils/priceUtils'
+import { useI18n } from 'vue-i18n'
+import { ref, watch } from 'vue'
 
 const { t } = useI18n()
 

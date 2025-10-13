@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { localePath } from '@/composables/localePath'
-import Button from '@/components/form/Button.vue'
-import { HttpTypes } from '@medusajs/types'
-import { convertToLocale } from '@/utils/priceUtils'
 import CartQuantity from '@/components/cart/CartQuantity.vue'
-import { computed, ref, watch } from 'vue'
+import { localePath } from '@/composables/localePath'
+import { convertToLocale } from '@/utils/priceUtils'
+import Button from '@/components/form/Button.vue'
 import { useCartStore } from '@/stores/CartStore'
+import { HttpTypes } from '@medusajs/types'
+import { computed, ref, watch } from 'vue'
 import debounce from 'lodash.debounce'
 
 const props = defineProps<{

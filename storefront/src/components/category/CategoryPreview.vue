@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import CategoryPreviewHeader from '@/components/category/CategoryPreviewHeader.vue'
+import ItemSkeletonContainer from '@/components/item/ItemSkeletonGroup.vue'
 import ItemContainer from '@/components/item/ItemContainer.vue'
+import type { ICategory } from '@/interfaces/ICategory'
+import { useLoaderStore } from '@/stores/LoaderStore'
 import { useItemStore } from '@/stores/ItemStore'
 import { computed, onMounted } from 'vue'
-import type { ICategory } from '@/interfaces/ICategory'
-import ItemSkeletonContainer from '@/components/item/ItemSkeletonGroup.vue'
-import CategoryPreviewHeader from '@/components/category/CategoryPreviewHeader.vue'
-import { useLoaderStore } from '@/stores/LoaderStore'
 const props = defineProps<{
   category: ICategory
 }>()

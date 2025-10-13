@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import { localePath } from '@/composables/localePath.ts'
+import { RouterLink, useRoute } from 'vue-router'
 import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { RouterLink, useRoute } from 'vue-router'
-import { localePath } from '@/composables/localePath.ts'
 
 const { t } = useI18n()
 const route = useRoute()
@@ -73,7 +73,7 @@ onMounted(() => {
       display: none;
     }
   }
-  
+
   &__item {
     color: $text-muted;
     &--active {

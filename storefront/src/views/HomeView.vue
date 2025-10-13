@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import Text2Columns from '@/components/content/Text2Columns.vue'
-import { useSeoMeta } from '@unhead/vue'
-import CategoryCard from '@/components/category/CategoryCard.vue'
-import CategoryPreview from '@/components/category/CategoryPreview.vue'
-import CategoryTitleNarrow from '@/components/category/CategoryTitleNarrow.vue'
-import { useDevice } from '@/composables/useDevice.ts'
 import CategoryPreviewMobile from '@/components/category/CategoryPreviewMobile.vue'
-import { useCategoryStore } from '@/stores/CategoryStore'
-import { useLoaderStore } from '@/stores/LoaderStore'
 import CategoryCardSkeleton from '@/components/category/CategoryCardSkeleton.vue'
+import CategoryTitleNarrow from '@/components/category/CategoryTitleNarrow.vue'
+import CategoryPreview from '@/components/category/CategoryPreview.vue'
+import CategoryCard from '@/components/category/CategoryCard.vue'
+import Text2Columns from '@/components/content/Text2Columns.vue'
+import { useCategoryStore } from '@/stores/CategoryStore'
+import { useDevice } from '@/composables/useDevice.ts'
+import { useLoaderStore } from '@/stores/LoaderStore'
+import { useSeoMeta } from '@unhead/vue'
 
 const { isMobile } = useDevice()
 const categoryStore = useCategoryStore()

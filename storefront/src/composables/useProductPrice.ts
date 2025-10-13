@@ -1,5 +1,5 @@
-import type { HttpTypes } from '@medusajs/types'
 import { convertToLocale, getPercentageDiff } from '@/utils/priceUtils'
+import type { HttpTypes } from '@medusajs/types'
 
 interface VariantPrice {
   calculated_price_number: number

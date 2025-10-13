@@ -1,8 +1,8 @@
+import { useLoaderStore } from '@/stores/LoaderStore'
+import type { HttpTypes } from '@medusajs/types'
+import ApiService from '@/services/api/api'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { useLoaderStore } from '@/stores/LoaderStore'
-import ApiService from '@/services/api/api'
-import type { HttpTypes } from '@medusajs/types'
 
 export const useCartStore = defineStore('cart', () => {
   const cart = ref<HttpTypes.StoreCart | undefined>(undefined)

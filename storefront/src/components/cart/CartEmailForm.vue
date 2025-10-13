@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
 import Input from '@/components/form/Input.vue'
+import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 

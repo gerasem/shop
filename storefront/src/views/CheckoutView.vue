@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import CartForm from '@/components/cart/CartForm.vue'
 import CartSteps from '@/components/cart/CartSteps.vue'
+import CartForm from '@/components/cart/CartForm.vue'
 import { useCartStore } from '@/stores/CartStore'
 
 const cartStore = useCartStore()

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import RadioGroup from '@/components/form/RadioGroup.vue'
 import Header from '@/components/content/Header.vue'
-import { useI18n } from 'vue-i18n'
-import { computed, onMounted } from 'vue'
-import { useCartStore } from '@/stores/CartStore'
 import { convertToLocale } from '@/utils/priceUtils'
+import { useCartStore } from '@/stores/CartStore'
+import { computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 const cartStore = useCartStore()
 

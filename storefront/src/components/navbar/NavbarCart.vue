@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import Icon from '@/components/media/Icon.vue'
 import { localePath } from '@/composables/localePath.ts'
-import { useCartStore } from '@/stores/CartStore'
-import { computed } from 'vue'
-import { convertToLocale } from '@/utils/priceUtils'
 import { useLoaderStore } from '@/stores/LoaderStore'
+import { convertToLocale } from '@/utils/priceUtils'
+import { useCartStore } from '@/stores/CartStore'
+import Icon from '@/components/media/Icon.vue'
+import { computed } from 'vue'
 
 const cartStore = useCartStore()
 const loaderStore = useLoaderStore()

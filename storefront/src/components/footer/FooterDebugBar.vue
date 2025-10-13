@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useItemStore } from '@/stores/ItemStore'
 import { useCategoryStore } from '@/stores/CategoryStore'
 import { useLoaderStore } from '@/stores/LoaderStore'
+import { useItemStore } from '@/stores/ItemStore'
 
 const categoryStore = useCategoryStore()
 const itemStore = useItemStore()

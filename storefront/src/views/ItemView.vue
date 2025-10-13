@@ -1,17 +1,17 @@
 <script setup lang="ts">
+import CategoryTitleNarrow from '@/components/category/CategoryTitleNarrow.vue'
 import BreadcrumbItem from '@/components/breadcrumb/BreadcrumbItem.vue'
 import ProductActions from '@/components/item-view/ProductActions.vue'
-import Gallery from '@/components/gallery/Gallery.vue'
 import Text2Columns from '@/components/content/Text2Columns.vue'
-import CategoryTitleNarrow from '@/components/category/CategoryTitleNarrow.vue'
-import { watch, ref, computed } from 'vue'
 import { useCategoryStore } from '@/stores/CategoryStore'
-import { useRoute } from 'vue-router'
-import { useSeoMeta } from '@unhead/vue'
-import { HttpTypes } from '@medusajs/types'
-import ApiService from '@/services/api/api'
+import Gallery from '@/components/gallery/Gallery.vue'
 import { useLoaderStore } from '@/stores/LoaderStore'
 import Header from '@/components/content/Header.vue'
+import ApiService from '@/services/api/api'
+import { HttpTypes } from '@medusajs/types'
+import { watch, ref, computed } from 'vue'
+import { useSeoMeta } from '@unhead/vue'
+import { useRoute } from 'vue-router'
 
 const categoryStore = useCategoryStore()
 const loaderStore = useLoaderStore()
@@ -57,11 +57,12 @@ useSeoMeta({
         <Header
           :level="1"
           :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)"
+          v-if="item"
         >
-          {{ item?.title }}
+          {{ item.title }}
         </Header>
 
-        <!-- Skelettons -->
+        <!-- Skeletons -->
         <div v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.ITEM)">
           <Header
             :level="4"

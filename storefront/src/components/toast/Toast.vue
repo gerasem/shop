@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import Icon from '@/components/media/Icon.vue'
 import { Toast, Toaster, createToaster } from '@ark-ui/vue/toast'
-import { watch } from 'vue'
 import { useToastStore } from '@/stores/ToastStore'
 import type { IToast } from '@/interfaces/IToast'
+import Icon from '@/components/media/Icon.vue'
+import { watch } from 'vue'
 
 const toastStore = useToastStore()
 const toaster = createToaster({ placement: 'bottom', overlap: false, gap: 15 })

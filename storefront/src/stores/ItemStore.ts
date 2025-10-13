@@ -1,11 +1,11 @@
-import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { useCategoryStore } from '@/stores/CategoryStore'
+import type { ICategory } from '@/interfaces/ICategory'
+import { useLoaderStore } from '@/stores/LoaderStore'
 import type { IItem } from '@/interfaces/IItem'
 import ApiService from '@/services/api/api'
-import type { ICategory } from '@/interfaces/ICategory'
-import { useCategoryStore } from '@/stores/CategoryStore'
 import { HttpTypes } from '@medusajs/types'
-import { useLoaderStore } from '@/stores/LoaderStore'
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
 export const useItemStore = defineStore('item', () => {
   const items = ref<IItem[]>([])

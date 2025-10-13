@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-import { useSeoMeta } from '@unhead/vue'
-import { useLoaderStore } from '@/stores/LoaderStore'
-import Header from '@/components/content/Header.vue'
-import { onMounted, ref } from 'vue'
-import CartSteps from '@/components/cart/CartSteps.vue'
-import RadioGroup from '@/components/form/RadioGroup.vue'
 import CartTotalPrices from '@/components/cart/CartTotalPrices.vue'
 import CartAddressFrom from '@/components/cart/CartAddressFrom.vue'
-import { useRouter } from 'vue-router'
+import RadioGroup from '@/components/form/RadioGroup.vue'
+import CartSteps from '@/components/cart/CartSteps.vue'
+import { useLoaderStore } from '@/stores/LoaderStore'
+import Header from '@/components/content/Header.vue'
 import { useCartStore } from '@/stores/CartStore'
+import { useSeoMeta } from '@unhead/vue'
+import { useRouter } from 'vue-router'
+import { onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 const loaderStore = useLoaderStore()
 const router = useRouter()

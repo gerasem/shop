@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import Item from '@/components/item/Item.vue'
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import 'swiper/css'
-import { useItemStore } from '@/stores/ItemStore'
-import { useLoaderStore } from '@/stores/LoaderStore'
-import { onMounted, computed } from 'vue'
+import CategoryPreviewHeader from '@/components/category/CategoryPreviewHeader.vue'
 import ItemSkeleton from '@/components/item/ItemSkeleton.vue'
 import type { ICategory } from '@/interfaces/ICategory'
-import CategoryPreviewHeader from '@/components/category/CategoryPreviewHeader.vue'
+import { useLoaderStore } from '@/stores/LoaderStore'
+import { useItemStore } from '@/stores/ItemStore'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import Item from '@/components/item/Item.vue'
+import { onMounted, computed } from 'vue'
+import 'swiper/css'
 
 const props = defineProps<{
   category: ICategory

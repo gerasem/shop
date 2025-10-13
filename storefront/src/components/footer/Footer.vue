@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import FooterDebugBar from './FooterDebugBar.vue'
+import { computed } from 'vue'
 
 const year = computed(() => {
   return new Date().getFullYear()

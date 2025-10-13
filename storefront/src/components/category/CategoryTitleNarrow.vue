@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import CategorySkeletonGroup from '@/components/category/CategorySkeletonGroup.vue'
 import CategoryTitle from '@/components/category/CategoryTitle.vue'
 import { useCategoryStore } from '@/stores/CategoryStore'
 import { useLoaderStore } from '@/stores/LoaderStore'
-import CategorySkeletonGroup from '@/components/category/CategorySkeletonGroup.vue'
 
 const categoryStore = useCategoryStore()
 const loaderStore = useLoaderStore()
