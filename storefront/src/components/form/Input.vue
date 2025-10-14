@@ -22,7 +22,7 @@ const input = defineModel<number | string | undefined>('input', { required: true
     <div class="control">
       <input
         class="input"
-        :class="{'is-skeleton': loading}"
+        :class="{ 'is-skeleton': loading }"
         v-model="input"
         :placeholder="placeholder ? placeholder : label"
         :name="name"

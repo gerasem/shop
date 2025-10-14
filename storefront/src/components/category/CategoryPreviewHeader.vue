@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { ICategory } from '@/interfaces/ICategory'
+import { useLoaderStore } from '@/stores/LoaderStore'
 import Header from '@/components/content/Header.vue'
 import { useI18n } from 'vue-i18n'
-import { useLoaderStore } from '@/stores/LoaderStore';
 
 const loaderStore = useLoaderStore()
 
@@ -14,14 +14,23 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <Header :level="2" :loading="loaderStore.isLoadingKey(`items-${category.handle}`)">
+  <Header
+    :level="2"
+    :loading="loaderStore.isLoadingKey(`items-${category.handle}`)"
+  >
     {{ category.name }}
     <template #action>
-      <div v-if="loaderStore.isLoadingKey(`items-${category.handle}`)" class="skeleton-lines">
+      <div
+        v-if="loaderStore.isLoadingKey(`items-${category.handle}`)"
+        class="skeleton-lines"
+      >
         <div></div>
       </div>
 
-      <RouterLink v-else :to="`category/${category.handle}`">
+      <RouterLink
+        v-else
+        :to="`category/${category.handle}`"
+      >
         {{ t('Show all') }}
         {{ category.name }}
       </RouterLink>

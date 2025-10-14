@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { IUserAddress } from '@/interfaces/IUserAddress'
+import { useLoaderStore } from '@/stores/LoaderStore'
 import Header from '@/components/content/Header.vue'
 import Input from '@/components/form/Input.vue'
 import { useI18n } from 'vue-i18n'
-import { useLoaderStore } from '@/stores/LoaderStore';
 
 defineProps<{
   header: string
