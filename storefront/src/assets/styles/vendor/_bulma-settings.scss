@@ -15,6 +15,7 @@
   $progress-border-radius: 0
 );
 @forward 'bulma/sass/elements/image';
+//@forward 'bulma/sass/elements/table';
 @forward 'bulma/sass/elements/tag';
 @forward 'bulma/sass/layout/container';
 @use 'bulma/sass/layout/section' with (

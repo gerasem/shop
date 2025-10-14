@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import RadioGroup from '@/components/form/RadioGroup.vue'
+import { paymentProviderMap } from '@/utils/paymentUtils'
 import Header from '@/components/content/Header.vue'
 import { useCartStore } from '@/stores/CartStore'
 import { HttpTypes } from '@medusajs/types'
@@ -21,10 +22,6 @@ defineEmits<{
 }>()
 
 const paymentMethod = defineModel<string>('paymentMethod', { required: true })
-
-const paymentProviderMap: Record<string, string> = {
-  pp_system_default: 'Default Payment',
-}
 
 const paymentItems = computed(() => {
   console.log('cartStore.paymentProviders', cartStore.paymentOptions)
