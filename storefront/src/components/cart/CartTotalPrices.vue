@@ -19,6 +19,7 @@ interface IButton {
 defineProps<{
   button: IButton
 }>()
+
 </script>
 
 <template>

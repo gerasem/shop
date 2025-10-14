@@ -13,6 +13,10 @@ const { t } = useI18n()
 const loaderStore = useLoaderStore()
 
 const address = defineModel<IUserAddress>('address', { required: true })
+
+defineEmits<{
+  (e: 'blur'): void
+}>()
 </script>
 
 <template>
@@ -26,6 +30,7 @@ const address = defineModel<IUserAddress>('address', { required: true })
           :label="t('Firstname')"
           name="firstname"
           :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.INITIALIZE_CART)"
+          @blur="$emit('blur')"
           required
         />
       </div>
@@ -36,6 +41,7 @@ const address = defineModel<IUserAddress>('address', { required: true })
           :label="t('Lastname')"
           name="lastname"
           :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.INITIALIZE_CART)"
+          @blur="$emit('blur')"
           required
         />
       </div>
@@ -48,6 +54,7 @@ const address = defineModel<IUserAddress>('address', { required: true })
           :label="t('Address')"
           name="address"
           :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.INITIALIZE_CART)"
+          @blur="$emit('blur')"
           required
         />
       </div>
@@ -60,6 +67,7 @@ const address = defineModel<IUserAddress>('address', { required: true })
           :label="t('Zip Code')"
           name="zip"
           :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.INITIALIZE_CART)"
+          @blur="$emit('blur')"
           required
         />
       </div>
@@ -70,6 +78,7 @@ const address = defineModel<IUserAddress>('address', { required: true })
           :label="t('City')"
           name="city"
           :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.INITIALIZE_CART)"
+          @blur="$emit('blur')"
           required
         />
       </div>
@@ -83,6 +92,7 @@ const address = defineModel<IUserAddress>('address', { required: true })
           name="phone"
           type="tel"
           :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.INITIALIZE_CART)"
+          @blur="$emit('blur')"
           required
         />
       </div>
@@ -93,6 +103,7 @@ const address = defineModel<IUserAddress>('address', { required: true })
           :label="t('Country')"
           name="country"
           :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.INITIALIZE_CART)"
+          @blur="$emit('blur')"
           required
         />
       </div>

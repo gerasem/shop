@@ -7,6 +7,10 @@ const { t } = useI18n()
 const loaderStore = useLoaderStore()
 
 const email = defineModel<string>('email', { required: true })
+
+defineEmits<{
+  (e: 'blur'): void
+}>()
 </script>
 
 <template>
@@ -18,6 +22,7 @@ const email = defineModel<string>('email', { required: true })
         name="email"
         type="email"
         :loading="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.INITIALIZE_CART)"
+        @blur="$emit('blur')"
         required
       />
     </div>

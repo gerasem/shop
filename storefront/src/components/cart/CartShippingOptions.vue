@@ -17,6 +17,7 @@ const { t } = useI18n()
 
 defineEmits<{
   (e: 'update:shippingId', value: string): void
+  (e: 'select'): void
 }>()
 
 const shippingId = defineModel<string>('shippingId', { required: true })
@@ -65,6 +66,7 @@ const selectedShipping = computed(() => {
       v-model="shippingId"
       name="shipping_option"
       :items="shippingItems"
+      @select="$emit('select')"
       required
     />
 

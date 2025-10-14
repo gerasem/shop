@@ -133,8 +133,22 @@ const handleSubmit = async () => {
   }
 }
 
-
 const terms = ref<boolean>(false)
+
+const checkValidation = () => {
+  if (!isFormValid.value) {
+    const form = formRef.value
+    console.log('check form on blur')
+    if (form?.checkValidity()) {
+      console.log('FORM VALID')
+
+      isFormValid.value = true
+    } else {
+      form?.reportValidity()
+      isFormValid.value = false
+    }
+  }
+}
 </script>
 
 <template>
@@ -153,11 +167,15 @@ const terms = ref<boolean>(false)
 
           <div class="columns is-multiline">
             <div class="column is-full-tablet is-two-thirds-desktop">
-              <CartEmailForm v-model:email="email" />
+              <CartEmailForm
+                v-model:email="email"
+                @blur="checkValidation()"
+              />
 
               <CartAddressFrom
                 :header="t('Address')"
                 v-model:address="userAddress"
+                @blur="checkValidation()"
               />
 
               <Checkbox
@@ -172,17 +190,20 @@ const terms = ref<boolean>(false)
                 class="mt-4"
                 :header="t('Billing Address')"
                 v-model:address="billingAddress"
+                @blur="checkValidation()"
               />
             </div>
             <div class="column is-full-tablet is-one-third-desktop pl-5">
               <CartShippingOptions
                 v-if="cartStore.cart"
                 v-model:shippingId="selectedShippingId"
+                @select="checkValidation()"
               />
 
               <CartPaymentOptions
                 v-if="cartStore.cart"
                 v-model:paymentMethod="selectedPaymentMethod"
+                @select="checkValidation()"
               />
             </div>
           </div>
@@ -202,6 +223,7 @@ const terms = ref<boolean>(false)
                 v-model="terms"
                 label="Agree to Terms"
                 name="terms"
+                @change="checkValidation()"
                 required
               />
             </template>
