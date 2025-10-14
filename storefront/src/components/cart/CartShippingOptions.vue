@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import RadioGroup from '@/components/form/RadioGroup.vue'
+import { useLoaderStore } from '@/stores/LoaderStore'
 import Header from '@/components/content/Header.vue'
 import { convertToLocale } from '@/utils/priceUtils'
 import { useCartStore } from '@/stores/CartStore'
@@ -7,6 +8,7 @@ import { computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const cartStore = useCartStore()
+const loaderStore = useLoaderStore()
 
 onMounted(async () => {
   await cartStore.getShippingOptions()
@@ -73,9 +75,22 @@ const selectedShipping = computed(() => {
       v-if="selectedShipping"
       class="mt-4 p-4 has-background-info-light"
     >
-      <p class="has-text-weight-semibold">{{ selectedShipping.name }}</p>
-      <p class="is-size-7 has-text-grey">{{ selectedShipping.description }}</p>
-      <p class="has-text-weight-bold">{{ selectedShipping.price }}</p>
+      <!-- loaderStore.LOADER_KEYS.EDIT_CART -->
+
+      <div
+        v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.EDIT_CART)"
+        class="skeleton-lines"
+      >
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
+      <template v-else>
+        <p class="has-text-weight-semibold">{{ selectedShipping.name }}</p>
+        <p class="is-size-7 has-text-grey">{{ selectedShipping.description }}</p>
+        <p class="has-text-weight-bold">{{ selectedShipping.price }}</p>
+      </template>
     </div>
   </div>
 </template>
