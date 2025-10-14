@@ -197,13 +197,13 @@ const checkValidation = () => {
               <CartShippingOptions
                 v-if="cartStore.cart"
                 v-model:shippingId="selectedShippingId"
-                @select="checkValidation()"
+                @change="checkValidation()"
               />
 
               <CartPaymentOptions
                 v-if="cartStore.cart"
                 v-model:paymentMethod="selectedPaymentMethod"
-                @select="checkValidation()"
+                @change="checkValidation()"
               />
             </div>
           </div>

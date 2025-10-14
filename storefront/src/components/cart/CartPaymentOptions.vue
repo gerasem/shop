@@ -18,7 +18,7 @@ const { t } = useI18n()
 
 defineEmits<{
   (e: 'update:paymentMethod', value: string): void
-  (e: 'select'): void
+  (e: 'change'): void
 }>()
 
 const paymentMethod = defineModel<string>('paymentMethod', { required: true })
@@ -60,7 +60,7 @@ const paymentItems = computed(() => {
       v-model="paymentMethod"
       name="payment_option"
       :items="paymentItems"
-      @select="$emit('select')"
+      @change="$emit('change')"
       required
     />
   </div>

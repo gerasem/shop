@@ -8,7 +8,7 @@ defineProps<{
 }>()
 
 defineEmits<{
-  (e: 'select'): void
+  (e: 'change'): void
   (e: 'update:modelValue', value: string): void
 }>()
 </script>
@@ -33,8 +33,7 @@ defineEmits<{
             :value="item.value"
             :checked="modelValue === item.value"
             :required="required && index === 0"
-            @select="$emit('select')"
-            @change="$emit('update:modelValue', item.value)"
+            @change="$emit('update:modelValue', item.value), $emit('change')"
           />
           {{ item.name }}
         </label>
