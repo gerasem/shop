@@ -7,6 +7,10 @@ defineProps<{
 }>()
 
 const textarea = defineModel<string | undefined>('textarea', { required: true })
+
+defineEmits<{
+  (e: 'blur'): void
+}>()
 </script>
 
 <template>
@@ -18,7 +22,8 @@ const textarea = defineModel<string | undefined>('textarea', { required: true })
         :id="name"
         :placeholder="placeholder"
         v-model="textarea"
-        required
+        @blur="$emit('blur')"
+        :required="required"
       ></textarea>
     </div>
   </div>

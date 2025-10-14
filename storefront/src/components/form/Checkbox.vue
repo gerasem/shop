@@ -7,6 +7,10 @@ defineProps<{
   required?: boolean
   disabled?: boolean
 }>()
+
+defineEmits<{
+  (e: 'change'): void
+}>()
 </script>
 
 <template>
@@ -21,6 +25,7 @@ defineProps<{
           :name="name"
           v-model="modelValue"
           :required="required"
+          @change="$emit('change')"
           :disabled="disabled"
         />
         {{ label }}

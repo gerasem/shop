@@ -10,6 +10,10 @@ defineProps<{
 }>()
 
 const input = defineModel<number | string | undefined>('input', { required: true })
+
+defineEmits<{
+  (e: 'blur'): void
+}>()
 </script>
 
 <template>
@@ -28,6 +32,7 @@ const input = defineModel<number | string | undefined>('input', { required: true
         :name="name"
         :required="required"
         :type="type || 'text'"
+        @blur="$emit('blur')"
       />
     </div>
   </div>

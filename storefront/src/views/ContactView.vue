@@ -45,6 +45,7 @@ const handleSubmit = async () => {
     userData.name = ''
     userData.email = ''
     userData.comment = ''
+    dataProtectionAccepted.value = false
   } else {
     form?.reportValidity()
     isFormValid.value = false
@@ -58,6 +59,21 @@ interface ModalDialogExposed {
 }
 
 const successModal = ref<ModalDialogExposed | null>(null)
+
+const checkValidation = () => {
+  if (!isFormValid.value) {
+    const form = formRef.value
+    console.log('check form on blur')
+    if (form?.checkValidity()) {
+      console.log('FORM VALID')
+
+      isFormValid.value = true
+    } else {
+      form?.reportValidity()
+      isFormValid.value = false
+    }
+  }
+}
 
 useSeoMeta({
   title: 'Contact',
@@ -94,6 +110,7 @@ useSeoMeta({
                 v-model:input="userData.name"
                 :label="t('Name')"
                 name="name"
+                @blur="checkValidation()"
                 required
               />
             </div>
@@ -105,6 +122,7 @@ useSeoMeta({
                 name="email"
                 required
                 type="email"
+                @blur="checkValidation()"
               />
             </div>
           </div>
@@ -113,6 +131,7 @@ useSeoMeta({
             v-model:textarea="userData.comment"
             :placeholder="`${t('Your message')} *`"
             name="comment"
+            @blur="checkValidation()"
             required
           ></Textarea>
 
@@ -121,6 +140,7 @@ useSeoMeta({
             v-model="dataProtectionAccepted"
             label="Agree to Data Protection"
             name="data-protection"
+            @change="checkValidation()"
             required
           />
 

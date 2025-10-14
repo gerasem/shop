@@ -133,6 +133,7 @@ const handleSubmit = async () => {
   }
 }
 
+
 const terms = ref<boolean>(false)
 </script>
 
