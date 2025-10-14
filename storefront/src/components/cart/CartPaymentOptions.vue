@@ -16,10 +16,10 @@ onMounted(async () => {
 const { t } = useI18n()
 
 defineEmits<{
-  (e: 'update:paymentId', value: string): void
+  (e: 'update:paymentMethod', value: string): void
 }>()
 
-const paymentId = defineModel<string>('paymentId', { required: true })
+const paymentMethod = defineModel<string>('paymentMethod', { required: true })
 
 const paymentProviderMap: Record<string, string> = {
   pp_system_default: 'Default Payment',
@@ -59,7 +59,7 @@ const paymentItems = computed(() => {
 
     <RadioGroup
       v-else
-      v-model="paymentId"
+      v-model="paymentMethod"
       name="payment_option"
       :items="paymentItems"
       required

@@ -252,6 +252,29 @@ class ApiService {
     )
   }
 
+  static async initiatePaymentSession(
+    cart: HttpTypes.StoreCart,
+    data: HttpTypes.StoreInitializePaymentSession,
+    loaderKey: string,
+  ) {
+    return ApiService.handleRequest(
+      async () => {
+        const { payment_collection } = await sdk.store.payment.initiatePaymentSession(cart, data)
+        return payment_collection
+      },
+      { loaderKey },
+    )
+
+    // return sdk.store.payment
+    //   .initiatePaymentSession(cart, data, {}, headers)
+    //   .then(async (resp) => {
+    //     const cartCacheTag = await getCacheTag('carts')
+    //     revalidateTag(cartCacheTag)
+    //     return resp
+    //   })
+    //   .catch(medusaError)
+  }
+  
   static async sendContactForm(): Promise<void> {
     const loaderStore = useLoaderStore()
 

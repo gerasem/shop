@@ -8,6 +8,7 @@ export const useCartStore = defineStore('cart', () => {
   const cart = ref<HttpTypes.StoreCart | undefined>(undefined)
   const shippingOptions = ref<HttpTypes.StoreCartShippingOption[] | undefined>(undefined)
   const paymentOptions = ref<HttpTypes.StorePaymentProvider[] | undefined>(undefined)
+  const paymentCollection = ref<HttpTypes.StorePaymentSession | undefined>(undefined)
 
   const loaderStore = useLoaderStore()
 
@@ -159,6 +160,25 @@ export const useCartStore = defineStore('cart', () => {
     }
   }
 
+  const selectPaymentOption = async (selectedPaymentMethod: string) => {
+    if (!cart.value) {
+      return
+    }
+
+    if (selectedPaymentMethod !== '') {
+      const returnedPaymentSession = await ApiService.initiatePaymentSession(
+        cart.value,
+        { provider_id: selectedPaymentMethod },
+        loaderStore.LOADER_KEYS.EDIT_CART,
+      )
+
+      console.log('test selectPaymentOption', returnedPaymentSession)
+      if (returnedPaymentSession?.payment_sessions && returnedPaymentSession?.payment_sessions[0]) {
+        paymentCollection.value = returnedPaymentSession?.payment_sessions[0]
+      }
+    }
+  }
+
   const getPaymentOptions = async (): Promise<void> => {
     if (!cart.value || !cart.value?.region_id) {
       return
@@ -185,5 +205,6 @@ export const useCartStore = defineStore('cart', () => {
     selectShippingOption,
     getPaymentOptions,
     paymentOptions,
+    selectPaymentOption,
   }
 })
