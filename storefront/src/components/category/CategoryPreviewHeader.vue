@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { ICategory } from '@/interfaces/ICategory'
+import { localePath } from '@/composables/localePath'
 import { useLoaderStore } from '@/stores/LoaderStore'
 import Header from '@/components/content/Header.vue'
 import { useI18n } from 'vue-i18n'
@@ -29,7 +30,7 @@ const { t } = useI18n()
 
       <RouterLink
         v-else
-        :to="`category/${category.handle}`"
+        :to="localePath(`category/${category.handle}`)"
       >
         {{ t('Show all') }}
         {{ category.name }}
