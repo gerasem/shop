@@ -51,7 +51,7 @@ const toggleMenu = () => {
         </div>
       </div>
 
-      <Transition name="mobile-menu">
+      <Transition name="fade-in-up">
         <div
           v-if="mobileMenu"
           class="navbar__mobile-menu"
