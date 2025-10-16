@@ -76,4 +76,10 @@ const router: Router = createRouter({
   ],
 })
 
+// router.afterEach((to, from) => {
+//   const toDepth = to.path.split('/').length
+//   const fromDepth = from.path.split('/').length
+//   to.meta.transition = toDepth < fromDepth ? 'fade-in-right' : 'fade-in-left'
+// })
+
 export default router

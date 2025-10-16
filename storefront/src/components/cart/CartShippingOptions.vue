@@ -75,8 +75,6 @@ const selectedShipping = computed(() => {
       v-if="selectedShipping"
       class="mt-4 p-4 has-background-info-light"
     >
-      <!-- loaderStore.LOADER_KEYS.EDIT_CART -->
-
       <div
         v-if="loaderStore.isLoadingKey(loaderStore.LOADER_KEYS.EDIT_CART)"
         class="skeleton-lines"

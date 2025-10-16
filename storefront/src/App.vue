@@ -12,7 +12,11 @@ import { RouterView } from 'vue-router'
   <InformationBanner />
   <Navbar />
   <div id="content">
-    <RouterView />
+    <router-view v-slot="{ Component }">
+      <transition name="fade">
+        <component :is="Component" />
+      </transition>
+    </router-view>
   </div>
   <Footer />
   <Toast />
