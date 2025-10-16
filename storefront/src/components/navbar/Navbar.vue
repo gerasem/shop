@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import LanguageSwitcher from '@/components/navbar/LanguageSwitcher.vue'
 import NavbarContact from '@/components/navbar/NavbarContact.vue'
+import NavbarCabinet from '@/components/navbar/NavbarCabinet.vue'
 import NavbarBurger from '@/components/navbar/NavbarBurger.vue'
 import NavbarMenu from '@/components/navbar/NavbarMenu.vue'
 import NavbarLogo from '@/components/navbar/NavbarLogo.vue'
@@ -43,7 +44,9 @@ const toggleMenu = () => {
           <NavbarContact />
         </div>
 
-        <div class="navbar-item">
+        <div class="navbar__icon-container navbar-item">
+          <NavbarCabinet />
+
           <NavbarCart />
         </div>
       </div>
@@ -102,6 +105,12 @@ const toggleMenu = () => {
     height: calc(100vh - 100px);
     justify-content: space-around;
     user-select: none;
+  }
+
+  &__icon-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
   }
 
   .container {

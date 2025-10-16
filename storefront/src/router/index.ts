@@ -57,6 +57,11 @@ const router: Router = createRouter({
           component: () => import('@/views/PaymentView.vue'),
         },
         {
+          path: 'cabinet',
+          name: 'cabinet',
+          component: () => import('@/views/CabinetView.vue'),
+        },
+        {
           path: '404',
           name: '404',
           component: () => import('@/views/404View.vue'),

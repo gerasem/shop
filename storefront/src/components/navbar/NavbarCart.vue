@@ -31,8 +31,8 @@ const countOfItems = computed(() => {
   >
     <Icon
       icon="bag"
-      :width="24"
-      :height="24"
+      :width="26"
+      :height="28"
       class="navbar__cart-icon"
       :class="{ active: countOfItems }"
     />
@@ -60,7 +60,7 @@ const countOfItems = computed(() => {
   }
 
   &__cart-icon {
-    margin-top: -4px;
+    margin-top: -2px;
 
     &.active {
       color: $color-primary;
