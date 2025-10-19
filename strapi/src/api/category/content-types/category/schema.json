@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "products",
+  "collectionName": "categories",
   "info": {
-    "singularName": "product",
-    "pluralName": "products",
-    "displayName": "Product"
+    "singularName": "category",
+    "pluralName": "categories",
+    "displayName": "Category"
   },
   "options": {
     "draftAndPublish": true
@@ -22,15 +22,6 @@
     },
     "handle": {
       "type": "string"
-    },
-    "productType": {
-      "type": "string"
-    },
-    "variants": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::product-variant.product-variant",
-      "mappedBy": "product"
     }
   }
 }

@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "products",
+  "collectionName": "product_variants",
   "info": {
-    "singularName": "product",
-    "pluralName": "products",
-    "displayName": "Product"
+    "singularName": "product-variant",
+    "pluralName": "product-variants",
+    "displayName": "Product Variant"
   },
   "options": {
     "draftAndPublish": true
@@ -20,17 +20,14 @@
       "required": true,
       "unique": true
     },
-    "handle": {
+    "sku": {
       "type": "string"
     },
-    "productType": {
-      "type": "string"
-    },
-    "variants": {
+    "product": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::product-variant.product-variant",
-      "mappedBy": "product"
+      "relation": "manyToOne",
+      "target": "api::product.product",
+      "inversedBy": "variants"
     }
   }
 }
