@@ -54,7 +54,7 @@ export const ProductsCollection: CollectionOverride = ({ defaultCollection }) =>
     meta: true,
   },
   fields: [
-    { name: 'title', type: 'text', required: true },
+    { name: 'title', type: 'text', required: true, localized: true },
     {
       type: 'tabs',
       tabs: [
@@ -76,6 +76,7 @@ export const ProductsCollection: CollectionOverride = ({ defaultCollection }) =>
               }),
               label: false,
               required: false,
+              localized: true,
             },
             {
               name: 'gallery',

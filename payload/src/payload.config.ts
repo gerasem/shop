@@ -27,6 +27,9 @@ import { plugins } from './plugins'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+export const LANGUAGES = ['de', 'en']
+export const DEFAULT_LANGUAGE = 'de'
+
 export default buildConfig({
   admin: {
     components: {
@@ -95,4 +98,8 @@ export default buildConfig({
   // if you want to resize images, crop, set focal point, etc.
   // make sure to install it and pass it to the config.
   // sharp,
+  localization: {
+    locales: ['de', 'en'],
+    defaultLocale: 'de',
+  },
 })
