@@ -9,8 +9,8 @@ import { RouterView } from 'vue-router'
 
 <template>
   <Loader />
-  <InformationBanner />
-  <Navbar />
+  <!-- <InformationBanner /> -->
+  <!-- <Navbar />
   <div id="content">
     <router-view v-slot="{ Component }">
       <transition name="fade">
@@ -18,7 +18,7 @@ import { RouterView } from 'vue-router'
       </transition>
     </router-view>
   </div>
-  <Footer />
+  <Footer /> -->
   <Toast />
 </template>
 

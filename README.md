@@ -1,11 +1,11 @@
 # Demo Online Store 🚀🔥
 
-Welcome to the **Demo Online Store**! This project is a fast, sleek, and modern example of an e-commerce application built with the latest technologies, showcasing the power of **Vue.js and Medusa.js**. 🛍️✨
+Welcome to the **Demo Online Store**! This project is a fast, sleek, and modern example of an e-commerce application built with the latest technologies, showcasing the power of **Vue.js and Payload CMS**. 🛍️✨
 
 ## Tech Stack 🔧
 
 - **Frontend Framework**: Vue.js 3
-- **Backend Framework**: Medusa.js
+- **Backend Framework**: Payload CMS
 - **State Management**: Pinia
 - **Routing**: Vue Router
 - **Localization**: vue-i18n
@@ -18,20 +18,20 @@ Welcome to the **Demo Online Store**! This project is a fast, sleek, and modern 
 
 To get started, follow these steps:
 
-1. **Install a medusa store**
+1. **Install a Payload CMS**
    ```bash
-   cd /medusa
-   chmod +x start.sh
-   npm i 
-   npm run docker:up
-   docker compose logs -f
-   docker compose run --rm medusa npx medusa user -e admin@example.com -p supersecret
+   //cd /medusa
+   //chmod +x start.sh
+   //npm i 
+   //npm run docker:up
+   //docker compose logs -f
+   //docker compose run --rm medusa npx medusa user -e admin@example.com -p supersecret
    ```
 
-2. **Run medusa.js**
+2. **Run Payload CMS**
    ```bash
-   cd /medusa
-   docker compose logs -f
+   //cd /medusa
+   //docker compose logs -f
    ```
 
 4. **Run frontend (vue app)**
