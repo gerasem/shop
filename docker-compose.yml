@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: medusa
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  payload:
+    build: ./payload
+    ports:
+      - "3000:3000"
+    environment:
+      - PAYLOAD_SECRET=supersecretpassword123
+      - PAYLOAD_DATABASE_URL=postgres://postgres:postgres@postgres:5432/payload
+    depends_on:
+      - postgres
+    volumes:
+      - ./payload/public:/app/public
+
+volumes:
+  postgres_data:
+ 

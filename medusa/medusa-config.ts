@@ -1,6 +1,6 @@
-import { loadEnv, defineConfig } from '@medusajs/framework/utils'
+import { loadEnv, defineConfig } from "@medusajs/framework/utils";
 
-loadEnv(process.env.NODE_ENV || 'development', process.cwd())
+loadEnv(process.env.NODE_ENV || "development", process.cwd());
 
 module.exports = defineConfig({
   projectConfig: {
@@ -18,4 +18,15 @@ module.exports = defineConfig({
       sslmode: "disable",
     },
   },
-})
+
+  modules: [
+    {
+      resolve: "./src/modules/payload",
+      options: {
+        serverUrl: process.env.PAYLOAD_SERVER_URL || "http://localhost:8000",
+        apiKey: process.env.PAYLOAD_API_KEY,
+        userCollection: process.env.PAYLOAD_USER_COLLECTION || "users",
+      },
+    },
+  ],
+});

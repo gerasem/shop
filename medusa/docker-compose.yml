@@ -1,5 +1,4 @@
 services:
-  # PostgreSQL Database
   postgres:
     image: postgres:15-alpine
     container_name: medusa_postgres
@@ -10,12 +9,10 @@ services:
       POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    # ← УБРАЛИ volumes
     networks:
       - medusa_network
 
-  # Redis
   redis:
     image: redis:7-alpine
     container_name: medusa_redis
@@ -25,9 +22,6 @@ services:
     networks:
       - medusa_network
 
-  # Medusa Server
-  # This service runs the Medusa backend application
-  # and the admin dashboard.
   medusa:
     build: .
     container_name: medusa_backend
@@ -43,14 +37,25 @@ services:
       - REDIS_URL=redis://redis:6379
     env_file:
       - .env
-    volumes:
-      - .:/app
-      - /app/node_modules
+    # ← УБРАЛИ volumes
     networks:
       - medusa_network
 
-volumes:
-  postgres_data:
+  payload:
+    build:
+      context: ../payload-cms
+    container_name: payload_cms
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+    environment:
+      - PAYLOAD_SECRET=supersecretpassword123
+      - PAYLOAD_DATABASE_URL=postgres://postgres:postgres@postgres:5432/payload
+    # ← УБРАЛИ volumes
+    networks:
+      - medusa_network
 
 networks:
   medusa_network:
