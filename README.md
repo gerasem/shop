@@ -20,6 +20,7 @@ To get started, follow these steps:
 
 1. **Install a Payload CMS**
    ```bash
+   docker compose up -d
    //cd /medusa
    //chmod +x start.sh
    //npm i 
